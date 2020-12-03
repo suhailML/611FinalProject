@@ -1,2 +1,5 @@
 # ignore the Intellij configs
 /.idea/
+
+# ignore the Intellij out folder
+/out/
