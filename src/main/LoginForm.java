@@ -1,4 +1,5 @@
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 public class LoginForm extends JFrame {
@@ -6,11 +7,11 @@ public class LoginForm extends JFrame {
     public LoginForm(){
 
         GridLayout layout = new GridLayout(3,2);
-        layout.setHgap(25);
-        layout.setVgap(25);
+        layout.setHgap(10);
+        layout.setVgap(10);
 
         JPanel panel = new JPanel(layout);
-
+        
         JLabel usernameLabel = new JLabel("USERNAME");
         JLabel passwordLabel = new JLabel("PASSWORD");
 
@@ -32,7 +33,7 @@ public class LoginForm extends JFrame {
         add(panel, BorderLayout.CENTER);//adding button on frame
 
         setTitle("Login Form");
-        setSize(600,300);
+        setSize(400,150);
         //setLayout(null);
         setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE);
         setVisible(true);
