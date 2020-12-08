@@ -1,6 +1,8 @@
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class LoginForm extends JFrame {
 
@@ -11,7 +13,7 @@ public class LoginForm extends JFrame {
         layout.setVgap(10);
 
         JPanel panel = new JPanel(layout);
-        
+
         JLabel usernameLabel = new JLabel("USERNAME");
         JLabel passwordLabel = new JLabel("PASSWORD");
 
@@ -22,6 +24,12 @@ public class LoginForm extends JFrame {
         JTextField passwordField = new JTextField();
 
         JButton loginButton =new JButton("LOGIN");//create button
+
+        loginButton.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                new UserForm().setVisible(true); // Main Form to show after the Login Form..
+            }
+        });
 
         panel.add(usernameLabel);
         panel.add(usernameField);
@@ -37,7 +45,5 @@ public class LoginForm extends JFrame {
         //setLayout(null);
         setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE);
         setVisible(true);
-
-        System.out.println("DONE");
     }
 }
