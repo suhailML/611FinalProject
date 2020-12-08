@@ -6,6 +6,8 @@ import java.awt.event.ActionListener;
 
 public class LoginForm extends JFrame {
 
+    private JTextField usernameField, passwordField;
+
     public LoginForm(){
 
         GridLayout layout = new GridLayout(3,2);
@@ -20,16 +22,12 @@ public class LoginForm extends JFrame {
         usernameLabel.setHorizontalAlignment(JLabel.CENTER);
         passwordLabel.setHorizontalAlignment(JLabel.CENTER);
 
-        JTextField usernameField = new JTextField();
-        JTextField passwordField = new JTextField();
+        usernameField = new JTextField();
+        passwordField = new JTextField();
 
         JButton loginButton =new JButton("LOGIN");//create button
 
-        loginButton.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent e){
-                new UserForm().setVisible(true); // Main Form to show after the Login Form..
-            }
-        });
+        loginButton.addActionListener(new LoginButtonHandler());
 
         panel.add(usernameLabel);
         panel.add(usernameField);
@@ -45,5 +43,12 @@ public class LoginForm extends JFrame {
         //setLayout(null);
         setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE);
         setVisible(true);
+    }
+
+    private class LoginButtonHandler implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            LoginForm.this.setVisible(false);
+            new UserForm(LoginForm.this.usernameField.getText()).setVisible(true); // Main Form to show after the Login Form..
+        }
     }
 }

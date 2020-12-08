@@ -3,7 +3,7 @@ import java.awt.*;
 
 public class UserForm extends JFrame {
 
-    public UserForm(){
+    public UserForm(String text){
 
         GridLayout layout = new GridLayout(1,1);
         layout.setHgap(10);
@@ -13,7 +13,7 @@ public class UserForm extends JFrame {
 
 
 
-        panel.add(new JLabel("YOU DID IT"));
+        panel.add(new JLabel("USERNAME: " + text));
 
         add(panel, BorderLayout.CENTER);//adding button on frame
 
