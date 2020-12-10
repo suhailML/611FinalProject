@@ -16,6 +16,4 @@ public class CheckingAccount extends BankAccount
     {
         super(name, ID, currencyType);
     }
-
-    
 }

@@ -6,6 +6,7 @@ public class Bank implements Lender
     private ArrayList<Employee> employees;
     private double reserves;
     private BankSettings settings;
+    // bank request manager
 
     /*
     CONSTRUCTORS
