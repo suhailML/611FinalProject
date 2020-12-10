@@ -2,9 +2,8 @@ import java.util.*;
 
 public abstract class BankAccount implements BankAccountActions
 {
-    private static int nextAccountNum = 00000; // move to BankSettings
     private String name;
-    private int accountNumber;
+    private String accountID;
     private String currencyType;
     private double balance;
     private LinkedList<Transaction> transactions;
@@ -14,19 +13,19 @@ public abstract class BankAccount implements BankAccountActions
     */
     public BankAccount(){}
 
-    public BankAccount(String name, int accountNumber, String currencyType, double balance, LinkedList<Transaction> transactions)
+    public BankAccount(String name, String accountID, String currencyType, double balance, LinkedList<Transaction> transactions)
     {
         setName(name);
-        setAccountNumber(accountNumber);
+        setAccountID(accountID);
         setCurrencyType(currencyType);
         setBalance(balance);
         setTransactions(transactions);
     }
 
-    public BankAccount(String name, String currencyType)
+    public BankAccount(String name, String accountID, String currencyType)
     {
         setName(name);
-        setAccountNumber(nextAccountNum);
+        setAccountID(accountID);
         setCurrencyType(currencyType);
         setBalance(0);
         setTransactions(new LinkedList<Transaction>());
@@ -40,9 +39,9 @@ public abstract class BankAccount implements BankAccountActions
         this.name = name;
     }
 
-    public void setAccountNumber(int accountNumber)
+    public void setAccountID(String accountID)
     {
-        this.accountNumber = accountNumber;
+        this.accountID = accountID;
     }
 
     public void setCurrencyType(String currencyType)
@@ -68,9 +67,9 @@ public abstract class BankAccount implements BankAccountActions
         return name;
     }
 
-    public int getAccountNumber()
+    public String getAccountID()
     {
-        return accountNumber;
+        return accountID;
     }
 
     public String getCurrencyType()

@@ -1,47 +1,51 @@
 public class Loan 
 {
-    private Bank bank; // create Lender interface, Bank implements Lender
-    private Customer customer; // create Lendee interface, Customer implements Lendee
-    private int loanID; // implement
+    private Lender lender; // create Lender interface, Bank implements Lender
+    private Lendee lendee; // create Lendee interface, Customer implements Lendee
+    private String loanID; // implement
     private double initialValue;
     private double presentValue;
     private double interestRate;
-    private String collateral; // implement
+    private String collateral;
     
     /*
     CONSTRUCTORS
     */
     public Loan(){}
 
-    public Loan(Bank bank, Customer customer, double initialValue, double presentValue, double interestRate)
+    public Loan(Lender lender, Lendee lendee, String loanID, double initialValue, double presentValue, double interestRate, String collateral)
     {
-        setBank(bank);
-        setCustomer(customer);
+        setLender(lender);
+        setLendee(lendee);
+        setLoanID(loanID);
         setInitialValue(initialValue);
         setPresentValue(presentValue);
         setInterestRate(interestRate);
+        setCollateral(collateral);
     }
 
-    public Loan(Bank bank, Customer customer, double initialValue, double interestRate)
+    public Loan(Lender lender, Lendee lendee, String loanID, double initialValue, double interestRate, String collateral)
     {
-        setBank(bank);
-        setCustomer(customer);
+        setLender(lender);
+        setLendee(lendee);
+        setLoanID(loanID);
         setInitialValue(initialValue);
         setPresentValue(initialValue);
         setInterestRate(interestRate);
+        setCollateral(collateral);
     }
 
     /*
     SETTERS
     */
-    public void setBank(Bank bank)
+    public void setLender(Lender lender)
     {
-        this.bank = bank;
+        this.lender = lender;
     }
 
-    public void setCustomer(Customer customer)
+    public void setLendee(Lendee lendee)
     {
-        this.customer = customer;
+        this.lendee = lendee;
     }
 
     public void setInitialValue(double value)
@@ -59,17 +63,27 @@ public class Loan
         this.interestRate = interestRate;
     }
 
+    public void setLoanID(String loanID)
+    {
+        this.loanID = loanID;
+    }
+
+    public void setCollateral(String collateral)
+    {
+        this.collateral = collateral;
+    }
+
     /*
     ACCESSORS
     */
-    public Bank getBank()
+    public Lender getLender()
     {
-        return bank;
+        return lender;
     }
 
-    public Customer getCustomer()
+    public Lendee getLendee()
     {
-        return customer;
+        return lendee;
     }
 
     public double getInitialValue()
@@ -85,5 +99,15 @@ public class Loan
     public double getInterestRate()
     {
         return interestRate;
+    }
+
+    public String getLoanID()
+    {
+        return loanID;
+    }
+
+    public String getCollateral()
+    {
+        return collateral;
     }
 }

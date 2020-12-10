@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class Customer extends User implements CustomerActions
+public class Customer extends User implements CustomerActions, Lendee
 {
     private ArrayList<BankAccount> accounts;
     private ArrayList<Loan> loans;
@@ -10,16 +10,16 @@ public class Customer extends User implements CustomerActions
     */
     public Customer(){}
 
-    public Customer(String username, String password, int userId, String firstName, String lastName)
+    public Customer(String username, String password, String userID, String firstName, String lastName)
     {
-        super(username, password, userId, firstName, lastName);
+        super(username, password, userID, firstName, lastName);
         setAccounts(new ArrayList<BankAccount>());
         setLoans(new ArrayList<Loan>());
     }
 
-    public Customer(String username, String password, int userId, String firstName, String lastName, ArrayList<BankAccount> accounts, ArrayList<Loan> loans)
+    public Customer(String username, String password, String userID, String firstName, String lastName, ArrayList<BankAccount> accounts, ArrayList<Loan> loans)
     {
-        super(username, password, userId, firstName, lastName);
+        super(username, password, userID, firstName, lastName);
         setAccounts(accounts);
         setLoans(loans);
     }

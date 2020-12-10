@@ -5,8 +5,8 @@ public class Employee extends User implements EmployeeActions
     */
     public Employee(){}
 
-    public Employee(String username, String password, int userId, String firstName, String lastName)
+    public Employee(String username, String password, String userID, String firstName, String lastName)
     {
-        super(username, password, userId, firstName, lastName);
+        super(username, password, userID, firstName, lastName);
     }
 }

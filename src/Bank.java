@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class Bank 
+public class Bank implements Lender
 {
     private ArrayList<Customer> customers;
     private ArrayList<Employee> employees;
