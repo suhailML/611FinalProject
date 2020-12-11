@@ -49,6 +49,8 @@ public class AccountForm extends JFrame {
         JButton buttonTakeLoan = new JButton("Request Loan ~ debug");
         JButton buttonBack = new JButton("Back");
 
+        buttonWithdraw.addActionListener(new buttonWithdrawActionListener());
+        buttonDeposit.addActionListener(new buttonDepositActionListener());
         buttonTakeLoan.addActionListener(new TestActionListener());
         buttonBack.addActionListener(new BackActionListener());
 
@@ -67,6 +69,41 @@ public class AccountForm extends JFrame {
         //setLayout(null);
         setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE);
         setVisible(true);
+    }
+
+
+    private class buttonWithdrawActionListener implements ActionListener{
+        public void actionPerformed(ActionEvent e) {
+            String input = JOptionPane.showInputDialog(
+                    AccountForm.this,
+                    "Enter an amount to withdraw:",
+                    "");
+
+            if(input == null){
+                System.out.println("Cancel selected");
+                return;
+            }
+
+            double amount = Double.parseDouble(input);
+            System.out.println("TODO --> DO WITHDRAW $" + amount);
+        }
+    }
+
+    private class buttonDepositActionListener implements ActionListener{
+        public void actionPerformed(ActionEvent e) {
+            String input = JOptionPane.showInputDialog(
+                    AccountForm.this,
+                    "Enter an amount to deposit:",
+                    "");
+
+            if(input == null){
+                System.out.println("Cancel selected");
+                return;
+            }
+
+            double amount = Double.parseDouble(input);
+            System.out.println("TODO --> DO DEPOSIT $" + amount);
+        }
     }
 
 
