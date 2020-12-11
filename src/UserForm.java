@@ -108,7 +108,8 @@ public class UserForm extends JFrame {
             System.out.println("DELETE ACCOUNT: " + index);
 
             System.out.println("TODO --> ACTUALLY DELETE ACCOUNT");
-
+            JOptionPane.showMessageDialog(UserForm.this,
+                    "BOOGY WOOGY");
         }
     }
 }
