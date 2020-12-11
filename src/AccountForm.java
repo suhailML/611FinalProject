@@ -15,7 +15,7 @@ public class AccountForm extends JFrame {
     public AccountForm(Bank bank, BankAccount account){
 
         this.outputJTextArea = new JTextArea(account.toString());
-        this.outputJTextArea.setEnabled(false);
+        //this.outputJTextArea.setEnabled(false);
 
         this.bank = bank;
         this.account = account;
@@ -82,8 +82,7 @@ public class AccountForm extends JFrame {
             // get the transaction
             Transaction transaction = account.getTransactions().get(index);
 
-            // print
-            AccountForm.this.
+            outputJTextArea.setText(transaction.toString());
 
         }
     }
