@@ -93,8 +93,11 @@ public class UserForm extends JFrame {
 
             //TODO Error checking
 
+            // hide this window
+            UserForm.this.setVisible(false);
+
             //TODO Open the Account form
-            new AccountForm(bank, account).setVisible(true);
+            new AccountForm(bank, account, UserForm.this).setVisible(true);
         }
     }
 

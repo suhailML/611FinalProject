@@ -11,8 +11,11 @@ public class AccountForm extends JFrame {
     private JList transactionJList;
     private JTextArea outputJTextArea;
 
+    private UserForm userForm;
 
-    public AccountForm(Bank bank, BankAccount account){
+    public AccountForm(Bank bank, BankAccount account, UserForm userForm){
+
+        this.userForm = userForm;
 
         this.outputJTextArea = new JTextArea(account.toString());
         this.outputJTextArea.setEnabled(false);
@@ -43,16 +46,17 @@ public class AccountForm extends JFrame {
         JButton buttonWithdraw = new JButton("Withdraw");
         JButton buttonDeposit = new JButton("Deposit");
         JButton buttonTransfer = new JButton("Transfer");
-        JButton buttonTakeLoan = new JButton("Request Loan");
-        JButton buttonTestJList = new JButton("Test JList");
+        JButton buttonTakeLoan = new JButton("Request Loan ~ debug");
+        JButton buttonBack = new JButton("Back");
 
-        buttonTestJList.addActionListener(new TestActionListener());
+        buttonTakeLoan.addActionListener(new TestActionListener());
+        buttonBack.addActionListener(new BackActionListener());
 
         panelActions.add(buttonWithdraw);
         panelActions.add(buttonDeposit);
         panelActions.add(buttonTransfer);
         panelActions.add(buttonTakeLoan);
-        panelActions.add(buttonTestJList);
+        panelActions.add(buttonBack);
 
         add(panelOutput);//adding button on frame
         add(panelAccounts);//adding button on frame
@@ -64,6 +68,17 @@ public class AccountForm extends JFrame {
         setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE);
         setVisible(true);
     }
+
+
+    private class BackActionListener implements  ActionListener{
+        public void actionPerformed(ActionEvent e) {
+            System.out.println("ACTION: return to user form");
+            AccountForm.this.setVisible(false);
+            userForm.setVisible(true);
+
+        }
+    }
+
 
     private class TestActionListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
