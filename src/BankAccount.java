@@ -1,12 +1,13 @@
 import java.util.*;
 
-public abstract class BankAccount implements BankAccountActions
+public abstract class BankAccount implements BankAccountActions, Transferable
 {
     private String name;
     private String accountID;
     private String currencyType;
     private double balance;
     private LinkedList<Transaction> transactions;
+    private Customer customer;
 
     /*
     CONSTRUCTORS
