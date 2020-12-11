@@ -43,6 +43,10 @@ public class UserForm extends JFrame {
         JButton buttonViewAccount = new JButton("View Account");
         JButton buttonDeleteAccount = new JButton("Delete Account");;
 
+        buttonAddAccount.addActionListener(new AddAccountButtonHandler());
+        buttonViewAccount.addActionListener(new ViewAccountButtonHandler());
+        buttonDeleteAccount.addActionListener(new DeleteAccountButtonHandler());
+
         panelActions.add(buttonAddAccount);
         panelActions.add(buttonViewAccount);
         panelActions.add(buttonDeleteAccount);
@@ -94,6 +98,11 @@ public class UserForm extends JFrame {
 
     private class DeleteAccountButtonHandler implements ActionListener {
         public void actionPerformed(ActionEvent e) {
+            // get the index
+            int index = accountJList.getLeadSelectionIndex();
+            System.out.println("DELETE ACCOUNT: " + index);
+
+            System.out.println("TODO --> ACTUALLY DELETE ACCOUNT");
 
         }
     }
