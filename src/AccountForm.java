@@ -89,6 +89,7 @@ public class AccountForm extends JFrame {
         }
     }
 
+
     private class buttonDepositActionListener implements ActionListener{
         public void actionPerformed(ActionEvent e) {
             String input = JOptionPane.showInputDialog(
@@ -107,6 +108,13 @@ public class AccountForm extends JFrame {
     }
 
 
+    private class buttonLoanActionListener implements ActionListener{
+        public void actionPerformed(ActionEvent e) {
+            System.out.println("TODO --> DO LOAN INPUTS");
+        }
+    }
+
+
     private class BackActionListener implements  ActionListener{
         public void actionPerformed(ActionEvent e) {
             System.out.println("ACTION: return to user form");
@@ -116,7 +124,7 @@ public class AccountForm extends JFrame {
         }
     }
 
-
+    /** Test function ~ output the selected transaction **/
     private class TestActionListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
 
@@ -128,7 +136,6 @@ public class AccountForm extends JFrame {
             Transaction transaction = account.getTransactions().get(index);
 
             outputJTextArea.setText(transaction.toString());
-
         }
     }
 }

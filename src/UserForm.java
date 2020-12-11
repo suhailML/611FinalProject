@@ -3,6 +3,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 public class UserForm extends JFrame {
 
@@ -68,7 +70,15 @@ public class UserForm extends JFrame {
     private void debugInit(){
 
         ArrayList<BankAccount> accounts = new ArrayList<>();
-        accounts.add(new CheckingAccount("First Checking Account","A","$"));
+
+        CheckingAccount test = new CheckingAccount("First Checking Account","A","$");
+        LinkedList<Transaction> transactionList = new LinkedList<>();
+        transactionList.add(new Transaction());
+        transactionList.add(new Transaction());
+        transactionList.add(new Transaction());
+
+        test.setTransactions(transactionList);
+        accounts.add(test);
         accounts.add(new SavingsAccount("First Savings Account","A","$"));
 
         this.customer.setAccounts(accounts);
@@ -77,7 +87,7 @@ public class UserForm extends JFrame {
     private class AddAccountButtonHandler implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             //TODO Create account form
-
+            System.out.println("Add Account");
         }
     }
 
