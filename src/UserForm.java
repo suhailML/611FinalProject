@@ -1,9 +1,18 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.SQLOutput;
+import java.util.ArrayList;
 
 public class UserForm extends JFrame {
 
-    public UserForm(String text){
+    private Bank bank;
+    private Customer customer;
+
+    private JList<BankAccount> accountJList;
+
+    public UserForm(Bank bank, Customer customer){
 
         GridLayout frameLayout = new GridLayout(1,3);
         frameLayout.setHgap(10);
@@ -14,17 +23,16 @@ public class UserForm extends JFrame {
         layout.setVgap(10);
 
         JPanel panelOutput = new JPanel(new GridLayout(1,1));
-        JPanel panelAccounts = new JPanel();
+        JPanel panelAccounts = new JPanel(new BorderLayout());
         JPanel panelActions = new JPanel(layout);
 
 
-        panelOutput.add(new JTextArea("USERNAME: " + text));
+        panelOutput.add(new JTextArea(customer.toString()));
 
-        String[] test = {"A", "B", "C", "D", "E"};
-        JList<String> comboTest = new JList<String>(test);
+        accountJList = new JList(customer.getAccounts().toArray());
 
-        panelAccounts.add(new JLabel("Account Picker"));
-        panelAccounts.add(comboTest);
+        panelAccounts.add(new JLabel("Account Picker"), BorderLayout.NORTH);
+        panelAccounts.add(accountJList, BorderLayout.CENTER);
 
         JButton buttonAddAccount = new JButton("Add Account");
         JButton buttonViewAccount = new JButton("View Account");
@@ -43,5 +51,35 @@ public class UserForm extends JFrame {
         //setLayout(null);
         setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE);
         setVisible(true);
+    }
+
+    private class AddAccountButtonHandler implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            //TODO Create account form
+
+        }
+    }
+
+    private class ViewAccountButtonHandler implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+
+            // get the index
+            int index = accountJList.getLeadSelectionIndex();
+            System.out.println("ACCOUNT: " + index);
+
+            // get the account
+            BankAccount account = customer.getAccounts().get(index);
+
+            //TODO Error checking
+
+            //TODO Open the Account form
+
+        }
+    }
+
+    private class DeleteAccountButtonHandler implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+
+        }
     }
 }

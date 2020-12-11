@@ -7,7 +7,11 @@ public class LoginForm extends JFrame {
 
     private JTextField usernameField, passwordField;
 
-    public LoginForm(){
+    private Bank bank;
+
+    public LoginForm(Bank bank){
+
+        this.bank = bank;
 
         GridLayout layout = new GridLayout(3,2);
         layout.setHgap(10);
@@ -47,7 +51,7 @@ public class LoginForm extends JFrame {
     private class LoginButtonHandler implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             LoginForm.this.setVisible(false);
-            new UserForm(LoginForm.this.usernameField.getText()).setVisible(true); // Main Form to show after the Login Form..
+            new UserForm(LoginForm.this.bank).setVisible(true); // Main Form to show after the Login Form..
         }
     }
 }
