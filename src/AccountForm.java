@@ -33,7 +33,7 @@ public class AccountForm extends JFrame {
         JPanel panelActions = new JPanel(buttonPanelLayout);
 
 
-        panelOutput.add();
+        panelOutput.add(outputJTextArea);
 
         transactionJList = new JList(account.getTransactions().toArray());
 

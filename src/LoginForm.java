@@ -51,7 +51,13 @@ public class LoginForm extends JFrame {
     private class LoginButtonHandler implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             LoginForm.this.setVisible(false);
-            new UserForm(LoginForm.this.bank).setVisible(true); // Main Form to show after the Login Form..
+            new UserForm(bank, new Customer(
+                    usernameField.getText(),
+                    passwordField.getText(),
+                    "ABCDE",
+                    "First Name",
+                    "Last Name"
+            )).setVisible(true); // Main Form to show after the Login Form..
         }
     }
 }

@@ -14,6 +14,11 @@ public class UserForm extends JFrame {
 
     public UserForm(Bank bank, Customer customer){
 
+        this.bank = bank;
+        this.customer = customer;
+
+        debugInit();
+
         GridLayout frameLayout = new GridLayout(1,3);
         frameLayout.setHgap(10);
         setLayout(frameLayout);
@@ -53,6 +58,16 @@ public class UserForm extends JFrame {
         setVisible(true);
     }
 
+
+    private void debugInit(){
+
+        ArrayList<BankAccount> accounts = new ArrayList<>();
+        accounts.add(new CheckingAccount("First Checking Account","A","$"));
+        accounts.add(new SavingsAccount("First Savings Account","A","$"));
+
+        this.customer.setAccounts(accounts);
+    }
+
     private class AddAccountButtonHandler implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             //TODO Create account form
@@ -73,7 +88,7 @@ public class UserForm extends JFrame {
             //TODO Error checking
 
             //TODO Open the Account form
-
+            new AccountForm(bank, account).setVisible(true);
         }
     }
 
