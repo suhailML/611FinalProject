@@ -49,4 +49,5 @@ public class Customer extends User implements CustomerActions, Lendee
     {
         return loans;
     }
+
 }

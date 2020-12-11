@@ -2,7 +2,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 
 public class UserForm extends JFrame {
@@ -11,6 +10,7 @@ public class UserForm extends JFrame {
     private Customer customer;
 
     private JList<BankAccount> accountJList;
+    private JTextArea outputJTextArea;
 
     public UserForm(Bank bank, Customer customer){
 
@@ -32,7 +32,9 @@ public class UserForm extends JFrame {
         JPanel panelActions = new JPanel(layout);
 
 
-        panelOutput.add(new JTextArea(customer.toString()));
+        outputJTextArea = new JTextArea(customer.toString());
+        outputJTextArea.setEnabled(false);
+        panelOutput.add(outputJTextArea);
 
         accountJList = new JList(customer.getAccounts().toArray());
 

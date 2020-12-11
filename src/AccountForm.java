@@ -15,7 +15,7 @@ public class AccountForm extends JFrame {
     public AccountForm(Bank bank, BankAccount account){
 
         this.outputJTextArea = new JTextArea(account.toString());
-        //this.outputJTextArea.setEnabled(false);
+        this.outputJTextArea.setEnabled(false);
 
         this.bank = bank;
         this.account = account;
@@ -65,13 +65,6 @@ public class AccountForm extends JFrame {
         setVisible(true);
     }
 
-    private class AddAccountButtonHandler implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
-            //TODO Create account form
-
-        }
-    }
-
     private class TestActionListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
 
@@ -83,12 +76,6 @@ public class AccountForm extends JFrame {
             Transaction transaction = account.getTransactions().get(index);
 
             outputJTextArea.setText(transaction.toString());
-
-        }
-    }
-
-    private class DeleteAccountButtonHandler implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
 
         }
     }

@@ -75,4 +75,12 @@ public abstract class User
     {
         return lastName;
     }
+
+    public String fullOutput(){
+        return "ACCOUNT: " + username + "\n\t" + password + "\nName: " + firstName + " " + lastName;
+    }
+
+    public String toString(){
+        return firstName + " " + lastName;
+    }
 }

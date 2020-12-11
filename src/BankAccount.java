@@ -105,4 +105,13 @@ public abstract class BankAccount implements BankAccountActions
         setBalance(getBalance() + value);
         return true;
     }
+
+
+    public String fullOutput(){
+        return "ACCOUNT: " + name + "\n\t" + accountID + "\nCurrency: " + currencyType;
+    }
+
+    public String toString(){
+        return name;
+    }
 }
