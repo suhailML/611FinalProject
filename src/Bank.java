@@ -1,12 +1,13 @@
 import java.util.*;
 
-public class Bank implements Lender
+public class Bank implements Lender, Transferable
 {
     private ArrayList<Customer> customers;
     private ArrayList<Employee> employees;
     private double reserves;
     private BankSettings settings;
-    // bank request manager
+    private BankRequestManager bankRequestManager;
+    //private BankDB db;
 
     /*
     CONSTRUCTORS
@@ -17,6 +18,8 @@ public class Bank implements Lender
         setEmployees(new ArrayList<Employee>());
         setReserves(1000000);
         setSettings(new BankSettings());
+        setBankRequestManager(BankRequestManager.getSingleInstance());
+        //setBankDB(BankDB.getSingleInstance);
     }
 
     public Bank(ArrayList<Customer> customers, ArrayList<Employee> employees, double reserves, BankSettings settings)
@@ -25,6 +28,8 @@ public class Bank implements Lender
         setEmployees(employees);
         setReserves(reserves);
         setSettings(settings);
+        setBankRequestManager(BankRequestManager.getSingleInstance());
+        //setBankDB(BankDB.getSingleInstance);
     }
 
     /*
@@ -50,6 +55,11 @@ public class Bank implements Lender
         this.settings = settings;
     }
 
+    public void setBankRequestManager(BankRequestManager bankRequestManager)
+    {
+        this.bankRequestManager = bankRequestManager;
+    }
+
     /*
     ACCESSORS
     */
@@ -71,5 +81,15 @@ public class Bank implements Lender
     public BankSettings getSettings()
     {
         return settings;
+    }
+
+    public BankRequestManager getBankRequestManager()
+    {
+        return bankRequestManager;
+    }
+
+    public something lend()
+    {
+
     }
 }
