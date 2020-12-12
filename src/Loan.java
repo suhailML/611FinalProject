@@ -110,4 +110,13 @@ public class Loan
     {
         return collateral;
     }
+
+    /*
+    Other Methods
+    */
+
+    public void payBack(double money)
+    {
+        presentValue -= money;
+    }
 }

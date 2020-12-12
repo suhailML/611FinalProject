@@ -6,9 +6,10 @@ public class Bank implements Lender, Transferable
     private ArrayList<Customer> customers;
     private ArrayList<Employee> employees;
     private double reserves;
+    private LinkedList<Transaction> transactions;
     private BankSettings settings;
     private BankRequestManager bankRequestManager;
-    //private BankDB db;
+    private BankDB db;
 
     /*
     CONSTRUCTORS
@@ -18,19 +19,21 @@ public class Bank implements Lender, Transferable
         setCustomers(new ArrayList<Customer>());
         setEmployees(new ArrayList<Employee>());
         setReserves(1000000);
+        setTransactions(new LinkedList<Transaction>());
         setSettings(new BankSettings());
         setBankRequestManager(BankRequestManager.getSingleInstance());
-        //setBankDB(BankDB.getSingleInstance);
+        setBankDB(BankDB.getSingleInstance());
     }
 
-    public Bank(ArrayList<Customer> customers, ArrayList<Employee> employees, double reserves, BankSettings settings)
+    public Bank(ArrayList<Customer> customers, ArrayList<Employee> employees, double reserves, LinkedList<Transaction> transactions, BankSettings settings)
     {
         setCustomers(customers);
         setEmployees(employees);
         setReserves(reserves);
+        setTransactions(transactions);
         setSettings(settings);
         setBankRequestManager(BankRequestManager.getSingleInstance());
-        //setBankDB(BankDB.getSingleInstance);
+        setBankDB(BankDB.getSingleInstance());
     }
 
     /*
@@ -61,6 +64,16 @@ public class Bank implements Lender, Transferable
         this.bankRequestManager = bankRequestManager;
     }
 
+    public void setBankDB(BankDB db)
+    {
+        this.db = db;
+    }
+
+    public void setTransactions(LinkedList<Transaction> transactions)
+    {
+        this.transactions = transactions;
+    }
+
     /*
     ACCESSORS
     */
@@ -89,12 +102,57 @@ public class Bank implements Lender, Transferable
         return bankRequestManager;
     }
 
-    public boolean isValidWithdraw(double money){
-        System.out.println("NOT IMPLEMENTED - isValidWithdraw bank");
-        return true;
+    public BankDB getBankDB()
+    {
+        return db;
     }
 
-    public void addMoney(double money){
-        System.out.println("NOT IMPLEMENTED - addMoney bank");
+    public LinkedList<Transaction> getTransactions()
+    {
+        return transactions;
+    }
+
+    /*
+    MUTATORS
+    */
+
+    public void addToReserves(double money)
+    {
+        reserves += money;
+    }
+
+    public void removeFromReserves(double money)
+    {
+        reserves -= money;
+    }
+
+    /*
+    Transferable Methods
+    */
+
+    public boolean send(double money)
+    {
+        boolean valid = false;
+
+        if (getReserves() > money)
+        {
+            removeFromReserves(money);
+            valid = true;
+        }
+
+        return valid;
+    }
+
+    public boolean receive(double money)
+    {
+        boolean valid = false;
+        addToReserves(money);
+        valid = true;
+        return valid;
+    }
+
+    public void addTransaction(Transaction transaction)
+    {
+        getTransactions().add(transaction);
     }
 }

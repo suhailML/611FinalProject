@@ -23,7 +23,8 @@ public class BankRequestManager implements GUIRequests
         return singleInstance;
     }
 
-    public boolean withdraw(Bank bank, BankAccount account, double money, int day)
+
+    public boolean withdraw(Bank bank, BankAccount account, double money)
     {
         boolean valid = false;
         if (money + bank.getSettings().getTransactionFee() < account.getBalance())
@@ -33,37 +34,41 @@ public class BankRequestManager implements GUIRequests
             // add to transactions of account
             // Bank.getBankDB().addTransaction(transaction)
 
+            bank.addToReserves(bank.getSettings().getTransactionFee());
+            Transaction transaction = transactionFactory.getWithdraw(bank.getSettings().getDay(), money, account);
+            account.addTransaction(transaction);
+            bank.getBankDB().addTransaction(transaction);
             valid = true;
         }
         return valid;
     }
 
-    public boolean deposit(Bank bank, BankAccount account, double money, int day)
+    public boolean deposit(Bank bank, BankAccount account, double money)
     {
         boolean valid = false;
         account.deposit(money - bank.getSettings().getTransactionFee());
-        //Transaction transaction = transactionFactory.getDeposit(day, money, account);
-        // Bank.getBankDB().addTransaction(transaction)
+
+        bank.addToReserves(bank.getSettings().getTransactionFee());
+        Transaction transaction = transactionFactory.getDeposit(bank.getSettings().getDay(), money, account);
+        bank.getBankDB().addTransaction(transaction);
         valid = true;
         return valid;
     }
 
-    public boolean loan(Bank bank, BankAccount account, double money, int day)
+    public boolean takeOutLoan(Bank bank, Customer customer, BankAccount account, double money, String collateral)
     {
         boolean valid = false;
-        /*
-        //transfer(bank, bank, account);
-        Loan loan = new Loan(bank, customer, money);
-        // Bank.getBankDB().addLoan(loan)
-        account.deposit(loan.money - bank.getSettings().getTransactionFee());
-        Transaction transaction = transactionFactory.getTransfer(day, money, bank, accountFrom);
-        // Bank.getBankDB().addTransaction(transaction)
-        */
+
+        Loan loan = loanFactory.createNewLoan(bank, customer, money, bank.getSettings().getLoanInterestRate(), collateral);
+        transfer(bank, (Transferable) bank, (Transferable) account, money);
+        bank.getBankDB().addLoan(loan);
         valid = true;
         return valid;
     }
 
-    public boolean transfer(Bank bank, Transferable sender, Transferable receiver, double money, int day)
+    // TODO ELIMINATE THIS IF NOT USED
+    /*
+    public boolean transfer_backup(Bank bank, Transferable sender, Transferable receiver, double money, int day)
     {
         //TODO transaction
         //Transaction transaction = transactionFactory.getTransfer(day, money, sender, receiver);
@@ -89,5 +94,29 @@ public class BankRequestManager implements GUIRequests
         }
 
         // Bank.getBankDB().addTransaction(transaction)
+    }
+     */
+    public boolean payBackLoan(Bank bank, Customer customer, BankAccount account, double money, Loan loan)
+    {
+        boolean valid = false;
+        if (money + bank.getSettings().getTransactionFee() < account.getBalance() && loan.getPresentValue() + bank.getSettings().getTransactionFee() >= money)
+        {
+            transfer(bank, (Transferable) account, (Transferable) bank, money);
+            loan.payBack(money);
+            bank.getBankDB.updateLoan(loan);
+        }
+    }
+
+    public boolean transfer(Bank bank, Transferable sender, Transferable receiver, double money)
+    {
+        Transaction transaction = transactionFactory.getTransfer(bank.getSettings().getDay(), money, sender, receiver);
+        sender.send(money);
+        money -= bank.getSettings().getTransactionFee();
+        bank.addToReserves(bank.getSettings().getTransactionFee());
+        receiver.receive(money);
+
+        sender.addTransaction(transaction);
+        receiver.addTransaction(transaction);
+        bank.getBankDB().addTransaction(transaction);
     }
 }
