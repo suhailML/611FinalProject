@@ -10,6 +10,8 @@ public class BankEmployeeForm extends JFrame {
     private Bank bank;
     private Employee employee;
 
+    private JList<Transaction> transactionJList;
+
     private JList<BankAccount> customerJList;
     private JTextArea outputJTextArea;
 
@@ -28,7 +30,7 @@ public class BankEmployeeForm extends JFrame {
         frameLayout.setHgap(10);
         setLayout(frameLayout);
 
-        GridLayout layout = new GridLayout(3,1, 10, 10);
+        GridLayout layout = new GridLayout(4,1, 10, 10);
 
         JPanel panelOutput = new JPanel(new GridLayout(1,1));
         JPanel panelAccounts = new JPanel(new BorderLayout());
@@ -44,13 +46,22 @@ public class BankEmployeeForm extends JFrame {
         panelAccounts.add(new JLabel("Account Picker"), BorderLayout.NORTH);
         panelAccounts.add(customerJList, BorderLayout.CENTER);
 
+
+        JButton editSettingsButton = new JButton("Edit Settings");
         JButton viewAccountButton = new JButton("View Account");
+        JButton viewTransactionsButton = new JButton("View Transactions");
         JButton signoutButton = new JButton("Sign out");
 
-        viewAccountButton.addActionListener(new ViewAccountButtonHandler());
-        signoutButton.addActionListener(new SignoutActionListener());
-        panelActions.add(viewAccountButton);
 
+        editSettingsButton.addActionListener(new EditSettingsActionListener());
+        viewAccountButton.addActionListener(new ViewAccountActionListener());
+        viewTransactionsButton.addActionListener((new ViewTransactionsActionListener()));
+        signoutButton.addActionListener(new SignoutActionListener());
+
+        panelActions.add(editSettingsButton);
+        panelActions.add(viewAccountButton);
+        panelActions.add(viewTransactionsButton);
+        panelActions.add(signoutButton);
 
         add(panelOutput);//adding button on frame
         add(panelAccounts);//adding button on frame
@@ -64,7 +75,13 @@ public class BankEmployeeForm extends JFrame {
     }
 
 
-    private class ViewAccountButtonHandler implements ActionListener {
+    private class EditSettingsActionListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            System.out.println("Open settings editor");
+        }
+    }
+
+    private class ViewAccountActionListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
 
             try{
@@ -88,6 +105,12 @@ public class BankEmployeeForm extends JFrame {
             }catch(ArrayIndexOutOfBoundsException arrayIndexOutOfBoundsException){
                 JOptionPane.showMessageDialog(null, "NO ACCOUNT SELECTED", "ERROR", JOptionPane.ERROR_MESSAGE);
             }
+        }
+    }
+
+    private class ViewTransactionsActionListener implements ActionListener{
+        public void actionPerformed(ActionEvent e) {
+            System.out.println("Open transactions view");
         }
     }
 
