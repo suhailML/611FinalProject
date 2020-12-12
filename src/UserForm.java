@@ -87,6 +87,12 @@ public class UserForm extends JFrame {
         public void actionPerformed(ActionEvent e) {
             //TODO Create account form
             System.out.println("Add Account");
+            if(new AddAccountDialog(UserForm.this, UserForm.this.bank, UserForm.this.customer).createAccount()){
+                System.out.println("Account created!");
+            }
+            else{
+                System.out.println("Cancel");
+            }
         }
     }
 
@@ -118,7 +124,7 @@ public class UserForm extends JFrame {
 
             System.out.println("TODO --> ACTUALLY DELETE ACCOUNT");
             JOptionPane.showMessageDialog(UserForm.this,
-                    "BOOGY WOOGY");
+                    "DELETED ACCOUNT" + index);
         }
     }
 }
