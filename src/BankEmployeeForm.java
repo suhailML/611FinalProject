@@ -110,6 +110,7 @@ public class BankEmployeeForm extends JFrame {
 
     private class ViewTransactionsActionListener implements ActionListener{
         public void actionPerformed(ActionEvent e) {
+            // output to console
             System.out.println("Open transactions view");
         }
     }

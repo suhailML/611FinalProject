@@ -47,7 +47,7 @@ public class UserForm extends JFrame {
         JButton addAccountButton = new JButton("Add Account");
         JButton viewAccountButton = new JButton("View Account");
         JButton deleteAccountButton = new JButton("Delete Account");;
-        JButton signoutButton = new JButton("Delete Account");;
+        JButton signoutButton = new JButton("Sign Out");;
 
         addAccountButton.addActionListener(new AddAccountActionListener());
         viewAccountButton.addActionListener(new ViewAccountActionListener());
