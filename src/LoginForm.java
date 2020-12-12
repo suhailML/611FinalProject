@@ -30,13 +30,19 @@ public class LoginForm extends JFrame {
 
         JButton loginButton =new JButton("LOGIN");//create button
 
-        loginButton.addActionListener(new LoginButtonHandler());
+        loginButton.addActionListener(new LoginButtonActionListener());
+
+        JButton bankButton =new JButton("TEMP BANK");//create button
+
+        bankButton.addActionListener(new BankButtonActionListener());
+
 
         panel.add(usernameLabel);
         panel.add(usernameField);
         panel.add(passwordLabel);
         panel.add(passwordField);
-        panel.add(new JLabel(""));
+        //panel.add(new JLabel(""));
+        panel.add(bankButton);
         panel.add(loginButton);//adding button on frame
 
         add(panel, BorderLayout.CENTER);//adding button on frame
@@ -48,10 +54,23 @@ public class LoginForm extends JFrame {
         setVisible(true);
     }
 
-    private class LoginButtonHandler implements ActionListener {
+    private class LoginButtonActionListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             LoginForm.this.setVisible(false);
             new UserForm(bank, new Customer(
+                    usernameField.getText(),
+                    passwordField.getText(),
+                    "ABCDE",
+                    "First Name",
+                    "Last Name"
+            ), LoginForm.this).setVisible(true); // Main Form to show after the Login Form..
+        }
+    }
+
+    private class BankButtonActionListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            LoginForm.this.setVisible(false);
+            new BankEmployeeForm(bank, new Employee(
                     usernameField.getText(),
                     passwordField.getText(),
                     "ABCDE",
