@@ -12,29 +12,61 @@ public class AddAccountDialog extends JDialog {
 
     private JLabel titleLabel;
 
-    JPanel content;
+    private Bank bank;
+    private Customer customer;
 
 
-    public AddAccountDialog(JFrame parentFrame){
+    public AddAccountDialog(JFrame parentFrame, Bank bank, Customer customer){
         super(parentFrame);
 
         titleLabel = new JLabel("Create Account: Savings");
-        content = new JPanel(new BorderLayout());
 
-        JPanel infoPanel = new JPanel();
+        setSize(400,400);
+
+
+        GridLayout infoPanelLayout = new GridLayout(3,1, 5,5);
+
+        JPanel infoPanel = new JPanel(infoPanelLayout);
         JPanel actionPanel = new JPanel();
+        JPanel radioPanel = new JPanel();
 
-        content.add(titleLabel, BorderLayout.NORTH);
-        content.add(infoPanel, BorderLayout.CENTER);
-        content.add(actionPanel, BorderLayout.SOUTH);
+        add(titleLabel, BorderLayout.NORTH);
+        add(infoPanel, BorderLayout.CENTER);
+        add(actionPanel, BorderLayout.SOUTH);
 
-        ButtonGroup group = initRadioButtons();
+        nameField = new JTextField();
+        currencyField = new JTextField();
 
-        infoPanel.add(nameField);
-        infoPanel.add(currencyField);
-        infoPanel.add(group);
+        nameField.setPreferredSize(new Dimension(200, 24));
+        currencyField.setPreferredSize(new Dimension(200, 24));
 
-        actionPanel.add()
+
+        JPanel namePanel = new JPanel();
+        JPanel currencyPanel = new JPanel();
+
+        namePanel.add(new JLabel("Name:"));
+        namePanel.add(nameField);
+        currencyPanel.add(new JLabel("Currency:"));
+        currencyPanel.add(currencyField);
+
+
+        initRadioButtons();
+
+        infoPanel.add(namePanel);
+        infoPanel.add(currencyPanel);
+        radioPanel.add(savingsRButton);
+        radioPanel.add(checkingRButton);
+        radioPanel.add(securitiesRButton);
+        infoPanel.add(radioPanel);
+
+        JButton confirmButton = new JButton("Confirm");
+        JButton cancelButton = new JButton("Cancel");
+
+        confirmButton.addActionListener(new CreateAccountButtonHandler());
+        cancelButton.addActionListener(new CancelButtonHandler());
+
+        actionPanel.add(confirmButton);
+        actionPanel.add(cancelButton);
 
 
         setTitle("Add Account");
@@ -42,23 +74,11 @@ public class AddAccountDialog extends JDialog {
 
         setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         setModal(true);
-        getContentPane().add(content);
         pack();
         setLocationRelativeTo(null);
     }
 
-
-    public boolean createAccount(Bank bank, Customer customer){
-        setVisible(true);
-
-
-
-
-
-        return ;
-    }
-
-    private ButtonGroup initRadioButtons(){
+    private void initRadioButtons(){
         // set up radio button
         savingsRButton = new JRadioButton("Savings");
         savingsRButton.setActionCommand("Savings");
@@ -71,11 +91,15 @@ public class AddAccountDialog extends JDialog {
         securitiesRButton.setSelected(false);
         securitiesRButton.setEnabled(false);
 
+        // change the title to match the account
+        savingsRButton.addActionListener(new AccountTypeRadioButtonHandler());
+        checkingRButton.addActionListener(new AccountTypeRadioButtonHandler());
+        securitiesRButton.addActionListener(new AccountTypeRadioButtonHandler());
+
         ButtonGroup group = new ButtonGroup();
         group.add(savingsRButton);
         group.add(checkingRButton);
         group.add(securitiesRButton);
-
 
     }
 
@@ -83,6 +107,51 @@ public class AddAccountDialog extends JDialog {
     private class AccountTypeRadioButtonHandler implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             AddAccountDialog.this.titleLabel.setText("Create Account: " + e.getActionCommand());
+        }
+    }
+
+    /** Update the title to match the account type selected **/
+    private class CreateAccountButtonHandler implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+
+            String name = AddAccountDialog.this.nameField.getText();
+            String currency = AddAccountDialog.this.currencyField.getText();
+
+            BankAccount account = null;
+
+            // select the right account type
+            if(savingsRButton.isSelected()){
+                System.out.println("Create savings account!");
+                account = new SavingsAccount(name, "NEED ID", currency);
+            }
+            else if(checkingRButton.isSelected()) {
+                System.out.println("Create checking account!");
+                account = new CheckingAccount();
+            }
+
+            else if(securitiesRButton.isSelected()) {
+                System.out.println("Create securities account!");
+                // not implemented
+            }
+
+            // check if the account creation is successful
+            if(true){
+                System.out.println("***** NEED TO IMPLEMENT ***** ACCOUNT CREATED");
+                System.out.println(account);
+            }
+            else{
+                System.out.println("Account creation failure");
+            }
+
+            AddAccountDialog.this.dispose();
+        }
+    }
+
+    /** Update the title to match the account type selected **/
+    private class CancelButtonHandler implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            System.out.println("Cancel");
+            AddAccountDialog.this.dispose();
         }
     }
 }

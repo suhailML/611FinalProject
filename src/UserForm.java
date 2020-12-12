@@ -87,12 +87,7 @@ public class UserForm extends JFrame {
         public void actionPerformed(ActionEvent e) {
             //TODO Create account form
             System.out.println("Add Account");
-            if(new AddAccountDialog(UserForm.this, UserForm.this.bank, UserForm.this.customer).createAccount()){
-                System.out.println("Account created!");
-            }
-            else{
-                System.out.println("Cancel");
-            }
+            new AddAccountDialog(UserForm.this, UserForm.this.bank, UserForm.this.customer).setVisible(true);
         }
     }
 
