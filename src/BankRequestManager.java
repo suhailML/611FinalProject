@@ -103,8 +103,10 @@ public class BankRequestManager implements GUIRequests
         {
             transfer(bank, (Transferable) account, (Transferable) bank, money);
             loan.payBack(money);
-            bank.getBankDB.updateLoan(loan);
+            bank.getBankDB().updateLoan(loan);
         }
+
+        return valid;
     }
 
     public boolean transfer(Bank bank, Transferable sender, Transferable receiver, double money)
@@ -118,5 +120,7 @@ public class BankRequestManager implements GUIRequests
         sender.addTransaction(transaction);
         receiver.addTransaction(transaction);
         bank.getBankDB().addTransaction(transaction);
+
+        return true;
     }
 }
