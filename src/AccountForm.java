@@ -11,11 +11,11 @@ public class AccountForm extends JFrame {
     private JList transactionJList;
     private JTextArea outputJTextArea;
 
-    private UserForm userForm;
+    private JFrame parentFrame;
 
-    public AccountForm(Bank bank, BankAccount account, UserForm userForm){
+    public AccountForm(Bank bank, BankAccount account, JFrame parentFrame){
 
-        this.userForm = userForm;
+        this.parentFrame = parentFrame;
 
         this.outputJTextArea = new JTextArea(account.toString());
         this.outputJTextArea.setEnabled(false);
@@ -119,8 +119,8 @@ public class AccountForm extends JFrame {
     private class BackActionListener implements  ActionListener{
         public void actionPerformed(ActionEvent e) {
             System.out.println("ACTION: return to user form");
-            AccountForm.this.setVisible(false);
-            userForm.setVisible(true);
+            AccountForm.this.dispose();
+            parentFrame.setVisible(true);
 
         }
     }

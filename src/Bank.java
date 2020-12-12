@@ -1,3 +1,4 @@
+
 import java.util.*;
 
 public class Bank implements Lender, Transferable
@@ -88,8 +89,12 @@ public class Bank implements Lender, Transferable
         return bankRequestManager;
     }
 
-    public something lend()
-    {
+    public boolean isValidWithdraw(double money){
+        System.out.println("NOT IMPLEMENTED - isValidWithdraw bank");
+        return true;
+    }
 
+    public void addMoney(double money){
+        System.out.println("NOT IMPLEMENTED - addMoney bank");
     }
 }

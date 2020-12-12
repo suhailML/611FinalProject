@@ -13,7 +13,11 @@ public class UserForm extends JFrame {
     private JList<BankAccount> accountJList;
     private JTextArea outputJTextArea;
 
-    public UserForm(Bank bank, Customer customer){
+    private JFrame parentFrame;
+
+    public UserForm(Bank bank, Customer customer, JFrame parentFrame){
+
+        this.parentFrame = parentFrame;
 
         this.bank = bank;
         this.customer = customer;
@@ -24,13 +28,11 @@ public class UserForm extends JFrame {
         frameLayout.setHgap(10);
         setLayout(frameLayout);
 
-        GridLayout layout = new GridLayout(3,1);
-        layout.setHgap(10);
-        layout.setVgap(10);
+        GridLayout actionsLayout = new GridLayout(4,1,10,10);
 
         JPanel panelOutput = new JPanel(new GridLayout(1,1));
         JPanel panelAccounts = new JPanel(new BorderLayout());
-        JPanel panelActions = new JPanel(layout);
+        JPanel panelActions = new JPanel(actionsLayout);
 
 
         outputJTextArea = new JTextArea(customer.toString());
@@ -42,17 +44,20 @@ public class UserForm extends JFrame {
         panelAccounts.add(new JLabel("Account Picker"), BorderLayout.NORTH);
         panelAccounts.add(accountJList, BorderLayout.CENTER);
 
-        JButton buttonAddAccount = new JButton("Add Account");
-        JButton buttonViewAccount = new JButton("View Account");
-        JButton buttonDeleteAccount = new JButton("Delete Account");;
+        JButton addAccountButton = new JButton("Add Account");
+        JButton viewAccountButton = new JButton("View Account");
+        JButton deleteAccountButton = new JButton("Delete Account");;
+        JButton signoutButton = new JButton("Delete Account");;
 
-        buttonAddAccount.addActionListener(new AddAccountButtonHandler());
-        buttonViewAccount.addActionListener(new ViewAccountButtonHandler());
-        buttonDeleteAccount.addActionListener(new DeleteAccountButtonHandler());
+        addAccountButton.addActionListener(new AddAccountActionListener());
+        viewAccountButton.addActionListener(new ViewAccountActionListener());
+        deleteAccountButton.addActionListener(new DeleteAccountActionListener());
+        signoutButton.addActionListener(new SignoutActionListener());
 
-        panelActions.add(buttonAddAccount);
-        panelActions.add(buttonViewAccount);
-        panelActions.add(buttonDeleteAccount);
+        panelActions.add(addAccountButton);
+        panelActions.add(viewAccountButton);
+        panelActions.add(deleteAccountButton);
+        panelActions.add(signoutButton);
 
         add(panelOutput);//adding button on frame
         add(panelAccounts);//adding button on frame
@@ -83,7 +88,7 @@ public class UserForm extends JFrame {
         this.customer.setAccounts(accounts);
     }
 
-    private class AddAccountButtonHandler implements ActionListener {
+    private class AddAccountActionListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             //TODO Create account form
             System.out.println("Add Account");
@@ -91,7 +96,7 @@ public class UserForm extends JFrame {
         }
     }
 
-    private class ViewAccountButtonHandler implements ActionListener {
+    private class ViewAccountActionListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
 
             // get the index
@@ -111,7 +116,7 @@ public class UserForm extends JFrame {
         }
     }
 
-    private class DeleteAccountButtonHandler implements ActionListener {
+    private class DeleteAccountActionListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             // get the index
             int index = accountJList.getLeadSelectionIndex();
@@ -120,6 +125,13 @@ public class UserForm extends JFrame {
             System.out.println("TODO --> ACTUALLY DELETE ACCOUNT");
             JOptionPane.showMessageDialog(UserForm.this,
                     "DELETED ACCOUNT" + index);
+        }
+    }
+
+    private class SignoutActionListener implements ActionListener{
+        public void actionPerformed(ActionEvent e) {
+            parentFrame.setVisible(true);
+            UserForm.this.dispose();
         }
     }
 }

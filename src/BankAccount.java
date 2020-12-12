@@ -107,6 +107,14 @@ public abstract class BankAccount implements BankAccountActions, Transferable
         return true;
     }
 
+    public boolean isValidWithdraw(double money){
+        System.out.println("NOT IMPLEMENTED - isValidWithdraw BankAccount");
+        return true;
+    }
+
+    public void addMoney(double money){
+        System.out.println("NOT IMPLEMENTED - addMoney BankAccount");
+    }
 
     public String fullOutput(){
         return "ACCOUNT: " + name + "\n\t" + accountID + "\nCurrency: " + currencyType;

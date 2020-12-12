@@ -57,7 +57,7 @@ public class LoginForm extends JFrame {
                     "ABCDE",
                     "First Name",
                     "Last Name"
-            )).setVisible(true); // Main Form to show after the Login Form..
+            ), LoginForm.this).setVisible(true); // Main Form to show after the Login Form..
         }
     }
 }
