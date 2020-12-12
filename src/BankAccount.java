@@ -89,6 +89,15 @@ public abstract class BankAccount implements BankAccountActions, Transferable
     }
 
     /*
+    MUTATORS
+    */
+
+    public void addTransaction(Transaction transaction)
+    {
+        getTransactions().add(transaction);
+    }
+
+    /*
     Bank Account Actions Methods
     */
     public boolean withdraw(double value)

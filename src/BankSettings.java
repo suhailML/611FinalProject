@@ -4,10 +4,12 @@ public class BankSettings
     private static final double defaultSavingsInterestRate = 0.01;
     private static final double defaultLoanInterestRate = 0.01;
     private static final double defaultMinSavingsForInterest = 5000.00;
+    private static final int defaultDay = 1;
     private double transactionFee;
     private double savingsInterestRate;
     private double loanInterestRate;
     private double minSavingsForInterest;
+    private int day;
 
     /*
     CONSTRUCTORS
@@ -18,14 +20,16 @@ public class BankSettings
         setSavingsInterestRate(defaultSavingsInterestRate);
         setLoanInterestRate(defaultLoanInterestRate);
         setMinSavingsForInterest(defaultMinSavingsForInterest);
+        setDay(defaultDay);
     }
 
-    public BankSettings(double transactionFee, double savingsInterestRate, double loanInterestRate, double minSavingsForInterest)
+    public BankSettings(double transactionFee, double savingsInterestRate, double loanInterestRate, double minSavingsForInterest, int day)
     {
         setTransactionFee(transactionFee);
         setSavingsInterestRate(savingsInterestRate);
         setLoanInterestRate(loanInterestRate);
         setMinSavingsForInterest(minSavingsForInterest);
+        setDay(day);
     }
 
     /*
@@ -51,6 +55,11 @@ public class BankSettings
         this.minSavingsForInterest = minSavingsForInterest;
     }
 
+    public void setDay(int day)
+    {
+        this.day = day;
+    }
+
     /*
     ACCESSORS
     */
@@ -72,5 +81,10 @@ public class BankSettings
     public double getMinSavingsForInterest()
     {
         return minSavingsForInterest;
+    }
+
+    public int getDay()
+    {
+        return day;
     }
 }
