@@ -99,32 +99,41 @@ public class UserForm extends JFrame {
     private class ViewAccountActionListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
 
-            // get the index
-            int index = accountJList.getLeadSelectionIndex();
-            System.out.println("ACCOUNT: " + index);
+            try {
+                // get the index
+                int index = accountJList.getLeadSelectionIndex();
+                System.out.println("ACCOUNT: " + index);
 
-            // get the account
-            BankAccount account = customer.getAccounts().get(index);
+                // get the account
+                BankAccount account = customer.getAccounts().get(index);
 
-            //TODO Error checking
+                //TODO Error checking
 
-            // hide this window
-            UserForm.this.setVisible(false);
+                // hide this window
+                UserForm.this.setVisible(false);
 
-            //TODO Open the Account form
-            new AccountForm(bank, account, UserForm.this).setVisible(true);
+                //TODO Open the Account form
+                new AccountForm(bank, account, UserForm.this).setVisible(true);
+
+            }catch(ArrayIndexOutOfBoundsException arrayIndexOutOfBoundsException){
+                JOptionPane.showMessageDialog(null, "NO ACCOUNT SELECTED", "ERROR", JOptionPane.ERROR_MESSAGE);
+            }
         }
     }
 
     private class DeleteAccountActionListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             // get the index
-            int index = accountJList.getLeadSelectionIndex();
-            System.out.println("DELETE ACCOUNT: " + index);
+            try {
+                int index = accountJList.getLeadSelectionIndex();
+                System.out.println("DELETE ACCOUNT: " + index);
 
-            System.out.println("TODO --> ACTUALLY DELETE ACCOUNT");
-            JOptionPane.showMessageDialog(UserForm.this,
-                    "DELETED ACCOUNT" + index);
+                System.out.println("TODO --> ACTUALLY DELETE ACCOUNT");
+                JOptionPane.showMessageDialog(UserForm.this,
+                        "DELETED ACCOUNT" + index);
+            }catch(ArrayIndexOutOfBoundsException arrayIndexOutOfBoundsException){
+                JOptionPane.showMessageDialog(null, "NO ACCOUNT SELECTED", "ERROR", JOptionPane.ERROR_MESSAGE);
+            }
         }
     }
 

@@ -67,23 +67,27 @@ public class BankEmployeeForm extends JFrame {
     private class ViewAccountButtonHandler implements ActionListener {
         public void actionPerformed(ActionEvent e) {
 
-            // get the index
-            int index = customerJList.getLeadSelectionIndex();
-            System.out.println("ACCOUNT: " + index);
+            try{
+                // get the index
+                int index = customerJList.getLeadSelectionIndex();
+                System.out.println("ACCOUNT: " + index);
 
-            // get the account
-            Customer customer = bank.getCustomers().get(index);
+                // get the account
+                Customer customer = bank.getCustomers().get(index);
 
-            //TODO Error checking
+                //TODO Error checking
 
-            // sysout the customer name
-            System.out.println("Open customer: " + customer);
+                // sysout the customer name
+                System.out.println("Open customer: " + customer);
 
-            //TODO hide this window
-            //BankEmployeeForm.this.setVisible(false);
+                //TODO hide this window
+                //BankEmployeeForm.this.setVisible(false);
 
-            //TODO Open the customer history form
-            //new CustomerVie(bank, customer, BankEmployeeForm.this).setVisible(true);
+                //TODO Open the customer history form
+                //new CustomerVie(bank, customer, BankEmployeeForm.this).setVisible(true);
+            }catch(ArrayIndexOutOfBoundsException arrayIndexOutOfBoundsException){
+                JOptionPane.showMessageDialog(null, "NO ACCOUNT SELECTED", "ERROR", JOptionPane.ERROR_MESSAGE);
+            }
         }
     }
 
