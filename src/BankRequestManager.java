@@ -23,6 +23,29 @@ public class BankRequestManager implements GUIRequests
         return singleInstance;
     }
 
+    /*
+    public boolean createAccount()
+    {
+        bank.getDB().newAccount(account);
+    }
+
+    public boolean editAccount()
+    {
+        bank.getDB().updateAccount(account);
+    }
+    
+
+    public boolean loginEmployee( user)
+    {
+
+    }
+
+    public boolean loginCustomer()
+    {
+
+    }
+    */
+
     public boolean withdraw(Bank bank, BankAccount account, double money)
     {
         boolean valid = false;
@@ -68,6 +91,7 @@ public class BankRequestManager implements GUIRequests
             loan.payBack(money);
             bank.getBankDB.updateLoan(loan);
         }
+        
     }
 
     public boolean transfer(Bank bank, Transferable sender, Transferable receiver, double money)

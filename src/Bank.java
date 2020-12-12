@@ -152,6 +152,11 @@ public class Bank implements Lender, Transferable
 
     public void addTransaction(Transaction transaction)
     {
-        getTransactions().add(transaction);
+        //getTransactions().add(transaction);
+    }
+
+    public void incrementDay()
+    {
+
     }
 }

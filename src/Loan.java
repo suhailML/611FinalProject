@@ -1,8 +1,8 @@
 public class Loan 
 {
-    private Lender lender; // create Lender interface, Bank implements Lender
-    private Lendee lendee; // create Lendee interface, Customer implements Lendee
-    private String loanID; // implement
+    private Bank lender; // Bank implements Lender
+    private Customer lendee; // Customer implements Lendee
+    private String loanID;
     private double initialValue;
     private double presentValue;
     private double interestRate;
