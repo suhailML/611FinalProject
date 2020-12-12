@@ -130,6 +130,7 @@ public class UserForm extends JFrame {
 
     private class SignoutActionListener implements ActionListener{
         public void actionPerformed(ActionEvent e) {
+            System.out.println("Signout");
             parentFrame.setVisible(true);
             UserForm.this.dispose();
         }
