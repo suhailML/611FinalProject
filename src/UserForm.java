@@ -129,8 +129,8 @@ public class UserForm extends JFrame {
                 System.out.println("DELETE ACCOUNT: " + index);
 
                 System.out.println("TODO --> ACTUALLY DELETE ACCOUNT");
-                JOptionPane.showMessageDialog(UserForm.this,
-                        "DELETED ACCOUNT" + index);
+                JOptionPane.showMessageDialog(UserForm.this,"DELETE - NEED TO DO - ACCOUNT" + customer.getAccounts().get(index));
+
             }catch(ArrayIndexOutOfBoundsException arrayIndexOutOfBoundsException){
                 JOptionPane.showMessageDialog(null, "NO ACCOUNT SELECTED", "ERROR", JOptionPane.ERROR_MESSAGE);
             }
