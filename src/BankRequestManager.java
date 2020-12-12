@@ -29,7 +29,7 @@ public class BankRequestManager implements GUIRequests
         boolean valid = false;
         if (money + bank.getSettings().getTransactionFee() < account.getBalance())
         {
-            account.withdraw(money + bank.getSettings().getTransactionFee());
+            account.send(money + bank.getSettings().getTransactionFee());
             //Transaction transaction = transactionFactory.getWithdraw(day, money, account);
             // add to transactions of account
             // Bank.getBankDB().addTransaction(transaction)
@@ -46,7 +46,7 @@ public class BankRequestManager implements GUIRequests
     public boolean deposit(Bank bank, BankAccount account, double money)
     {
         boolean valid = false;
-        account.deposit(money - bank.getSettings().getTransactionFee());
+        account.receive(money - bank.getSettings().getTransactionFee());
 
         bank.addToReserves(bank.getSettings().getTransactionFee());
         Transaction transaction = transactionFactory.getDeposit(bank.getSettings().getDay(), money, account);
