@@ -43,12 +43,22 @@ public class ParseFile {
 
     public static void addLine(String fileLocation, String line)
     {
-        try {
-            Files.write(Paths.get(fileLocation), line.getBytes(), StandardOpenOption.APPEND);
-          } catch (IOException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
-          }
+        File file = new File(fileLocation);
+        try 
+        {
+            if (file.createNewFile())
+            {
+                Files.write(Paths.get(fileLocation), line.getBytes(), StandardOpenOption.APPEND);
+            }
+            else
+            {
+                Files.write(Paths.get(fileLocation), line.getBytes(), StandardOpenOption.APPEND);
+            }
+        }
+        catch (IOException e)
+        {
+            System.out.println(e);
+        }
     }
 
     public static void main(String[] args) {
@@ -59,6 +69,6 @@ public class ParseFile {
         //     System.out.println(uniqueKey);
         // }
 
-        addLine("./credentials/customercredentials.txt", "\n" + "boi2");
+        addLine("./credentials/customercredentials2.txt", "\n" + "boi2");
     }
 }
