@@ -13,7 +13,7 @@ public class Loan
     */
     public Loan(){}
 
-    public Loan(Lender lender, Lendee lendee, String loanID, double initialValue, double presentValue, double interestRate, String collateral)
+    public Loan(Transferable lender, Transferable lendee, String loanID, double initialValue, double presentValue, double interestRate, String collateral)
     {
         setLender(lender);
         setLendee(lendee);

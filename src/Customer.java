@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class Customer extends User implements CustomerActions, Lendee
+public class Customer extends User implements CustomerActions
 {
     private ArrayList<BankAccount> accounts;
     private ArrayList<Loan> loans;
