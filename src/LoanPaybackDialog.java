@@ -18,7 +18,6 @@ public class LoanPaybackDialog extends JDialog {
     private Bank bank;
     private Customer customer;
 
-
     public LoanPaybackDialog(Bank bank, Customer customer, JFrame parentFrame){
         super(parentFrame);
 
@@ -53,6 +52,7 @@ public class LoanPaybackDialog extends JDialog {
         loanComboBox.addActionListener(e -> {
             loanValueLabel.setText("$" + ((Loan)loanComboBox.getSelectedItem()).getPresentValue());
         });
+
 
         senderValueLabel = new JLabel("$" + ((BankAccount)senderComboBox.getSelectedItem()).getBalance());
         loanValueLabel = new JLabel("$" + ((Loan)loanComboBox.getSelectedItem()).getPresentValue());
@@ -127,7 +127,7 @@ public class LoanPaybackDialog extends JDialog {
             System.out.println("\t" + money);
 
             //TODO payback loan action
-            //TODO bank.getBankRequestManager().payBackLoan(bank, bank, sender, money, loan);
+            bank.getBankRequestManager().payBackLoan(bank, bank, sender, money, loan);
 
         }
     }
