@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class Customer extends User implements CustomerActions
+public class Customer extends User implements CustomerActions, Lendee
 {
     private ArrayList<BankAccount> accounts;
     private ArrayList<Loan> loans;
@@ -10,16 +10,16 @@ public class Customer extends User implements CustomerActions
     */
     public Customer(){}
 
-    public Customer(String username, String password, int userId, String firstName, String lastName)
+    public Customer(String username, String password, String userID, String firstName, String lastName)
     {
-        super(username, password, userId, firstName, lastName);
+        super(username, password, userID, firstName, lastName);
         setAccounts(new ArrayList<BankAccount>());
         setLoans(new ArrayList<Loan>());
     }
 
-    public Customer(String username, String password, int userId, String firstName, String lastName, ArrayList<BankAccount> accounts, ArrayList<Loan> loans)
+    public Customer(String username, String password, String userID, String firstName, String lastName, ArrayList<BankAccount> accounts, ArrayList<Loan> loans)
     {
-        super(username, password, userId, firstName, lastName);
+        super(username, password, userID, firstName, lastName);
         setAccounts(accounts);
         setLoans(loans);
     }
@@ -49,4 +49,25 @@ public class Customer extends User implements CustomerActions
     {
         return loans;
     }
+
+
+    /** Sum up all of the accounts **/
+    //TODO should this include loans?
+    public double getNetWorth(){
+        double total = 0;
+        for(BankAccount account : accounts){
+            total += account.getBalance();
+        }
+        return total;
+    }
+
+    /** Return the total list of loans **/
+    public double getTotalLoans(){
+        double total = 0;
+        for(Loan loan : loans){
+            total += loan.getPresentValue();
+        }
+        return total;
+    }
+
 }

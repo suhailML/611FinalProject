@@ -7,15 +7,13 @@ public class CheckingAccount extends BankAccount
     */
     public CheckingAccount(){}
 
-    public CheckingAccount(String name, int accountNumber, String currencyType, double balance, LinkedList<Transaction> transactions)
+    public CheckingAccount(String name, String accountID, String currencyType, double balance, LinkedList<Transaction> transactions)
     {
-        super(name, accountNumber, currencyType, balance, transactions);
+        super(name, accountID, currencyType, balance, transactions);
     }
 
-    public CheckingAccount(String name, String currencyType)
+    public CheckingAccount(String name, String ID, String currencyType)
     {
-        super(name, currencyType);
+        super(name, ID, currencyType);
     }
-
-    
 }

@@ -1,32 +1,33 @@
 import java.util.*;
 
-public abstract class BankAccount implements BankAccountActions
+public abstract class BankAccount implements Transferable//BankAccountActions, Transferable
 {
-    private static int nextAccountNum = 00000; // move to BankSettings
     private String name;
-    private int accountNumber;
+    private String accountID;
     private String currencyType;
     private double balance;
-    private LinkedList<Transaction> transactions;
+    // private LinkedList<Transaction> transactions;
+    private TransactionHistory history;
+    private Customer customer;
 
     /*
     CONSTRUCTORS
     */
     public BankAccount(){}
 
-    public BankAccount(String name, int accountNumber, String currencyType, double balance, LinkedList<Transaction> transactions)
+    public BankAccount(String name, String accountID, String currencyType, double balance, LinkedList<Transaction> transactions)
     {
         setName(name);
-        setAccountNumber(accountNumber);
+        setAccountID(accountID);
         setCurrencyType(currencyType);
         setBalance(balance);
         setTransactions(transactions);
     }
 
-    public BankAccount(String name, String currencyType)
+    public BankAccount(String name, String accountID, String currencyType)
     {
         setName(name);
-        setAccountNumber(nextAccountNum);
+        setAccountID(accountID);
         setCurrencyType(currencyType);
         setBalance(0);
         setTransactions(new LinkedList<Transaction>());
@@ -40,9 +41,9 @@ public abstract class BankAccount implements BankAccountActions
         this.name = name;
     }
 
-    public void setAccountNumber(int accountNumber)
+    public void setAccountID(String accountID)
     {
-        this.accountNumber = accountNumber;
+        this.accountID = accountID;
     }
 
     public void setCurrencyType(String currencyType)
@@ -68,9 +69,9 @@ public abstract class BankAccount implements BankAccountActions
         return name;
     }
 
-    public int getAccountNumber()
+    public String getAccountID()
     {
-        return accountNumber;
+        return accountID;
     }
 
     public String getCurrencyType()
@@ -89,9 +90,19 @@ public abstract class BankAccount implements BankAccountActions
     }
 
     /*
+    MUTATORS
+    */
+
+    public boolean addTransaction(Transaction transaction)
+    {
+        getTransactions().add(transaction);
+        return true;
+    }
+
+    /*
     Bank Account Actions Methods
     */
-    public boolean withdraw(double value)
+    public boolean send(double value)
     {
         if (value > getBalance())
         {
@@ -101,9 +112,24 @@ public abstract class BankAccount implements BankAccountActions
         return true;
     }
 
-    public boolean deposit(double value)
+    public boolean receive(double value)
     {
         setBalance(getBalance() + value);
         return true;
+    }
+
+
+    // TODO maybe we want to check this first
+    public boolean isValidWithdraw(double money){
+        System.out.println("NOT IMPLEMENTED - isValidWithdraw BankAccount");
+        return true;
+    }
+
+    public String fullOutput(){
+        return "ACCOUNT: " + name + "\n\t" + accountID + "\nCurrency: " + currencyType;
+    }
+
+    public String toString(){
+        return name;
     }
 }

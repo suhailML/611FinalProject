@@ -7,13 +7,22 @@ public class LoginForm extends JFrame {
 
     private JTextField usernameField, passwordField;
 
-    public LoginForm(){
+    private Bank bank;
 
-        GridLayout layout = new GridLayout(3,2);
-        layout.setHgap(10);
-        layout.setVgap(10);
+    public LoginForm(Bank bank){
 
-        JPanel panel = new JPanel(layout);
+        this.bank = bank;
+
+        GridLayout frameLayout = new GridLayout(3,1, 0, 10);
+        GridLayout textLayout = new GridLayout(1,2, 5, 0);
+        GridLayout actionLayout = new GridLayout(1,3, 5, 0);
+
+        JPanel usernamePanel = new JPanel(textLayout);
+        JPanel passwordPanel = new JPanel(textLayout);
+        JPanel actionPanel = new JPanel(actionLayout);
+
+
+        JPanel framePanel = new JPanel(frameLayout);
 
         JLabel usernameLabel = new JLabel("USERNAME");
         JLabel passwordLabel = new JLabel("PASSWORD");
@@ -24,18 +33,32 @@ public class LoginForm extends JFrame {
         usernameField = new JTextField();
         passwordField = new JTextField();
 
-        JButton loginButton =new JButton("LOGIN");//create button
+        JButton loginButton =new JButton("USER LOGIN");//create button
 
-        loginButton.addActionListener(new LoginButtonHandler());
+        loginButton.addActionListener(new LoginButtonActionListener());
 
-        panel.add(usernameLabel);
-        panel.add(usernameField);
-        panel.add(passwordLabel);
-        panel.add(passwordField);
-        panel.add(new JLabel(""));
-        panel.add(loginButton);//adding button on frame
+        JButton bankButton =new JButton("BANK LOGIN");//create button
 
-        add(panel, BorderLayout.CENTER);//adding button on frame
+        bankButton.addActionListener(new BankButtonActionListener());
+
+        JButton createUserButton =new JButton("Create User");//create button
+
+        createUserButton.addActionListener(new CreateUserActionListener());
+
+
+        usernamePanel.add(usernameLabel);
+        usernamePanel.add(usernameField);
+        passwordPanel.add(passwordLabel);
+        passwordPanel.add(passwordField);
+        actionPanel.add(bankButton);
+        actionPanel.add(createUserButton);
+        actionPanel.add(loginButton);//adding button on frame
+
+        framePanel.add(usernamePanel);
+        framePanel.add(passwordPanel);
+        framePanel.add(actionPanel);
+
+        add(framePanel, BorderLayout.CENTER);//adding button on frame
 
         setTitle("Login Form");
         setSize(400,150);
@@ -44,10 +67,55 @@ public class LoginForm extends JFrame {
         setVisible(true);
     }
 
-    private class LoginButtonHandler implements ActionListener {
+
+    /** Login as a user **/
+    private class LoginButtonActionListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             LoginForm.this.setVisible(false);
-            new UserForm(LoginForm.this.usernameField.getText()).setVisible(true); // Main Form to show after the Login Form..
+
+            // TODO check the login
+
+            System.out.println("User login");
+            new UserForm(bank, new Customer(
+                    usernameField.getText(),
+                    passwordField.getText(),
+                    "ABCDE",
+                    "First Name",
+                    "Last Name"
+            ), LoginForm.this).setVisible(true); // Main Form to show after the Login Form..
+        }
+    }
+
+
+    /** Login as an employee **/
+    private class BankButtonActionListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+
+            System.out.println("Bank login");
+            LoginForm.this.setVisible(false);
+
+            //TODO Check the login
+
+            new BankEmployeeForm(bank, new Employee(
+                    usernameField.getText(),
+                    passwordField.getText(),
+                    "ABCDE",
+                    "First Name",
+                    "Last Name"
+            ), LoginForm.this).setVisible(true); // Main Form to show after the Login Form..
+        }
+    }
+
+
+    /** Create a user **/
+    private class CreateUserActionListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+
+            // TODO create user form
+
+            System.out.println("Create a user");
+
+
         }
     }
 }

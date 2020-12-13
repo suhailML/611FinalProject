@@ -2,7 +2,7 @@ public abstract class User
 {
     private String username;
     private String password;
-    private int userId;
+    private String userID;
     private String firstName;
     private String lastName;
 
@@ -11,11 +11,11 @@ public abstract class User
     */
     public User(){}
 
-    public User(String username, String password, int userId, String firstName, String lastName)
+    public User(String username, String password, String userID, String firstName, String lastName)
     {
         setUsername(username);
         setPassword(password);
-        setUserId(userId);
+        setUserID(userID);
         setFirstName(firstName);
         setLastName(lastName);
     }
@@ -33,9 +33,9 @@ public abstract class User
         this.password = password;
     }
 
-    public void setUserId(int userId)
+    public void setUserID(String userID)
     {
-        this.userId = userId;
+        this.userID = userID;
     }
 
     public void setFirstName(String firstName)
@@ -61,9 +61,9 @@ public abstract class User
         return password;
     }
 
-    public int getUserId()
+    public String getUserID()
     {
-        return userId;
+        return userID;
     }
 
     public String getFirstName()
@@ -74,5 +74,13 @@ public abstract class User
     public String getLastName()
     {
         return lastName;
+    }
+
+    public String fullOutput(){
+        return "ACCOUNT: " + username + "\n\t" + password + "\nName: " + firstName + " " + lastName;
+    }
+
+    public String toString(){
+        return firstName + " " + lastName;
     }
 }

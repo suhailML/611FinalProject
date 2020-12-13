@@ -7,13 +7,13 @@ public class SavingsAccount extends BankAccount
     */
     public SavingsAccount(){}
 
-    public SavingsAccount(String name, int accountNumber, String currencyType, double balance, LinkedList<Transaction> transactions)
+    public SavingsAccount(String name, String accountID, String currencyType, double balance, LinkedList<Transaction> transactions)
     {
-        super(name, accountNumber, currencyType, balance, transactions);
+        super(name, accountID, currencyType, balance, transactions);
     }
 
-    public SavingsAccount(String name, String currencyType)
+    public SavingsAccount(String name, String accountID, String currencyType)
     {
-        super(name, currencyType);
+        super(name, accountID, currencyType);
     }
 }
