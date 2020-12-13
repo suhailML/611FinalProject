@@ -32,16 +32,18 @@ public class AccountForm extends JFrame {
         buttonPanelLayout.setVgap(10);
 
         JPanel panelOutput = new JPanel(new GridLayout(1,1));
-        JPanel panelAccounts = new JPanel(new BorderLayout());
+        JPanel panelTransactions = new JPanel(new BorderLayout());
+
         JPanel panelActions = new JPanel(buttonPanelLayout);
+
 
 
         panelOutput.add(outputJTextArea);
 
         transactionJList = new JList(account.getTransactions().toArray());
 
-        panelAccounts.add(new JLabel("Transaction Picker"), BorderLayout.NORTH);
-        panelAccounts.add(transactionJList, BorderLayout.CENTER);
+        panelTransactions.add(new JLabel("Transaction Picker"), BorderLayout.NORTH);
+        panelTransactions.add(transactionJList, BorderLayout.CENTER);
 
         JButton buttonWithdraw = new JButton("Withdraw");
         JButton buttonDeposit = new JButton("Deposit");
@@ -61,7 +63,7 @@ public class AccountForm extends JFrame {
         panelActions.add(buttonBack);
 
         add(panelOutput);//adding button on frame
-        add(panelAccounts);//adding button on frame
+        add(panelTransactions);//adding button on frame
         add(panelActions);//adding button on frame
 
         setTitle("User View Form");
