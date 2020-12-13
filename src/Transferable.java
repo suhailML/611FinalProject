@@ -1,4 +1,3 @@
-
 public interface Transferable 
 {
     public boolean send(double money);
