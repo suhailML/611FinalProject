@@ -137,14 +137,16 @@ public class AddAccountDialog extends JDialog {
                 // not implemented
             }
 
-            // check if the account creation is successful
-            if(true){
+            /* TODO check if the account creation is successful
+            if(createAccount(Bank bank, Customer customer, String name, String currency, Enum AccountType??)){
                 System.out.println("***** NEED TO IMPLEMENT ***** ACCOUNT CREATED");
                 System.out.println(account);
+                JOptionPane.showMessageDialog(AddAccountDialog.this, "Created account: " + account, "Account Created", JOptionPane.INFORMATION_MESSAGE);
             }
             else{
-                System.out.println("Account creation failure");
+                JOptionPane.showMessageDialog(AddAccountDialog.this, "Failed to create account", "Account Creation Error", JOptionPane.ERROR_MESSAGE);
             }
+            */
 
             AddAccountDialog.this.dispose();
         }

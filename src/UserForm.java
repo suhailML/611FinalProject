@@ -140,11 +140,24 @@ public class UserForm extends JFrame {
         public void actionPerformed(ActionEvent e) {
             // get the index
             try {
-                int index = accountJList.getLeadSelectionIndex();
-                System.out.println("DELETE ACCOUNT: " + index);
+                BankAccount account = accountJList.getSelectedValue();
+                System.out.println("DELETE ACCOUNT: " + account);
+
+
 
                 System.out.println("TODO --> ACTUALLY DELETE ACCOUNT");
-                JOptionPane.showMessageDialog(UserForm.this,"DELETE - NEED TO DO - ACCOUNT" + customer.getAccounts().get(index));
+                JOptionPane.showMessageDialog(UserForm.this,"DELETE - NEED TO DO - ACCOUNT" + account);
+
+
+                //TODO
+                /*
+                if(bank.getBankRequestManager().deleteAccount(bank, customer, account)){
+                    JOptionPane.showMessageDialog(UserForm.this, "Account deleted: " + account, "Delete Account", JOptionPane.INFORMATION_MESSAGE);
+                }
+                else{
+                    JOptionPane.showMessageDialog(UserForm.this, "Could not delete account: " + account, "Delete Account Error", JOptionPane.ERROR_MESSAGE);
+                }
+                 */
 
             }catch(ArrayIndexOutOfBoundsException arrayIndexOutOfBoundsException){
                 JOptionPane.showMessageDialog(null, "NO ACCOUNT SELECTED", "ERROR", JOptionPane.ERROR_MESSAGE);
