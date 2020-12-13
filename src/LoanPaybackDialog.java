@@ -124,6 +124,8 @@ public class LoanPaybackDialog extends JDialog {
             System.out.println("\t" + sender);
             System.out.println("\t" + loan);
 
+            //TODO payback loan action
+
         }
     }
 
