@@ -49,4 +49,25 @@ public class Customer extends User implements CustomerActions, Lendee
     {
         return loans;
     }
+
+
+    /** Sum up all of the accounts **/
+    //TODO should this include loans?
+    public double getNetWorth(){
+        double total = 0;
+        for(BankAccount account : accounts){
+            total += account.getBalance();
+        }
+        return total;
+    }
+
+    /** Return the total list of loans **/
+    public double getTotalLoans(){
+        double total = 0;
+        for(Loan loan : loans){
+            total += loan.getPresentValue();
+        }
+        return total;
+    }
+
 }

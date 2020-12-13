@@ -1,6 +1,6 @@
 import java.util.*;
 
-public abstract class BankAccount implements BankAccountActions, Transferable
+public abstract class BankAccount implements Transferable//BankAccountActions, Transferable
 {
     private String name;
     private String accountID;
@@ -93,15 +93,16 @@ public abstract class BankAccount implements BankAccountActions, Transferable
     MUTATORS
     */
 
-    public void addTransaction(Transaction transaction)
+    public boolean addTransaction(Transaction transaction)
     {
         getTransactions().add(transaction);
+        return true;
     }
 
     /*
     Bank Account Actions Methods
     */
-    public boolean withdraw(double value)
+    public boolean send(double value)
     {
         if (value > getBalance())
         {
@@ -111,9 +112,24 @@ public abstract class BankAccount implements BankAccountActions, Transferable
         return true;
     }
 
-    public boolean deposit(double value)
+    public boolean receive(double value)
     {
         setBalance(getBalance() + value);
         return true;
+    }
+
+
+    // TODO maybe we want to check this first
+    public boolean isValidWithdraw(double money){
+        System.out.println("NOT IMPLEMENTED - isValidWithdraw BankAccount");
+        return true;
+    }
+
+    public String fullOutput(){
+        return "ACCOUNT: " + name + "\n\t" + accountID + "\nCurrency: " + currencyType;
+    }
+
+    public String toString(){
+        return name;
     }
 }

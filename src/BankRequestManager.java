@@ -51,7 +51,11 @@ public class BankRequestManager implements GUIRequests
         boolean valid = false;
         if (money + bank.getSettings().getTransactionFee() < account.getBalance())
         {
-            account.withdraw(money + bank.getSettings().getTransactionFee());
+            account.send(money + bank.getSettings().getTransactionFee());
+            //Transaction transaction = transactionFactory.getWithdraw(day, money, account);
+            // add to transactions of account
+            // Bank.getBankDB().addTransaction(transaction)
+
             bank.addToReserves(bank.getSettings().getTransactionFee());
             Transaction transaction = transactionFactory.getWithdraw(bank.getSettings().getDay(), money, account);
             account.addTransaction(transaction);
@@ -64,7 +68,8 @@ public class BankRequestManager implements GUIRequests
     public boolean deposit(Bank bank, BankAccount account, double money)
     {
         boolean valid = false;
-        account.deposit(money - bank.getSettings().getTransactionFee());
+        account.receive(money - bank.getSettings().getTransactionFee());
+
         bank.addToReserves(bank.getSettings().getTransactionFee());
         Transaction transaction = transactionFactory.getDeposit(bank.getSettings().getDay(), money, account);
         bank.getBankDB().addTransaction(transaction);
@@ -75,6 +80,7 @@ public class BankRequestManager implements GUIRequests
     public boolean takeOutLoan(Bank bank, Customer customer, BankAccount account, double money, String collateral)
     {
         boolean valid = false;
+
         Loan loan = loanFactory.createNewLoan(bank, customer, money, bank.getSettings().getLoanInterestRate(), collateral);
         transfer(bank, (Transferable) bank, (Transferable) account, money);
         bank.getBankDB().addLoan(loan);
@@ -82,6 +88,36 @@ public class BankRequestManager implements GUIRequests
         return valid;
     }
 
+    // TODO ELIMINATE THIS IF NOT USED
+    /*
+    public boolean transfer_backup(Bank bank, Transferable sender, Transferable receiver, double money, int day)
+    {
+        //TODO transaction
+        //Transaction transaction = transactionFactory.getTransfer(day, money, sender, receiver);
+
+        double fee = bank.getSettings().getTransactionFee();
+
+        if(sender.isValidWithdraw(money + fee)){
+
+            // send the fee to the bank
+            //      - a bank will send itself the fee if it is the sender
+            sender.addMoney(-fee);
+            bank.addMoney(fee);
+
+            // send the money to the receiver
+            sender.addMoney(-money);
+            receiver.addMoney(money);
+            // Bank.getBankDB().addTransaction(transaction)
+            return true;
+        }
+        else{
+            System.out.println("Invalid transfer");
+            return false;
+        }
+
+        // Bank.getBankDB().addTransaction(transaction)
+    }
+     */
     public boolean payBackLoan(Bank bank, Customer customer, BankAccount account, double money, Loan loan)
     {
         boolean valid = false;
@@ -89,9 +125,10 @@ public class BankRequestManager implements GUIRequests
         {
             transfer(bank, (Transferable) account, (Transferable) bank, money);
             loan.payBack(money);
-            bank.getBankDB.updateLoan(loan);
+            bank.getBankDB().updateLoan(loan);
         }
-        
+
+        return valid;
     }
 
     public boolean transfer(Bank bank, Transferable sender, Transferable receiver, double money)
@@ -105,5 +142,7 @@ public class BankRequestManager implements GUIRequests
         sender.addTransaction(transaction);
         receiver.addTransaction(transaction);
         bank.getBankDB().addTransaction(transaction);
+
+        return true;
     }
 }

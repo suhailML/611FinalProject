@@ -150,7 +150,7 @@ public class Bank implements Lender, Transferable
         return valid;
     }
 
-    public void addTransaction(Transaction transaction)
+    public boolean addTransaction(Transaction transaction)
     {
         //getTransactions().add(transaction);
     }
