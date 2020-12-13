@@ -100,6 +100,9 @@ public class BankSettingsForm extends JDialog {
                 System.out.println("\tminSavingsForInterest " + minSavingsForInterest);
 
 
+                // TODO bank.getBankRequestManager().saveBankSettings(Bank bank, Double transactionFee, Double savingsInterestRate, Double loanInterestRate, Double minSavingsForInterest);
+
+
                 BankSettingsForm.this.dispose();
 
             }

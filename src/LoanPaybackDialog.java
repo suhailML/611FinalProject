@@ -106,7 +106,6 @@ public class LoanPaybackDialog extends JDialog {
         for(Object value : valuesList){
             comboBox.addItem(value);
         }
-
     }
 
 
@@ -117,14 +116,18 @@ public class LoanPaybackDialog extends JDialog {
             int senderIndex = LoanPaybackDialog.this.senderComboBox.getSelectedIndex();
             int loanIndex = LoanPaybackDialog.this.loanComboBox.getSelectedIndex();
 
+            double money = (Double)LoanPaybackDialog.this.amountSpinner.getValue();
+
             Transferable sender = LoanPaybackDialog.this.senderComboBox.getItemAt(senderIndex);
             Loan loan = LoanPaybackDialog.this.loanComboBox.getItemAt(loanIndex);
 
             System.out.println("TODO Transfer action");
             System.out.println("\t" + sender);
             System.out.println("\t" + loan);
+            System.out.println("\t" + money);
 
             //TODO payback loan action
+            //TODO bank.getBankRequestManager().payBackLoan(bank, bank, sender, money, loan);
 
         }
     }
