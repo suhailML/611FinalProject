@@ -6,8 +6,11 @@ public abstract class BankAccount implements Transferable//BankAccountActions, T
     private String accountID;
     private String currencyType;
     private double balance;
-    // private LinkedList<Transaction> transactions;
-    private TransactionHistory history;
+    //TODO remove this
+    private LinkedList<Transaction> transactions;
+
+    //TODO implement this
+    //private TransactionHistory history;
     private Customer customer;
 
     /*

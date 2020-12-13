@@ -153,6 +153,7 @@ public class Bank implements Lender, Transferable
     public boolean addTransaction(Transaction transaction)
     {
         //getTransactions().add(transaction);
+        return true;
     }
 
     public void incrementDay()
