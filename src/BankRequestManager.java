@@ -97,24 +97,6 @@ public class BankRequestManager implements GUIRequests
         bank.getBankDB().addAccount(account);
     }
 
-    /*
-    public boolean editAccount()
-    {
-        bank.getDB().updateAccount(account);
-    }
-    
-
-    public boolean loginEmployee( user)
-    {
-
-    }
-
-    public boolean loginCustomer()
-    {
-
-    }
-    */
-
     public boolean withdraw(Bank bank, BankAccount account, double money)
     {
         boolean valid = false;
