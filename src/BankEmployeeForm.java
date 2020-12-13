@@ -77,7 +77,9 @@ public class BankEmployeeForm extends JFrame {
 
     private class EditSettingsActionListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            System.out.println("Open settings editor");
+
+            new BankSettingsForm(BankEmployeeForm.this, BankEmployeeForm.this.bank).setVisible(true);
+
         }
     }
 
@@ -101,7 +103,7 @@ public class BankEmployeeForm extends JFrame {
                 //BankEmployeeForm.this.setVisible(false);
 
                 //TODO Open the customer history form
-                //new CustomerVie(bank, customer, BankEmployeeForm.this).setVisible(true);
+                //new CustomerView(bank, customer, BankEmployeeForm.this).setVisible(true);
             }catch(ArrayIndexOutOfBoundsException arrayIndexOutOfBoundsException){
                 JOptionPane.showMessageDialog(null, "NO ACCOUNT SELECTED", "ERROR", JOptionPane.ERROR_MESSAGE);
             }
