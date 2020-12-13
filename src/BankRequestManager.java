@@ -123,13 +123,11 @@ public class BankRequestManager implements GUIRequests
         double fee = bank.getSettings().getTransactionFee();
 
         if(sender.send(money + fee)) {
+            money -= bank.getSettings().getTransactionFee();
+            bank.addToReserves(bank.getSettings().getTransactionFee());
 
             // if the receiver was able to receive the money, update the database
             if(receiver.receive(money)) {
-                money -= bank.getSettings().getTransactionFee();
-                bank.addToReserves(bank.getSettings().getTransactionFee());
-                receiver.receive(money);
-
                 sender.addTransaction(transaction);
                 receiver.addTransaction(transaction);
                 bank.getBankDB().addTransaction(transaction);
