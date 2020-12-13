@@ -9,9 +9,10 @@ public class CreateUserDialog extends JDialog {
 
     private Bank bank;
 
+    private JFrame parentFrame;
 
     public CreateUserDialog(Bank bank, JFrame parentFrame){
-        super(parentFrame);
+        this.parentFrame = parentFrame;
 
         this.bank = bank;
 
@@ -94,7 +95,13 @@ public class CreateUserDialog extends JDialog {
             // TODO call method of creation
 
             System.out.println("TODO Create Customer!");
-            System.out.println(new UserFactory().createNewCustomer(username, password, firstName, lastName));
+
+            Customer customer = new UserFactory().createNewCustomer(username, password, firstName, lastName);
+            System.out.println();
+
+
+
+            new AddAccountDialog(bank,customer, CreateUserDialog.this.parentFrame).setVisible(true);
 
             CreateUserDialog.this.dispose();
         }
