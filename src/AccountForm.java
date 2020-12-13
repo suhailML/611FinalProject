@@ -119,7 +119,7 @@ public class AccountForm extends JFrame {
             double amount = Double.parseDouble(input);
             System.out.println("TODO --> DO DEPOSIT $" + amount);
 
-            //TODO
+            //TODO deposit action
             /* TODO
             if(withdraw(Bank bank, BankAccount account, double money)){
                 JOptionPane.showMessageDialog(AccountForm.this, "You deposited " + money + " to " + account, "Deposit", JOptionPane.INFORMATION_MESSAGE);
@@ -136,6 +136,12 @@ public class AccountForm extends JFrame {
     private class buttonLoanActionListener implements ActionListener{
         public void actionPerformed(ActionEvent e) {
             System.out.println("TODO --> DO LOAN INPUTS");
+            // TODO Create a loan
+
+
+            /*
+            bank.getBankRequestManager().takeOutLoan(Bank bank, Transferable lendee, Transferable lender, double money, String collateral);
+             */
         }
     }
 
@@ -145,10 +151,10 @@ public class AccountForm extends JFrame {
             System.out.println("ACTION: return to user form");
             AccountForm.this.dispose();
             parentFrame.setVisible(true);
-
         }
     }
 
+    //TODO remove this
     /** Test function ~ output the selected transaction **/
     private class TestActionListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
