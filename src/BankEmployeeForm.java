@@ -46,18 +46,18 @@ public class BankEmployeeForm extends JFrame {
 
 
         JButton editSettingsButton = new JButton("Edit Settings");
-        JButton viewAccountButton = new JButton("View Account");
+        JButton viewCustomerButton = new JButton("View Account");
         JButton viewTransactionsButton = new JButton("View Transactions");
         JButton signoutButton = new JButton("Sign out");
 
 
         editSettingsButton.addActionListener(new EditSettingsActionListener());
-        viewAccountButton.addActionListener(new ViewAccountActionListener());
+        viewCustomerButton.addActionListener(new ViewCustomerActionListener());
         viewTransactionsButton.addActionListener((new ViewTransactionsActionListener()));
         signoutButton.addActionListener(new SignoutActionListener());
 
         panelActions.add(editSettingsButton);
-        panelActions.add(viewAccountButton);
+        panelActions.add(viewCustomerButton);
         panelActions.add(viewTransactionsButton);
         panelActions.add(signoutButton);
 
@@ -82,7 +82,7 @@ public class BankEmployeeForm extends JFrame {
     }
 
     /** View the selected account **/
-    private class ViewAccountActionListener implements ActionListener {
+    private class ViewCustomerActionListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
 
             try{
