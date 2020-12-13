@@ -77,12 +77,14 @@ public class BankRequestManager implements GUIRequests
         return valid;
     }
 
-    public boolean takeOutLoan(Bank bank, Customer customer, BankAccount account, double money, String collateral)
+
+    /** Take a loan from the lender to the lendee **/
+    public boolean takeOutLoan(Bank bank, Transferable lender, Transferable lendee, double money, String collateral)
     {
         boolean valid = false;
 
-        Loan loan = loanFactory.createNewLoan(bank, customer, money, bank.getSettings().getLoanInterestRate(), collateral);
-        transfer(bank, (Transferable) bank, (Transferable) account, money);
+        Loan loan = loanFactory.createNewLoan(bank, lendee, money, bank.getSettings().getLoanInterestRate(), collateral);
+        transfer(bank, lender, lendee, money);
         bank.getBankDB().addLoan(loan);
         valid = true;
         return valid;
@@ -118,15 +120,21 @@ public class BankRequestManager implements GUIRequests
         // Bank.getBankDB().addTransaction(transaction)
     }
      */
-    public boolean payBackLoan(Bank bank, Customer customer, BankAccount account, double money, Loan loan)
+
+
+    /** Payback part of a loan from the lendee to the lender **/
+    public boolean payBackLoan(Bank bank, Transferable lendee, Transferable lender, double money, Loan loan)
     {
         boolean valid = false;
-        if (money + bank.getSettings().getTransactionFee() < account.getBalance() && loan.getPresentValue() + bank.getSettings().getTransactionFee() >= money)
+        if (money + bank.getSettings().getTransactionFee() < lendee.getBalance() && loan.getPresentValue() + bank.getSettings().getTransactionFee() >= money)
         {
-            transfer(bank, (Transferable) account, (Transferable) bank, money);
+            // transfer from the lendee to the lender
+            transfer(bank, lendee, lender, money);
             loan.payBack(money);
             bank.getBankDB().updateLoan(loan);
         }
+
+        //TODO pay back over paying the loan?
 
         return valid;
     }

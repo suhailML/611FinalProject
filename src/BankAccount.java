@@ -1,6 +1,6 @@
 import java.util.*;
 
-public abstract class BankAccount implements Transferable//BankAccountActions, Transferable
+public abstract class BankAccount implements Transferable
 {
     private String name;
     private String accountID;
