@@ -147,4 +147,13 @@ public class BankRequestManager implements GUIRequests
 
         return true;
     }
+
+
+    public String queryTransactions(int day){
+
+        String output = "TODO - fill in query transactions --> DAY: " + day;
+
+        return output;
+
+    }
 }

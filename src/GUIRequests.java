@@ -17,5 +17,5 @@ public interface GUIRequests
     // - public boolean deleteAccount(Bank bank, Customer customer, Account account) --> do not delete account when there are loans
     // - public boolean saveBankSettings(Bank bank, Double transactionFee, Double savingsInterestRate, Double loanInterestRate, Double minSavingsForInterest)
 
-
+    public String queryTransactions(int day);
 }

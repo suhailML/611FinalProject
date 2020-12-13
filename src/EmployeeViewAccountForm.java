@@ -3,7 +3,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class EmployeeViewAccountForm extends JFrame {
+public class EmployeeViewAccountForm extends JDialog {
 
     private Bank bank;
     private BankAccount account;
@@ -15,7 +15,7 @@ public class EmployeeViewAccountForm extends JFrame {
 
     public EmployeeViewAccountForm(Bank bank, BankAccount account, JFrame parentFrame){
 
-        this.parentFrame = parentFrame;
+        super(parentFrame);
 
         this.outputJTextArea = new JTextArea(account.toString());
         this.outputJTextArea.setEnabled(false);
@@ -58,8 +58,7 @@ public class EmployeeViewAccountForm extends JFrame {
 
         setTitle("Employee View Account Form");
         setSize(600,400);
-        //setLayout(null);
-        setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE);
+        setModal(true);
         setVisible(true);
     }
 
@@ -68,8 +67,6 @@ public class EmployeeViewAccountForm extends JFrame {
         public void actionPerformed(ActionEvent e) {
             System.out.println("ACTION: return to user form");
             EmployeeViewAccountForm.this.dispose();
-            parentFrame.setVisible(true);
-
         }
     }
 }

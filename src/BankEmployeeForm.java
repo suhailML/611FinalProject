@@ -114,6 +114,8 @@ public class BankEmployeeForm extends JFrame {
         public void actionPerformed(ActionEvent e) {
             // output to console
             System.out.println("Open transactions view");
+
+            new EmployeeViewTransactionsDialog(BankEmployeeForm.this.bank, BankEmployeeForm.this);
         }
     }
 
