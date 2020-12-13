@@ -22,6 +22,8 @@ public class UserForm extends JFrame {
         this.bank = bank;
         this.customer = customer;
 
+        System.out.println("OPEN CUSTOMER " + customer);
+
         debugInit();
 
         GridLayout frameLayout = new GridLayout(1,3);
@@ -153,7 +155,7 @@ public class UserForm extends JFrame {
     /** Open the window to make a transfer into an account **/
     private class TransferActionListener implements ActionListener{
         public void actionPerformed(ActionEvent e) {
-            System.out.println("Transfer Dialog");
+            System.out.println("OPEN TRANSFER DIALOG");
             new TransferDialog(UserForm.this.bank, UserForm.this.customer, UserForm.this).setVisible(true);
         }
     }
@@ -161,7 +163,8 @@ public class UserForm extends JFrame {
     /** Open the window to allow the user to payback a loan **/
     private class PaybackLoanActionListener implements ActionListener{
         public void actionPerformed(ActionEvent e) {
-            System.out.println("TODO --> OPEN PAYBACK LOAN WINDOW");
+            System.out.println("OPEN PAYBACK LOAN DIALOG");
+            new LoanPaybackDialog(UserForm.this.bank, UserForm.this.customer, UserForm.this).setVisible(true);
         }
     }
 

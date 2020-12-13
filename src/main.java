@@ -4,8 +4,6 @@ public class main {
 
     public static void main(String[] args) {
 
-
-
         //new AccountForm();
         new LoginForm(initDebugBank());
     }
@@ -17,6 +15,24 @@ public class main {
         Customer test = factory.createNewCustomer("test", "1234", "Evan", "Bosia");
         Customer test2 = factory.createNewCustomer("test2", "1234", "Foo", "Bar");
         Customer test3 = factory.createNewCustomer("test3", "1234", "John", "Doe");
+
+
+        ArrayList<BankAccount> bankAccounts = new ArrayList<>();
+
+        BankAccount accountChecking = new CheckingAccount("Checking", "123C", "$");
+        accountChecking.receive(10000);
+
+        BankAccount accountSavings = new SavingsAccount("Savings", "123", "$");
+        accountSavings.receive(10000);
+
+
+        bankAccounts.add(accountChecking);
+        bankAccounts.add(accountSavings);
+
+        ArrayList<Loan> testLoans = new ArrayList<>();
+        testLoans.add(new Loan(bank, accountChecking, "LOAN1", 1000, 1000, 5, "FOO"));
+
+        test.setLoans(testLoans);
 
         ArrayList<Customer> customers = new ArrayList<Customer>();
 

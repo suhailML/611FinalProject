@@ -78,13 +78,7 @@ public class LoginForm extends JFrame {
             // TODO check the login
 
             System.out.println("User login");
-            new UserForm(bank, new Customer(
-                    usernameField.getText(),
-                    passwordField.getText(),
-                    "ABCDE",
-                    "First Name",
-                    "Last Name"
-            ), LoginForm.this).setVisible(true); // Main Form to show after the Login Form..
+            new UserForm(bank, bank.getCustomers().get(0), LoginForm.this).setVisible(true); // Main Form to show after the Login Form..
         }
     }
 

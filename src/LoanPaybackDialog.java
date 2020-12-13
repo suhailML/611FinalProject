@@ -4,13 +4,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-public class TransferDialog extends JDialog {
+public class LoanPaybackDialog extends JDialog {
 
-    private JComboBox<Transferable> senderComboBox, receiverComboBox;
+    private JComboBox<Transferable> senderComboBox;
+    private JComboBox<Loan> loanComboBox;
 
     private JSpinner amountSpinner;
 
-    private JLabel senderValueLabel, receiverValueLabel;
+    private JLabel senderValueLabel, loanValueLabel;
 
     private JLabel titleLabel;
 
@@ -18,7 +19,7 @@ public class TransferDialog extends JDialog {
     private Customer customer;
 
 
-    public TransferDialog(Bank bank, Customer customer, JFrame parentFrame){
+    public LoanPaybackDialog(Bank bank, Customer customer, JFrame parentFrame){
         super(parentFrame);
 
         this.bank = bank;
@@ -27,7 +28,6 @@ public class TransferDialog extends JDialog {
         titleLabel = new JLabel("Transfer");
 
         setSize(400,200);
-
 
         GridLayout infoPanelLayout = new GridLayout(1,3, 5,5);
 
@@ -38,25 +38,24 @@ public class TransferDialog extends JDialog {
         add(infoPanel, BorderLayout.CENTER);
         add(actionPanel, BorderLayout.SOUTH);
 
+        // initialize combo box
         senderComboBox = new JComboBox<>();
-        receiverComboBox = new JComboBox<>();
+        loanComboBox = new JComboBox<>();
 
         initComboBox(senderComboBox, customer.getAccounts());
-        initComboBox(receiverComboBox, customer.getAccounts());
+        initComboBox(loanComboBox, customer.getLoans());
 
         // update sender when the sender combo box changes
         senderComboBox.addActionListener(e -> {
             senderValueLabel.setText("$" + ((BankAccount)senderComboBox.getSelectedItem()).getBalance());
         });
 
-        // update the receiver when the receiver combo box changes
-        receiverComboBox.addActionListener(e -> {
-            receiverValueLabel.setText("$" + ((BankAccount)receiverComboBox.getSelectedItem()).getBalance());
+        loanComboBox.addActionListener(e -> {
+            senderValueLabel.setText("$" + ((Loan)senderComboBox.getSelectedItem()).getPresentValue());
         });
 
-
         senderValueLabel = new JLabel("$" + ((BankAccount)senderComboBox.getSelectedItem()).getBalance());
-        receiverValueLabel = new JLabel("$" + ((BankAccount)receiverComboBox.getSelectedItem()).getBalance());
+        loanValueLabel = new JLabel("$" + ((Loan)loanComboBox.getSelectedItem()).getPresentValue());
 
         GridLayout rowLayout = new GridLayout(2,1, 5,5);
 
@@ -65,12 +64,12 @@ public class TransferDialog extends JDialog {
         JPanel valuePanel = new JPanel(rowLayout);
 
 
-        labelPanel.add(new JLabel("Sender:"));
+        labelPanel.add(new JLabel("Account:"));
         dataPanel.add(senderComboBox);
         valuePanel.add(senderValueLabel);
-        labelPanel.add(new JLabel("Recepient:"));
-        dataPanel.add(receiverComboBox);
-        valuePanel.add(receiverValueLabel);
+        labelPanel.add(new JLabel("Loan:"));
+        dataPanel.add(loanComboBox);
+        valuePanel.add(loanValueLabel);
 
         infoPanel.add(labelPanel);
         infoPanel.add(dataPanel);
@@ -102,9 +101,9 @@ public class TransferDialog extends JDialog {
     }
 
     /** Initialize the combo box with the right values **/
-    private <T extends Transferable> void initComboBox(JComboBox<Transferable> comboBox, List<T> valuesList){
+    private void initComboBox(JComboBox comboBox, List valuesList){
 
-        for(T value : valuesList){
+        for(Object value : valuesList){
             comboBox.addItem(value);
         }
 
@@ -115,15 +114,15 @@ public class TransferDialog extends JDialog {
     private class ConfirmTransactionActionListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
 
-            int senderIndex = TransferDialog.this.senderComboBox.getSelectedIndex();
-            int recevierIndex = TransferDialog.this.receiverComboBox.getSelectedIndex();
+            int senderIndex = LoanPaybackDialog.this.senderComboBox.getSelectedIndex();
+            int loanIndex = LoanPaybackDialog.this.loanComboBox.getSelectedIndex();
 
-            Transferable sender = TransferDialog.this.senderComboBox.getItemAt(senderIndex);
-            Transferable receiver = TransferDialog.this.receiverComboBox.getItemAt(recevierIndex);
+            Transferable sender = LoanPaybackDialog.this.senderComboBox.getItemAt(senderIndex);
+            Loan loan = LoanPaybackDialog.this.loanComboBox.getItemAt(loanIndex);
 
             System.out.println("TODO Transfer action");
             System.out.println("\t" + sender);
-            System.out.println("\t" + receiver);
+            System.out.println("\t" + loan);
 
         }
     }
@@ -132,7 +131,7 @@ public class TransferDialog extends JDialog {
     private class CancelButtonActionListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             System.out.println("Cancel");
-            TransferDialog.this.dispose();
+            LoanPaybackDialog.this.dispose();
         }
     }
 }
