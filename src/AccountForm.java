@@ -76,6 +76,7 @@ public class AccountForm extends JFrame {
 
     private class buttonWithdrawActionListener implements ActionListener{
         public void actionPerformed(ActionEvent e) {
+
             String input = JOptionPane.showInputDialog(
                     AccountForm.this,
                     "Enter an amount to withdraw:",
@@ -88,6 +89,16 @@ public class AccountForm extends JFrame {
 
             double amount = Double.parseDouble(input);
             System.out.println("TODO --> DO WITHDRAW $" + amount);
+
+            //TODO withdraw action
+            /* TODO
+            if(withdraw(Bank bank, BankAccount account, double money)){
+                JOptionPane.showMessageDialog(AccountForm.this, "You withdrew " + money + " from " + account, "Withdrawal", JOptionPane.INFORMATION_MESSAGE);
+            }
+            else{
+                JOptionPane.showMessageDialog(AccountForm.this, "Withdrawal from account failed", "Withdrawal Error", JOptionPane.ERROR_MESSAGE);
+            }
+            */
         }
     }
 
@@ -107,6 +118,17 @@ public class AccountForm extends JFrame {
 
             double amount = Double.parseDouble(input);
             System.out.println("TODO --> DO DEPOSIT $" + amount);
+
+            //TODO
+            /* TODO
+            if(withdraw(Bank bank, BankAccount account, double money)){
+                JOptionPane.showMessageDialog(AccountForm.this, "You deposited " + money + " to " + account, "Deposit", JOptionPane.INFORMATION_MESSAGE);
+            }
+            else{
+                JOptionPane.showMessageDialog(AccountForm.this, "Deposit to account failed", "Deposit Error", JOptionPane.ERROR_MESSAGE);
+            }
+            */
+
         }
     }
 
