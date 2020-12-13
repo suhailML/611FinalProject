@@ -10,9 +10,7 @@ public class BankEmployeeForm extends JFrame {
     private Bank bank;
     private Employee employee;
 
-    private JList<Transaction> transactionJList;
-
-    private JList<BankAccount> customerJList;
+    private JList<Customer> customerJList;
     private JTextArea outputJTextArea;
 
     private JFrame parentFrame;
@@ -74,7 +72,7 @@ public class BankEmployeeForm extends JFrame {
         setVisible(true);
     }
 
-
+    /** Open the bank settings editor form **/
     private class EditSettingsActionListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
 
@@ -83,23 +81,15 @@ public class BankEmployeeForm extends JFrame {
         }
     }
 
+    /** View the selected account **/
     private class ViewAccountActionListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
 
             try{
                 // get the index
-                int index = customerJList.getLeadSelectionIndex();
-                System.out.println("ACCOUNT: " + index);
-
-                // get the account
-                Customer customer = bank.getCustomers().get(index);
-
-                //TODO Error checking
-
-                // sysout the customer name
+                Customer customer = customerJList.getSelectedValue();
                 System.out.println("Open customer: " + customer);
 
-                //TODO hide this window
                 BankEmployeeForm.this.setVisible(false);
 
                 //TODO Open the customer history form
