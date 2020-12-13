@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 public class TransferDialog extends JDialog {
 
@@ -36,6 +37,8 @@ public class TransferDialog extends JDialog {
         senderComboBox = new JComboBox<>();
         receiverComboBox = new JComboBox<>();
 
+        initComboBox(senderComboBox, customer.getAccounts());
+        initComboBox(receiverComboBox, customer.getAccounts());
 
         GridLayout rowLayout = new GridLayout(1,2, 5,5);
 
@@ -67,6 +70,16 @@ public class TransferDialog extends JDialog {
         setModal(true);
         pack();
         setLocationRelativeTo(null);
+
+    }
+
+
+    private void initComboBox(JComboBox<Transferable> comboBox, List<BankAccount> valuesList){
+
+        for(BankAccount value : valuesList){
+            comboBox.addItem(value);
+        }
+
     }
 
 
