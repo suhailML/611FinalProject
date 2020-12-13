@@ -125,31 +125,51 @@ public class BankRequestManager implements GUIRequests
     /** Payback part of a loan from the lendee to the lender **/
     public boolean payBackLoan(Bank bank, Transferable lendee, Transferable lender, double money, Loan loan)
     {
-        boolean valid = false;
-        if (money + bank.getSettings().getTransactionFee() < lendee.getBalance() && loan.getPresentValue() + bank.getSettings().getTransactionFee() >= money)
+
+        // if the transfer of money is successful
+        if (transfer(bank, lendee, lender, money))
         {
-            // transfer from the lendee to the lender
-            transfer(bank, lendee, lender, money);
+            // remove money from the loan
             loan.payBack(money);
+
+            //TODO pay back over paying the loan?
+
             bank.getBankDB().updateLoan(loan);
+
+            return true;
         }
 
-        //TODO pay back over paying the loan?
-
-        return valid;
+        return false;
     }
 
     public boolean transfer(Bank bank, Transferable sender, Transferable receiver, double money)
     {
         Transaction transaction = transactionFactory.getTransfer(bank.getSettings().getDay(), money, sender, receiver);
-        sender.send(money);
-        money -= bank.getSettings().getTransactionFee();
-        bank.addToReserves(bank.getSettings().getTransactionFee());
-        receiver.receive(money);
 
-        sender.addTransaction(transaction);
-        receiver.addTransaction(transaction);
-        bank.getBankDB().addTransaction(transaction);
+        double fee = bank.getSettings().getTransactionFee();
+
+        if(sender.send(money + fee)) {
+
+            // if the receiver was able to receive the money, update the database
+            if(receiver.receive(money)) {
+                money -= bank.getSettings().getTransactionFee();
+                bank.addToReserves(bank.getSettings().getTransactionFee());
+                receiver.receive(money);
+
+                sender.addTransaction(transaction);
+                receiver.addTransaction(transaction);
+                bank.getBankDB().addTransaction(transaction);
+
+                return true;
+            }
+            else{
+                System.out.println("Transaction failed from receiver - return all money to sender");
+                sender.receive(money + fee);
+            }
+        }
+        else{
+            System.out.println("Transaction failed from sender - insufficient funds");
+        }
 
         return true;
     }
