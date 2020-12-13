@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class BankRequestManager implements GUIRequests
 {
     private UserFactory userFactory;
@@ -23,28 +25,83 @@ public class BankRequestManager implements GUIRequests
         return singleInstance;
     }
 
-    /*
-    public boolean createAccount()
+    public boolean createCustomer(Bank bank, String username, String password, String firstName, String lastName)
     {
-        bank.getDB().newAccount(account);
+        boolean valid = false;
+
+        ArrayList<Customer> customers = bank.getCustomers();
+        for (int i = 0; i < 0; i++)
+        {
+            if (customers.get(i).getUsername().equals(username))
+            {
+                return valid;
+            }
+        }
+        valid = true;
+
+        Customer customer = userFactory.createNewCustomer(username, password, firstName, lastName);
+        bank.addCustomer(customer);
+        bank.getBankDB().addCustomer(customer);
+
+        return valid;
     }
 
-    public boolean editAccount()
+    public boolean createEmployee(Bank bank, String username, String password, String firstName, String lastName)
     {
-        bank.getDB().updateAccount(account);
-    }
-    
+        boolean valid = false;
 
-    public boolean loginEmployee( user)
+        ArrayList<Employee> employees = bank.getEmployees();
+        for (int i = 0; i < 0; i++)
+        {
+            if (employees.get(i).getUsername().equals(username))
+            {
+                return valid;
+            }
+        }
+        valid = true;
+
+        Employee employee = userFactory.createNewEmployee(username, password, firstName, lastName);
+        bank.addEmployee(employee);
+        bank.getBankDB().addEmployee(employee);
+
+        return valid;
+    }
+
+    public Customer checkCustomerLogin(Bank bank, String username, String password)
     {
-
+        Customer customer = bank.getCustomer(username, password);
+        return customer;
     }
 
-    public boolean loginCustomer()
+    public Employee checkEmployeeLogin(Bank bank, String username, String password)
     {
-
+        Employee employee = bank.getEmployee(username, password);
+        return employee;
     }
-    */
+
+    public boolean createAccount(Bank bank, Customer customer, String name, String currency, int accountType)
+    {
+        BankAccount account;
+        switch(accountType)
+        {
+            case 0: 
+            account = bankAccountFactory.createNewCheckingAccount(name, currency);
+            break;
+
+            case 1: 
+            account = bankAccountFactory.createNewSavingsAccount(name, currency);
+            break;
+        }
+
+        customer.addAccount(account);
+        bank.getBankDB().addAccount(account);
+    }
+
+    public boolean deleteAccount(Bank bank, Customer customer, BankAccount account)
+    {
+        customer.deleteAccount(account);
+        bank.getBankDB().deleteAccount(account);
+    }
 
     public boolean withdraw(Bank bank, BankAccount account, double money)
     {

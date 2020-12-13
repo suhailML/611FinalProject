@@ -1,7 +1,7 @@
 public class Loan 
 {
-    private Transferable lender; // Bank implements Lender
-    private Transferable lendee; // Customer implements Lendee
+    private Transferable lender; 
+    private Transferable lendee;
     private String loanID;
     private double initialValue;
     private double presentValue;
