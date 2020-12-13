@@ -1,9 +1,9 @@
 import java.util.*;
 
-public class Customer extends User implements CustomerActions, Lendee
+public class Customer extends User implements CustomerActions
 {
-    private ArrayList<BankAccount> accounts;
-    private ArrayList<Loan> loans;
+    private List<BankAccount> accounts;
+    private List<Loan> loans;
 
     /*
     CONSTRUCTORS
@@ -40,12 +40,12 @@ public class Customer extends User implements CustomerActions, Lendee
     /*
     ACCESSORS
     */
-    public ArrayList<BankAccount> getAccounts()
+    public List<BankAccount> getAccounts()
     {
         return accounts;
     }
 
-    public ArrayList<Loan> getLoans()
+    public List<Loan> getLoans()
     {
         return loans;
     }
@@ -68,6 +68,16 @@ public class Customer extends User implements CustomerActions, Lendee
             total += loan.getPresentValue();
         }
         return total;
+    }
+
+    public void addAccount(BankAccount account)
+    {
+        getAccounts().add(account);
+    }
+
+    public void deleteAccount(BankAccount account)
+    {
+        getAccounts().remove(account);
     }
 
 }

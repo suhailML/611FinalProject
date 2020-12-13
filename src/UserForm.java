@@ -22,13 +22,15 @@ public class UserForm extends JFrame {
         this.bank = bank;
         this.customer = customer;
 
+        System.out.println("OPEN CUSTOMER " + customer);
+
         debugInit();
 
         GridLayout frameLayout = new GridLayout(1,3);
         frameLayout.setHgap(10);
         setLayout(frameLayout);
 
-        GridLayout actionsLayout = new GridLayout(4,1,10,10);
+        GridLayout actionsLayout = new GridLayout(5,1,10,10);
 
         JPanel panelOutput = new JPanel(new GridLayout(1,1));
         JPanel panelAccounts = new JPanel(new BorderLayout());
@@ -41,22 +43,32 @@ public class UserForm extends JFrame {
 
         accountJList = new JList(customer.getAccounts().toArray());
 
+        JButton viewAccountButton = new JButton("View Account");
+
         panelAccounts.add(new JLabel("Account Picker"), BorderLayout.NORTH);
         panelAccounts.add(accountJList, BorderLayout.CENTER);
+        panelAccounts.add(viewAccountButton, BorderLayout.SOUTH);
 
+        viewAccountButton.addActionListener(new ViewAccountActionListener());
+
+
+        // Action buttons
         JButton addAccountButton = new JButton("Add Account");
-        JButton viewAccountButton = new JButton("View Account");
-        JButton deleteAccountButton = new JButton("Delete Account");;
+        JButton deleteAccountButton = new JButton("Delete Account");
+        JButton transferButton = new JButton("Make Transfer");
+        JButton paybackLoanButton = new JButton("Payback Loan");
         JButton signoutButton = new JButton("Sign Out");;
 
         addAccountButton.addActionListener(new AddAccountActionListener());
-        viewAccountButton.addActionListener(new ViewAccountActionListener());
         deleteAccountButton.addActionListener(new DeleteAccountActionListener());
+        transferButton.addActionListener(new TransferActionListener());
+        paybackLoanButton.addActionListener(new PaybackLoanActionListener());
         signoutButton.addActionListener(new SignoutActionListener());
 
         panelActions.add(addAccountButton);
-        panelActions.add(viewAccountButton);
         panelActions.add(deleteAccountButton);
+        panelActions.add(transferButton);
+        panelActions.add(paybackLoanButton);
         panelActions.add(signoutButton);
 
         add(panelOutput);//adding button on frame
@@ -88,14 +100,16 @@ public class UserForm extends JFrame {
         this.customer.setAccounts(accounts);
     }
 
+    /** Open the window to add an account **/
     private class AddAccountActionListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             //TODO Create account form
             System.out.println("Add Account");
-            new AddAccountDialog(UserForm.this, UserForm.this.bank, UserForm.this.customer).setVisible(true);
+            new AddAccountDialog(UserForm.this.bank, UserForm.this.customer, UserForm.this).setVisible(true);
         }
     }
 
+    /** Open the account view of a selected account **/
     private class ViewAccountActionListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
 
@@ -121,6 +135,7 @@ public class UserForm extends JFrame {
         }
     }
 
+    /** Allow the user to delete a selected account **/
     private class DeleteAccountActionListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             // get the index
@@ -137,6 +152,23 @@ public class UserForm extends JFrame {
         }
     }
 
+    /** Open the window to make a transfer into an account **/
+    private class TransferActionListener implements ActionListener{
+        public void actionPerformed(ActionEvent e) {
+            System.out.println("OPEN TRANSFER DIALOG");
+            new TransferDialog(UserForm.this.bank, UserForm.this.customer, UserForm.this).setVisible(true);
+        }
+    }
+
+    /** Open the window to allow the user to payback a loan **/
+    private class PaybackLoanActionListener implements ActionListener{
+        public void actionPerformed(ActionEvent e) {
+            System.out.println("OPEN PAYBACK LOAN DIALOG");
+            new LoanPaybackDialog(UserForm.this.bank, UserForm.this.customer, UserForm.this).setVisible(true);
+        }
+    }
+
+    /** Return to the login form - "log out" of the app **/
     private class SignoutActionListener implements ActionListener{
         public void actionPerformed(ActionEvent e) {
             System.out.println("Signout");

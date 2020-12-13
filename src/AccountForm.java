@@ -32,16 +32,18 @@ public class AccountForm extends JFrame {
         buttonPanelLayout.setVgap(10);
 
         JPanel panelOutput = new JPanel(new GridLayout(1,1));
-        JPanel panelAccounts = new JPanel(new BorderLayout());
+        JPanel panelTransactions = new JPanel(new BorderLayout());
+
         JPanel panelActions = new JPanel(buttonPanelLayout);
+
 
 
         panelOutput.add(outputJTextArea);
 
         transactionJList = new JList(account.getTransactions().toArray());
 
-        panelAccounts.add(new JLabel("Transaction Picker"), BorderLayout.NORTH);
-        panelAccounts.add(transactionJList, BorderLayout.CENTER);
+        panelTransactions.add(new JLabel("Transaction Picker"), BorderLayout.NORTH);
+        panelTransactions.add(transactionJList, BorderLayout.CENTER);
 
         JButton buttonWithdraw = new JButton("Withdraw");
         JButton buttonDeposit = new JButton("Deposit");
@@ -61,7 +63,7 @@ public class AccountForm extends JFrame {
         panelActions.add(buttonBack);
 
         add(panelOutput);//adding button on frame
-        add(panelAccounts);//adding button on frame
+        add(panelTransactions);//adding button on frame
         add(panelActions);//adding button on frame
 
         setTitle("User View Form");
@@ -74,6 +76,7 @@ public class AccountForm extends JFrame {
 
     private class buttonWithdrawActionListener implements ActionListener{
         public void actionPerformed(ActionEvent e) {
+
             String input = JOptionPane.showInputDialog(
                     AccountForm.this,
                     "Enter an amount to withdraw:",
@@ -86,6 +89,16 @@ public class AccountForm extends JFrame {
 
             double amount = Double.parseDouble(input);
             System.out.println("TODO --> DO WITHDRAW $" + amount);
+
+            //TODO withdraw action
+            /* TODO
+            if(withdraw(Bank bank, BankAccount account, double money)){
+                JOptionPane.showMessageDialog(AccountForm.this, "You withdrew " + money + " from " + account, "Withdrawal", JOptionPane.INFORMATION_MESSAGE);
+            }
+            else{
+                JOptionPane.showMessageDialog(AccountForm.this, "Withdrawal from account failed", "Withdrawal Error", JOptionPane.ERROR_MESSAGE);
+            }
+            */
         }
     }
 
@@ -105,6 +118,17 @@ public class AccountForm extends JFrame {
 
             double amount = Double.parseDouble(input);
             System.out.println("TODO --> DO DEPOSIT $" + amount);
+
+            //TODO
+            /* TODO
+            if(withdraw(Bank bank, BankAccount account, double money)){
+                JOptionPane.showMessageDialog(AccountForm.this, "You deposited " + money + " to " + account, "Deposit", JOptionPane.INFORMATION_MESSAGE);
+            }
+            else{
+                JOptionPane.showMessageDialog(AccountForm.this, "Deposit to account failed", "Deposit Error", JOptionPane.ERROR_MESSAGE);
+            }
+            */
+
         }
     }
 

@@ -16,8 +16,11 @@ public class AddAccountDialog extends JDialog {
     private Customer customer;
 
 
-    public AddAccountDialog(JFrame parentFrame, Bank bank, Customer customer){
+    public AddAccountDialog(Bank bank, Customer customer, JFrame parentFrame){
         super(parentFrame);
+
+        this.bank = bank;
+        this.customer = customer;
 
         titleLabel = new JLabel("Create Account: Savings");
 

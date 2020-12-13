@@ -40,8 +40,6 @@ public class EmployeeViewCustomerForm extends JFrame {
         JPanel panelAccounts = new JPanel(new BorderLayout());
         JPanel panelActions = new JPanel(actionsLayout);
 
-
-
         accountJList = new JList(customer.getAccounts().toArray());
 
         panelAccounts.add(new JLabel("Account Picker"), BorderLayout.NORTH);
@@ -49,20 +47,20 @@ public class EmployeeViewCustomerForm extends JFrame {
 
         JButton sortAccountsButton = new JButton("Sort Accounts");
         JButton viewAccountButton = new JButton("View Account");
-        JButton signoutButton = new JButton("Sign Out");;
+        JButton returnButton = new JButton("Back");;
 
         sortAccountsButton.addActionListener(new SortAccountsActionListener());
         viewAccountButton.addActionListener(new ViewAccountActionListener());
-        signoutButton.addActionListener(new SignoutActionListener());
+        returnButton.addActionListener(new ReturnActionListener());
 
         panelActions.add(sortAccountsButton);
         panelActions.add(viewAccountButton);
-        panelActions.add(signoutButton);
+        panelActions.add(returnButton);
 
         add(panelAccounts);//adding button on frame
         add(panelActions);//adding button on frame
 
-        setTitle("User View Form");
+        setTitle("Bank View of User");
         setSize(600,400);
         //setLayout(null);
         setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE);
@@ -105,12 +103,8 @@ public class EmployeeViewCustomerForm extends JFrame {
                 // get the account
                 BankAccount account = customer.getAccounts().get(index);
 
-                //TODO Error checking
-
-                // TODO hide this window
-                //EmployeeViewCustomerForm.this.setVisible(false);
-
                 //TODO Open the EmployeeViewAccount form
+                new EmployeeViewAccountForm(EmployeeViewCustomerForm.this.bank, account, EmployeeViewCustomerForm.this);
 
             }catch(IndexOutOfBoundsException indexOutOfBoundsException){
                 JOptionPane.showMessageDialog(null, "NO ACCOUNT SELECTED", "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -119,7 +113,7 @@ public class EmployeeViewCustomerForm extends JFrame {
     }
 
 
-    private class SignoutActionListener implements ActionListener{
+    private class ReturnActionListener implements ActionListener{
         public void actionPerformed(ActionEvent e) {
             System.out.println("Signout");
             parentFrame.setVisible(true);

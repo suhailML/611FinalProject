@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class Bank implements Lender, Transferable
+public class Bank implements Transferable
 {
     private ArrayList<Customer> customers;
     private ArrayList<Employee> employees;
@@ -153,10 +153,61 @@ public class Bank implements Lender, Transferable
     public boolean addTransaction(Transaction transaction)
     {
         //getTransactions().add(transaction);
+        return true;
     }
 
     public void incrementDay()
     {
 
+    }
+
+    public Customer getCustomer(String username, String password)
+    {
+        Customer customer;
+
+        ArrayList<Customer> customers = getCustomers();
+        Iterator<Customer> iter = customers.iterator();
+
+        while (iter.hasNext())
+        {
+            Customer temp = iter.next();
+            if (temp.getUsername().equals(username) && temp.getPassword().equals(password))
+            {
+                customer = temp;
+                break;
+            }
+        }
+
+        return customer;
+    }
+
+    public void addCustomer(Customer customer)
+    {
+        getCustomers().add(customer);
+    }
+
+    public void addEmployee(Employee employee)
+    {
+        getEmployees().add(employee);
+    }
+
+    public Employee getEmployee(String username, String password)
+    {
+        Employee employee;
+
+        ArrayList<Employee> employees = getEmployees();
+        Iterator<Employee> iter = employees.iterator();
+
+        while (iter.hasNext())
+        {
+            Employee temp = iter.next();
+            if (temp.getUsername().equals(username) && temp.getPassword().equals(password))
+            {
+                employee = temp;
+                break;
+            }
+        }
+
+        return employee;
     }
 }

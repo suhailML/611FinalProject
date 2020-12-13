@@ -1,3 +1,5 @@
+import sun.rmi.runtime.Log;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -76,13 +78,7 @@ public class LoginForm extends JFrame {
             // TODO check the login
 
             System.out.println("User login");
-            new UserForm(bank, new Customer(
-                    usernameField.getText(),
-                    passwordField.getText(),
-                    "ABCDE",
-                    "First Name",
-                    "Last Name"
-            ), LoginForm.this).setVisible(true); // Main Form to show after the Login Form..
+            new UserForm(bank, bank.getCustomers().get(0), LoginForm.this).setVisible(true); // Main Form to show after the Login Form..
         }
     }
 
@@ -110,10 +106,10 @@ public class LoginForm extends JFrame {
     /** Create a user **/
     private class CreateUserActionListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
+            System.out.println("Create a user selected");
 
             // TODO create user form
-
-            System.out.println("Create a user");
+            new CreateUserDialog(bank,LoginForm.this).setVisible(true);
 
 
         }

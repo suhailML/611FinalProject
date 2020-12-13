@@ -4,10 +4,10 @@ public class BankAccountFactory
 {
     public BankAccountFactory() {}
 
-    public SavingsAccount createNewSavingsAccount(String name, String accountID, String currencyType)
+    public SavingsAccount createNewSavingsAccount(String name, String currencyType)
     {
         String ID = UUID.randomUUID().toString();
-        SavingsAccount account = new SavingsAccount(name, accountID, currencyType);
+        SavingsAccount account = new SavingsAccount(name, ID, currencyType);
         return account;
     }
 
@@ -17,10 +17,10 @@ public class BankAccountFactory
         return account;
     }
 
-    public CheckingAccount createNewCheckingAccount(String name, String accountID, String currencyType)
+    public CheckingAccount createNewCheckingAccount(String name, String currencyType)
     {
         String ID = UUID.randomUUID().toString();
-        CheckingAccount account = new CheckingAccount(name, accountID, currencyType);
+        CheckingAccount account = new CheckingAccount(name, ID, currencyType);
         return account;
     }
 

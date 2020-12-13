@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class BankRequestManager implements GUIRequests
 {
     private UserFactory userFactory;
@@ -23,28 +25,83 @@ public class BankRequestManager implements GUIRequests
         return singleInstance;
     }
 
-    /*
-    public boolean createAccount()
+    public boolean createCustomer(Bank bank, String username, String password, String firstName, String lastName)
     {
-        bank.getDB().newAccount(account);
+        boolean valid = false;
+
+        ArrayList<Customer> customers = bank.getCustomers();
+        for (int i = 0; i < 0; i++)
+        {
+            if (customers.get(i).getUsername().equals(username))
+            {
+                return valid;
+            }
+        }
+        valid = true;
+
+        Customer customer = userFactory.createNewCustomer(username, password, firstName, lastName);
+        bank.addCustomer(customer);
+        bank.getBankDB().addCustomer(customer);
+
+        return valid;
     }
 
-    public boolean editAccount()
+    public boolean createEmployee(Bank bank, String username, String password, String firstName, String lastName)
     {
-        bank.getDB().updateAccount(account);
-    }
-    
+        boolean valid = false;
 
-    public boolean loginEmployee( user)
+        ArrayList<Employee> employees = bank.getEmployees();
+        for (int i = 0; i < 0; i++)
+        {
+            if (employees.get(i).getUsername().equals(username))
+            {
+                return valid;
+            }
+        }
+        valid = true;
+
+        Employee employee = userFactory.createNewEmployee(username, password, firstName, lastName);
+        bank.addEmployee(employee);
+        bank.getBankDB().addEmployee(employee);
+
+        return valid;
+    }
+
+    public Customer checkCustomerLogin(Bank bank, String username, String password)
     {
-
+        Customer customer = bank.getCustomer(username, password);
+        return customer;
     }
 
-    public boolean loginCustomer()
+    public Employee checkEmployeeLogin(Bank bank, String username, String password)
     {
-
+        Employee employee = bank.getEmployee(username, password);
+        return employee;
     }
-    */
+
+    public boolean createAccount(Bank bank, Customer customer, String name, String currency, int accountType)
+    {
+        BankAccount account;
+        switch(accountType)
+        {
+            case 0: 
+            account = bankAccountFactory.createNewCheckingAccount(name, currency);
+            break;
+
+            case 1: 
+            account = bankAccountFactory.createNewSavingsAccount(name, currency);
+            break;
+        }
+
+        customer.addAccount(account);
+        bank.getBankDB().addAccount(account);
+    }
+
+    public boolean deleteAccount(Bank bank, Customer customer, BankAccount account)
+    {
+        customer.deleteAccount(account);
+        bank.getBankDB().deleteAccount(account);
+    }
 
     public boolean withdraw(Bank bank, BankAccount account, double money)
     {
@@ -77,72 +134,83 @@ public class BankRequestManager implements GUIRequests
         return valid;
     }
 
-    public boolean takeOutLoan(Bank bank, Customer customer, BankAccount account, double money, String collateral)
+
+    /** Take a loan from the lender to the lendee **/
+    public boolean takeOutLoan(Bank bank, Transferable lender, Transferable lendee, double money, String collateral)
     {
-        boolean valid = false;
 
-        Loan loan = loanFactory.createNewLoan(bank, customer, money, bank.getSettings().getLoanInterestRate(), collateral);
-        transfer(bank, (Transferable) bank, (Transferable) account, money);
-        bank.getBankDB().addLoan(loan);
-        valid = true;
-        return valid;
-    }
+        Loan loan = loanFactory.createNewLoan(bank, lendee, money, bank.getSettings().getLoanInterestRate(), collateral);
 
-    // TODO ELIMINATE THIS IF NOT USED
-    /*
-    public boolean transfer_backup(Bank bank, Transferable sender, Transferable receiver, double money, int day)
-    {
-        //TODO transaction
-        //Transaction transaction = transactionFactory.getTransfer(day, money, sender, receiver);
+        // if the loan transfer is successful from lender to lendee, add it to the database
+        if(transfer(bank, lender, lendee, money)){
 
-        double fee = bank.getSettings().getTransactionFee();
+            bank.getBankDB().addLoan(loan);
 
-        if(sender.isValidWithdraw(money + fee)){
-
-            // send the fee to the bank
-            //      - a bank will send itself the fee if it is the sender
-            sender.addMoney(-fee);
-            bank.addMoney(fee);
-
-            // send the money to the receiver
-            sender.addMoney(-money);
-            receiver.addMoney(money);
-            // Bank.getBankDB().addTransaction(transaction)
             return true;
         }
-        else{
-            System.out.println("Invalid transfer");
-            return false;
-        }
 
-        // Bank.getBankDB().addTransaction(transaction)
+        return false;
     }
-     */
-    public boolean payBackLoan(Bank bank, Customer customer, BankAccount account, double money, Loan loan)
+
+
+    /** Payback part of a loan from the lendee to the lender **/
+    public boolean payBackLoan(Bank bank, Transferable lendee, Transferable lender, double money, Loan loan)
     {
-        boolean valid = false;
-        if (money + bank.getSettings().getTransactionFee() < account.getBalance() && loan.getPresentValue() + bank.getSettings().getTransactionFee() >= money)
+
+        // if the transfer of money is successful from lendee to lender
+        if (transfer(bank, lendee, lender, money))
         {
-            transfer(bank, (Transferable) account, (Transferable) bank, money);
+            // remove money from the loan
             loan.payBack(money);
+
+            //TODO pay back over paying the loan?
+
             bank.getBankDB().updateLoan(loan);
+
+            return true;
         }
 
-        return valid;
+        return false;
     }
 
     public boolean transfer(Bank bank, Transferable sender, Transferable receiver, double money)
     {
         Transaction transaction = transactionFactory.getTransfer(bank.getSettings().getDay(), money, sender, receiver);
-        sender.send(money);
-        money -= bank.getSettings().getTransactionFee();
-        bank.addToReserves(bank.getSettings().getTransactionFee());
-        receiver.receive(money);
 
-        sender.addTransaction(transaction);
-        receiver.addTransaction(transaction);
-        bank.getBankDB().addTransaction(transaction);
+        double fee = bank.getSettings().getTransactionFee();
+
+        if(sender.send(money + fee)) {
+
+            // if the receiver was able to receive the money, update the database
+            if(receiver.receive(money)) {
+                money -= bank.getSettings().getTransactionFee();
+                bank.addToReserves(bank.getSettings().getTransactionFee());
+                receiver.receive(money);
+
+                sender.addTransaction(transaction);
+                receiver.addTransaction(transaction);
+                bank.getBankDB().addTransaction(transaction);
+
+                return true;
+            }
+            else{
+                System.out.println("Transaction failed from receiver - return all money to sender");
+                sender.receive(money + fee);
+            }
+        }
+        else{
+            System.out.println("Transaction failed from sender - insufficient funds");
+        }
 
         return true;
+    }
+
+
+    public String queryTransactions(int day){
+
+        String output = "TODO - fill in query transactions --> DAY: " + day;
+
+        return output;
+
     }
 }

@@ -7,6 +7,6 @@ public class SellAction extends BuyAction {
 
     public String toString()
     {
-        return "SELL: " + "Sold " + Integer.toString(this.shares) + " shares for " + Integer.toString(this.money) + " dollars at the company, " + this.company;
+        return "SELL: " + "Sold " + Integer.toString(this.shares) + " shares for " + Double.toString(this.money) + " dollars at the company, " + this.company;
     }
 }

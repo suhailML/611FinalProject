@@ -1,7 +1,7 @@
 public class Loan 
 {
-    private Bank lender; // Bank implements Lender
-    private Customer lendee; // Customer implements Lendee
+    private Transferable lender; 
+    private Transferable lendee;
     private String loanID;
     private double initialValue;
     private double presentValue;
@@ -13,7 +13,7 @@ public class Loan
     */
     public Loan(){}
 
-    public Loan(Lender lender, Lendee lendee, String loanID, double initialValue, double presentValue, double interestRate, String collateral)
+    public Loan(Transferable lender, Transferable lendee, String loanID, double initialValue, double presentValue, double interestRate, String collateral)
     {
         setLender(lender);
         setLendee(lendee);
@@ -24,7 +24,7 @@ public class Loan
         setCollateral(collateral);
     }
 
-    public Loan(Lender lender, Lendee lendee, String loanID, double initialValue, double interestRate, String collateral)
+    public Loan(Transferable lender, Transferable lendee, String loanID, double initialValue, double interestRate, String collateral)
     {
         setLender(lender);
         setLendee(lendee);
@@ -38,12 +38,12 @@ public class Loan
     /*
     SETTERS
     */
-    public void setLender(Lender lender)
+    public void setLender(Transferable lender)
     {
         this.lender = lender;
     }
 
-    public void setLendee(Lendee lendee)
+    public void setLendee(Transferable lendee)
     {
         this.lendee = lendee;
     }
@@ -76,12 +76,12 @@ public class Loan
     /*
     ACCESSORS
     */
-    public Lender getLender()
+    public Transferable getLender()
     {
         return lender;
     }
 
-    public Lendee getLendee()
+    public Transferable getLendee()
     {
         return lendee;
     }

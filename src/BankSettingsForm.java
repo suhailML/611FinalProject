@@ -3,32 +3,28 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class BankSettingsForm extends JFrame {
+public class BankSettingsForm extends JDialog {
 
     private JTextField transactionFeeField, savingsInterestRateField, loanInterestRateField, minSavingsForInterestField;
-
-    private JLabel titleLabel;
 
     private Bank bank;
     private Customer customer;
 
 
-    public BankSettingsForm(JFrame parentFrame, Bank bank, Customer customer){
+    public BankSettingsForm(JFrame parentFrame, Bank bank){
+
+        super(parentFrame);
 
         this.bank = bank;
         this.customer = customer;
 
-        titleLabel = new JLabel("Create Account: Savings");
-
-        setSize(400,600);
+        setSize(400,250);
 
         GridLayout infoPanelLayout = new GridLayout(1,2, 5,5);
 
         JPanel infoPanel = new JPanel(infoPanelLayout);
         JPanel actionPanel = new JPanel();
-        JPanel radioPanel = new JPanel();
 
-        add(titleLabel, BorderLayout.NORTH);
         add(infoPanel, BorderLayout.CENTER);
         add(actionPanel, BorderLayout.SOUTH);
 
@@ -42,8 +38,14 @@ public class BankSettingsForm extends JFrame {
         loanInterestRateField.setPreferredSize(new Dimension(200, 24));
         minSavingsForInterestField.setPreferredSize(new Dimension(200, 24));
 
-        JPanel labelPanel = new JPanel();
-        JPanel fieldPanel = new JPanel();
+        transactionFeeField.setText(Double.toString(bank.getSettings().getTransactionFee()));
+        savingsInterestRateField.setText(Double.toString(bank.getSettings().getSavingsInterestRate()));
+        loanInterestRateField.setText(Double.toString(bank.getSettings().getLoanInterestRate()));
+        minSavingsForInterestField.setText(Double.toString(bank.getSettings().getMinSavingsForInterest()));
+
+
+        JPanel labelPanel = new JPanel(new GridLayout(4,1, 5,5));
+        JPanel fieldPanel = new JPanel(new GridLayout(4,1, 5,5));
 
         labelPanel.add(new JLabel("Transaction Fee:"));
         fieldPanel.add(transactionFeeField);
@@ -58,8 +60,6 @@ public class BankSettingsForm extends JFrame {
         infoPanel.add(labelPanel);
         infoPanel.add(fieldPanel);
 
-        infoPanel.add(radioPanel);
-
         JButton applyButton = new JButton("Confirm");
         JButton cancelButton = new JButton("Cancel");
 
@@ -69,10 +69,10 @@ public class BankSettingsForm extends JFrame {
         actionPanel.add(applyButton);
         actionPanel.add(cancelButton);
 
-        add(infoPanel);
-        add(actionPanel);
+        add(infoPanel, BorderLayout.CENTER);
+        add(actionPanel, BorderLayout.SOUTH);
 
-        setTitle("Add Account");
+        setTitle("Bank Settings");
         // set up the action selection buttons
 
         setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -84,7 +84,35 @@ public class BankSettingsForm extends JFrame {
     /** Update the title to match the account type selected **/
     private class ApplyButtonActionListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            System.out.println("Save the bank settings");
+
+            try {
+                Double transactionFee = Double.parseDouble(BankSettingsForm.this.transactionFeeField.getText());
+                Double savingsInterestRate = Double.parseDouble(BankSettingsForm.this.savingsInterestRateField.getText());
+                Double loanInterestRate = Double.parseDouble(BankSettingsForm.this.loanInterestRateField.getText());
+                Double minSavingsForInterest = Double.parseDouble(BankSettingsForm.this.minSavingsForInterestField.getText());
+
+                //TODO update the bank settings
+
+                System.out.println("TODO - Save the bank settings: ");
+                System.out.println("\ttransactionFee " + transactionFee);
+                System.out.println("\tsavingsInterestRate " + savingsInterestRate);
+                System.out.println("\tloanInterestRate " + loanInterestRate);
+                System.out.println("\tminSavingsForInterest " + minSavingsForInterest);
+
+
+                // TODO bank.getBankRequestManager().saveBankSettings(Bank bank, Double transactionFee, Double savingsInterestRate, Double loanInterestRate, Double minSavingsForInterest);
+
+
+                BankSettingsForm.this.dispose();
+
+            }
+            catch(NumberFormatException numberFormatException){
+                JOptionPane.showMessageDialog(BankSettingsForm.this, "All field inputs must be numbers", "NUMBER ERROR", JOptionPane.ERROR_MESSAGE);
+            }
+
+
+
+
         }
     }
 
