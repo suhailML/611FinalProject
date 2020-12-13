@@ -170,7 +170,9 @@ public class Bank implements Transferable
 
         while (iter.hasNext())
         {
+
             Customer temp = iter.next();
+            System.out.println(temp.getUsername() + " " + temp.getPassword());
             if (temp.getUsername().equals(username) && temp.getPassword().equals(password))
             {
                 customer = temp;

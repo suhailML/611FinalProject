@@ -46,13 +46,6 @@ public class BankRequestManager implements GUIRequests
         return valid;
     }
 
-    @Override
-    public Customer checkUserLogin(Bank bank, String username, String password) {
-
-        System.out.println("DUMMY LOGIN - NULL");
-
-        return null;
-    }
 
     public boolean createEmployee(Bank bank, String username, String password, String firstName, String lastName)
     {

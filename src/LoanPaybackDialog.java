@@ -51,7 +51,7 @@ public class LoanPaybackDialog extends JDialog {
         });
 
         loanComboBox.addActionListener(e -> {
-            senderValueLabel.setText("$" + ((Loan)senderComboBox.getSelectedItem()).getPresentValue());
+            loanValueLabel.setText("$" + ((Loan)loanComboBox.getSelectedItem()).getPresentValue());
         });
 
         senderValueLabel = new JLabel("$" + ((BankAccount)senderComboBox.getSelectedItem()).getBalance());

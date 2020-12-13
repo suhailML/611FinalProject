@@ -116,19 +116,16 @@ public class AccountForm extends JFrame {
                 return;
             }
 
-            double amount = Double.parseDouble(input);
-            System.out.println("TODO --> DO DEPOSIT $" + amount);
+            double money = Double.parseDouble(input);
+            System.out.println("TODO --> DO DEPOSIT $" + money);
 
-            //TODO deposit action
-            /* TODO
-            if(withdraw(Bank bank, BankAccount account, double money)){
+
+            if(bank.getBankRequestManager().deposit(bank, account, money)){
                 JOptionPane.showMessageDialog(AccountForm.this, "You deposited " + money + " to " + account, "Deposit", JOptionPane.INFORMATION_MESSAGE);
             }
             else{
                 JOptionPane.showMessageDialog(AccountForm.this, "Deposit to account failed", "Deposit Error", JOptionPane.ERROR_MESSAGE);
             }
-            */
-
         }
     }
 

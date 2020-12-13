@@ -77,7 +77,7 @@ public class LoginForm extends JFrame {
             String username = usernameField.getText();
             String password = passwordField.getText();
 
-            Customer customer = bank.getCustomer(username, password);
+            Customer customer = bank.getBankRequestManager().checkCustomerLogin(bank, username, password);
 
             System.out.println("User login: " + username + " " + password);
 
@@ -99,8 +99,8 @@ public class LoginForm extends JFrame {
             String username = usernameField.getText();
             String password = passwordField.getText();
 
-            System.out.println("Bank login " + username + " " + password);
-            Employee employee = bank.getEmployee(username, password);
+            System.out.println("Employee login " + username + " " + password);
+            Employee employee = bank.getBankRequestManager().checkEmployeeLogin(bank, username, password);
 
             if (employee == null) {
                 JOptionPane.showMessageDialog(LoginForm.this, "Employee not found with these credentials", "Employee not Found", JOptionPane.ERROR_MESSAGE);
