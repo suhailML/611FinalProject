@@ -70,4 +70,11 @@ public class Customer extends User implements CustomerActions
         return total;
     }
 
+    public void addAccount(BankAccount account)
+    {
+        getAccounts().add(account);
+    }
+
+
+
 }
