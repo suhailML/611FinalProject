@@ -47,7 +47,6 @@ public class AccountForm extends JFrame {
 
         JButton buttonWithdraw = new JButton("Withdraw");
         JButton buttonDeposit = new JButton("Deposit");
-        JButton buttonTransfer = new JButton("Transfer");
         JButton buttonTakeLoan = new JButton("Request Loan ~ debug");
         JButton buttonBack = new JButton("Back");
 
@@ -58,7 +57,6 @@ public class AccountForm extends JFrame {
 
         panelActions.add(buttonWithdraw);
         panelActions.add(buttonDeposit);
-        panelActions.add(buttonTransfer);
         panelActions.add(buttonTakeLoan);
         panelActions.add(buttonBack);
 
