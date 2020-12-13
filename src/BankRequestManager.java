@@ -81,52 +81,26 @@ public class BankRequestManager implements GUIRequests
     /** Take a loan from the lender to the lendee **/
     public boolean takeOutLoan(Bank bank, Transferable lender, Transferable lendee, double money, String collateral)
     {
-        boolean valid = false;
 
         Loan loan = loanFactory.createNewLoan(bank, lendee, money, bank.getSettings().getLoanInterestRate(), collateral);
-        transfer(bank, lender, lendee, money);
-        bank.getBankDB().addLoan(loan);
-        valid = true;
-        return valid;
-    }
 
-    // TODO ELIMINATE THIS IF NOT USED
-    /*
-    public boolean transfer_backup(Bank bank, Transferable sender, Transferable receiver, double money, int day)
-    {
-        //TODO transaction
-        //Transaction transaction = transactionFactory.getTransfer(day, money, sender, receiver);
+        // if the loan transfer is successful from lender to lendee, add it to the database
+        if(transfer(bank, lender, lendee, money)){
 
-        double fee = bank.getSettings().getTransactionFee();
+            bank.getBankDB().addLoan(loan);
 
-        if(sender.isValidWithdraw(money + fee)){
-
-            // send the fee to the bank
-            //      - a bank will send itself the fee if it is the sender
-            sender.addMoney(-fee);
-            bank.addMoney(fee);
-
-            // send the money to the receiver
-            sender.addMoney(-money);
-            receiver.addMoney(money);
-            // Bank.getBankDB().addTransaction(transaction)
             return true;
         }
-        else{
-            System.out.println("Invalid transfer");
-            return false;
-        }
 
-        // Bank.getBankDB().addTransaction(transaction)
+        return false;
     }
-     */
 
 
     /** Payback part of a loan from the lendee to the lender **/
     public boolean payBackLoan(Bank bank, Transferable lendee, Transferable lender, double money, Loan loan)
     {
 
-        // if the transfer of money is successful
+        // if the transfer of money is successful from lendee to lender
         if (transfer(bank, lendee, lender, money))
         {
             // remove money from the loan
