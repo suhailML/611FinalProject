@@ -113,21 +113,28 @@ public class LoanPaybackDialog extends JDialog {
     private class ConfirmTransactionActionListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
 
-            int senderIndex = LoanPaybackDialog.this.senderComboBox.getSelectedIndex();
+            int lendeeIndex = LoanPaybackDialog.this.senderComboBox.getSelectedIndex();
             int loanIndex = LoanPaybackDialog.this.loanComboBox.getSelectedIndex();
 
             double money = (Double)LoanPaybackDialog.this.amountSpinner.getValue();
 
-            Transferable sender = LoanPaybackDialog.this.senderComboBox.getItemAt(senderIndex);
+            Transferable lendee = LoanPaybackDialog.this.senderComboBox.getItemAt(lendeeIndex);
             Loan loan = LoanPaybackDialog.this.loanComboBox.getItemAt(loanIndex);
 
             System.out.println("TODO Transfer action");
-            System.out.println("\t" + sender);
+            System.out.println("\t" + lendee);
             System.out.println("\t" + loan);
             System.out.println("\t" + money);
 
             //TODO payback loan action
-            bank.getBankRequestManager().payBackLoan(bank, bank, sender, money, loan);
+            if(bank.getBankRequestManager().payBackLoan(bank, lendee, bank, money, loan)){
+                JOptionPane.showMessageDialog(LoanPaybackDialog.this, "Loan value remaining: " + loan.getPresentValue(), "Loan Payment", JOptionPane.INFORMATION_MESSAGE);
+
+                LoanPaybackDialog.this.dispose();
+            }
+            else{
+                JOptionPane.showMessageDialog(LoanPaybackDialog.this, "Payback failed, insufficient funds", "Loan error", JOptionPane.ERROR_MESSAGE);
+            }
 
         }
     }

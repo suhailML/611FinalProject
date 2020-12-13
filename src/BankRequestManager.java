@@ -174,14 +174,6 @@ public class BankRequestManager implements GUIRequests
             // remove money from the loan
             loan.payBack(money);
 
-            //TODO pay back over paying the loan?
-            /*
-            if(loan.getPresentValue() < 0){
-                transfer(bank, lendee, lender, 0-loan.getPresentValue());
-            }
-            */
-
-
             bank.getBankDB().updateLoan(loan);
 
             return true;
@@ -211,13 +203,13 @@ public class BankRequestManager implements GUIRequests
             else{
                 System.out.println("Transaction failed from receiver - return all money to sender");
                 sender.receive(money + fee);
+                return false;
             }
         }
         else{
             System.out.println("Transaction failed from sender - insufficient funds");
+            return false;
         }
-
-        return true;
     }
 
 
