@@ -1,3 +1,5 @@
+import sun.rmi.runtime.Log;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -110,10 +112,10 @@ public class LoginForm extends JFrame {
     /** Create a user **/
     private class CreateUserActionListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
+            System.out.println("Create a user selected");
 
             // TODO create user form
-
-            System.out.println("Create a user");
+            new CreateUserDialog(bank,LoginForm.this).setVisible(true);
 
 
         }
