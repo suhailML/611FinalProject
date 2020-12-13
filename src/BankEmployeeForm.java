@@ -100,10 +100,10 @@ public class BankEmployeeForm extends JFrame {
                 System.out.println("Open customer: " + customer);
 
                 //TODO hide this window
-                //BankEmployeeForm.this.setVisible(false);
+                BankEmployeeForm.this.setVisible(false);
 
                 //TODO Open the customer history form
-                //new CustomerView(bank, customer, BankEmployeeForm.this).setVisible(true);
+                new EmployeeViewCustomerForm(bank, customer, BankEmployeeForm.this).setVisible(true);
             }catch(ArrayIndexOutOfBoundsException arrayIndexOutOfBoundsException){
                 JOptionPane.showMessageDialog(null, "NO ACCOUNT SELECTED", "ERROR", JOptionPane.ERROR_MESSAGE);
             }
