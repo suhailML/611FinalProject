@@ -46,6 +46,14 @@ public class BankRequestManager implements GUIRequests
         return valid;
     }
 
+    @Override
+    public Customer checkUserLogin(Bank bank, String username, String password) {
+
+        System.out.println("DUMMY LOGIN - NULL");
+
+        return null;
+    }
+
     public boolean createEmployee(Bank bank, String username, String password, String firstName, String lastName)
     {
         boolean valid = false;
@@ -91,16 +99,23 @@ public class BankRequestManager implements GUIRequests
             case 1: 
             account = bankAccountFactory.createNewSavingsAccount(name, currency);
             break;
+
+            default:
+                return false;
         }
 
         customer.addAccount(account);
         bank.getBankDB().addAccount(account);
+
+        return true;
     }
 
     public boolean deleteAccount(Bank bank, Customer customer, BankAccount account)
     {
         customer.deleteAccount(account);
         bank.getBankDB().deleteAccount(account);
+
+        return true;
     }
 
     public boolean withdraw(Bank bank, BankAccount account, double money)

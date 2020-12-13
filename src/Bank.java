@@ -163,7 +163,7 @@ public class Bank implements Transferable
 
     public Customer getCustomer(String username, String password)
     {
-        Customer customer;
+        Customer customer = null;
 
         ArrayList<Customer> customers = getCustomers();
         Iterator<Customer> iter = customers.iterator();
@@ -193,7 +193,7 @@ public class Bank implements Transferable
 
     public Employee getEmployee(String username, String password)
     {
-        Employee employee;
+        Employee employee = null;
 
         ArrayList<Employee> employees = getEmployees();
         Iterator<Employee> iter = employees.iterator();
