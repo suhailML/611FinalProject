@@ -12,14 +12,13 @@ public interface GUIRequests
     public Customer checkUserLogin(Bank bank, String username, String password);
     public Employee checkEmployeeLogin(Bank bank, String username, String password);
     public boolean createAccount(Bank bank, Customer customer, String name, String currency, int accountType);
-
+    public boolean deleteAccount(Bank bank, Customer customer, BankAccount account);
 
 
 
     //TODO add these functions
     // - 
     
-    // - public boolean deleteAccount(Bank bank, Customer customer, Account account) --> do not delete account when there are loans
     // - public boolean saveBankSettings(Bank bank, Double transactionFee, Double savingsInterestRate, Double loanInterestRate, Double minSavingsForInterest)
 
     public String queryTransactions(int day);

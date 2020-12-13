@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+import java.util.*;
 
 public class BankRequestManager implements GUIRequests
 {
@@ -95,6 +95,12 @@ public class BankRequestManager implements GUIRequests
 
         customer.addAccount(account);
         bank.getBankDB().addAccount(account);
+    }
+
+    public boolean deleteAccount(Bank bank, Customer customer, BankAccount account)
+    {
+        customer.deleteAccount(account);
+        bank.getBankDB().deleteAccount(account);
     }
 
     public boolean withdraw(Bank bank, BankAccount account, double money)

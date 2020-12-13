@@ -75,6 +75,9 @@ public class Customer extends User implements CustomerActions
         getAccounts().add(account);
     }
 
-
+    public void deleteAccount(BankAccount account)
+    {
+        getAccounts().remove(account);
+    }
 
 }
