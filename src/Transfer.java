@@ -49,7 +49,7 @@ public class Transfer extends Transaction
     }
 
     public String toString() {
-        return "Transfer: " + getAccount().getCurrencyType() + getMoney() + " - " + "FROM: " + senderName + " TO: " + receiverName;
+        return "Transfer: "+ getMoney() + " - " + "FROM: " + senderName + " TO: " + receiverName;
     }
 
 }
