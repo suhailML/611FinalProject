@@ -73,12 +73,21 @@ public class LoginForm extends JFrame {
     /** Login as a user **/
     private class LoginButtonActionListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            LoginForm.this.setVisible(false);
 
-            // TODO check the login
+            String username = usernameField.getText();
+            String password = passwordField.getText();
 
-            System.out.println("User login");
-            new UserForm(bank, bank.getCustomers().get(0), LoginForm.this).setVisible(true); // Main Form to show after the Login Form..
+            Customer customer = bank.getBankRequestManager().checkCustomerLogin(bank, username, password);
+
+            System.out.println("User login: " + username + " " + password);
+
+            if (customer == null) {
+                JOptionPane.showMessageDialog(LoginForm.this, "Customer not found with these credentials", "Customer not Found", JOptionPane.ERROR_MESSAGE);
+            }
+            else {
+                LoginForm.this.setVisible(false);
+                new UserForm(bank, bank.getCustomers().get(0), LoginForm.this).setVisible(true); // Main Form to show after the Login Form..
+            }
         }
     }
 
@@ -87,18 +96,26 @@ public class LoginForm extends JFrame {
     private class BankButtonActionListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
 
-            System.out.println("Bank login");
-            LoginForm.this.setVisible(false);
+            String username = usernameField.getText();
+            String password = passwordField.getText();
 
-            //TODO Check the login
+            System.out.println("Employee login " + username + " " + password);
+            Employee employee = bank.getBankRequestManager().checkEmployeeLogin(bank, username, password);
 
-            new BankEmployeeForm(bank, new Employee(
-                    usernameField.getText(),
-                    passwordField.getText(),
-                    "ABCDE",
-                    "First Name",
-                    "Last Name"
-            ), LoginForm.this).setVisible(true); // Main Form to show after the Login Form..
+            if (employee == null) {
+                JOptionPane.showMessageDialog(LoginForm.this, "Employee not found with these credentials", "Employee not Found", JOptionPane.ERROR_MESSAGE);
+            }
+            else{
+                LoginForm.this.setVisible(false);
+
+                new BankEmployeeForm(bank, new Employee(
+                        usernameField.getText(),
+                        passwordField.getText(),
+                        "ABCDE",
+                        "First Name",
+                        "Last Name"
+                ), LoginForm.this).setVisible(true); // Main Form to show after the Login Form..
+            }
         }
     }
 
@@ -107,11 +124,7 @@ public class LoginForm extends JFrame {
     private class CreateUserActionListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             System.out.println("Create a user selected");
-
-            // TODO create user form
             new CreateUserDialog(bank,LoginForm.this).setVisible(true);
-
-
         }
     }
 }

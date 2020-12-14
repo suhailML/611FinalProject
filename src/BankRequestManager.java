@@ -46,6 +46,14 @@ public class BankRequestManager implements GUIRequests
         return valid;
     }
 
+    public boolean updateCustomer(Bank bank, Customer customer, String firstName, String lastName, String password)
+    {
+        customer.setFirstName(firstName);
+        customer.setLastName(lastName);
+        customer.setPassword(password);
+        bank.getBankDB().updateCustomer(customer);
+    }
+
     public boolean createEmployee(Bank bank, String username, String password, String firstName, String lastName)
     {
         boolean valid = false;
@@ -91,16 +99,33 @@ public class BankRequestManager implements GUIRequests
             case 1: 
             account = bankAccountFactory.createNewSavingsAccount(name, currency);
             break;
+
+            default:
+                return false;
         }
 
         customer.addAccount(account);
         bank.getBankDB().addAccount(account);
+
+        return true;
+    }
+
+    public boolean saveBankSettings(Bank bank, double transactionFee, double savingsInterestRate, double loanInterestRate, double minSavingsForInterest)
+    {
+        BankSettings settings = bank.getSettings();
+        settings.setTransactionFee(transactionFee);
+        settings.setSavingsInterestRate(savingsInterestRate);
+        settings.setLoanInterestRate(loanInterestRate);
+        settings.setMinSavingsForInterest(minSavingsForInterest);
+        bank.getBankDB().updateBankSettings(settings);
     }
 
     public boolean deleteAccount(Bank bank, Customer customer, BankAccount account)
     {
         customer.deleteAccount(account);
         bank.getBankDB().deleteAccount(account);
+
+        return true;
     }
 
     public boolean withdraw(Bank bank, BankAccount account, double money)
@@ -134,11 +159,25 @@ public class BankRequestManager implements GUIRequests
         return valid;
     }
 
+    @Override
+    public boolean transfer(Bank bank, BankAccount account, Transferable sender, Transferable receiver, double money) {
+        return false;
+    }
+
+    @Override
+    public boolean takeOutLoan(Bank bank, BankAccount account, Transferable lendee, Transferable lender, double money, String collateral) {
+        return false;
+    }
+
+    @Override
+    public boolean payBackLoan(Bank bank, BankAccount account, Transferable lendee, Transferable lender, double money, Loan loan) {
+        return false;
+    }
+
 
     /** Take a loan from the lender to the lendee **/
     public boolean takeOutLoan(Bank bank, Transferable lender, Transferable lendee, double money, String collateral)
     {
-
         Loan loan = loanFactory.createNewLoan(bank, lendee, money, bank.getSettings().getLoanInterestRate(), collateral);
 
         // if the loan transfer is successful from lender to lendee, add it to the database
@@ -156,7 +195,8 @@ public class BankRequestManager implements GUIRequests
     /** Payback part of a loan from the lendee to the lender **/
     public boolean payBackLoan(Bank bank, Transferable lendee, Transferable lender, double money, Loan loan)
     {
-        if(loan.getPresentValue() < money){
+        if(loan.getPresentValue() < money)
+        {
             money = loan.getPresentValue();
         }
 
@@ -166,14 +206,6 @@ public class BankRequestManager implements GUIRequests
             // remove money from the loan
             loan.payBack(money);
 
-            //TODO pay back over paying the loan?
-            /*
-            if(loan.getPresentValue() < 0){
-                transfer(bank, lendee, lender, 0-loan.getPresentValue());
-            }
-            */
-
-
             bank.getBankDB().updateLoan(loan);
 
             return true;
@@ -182,10 +214,8 @@ public class BankRequestManager implements GUIRequests
         return false;
     }
 
-    public boolean transfer(Bank bank, BankAccount account, Transferable sender, Transferable receiver, double money)
+    public boolean transfer(Bank bank, Transferable sender, Transferable receiver, double money)
     {
-        Transaction transaction = transactionFactory.getTransfer(bank.getSettings().getDay(), money, account, sender, receiver);
-
         double fee = bank.getSettings().getTransactionFee();
 
         if(sender.send(money + fee)) {
@@ -194,30 +224,83 @@ public class BankRequestManager implements GUIRequests
 
             // if the receiver was able to receive the money, update the database
             if(receiver.receive(money)) {
-                sender.addTransaction(transaction);
-                receiver.addTransaction(transaction);
-                bank.getBankDB().addTransaction(transaction);
+
+                if (sender instanceof BankAccount)
+                {
+                    Transaction transaction = transactionFactory.getTransfer(bank.getSettings().getDay(), money, (BankAccount) sender, sender, receiver);
+                    ((BankAccount) sender).addTransaction(transaction);
+                    bank.getBankDB().addTransaction(transaction);
+                }
+                if (receiver instanceof BankAccount)
+                {
+                    Transaction transaction = transactionFactory.getTransfer(bank.getSettings().getDay(), money, (BankAccount) sender, sender, receiver);
+                    ((BankAccount) receiver).addTransaction(transaction);
+                    bank.getBankDB().addTransaction(transaction);
+                }
 
                 return true;
             }
             else{
                 System.out.println("Transaction failed from receiver - return all money to sender");
                 sender.receive(money + fee);
+                return false;
             }
         }
         else{
             System.out.println("Transaction failed from sender - insufficient funds");
+            return false;
+        }
+    }
+
+    public boolean incrementDay(Bank bank)
+    {
+        bank.getSettings().incrementDay();
+        
+        ArrayList<Customer> customers = bank.getCustomers();
+
+        for (Customer customer : customers)
+        {
+            List<Loan> loans = customer.getLoans();
+            for (Loan loan : loans)
+            {
+                loan.compoundInterest();
+            }
+
+            List<BankAccount> accounts = customer.getAccounts();
+            for (BankAccount account : accounts)
+            {
+                if (account instanceof SavingsAccount && account.getBalance() > bank.getSettings().getMinSavingsForInterest())
+                {
+                    SavingsAccount temp = (SavingsAccount) account;
+                    temp.compoundInterest(bank.getSettings().getSavingsInterestRate());
+                }
+            }
+        }
+    }
+
+    public String queryTransactions(Bank bank, int day)
+    {
+        StringBuilder string = new StringBuilder();
+
+        List<Customer> customers = bank.getCustomers();
+
+        for (Customer customer : customers)
+        {
+            List<BankAccount> accounts = customer.getAccounts();
+            for (BankAccount account: accounts)
+            {
+                List<Transaction> history = account.getTransactionHistory().getTransactions();
+                for (Transaction transaction : history)
+                {
+                    if (transaction.getDay() == day)
+                    {
+                        string.append(transaction.toString() + "\n");
+                    }
+                }
+            }
         }
 
-        return true;
+        return string.toString();
     }
 
-
-    public String queryTransactions(int day){
-
-        String output = "TODO - fill in query transactions --> DAY: " + day;
-
-        return output;
-
-    }
 }

@@ -40,14 +40,13 @@ public class AccountForm extends JFrame {
 
         panelOutput.add(outputJTextArea);
 
-        transactionJList = new JList(account.getTransactions().toArray());
+        transactionJList = new JList(account.getTransactionHistory().toArray());
 
         panelTransactions.add(new JLabel("Transaction Picker"), BorderLayout.NORTH);
         panelTransactions.add(transactionJList, BorderLayout.CENTER);
 
         JButton buttonWithdraw = new JButton("Withdraw");
         JButton buttonDeposit = new JButton("Deposit");
-        JButton buttonTransfer = new JButton("Transfer");
         JButton buttonTakeLoan = new JButton("Request Loan ~ debug");
         JButton buttonBack = new JButton("Back");
 
@@ -58,7 +57,6 @@ public class AccountForm extends JFrame {
 
         panelActions.add(buttonWithdraw);
         panelActions.add(buttonDeposit);
-        panelActions.add(buttonTransfer);
         panelActions.add(buttonTakeLoan);
         panelActions.add(buttonBack);
 
@@ -68,7 +66,6 @@ public class AccountForm extends JFrame {
 
         setTitle("User View Form");
         setSize(600,400);
-        //setLayout(null);
         setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE);
         setVisible(true);
     }
@@ -87,18 +84,17 @@ public class AccountForm extends JFrame {
                 return;
             }
 
-            double amount = Double.parseDouble(input);
-            System.out.println("TODO --> DO WITHDRAW $" + amount);
+            double money = Double.parseDouble(input);
+            System.out.println("TODO --> DO WITHDRAW $" + money);
 
-            //TODO withdraw action
-            /* TODO
-            if(withdraw(Bank bank, BankAccount account, double money)){
+
+            if(bank.getBankRequestManager().withdraw(bank, account, money)){
                 JOptionPane.showMessageDialog(AccountForm.this, "You withdrew " + money + " from " + account, "Withdrawal", JOptionPane.INFORMATION_MESSAGE);
             }
             else{
                 JOptionPane.showMessageDialog(AccountForm.this, "Withdrawal from account failed", "Withdrawal Error", JOptionPane.ERROR_MESSAGE);
             }
-            */
+
         }
     }
 
@@ -116,32 +112,16 @@ public class AccountForm extends JFrame {
                 return;
             }
 
-            double amount = Double.parseDouble(input);
-            System.out.println("TODO --> DO DEPOSIT $" + amount);
+            double money = Double.parseDouble(input);
+            System.out.println("TODO --> DO DEPOSIT $" + money);
 
-            //TODO deposit action
-            /* TODO
-            if(withdraw(Bank bank, BankAccount account, double money)){
+
+            if(bank.getBankRequestManager().deposit(bank, account, money)){
                 JOptionPane.showMessageDialog(AccountForm.this, "You deposited " + money + " to " + account, "Deposit", JOptionPane.INFORMATION_MESSAGE);
             }
             else{
                 JOptionPane.showMessageDialog(AccountForm.this, "Deposit to account failed", "Deposit Error", JOptionPane.ERROR_MESSAGE);
             }
-            */
-
-        }
-    }
-
-
-    private class buttonLoanActionListener implements ActionListener{
-        public void actionPerformed(ActionEvent e) {
-            System.out.println("TODO --> DO LOAN INPUTS");
-            // TODO Create a loan
-
-
-            /*
-            bank.getBankRequestManager().takeOutLoan(Bank bank, Transferable lendee, Transferable lender, double money, String collateral);
-             */
         }
     }
 
@@ -164,7 +144,7 @@ public class AccountForm extends JFrame {
             System.out.println("YOU SELECTED: Transcation: " + index);
 
             // get the transaction
-            Transaction transaction = account.getTransactions().get(index);
+            Transaction transaction = account.getTransactionHistory().get(index);
 
             outputJTextArea.setText(transaction.toString());
         }

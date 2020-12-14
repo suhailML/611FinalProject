@@ -28,7 +28,7 @@ public class BankEmployeeForm extends JFrame {
         frameLayout.setHgap(10);
         setLayout(frameLayout);
 
-        GridLayout layout = new GridLayout(4,1, 10, 10);
+        GridLayout layout = new GridLayout(5,1, 10, 10);
 
         JPanel panelOutput = new JPanel(new GridLayout(1,1));
         JPanel panelAccounts = new JPanel(new BorderLayout());
@@ -44,18 +44,19 @@ public class BankEmployeeForm extends JFrame {
         panelAccounts.add(new JLabel("Account Picker"), BorderLayout.NORTH);
         panelAccounts.add(customerJList, BorderLayout.CENTER);
 
-
+        JButton createEmployeeButton = new JButton("Create Employee");
         JButton editSettingsButton = new JButton("Edit Settings");
         JButton viewCustomerButton = new JButton("View Account");
         JButton viewTransactionsButton = new JButton("View Transactions");
         JButton signoutButton = new JButton("Sign out");
 
-
+        createEmployeeButton.addActionListener(new CreateEmployeeActionListener());
         editSettingsButton.addActionListener(new EditSettingsActionListener());
         viewCustomerButton.addActionListener(new ViewCustomerActionListener());
         viewTransactionsButton.addActionListener((new ViewTransactionsActionListener()));
         signoutButton.addActionListener(new SignoutActionListener());
 
+        panelActions.add(createEmployeeButton);
         panelActions.add(editSettingsButton);
         panelActions.add(viewCustomerButton);
         panelActions.add(viewTransactionsButton);
@@ -71,6 +72,15 @@ public class BankEmployeeForm extends JFrame {
         setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE);
         setVisible(true);
     }
+
+
+    /** Open the bank settings editor form **/
+    private class CreateEmployeeActionListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            new CreateEmployeeDialog( BankEmployeeForm.this.bank, BankEmployeeForm.this).setVisible(true);
+        }
+    }
+
 
     /** Open the bank settings editor form **/
     private class EditSettingsActionListener implements ActionListener {

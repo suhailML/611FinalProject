@@ -7,7 +7,6 @@ public abstract class BankAccount implements Transferable
     private String currencyType;
     private double balance;
     private TransactionHistory transactionHistory;
-    private Customer customer;
 
     /*
     CONSTRUCTORS
@@ -94,7 +93,8 @@ public abstract class BankAccount implements Transferable
 
     public boolean addTransaction(Transaction transaction)
     {
-        getTransactionHistory().addTransaction(transaction);
+        transactionHistory.addTransaction(transaction);
+        //getTransactionHistory().addTransaction(transaction);
         return true;
     }
 

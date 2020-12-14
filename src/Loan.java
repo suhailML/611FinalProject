@@ -119,4 +119,9 @@ public class Loan
     {
         presentValue -= money;
     }
+
+    public void compoundInterest()
+    {
+        presentValue += presentValue*interestRate;
+    }
 }

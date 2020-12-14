@@ -73,12 +73,12 @@ public class EmployeeViewCustomerForm extends JFrame {
             ArrayList<BankAccount> accounts = new ArrayList<>();
 
             CheckingAccount test = new CheckingAccount("First Checking Account","A","$");
-            LinkedList<Transaction> transactionList = new LinkedList<>();
-            transactionList.add(new Transaction());
-            transactionList.add(new Transaction());
-            transactionList.add(new Transaction());
+           // LinkedList<Transaction> transactionList = new LinkedList<>();
+            //transactionList.add(new Transaction());
+            //transactionList.add(new Transaction());
+           /// transactionList.add(new Transaction());
 
-            test.setTransactions(transactionList);
+            //test.setTransactions(transactionList);
             accounts.add(test);
             accounts.add(new SavingsAccount("First Savings Account","A","$"));
 
@@ -103,7 +103,7 @@ public class EmployeeViewCustomerForm extends JFrame {
                 // get the account
                 BankAccount account = customer.getAccounts().get(index);
 
-                //TODO Open the EmployeeViewAccount form
+                // Open the EmployeeViewAccount form
                 new EmployeeViewAccountForm(EmployeeViewCustomerForm.this.bank, account, EmployeeViewCustomerForm.this);
 
             }catch(IndexOutOfBoundsException indexOutOfBoundsException){

@@ -23,6 +23,23 @@ public class BankDB {
         System.out.println("DUMMY UPDATE " + loan);
     }
 
+    public void addAccount(BankAccount account){
+        System.out.println("DUMMY ADD " + account);
+    }
+
+    public void addCustomer(Customer customer){
+        System.out.println("DUMMY ADD " + customer);
+    }
+
+    public void deleteAccount(BankAccount account){
+        System.out.println("DUMMY DELETE " + account);
+    }
+
+
+    public void addEmployee(Employee employee){
+        System.out.println("DUMMY ADD" + employee);
+    }
+
     public void addLoan(Loan loan){
         System.out.println("DUMMY UPDATE " + loan);
     }
