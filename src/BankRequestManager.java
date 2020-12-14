@@ -25,7 +25,7 @@ public class BankRequestManager implements GUIRequests
         return singleInstance;
     }
 
-    public boolean createCustomer(Bank bank, String username, String password, String firstName, String lastName)
+    public Customer createCustomer(Bank bank, String username, String password, String firstName, String lastName)
     {
         boolean valid = false;
 
@@ -34,16 +34,15 @@ public class BankRequestManager implements GUIRequests
         {
             if (customers.get(i).getUsername().equals(username))
             {
-                return valid;
+                return null;
             }
         }
-        valid = true;
 
         Customer customer = userFactory.createNewCustomer(username, password, firstName, lastName);
         bank.addCustomer(customer);
         bank.getBankDB().addCustomer(customer);
 
-        return valid;
+        return customer;
     }
 
     public boolean updateCustomer(Bank bank, Customer customer, String firstName, String lastName, String password)
@@ -88,7 +87,7 @@ public class BankRequestManager implements GUIRequests
         return employee;
     }
 
-    public boolean createAccount(Bank bank, Customer customer, String name, String currency, int accountType)
+    public BankAccount createAccount(Bank bank, Customer customer, String name, String currency, int accountType)
     {
         BankAccount account;
         switch(accountType)
@@ -102,13 +101,13 @@ public class BankRequestManager implements GUIRequests
             break;
 
             default:
-                return false;
+                return null;
         }
 
         customer.addAccount(account);
         bank.getBankDB().addAccount(account);
 
-        return true;
+        return account;
     }
 
     public boolean saveBankSettings(Bank bank, double transactionFee, double savingsInterestRate, double loanInterestRate, double minSavingsForInterest)

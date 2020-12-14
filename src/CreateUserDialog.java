@@ -102,7 +102,7 @@ public class CreateUserDialog extends JDialog {
 
             Customer customer = bank.getBankRequestManager().createCustomer(bank, username, password, firstName, lastName);
 
-            if(){
+            if(customer != null){
                 JOptionPane.showMessageDialog(CreateUserDialog.this, "Created user " + customer, "Customer Create", JOptionPane.INFORMATION_MESSAGE);
 
                 //TODO how do we get the customer to add the account to?
