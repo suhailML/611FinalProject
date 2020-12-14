@@ -1,10 +1,14 @@
+
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
 public class BankDatabase  {
+
+    //LINUX File Paths
     private String bankDB = "../src/";
     private String credentials = bankDB + "credentials/";
     private String employeeCredentials = credentials + "employeecredentials.txt";
@@ -17,12 +21,41 @@ public class BankDatabase  {
     private String bankSettings = bankDB + "banksettings/";
     private String bankSettingsFile = bankSettings + "banksettings.txt";
 
+
+
+
     private static BankDatabase singleInstance;
 
-    private BankDatabase(){}
+    private BankDatabase(){
+        setupWindowsLogin();
+    }
+
+    private void setupWindowsLogin(){
+        File fileTest = new File(System.getProperty("user.dir"));
+
+        try {
+            String start = fileTest.getCanonicalPath();
+            bankDB = start + "\\src\\";
+            credentials = bankDB + "credentials\\";
+            employeeCredentials = credentials + "employeecredentials.txt";
+            customerCredentials = credentials + "customercredentials.txt";
+            loans = bankDB + "loans\\";
+            transactions = bankDB + "transactions\\";
+            userIdToAccountIDs = bankDB + "userIdToAccountIDs\\";
+            accountIDsInfo = bankDB + "accountIDsInfo\\";
+            accountIDsInfoFile = bankDB + accountIDsInfo + "accountIds.txt";
+            bankSettings = bankDB + "banksettings\\";
+            bankSettingsFile = bankSettings + "banksettings.txt";
+
+        }catch(IOException ioe){
+            System.out.println("IO Exception");
+        }
+    }
+
 
     public static BankDatabase getSingleInstance()
     {
+
         if (singleInstance == null)
         {
             singleInstance = new BankDatabase();
@@ -216,9 +249,6 @@ public class BankDatabase  {
         return ParseFile.parseRows(employeeCredentials);
     }
 
-    public void updateBankSettings(BankSettings settings){
-        System.out.println("TODO -- updateBankSettings() in BankDatabase");
-    }
 }
 
 

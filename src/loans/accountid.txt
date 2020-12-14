@@ -1,2 +1,2 @@
 lender/lendeeID/loanID/initialValue/presentValue/interestRate/collateral
-bank,123,456,1000,1000,0.5,house
+bank 123 456 1000 1000 0.5 house

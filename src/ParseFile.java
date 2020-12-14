@@ -24,7 +24,7 @@ public class ParseFile {
         try {
             fileScanner = new Scanner(file);
         } catch (FileNotFoundException e) {
-            System.out.println("File Not Found");
+            System.out.println("File Not Found" + fileLocation);
             return new ArrayList<List<String>>();
         }
         int count = 0;

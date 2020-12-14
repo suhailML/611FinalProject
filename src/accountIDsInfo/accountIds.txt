@@ -1,1 +1,2 @@
 accountID/name/currencyType/money
+accountid test $ 10000

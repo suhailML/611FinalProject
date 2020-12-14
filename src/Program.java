@@ -5,6 +5,9 @@ public class Program
     public static void run()
     {
         Bank bank = startup();
+
+        // open the login form
+        new LoginForm(bank);
     }
 
     private static Bank startup()
@@ -26,6 +29,7 @@ public class Program
             employees.add(employee);
         }
         bank.setEmployees(employees);
+        System.out.println(employees);
 
         List<List<String>> customerCredentials = db.getAllCustomerCredentials();
         HashMap<String,ArrayList<String>> accountMap = db.getAllUsersAndAccounts();
@@ -35,6 +39,7 @@ public class Program
             String ID = credentials.get(4);
 
             ArrayList<String> accountIDs = accountMap.get(ID);
+
             List<BankAccount> accounts = new ArrayList<BankAccount>();
             for (String accountID : accountIDs)
             {
