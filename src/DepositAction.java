@@ -1,6 +1,6 @@
 public class DepositAction extends TransactionAction {
     
-    DepositAction(double money)
+    DepositAction(int day, double money, String accountID)
     {
         super(money);
     }

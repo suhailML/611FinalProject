@@ -1,6 +1,6 @@
 public class WithdrawAction extends TransactionAction {
     
-    WithdrawAction(double money)
+    WithdrawAction(int day, double money, String accountID)
     {
         super(money);
     }
