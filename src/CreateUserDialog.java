@@ -11,7 +11,7 @@ public class CreateUserDialog extends JDialog {
 
     private JFrame parentFrame;
 
-    public CreateUserDialog(Bank bank, JFrame parentFrame){
+    public CreateUserDialog(Bank bank, String username, String password, JFrame parentFrame){
         this.parentFrame = parentFrame;
 
         this.bank = bank;
@@ -28,8 +28,8 @@ public class CreateUserDialog extends JDialog {
         JPanel labelPanel = new JPanel(labelPanelLayout);
         JPanel textFieldPanel = new JPanel(textFieldPanelLayout);
 
-        usernameField = new JTextField();
-        passwordField = new JTextField();
+        usernameField = new JTextField(username);
+        passwordField = new JTextField(password);
         firstNameField = new JTextField();
         lastNameField = new JTextField();
 
@@ -99,18 +99,20 @@ public class CreateUserDialog extends JDialog {
 
             System.out.println("TODO Create Customer!");
 
-            /* TODO
-            if(bank.getBankRequestManager().createCustomer(bank, username, password, firstName, lastName){
-                JOptionPane.showMessageDialog(BankSettingsForm.this, "Created user " + , "Bank Settings", JOptionPane.INFORMATION_MESSAGE);
+
+            Customer customer = bank.getBankRequestManager().createCustomer(bank, username, password, firstName, lastName);
+
+            if(){
+                JOptionPane.showMessageDialog(CreateUserDialog.this, "Created user " + customer, "Customer Create", JOptionPane.INFORMATION_MESSAGE);
 
                 //TODO how do we get the customer to add the account to?
                 new AddAccountDialog(bank,customer, CreateUserDialog.this.parentFrame).setVisible(true);
 
             }
             else{
-                JOptionPane.showMessageDialog(BankSettingsForm.this, "User creation failed.", "User Creation Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(CreateUserDialog.this, "User creation failed.", "User Creation Error", JOptionPane.ERROR_MESSAGE);
             }
-            */
+
 
 
 

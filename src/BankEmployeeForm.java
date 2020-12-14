@@ -28,7 +28,7 @@ public class BankEmployeeForm extends JFrame {
         frameLayout.setHgap(10);
         setLayout(frameLayout);
 
-        GridLayout layout = new GridLayout(5,1, 10, 10);
+        GridLayout layout = new GridLayout(6,1, 10, 10);
 
         JPanel panelOutput = new JPanel(new GridLayout(1,1));
         JPanel panelAccounts = new JPanel(new BorderLayout());
@@ -131,6 +131,7 @@ public class BankEmployeeForm extends JFrame {
         public void actionPerformed(ActionEvent e) {
 
             bank.getBankRequestManager().incrementDay(bank);
+            System.out.println(bank.getSettings().getDay());
         }
     }
 

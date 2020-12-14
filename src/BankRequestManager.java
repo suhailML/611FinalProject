@@ -52,6 +52,7 @@ public class BankRequestManager implements GUIRequests
         customer.setLastName(lastName);
         customer.setPassword(password);
         bank.getBankDB().updateCustomer(customer);
+        return true;
     }
 
     public boolean createEmployee(Bank bank, String username, String password, String firstName, String lastName)
@@ -118,6 +119,7 @@ public class BankRequestManager implements GUIRequests
         settings.setLoanInterestRate(loanInterestRate);
         settings.setMinSavingsForInterest(minSavingsForInterest);
         bank.getBankDB().updateBankSettings(settings);
+        return true;
     }
 
     public boolean deleteAccount(Bank bank, Customer customer, BankAccount account)
@@ -157,21 +159,6 @@ public class BankRequestManager implements GUIRequests
         bank.getBankDB().addTransaction(transaction);
         valid = true;
         return valid;
-    }
-
-    @Override
-    public boolean transfer(Bank bank, BankAccount account, Transferable sender, Transferable receiver, double money) {
-        return false;
-    }
-
-    @Override
-    public boolean takeOutLoan(Bank bank, BankAccount account, Transferable lendee, Transferable lender, double money, String collateral) {
-        return false;
-    }
-
-    @Override
-    public boolean payBackLoan(Bank bank, BankAccount account, Transferable lendee, Transferable lender, double money, Loan loan) {
-        return false;
     }
 
 
@@ -276,6 +263,8 @@ public class BankRequestManager implements GUIRequests
                 }
             }
         }
+
+        return true;
     }
 
     public String queryTransactions(Bank bank, int day)
