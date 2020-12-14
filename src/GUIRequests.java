@@ -18,5 +18,5 @@ public interface GUIRequests
     //TODO add these functions
     
 
-    public String queryTransactions(int day);
+    public String queryTransactions(Bank bank, int day);
 }

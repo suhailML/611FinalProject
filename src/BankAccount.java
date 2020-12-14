@@ -7,7 +7,6 @@ public abstract class BankAccount implements Transferable
     private String currencyType;
     private double balance;
     private TransactionHistory transactionHistory;
-    private Customer customer;
 
     /*
     CONSTRUCTORS

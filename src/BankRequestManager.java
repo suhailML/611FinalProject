@@ -256,21 +256,29 @@ public class BankRequestManager implements GUIRequests
         }
     }
 
-    public String queryTransactions(int day)
+    public String queryTransactions(Bank bank, int day)
     {
-        // TODO
-        String output = "TODO - fill in query transactions --> DAY: " + day;
+        StringBuilder string = new StringBuilder();
 
-        /*
-        for (customer)
-            for (account)
-                for transaction
-                    if transaction.day == day
-                        s += transaction.tostring() + \n
+        List<Customer> customers = bank.getCustomers();
 
-        */
-        return output;
+        for (Customer customer : customers)
+        {
+            List<BankAccount> accounts = customer.getAccounts();
+            for (BankAccount account: accounts)
+            {
+                List<Transaction> history = account.getTransactionHistory().getTransactions();
+                for (Transaction transaction : history)
+                {
+                    if (transaction.getDay() == day)
+                    {
+                        string.append(transaction.toString() + "\n");
+                    }
+                }
+            }
+        }
 
+        return string.toString();
     }
 
 }
