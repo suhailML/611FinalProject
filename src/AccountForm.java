@@ -83,8 +83,6 @@ public class AccountForm extends JFrame {
             }
 
             double money = Double.parseDouble(input);
-            System.out.println("TODO --> DO WITHDRAW $" + money);
-
 
             if(bank.getBankRequestManager().withdraw(bank, account, money)){
                 JOptionPane.showMessageDialog(AccountForm.this, "You withdrew " + money + " from " + account, "Withdrawal", JOptionPane.INFORMATION_MESSAGE);
@@ -111,8 +109,6 @@ public class AccountForm extends JFrame {
             }
 
             double money = Double.parseDouble(input);
-            System.out.println("TODO --> DO DEPOSIT $" + money);
-
 
             if(bank.getBankRequestManager().deposit(bank, account, money)){
                 JOptionPane.showMessageDialog(AccountForm.this, "You deposited " + money + " to " + account, "Deposit", JOptionPane.INFORMATION_MESSAGE);
