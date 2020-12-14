@@ -45,6 +45,11 @@ public class UserForm extends JFrame {
         panelOutput.add(outputJTextArea, BorderLayout.CENTER);
         panelOutput.add(editUserButton, BorderLayout.SOUTH);
 
+        /*
+        DefaultListModel<BankAccount> listModel = new DefaultListModel<>();
+        listModel.
+         */
+
         accountJList = new JList(customer.getAccounts().toArray());
 
         JButton viewAccountButton = new JButton("View Account");
@@ -101,6 +106,10 @@ public class UserForm extends JFrame {
         this.customer.setAccounts(accounts);
     }
 
+    private void updateAccountJList(){
+        accountJList.setListData(customer.getAccounts().toArray(new BankAccount[0]));
+    }
+
     private class EditUserActionListener implements ActionListener{
         public void actionPerformed(ActionEvent e) {
             //TODO Create account form
@@ -116,7 +125,7 @@ public class UserForm extends JFrame {
             //TODO Create account form
             System.out.println("Add Account");
             new AddAccountDialog(UserForm.this.bank, UserForm.this.customer, UserForm.this).setVisible(true);
-            accountJList.updateUI();
+            updateAccountJList();
         }
     }
 
@@ -139,6 +148,7 @@ public class UserForm extends JFrame {
 
                 //TODO Open the Account form
                 new AccountForm(bank, account, UserForm.this).setVisible(true);
+                updateAccountJList();
 
             }catch(ArrayIndexOutOfBoundsException arrayIndexOutOfBoundsException){
                 JOptionPane.showMessageDialog(null, "NO ACCOUNT SELECTED", "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -159,14 +169,15 @@ public class UserForm extends JFrame {
 
 
                 //TODO
-                /*
+
                 if(bank.getBankRequestManager().deleteAccount(bank, customer, account)){
                     JOptionPane.showMessageDialog(UserForm.this, "Account deleted: " + account, "Delete Account", JOptionPane.INFORMATION_MESSAGE);
                 }
                 else{
                     JOptionPane.showMessageDialog(UserForm.this, "Could not delete account: " + account, "Delete Account Error", JOptionPane.ERROR_MESSAGE);
                 }
-                 */
+
+                updateAccountJList();
 
             }catch(ArrayIndexOutOfBoundsException arrayIndexOutOfBoundsException){
                 JOptionPane.showMessageDialog(null, "NO ACCOUNT SELECTED", "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -179,7 +190,7 @@ public class UserForm extends JFrame {
         public void actionPerformed(ActionEvent e) {
             System.out.println("OPEN TRANSFER DIALOG");
             new TransferDialog(UserForm.this.bank, UserForm.this.customer, UserForm.this).setVisible(true);
-
+            updateAccountJList();
         }
     }
 
@@ -189,6 +200,7 @@ public class UserForm extends JFrame {
         public void actionPerformed(ActionEvent e) {
             System.out.println("OPEN CREATE LOAN DIALOG");
             new LoanCreateDialog(UserForm.this.bank, UserForm.this.customer, UserForm.this).setVisible(true);
+            updateAccountJList();
         }
     }
 
@@ -197,6 +209,7 @@ public class UserForm extends JFrame {
         public void actionPerformed(ActionEvent e) {
             System.out.println("OPEN PAYBACK LOAN DIALOG");
             new LoanPaybackDialog(UserForm.this.bank, UserForm.this.customer, UserForm.this).setVisible(true);
+            updateAccountJList();
         }
     }
 
