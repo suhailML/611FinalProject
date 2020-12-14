@@ -168,6 +168,7 @@ public class BankDatabase  {
 
     public void addAccount(String userID, String accountID, String name, String currencyType, String balance, String accountType)
     {
+
         ParseFile.addLine(userIdToAccountIDs + userID + ".txt", accountID);
         ParseFile.addLine(accountIDsInfoFile, accountID + "\t" + name + "\t" + currencyType + "\t" + balance + "\t" + accountType);
     }

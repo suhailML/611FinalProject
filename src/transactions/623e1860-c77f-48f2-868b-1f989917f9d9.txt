@@ -1,1 +1,2 @@
+Type Amount Day
 DEPOSIT	1000.0	1	NA	NA

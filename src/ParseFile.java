@@ -52,12 +52,12 @@ public class ParseFile {
         {
             if (file.createNewFile())
             {
-                Files.write(Paths.get(fileLocation),"".getBytes());
-                Files.write(Paths.get(fileLocation), line.getBytes(), StandardOpenOption.APPEND);
+                Files.write(Paths.get(fileLocation),(""+System.lineSeparator()).getBytes());
+                Files.write(Paths.get(fileLocation), (line+System.lineSeparator()).getBytes(), StandardOpenOption.APPEND);
             }
             else
             {
-                Files.write(Paths.get(fileLocation), line.getBytes(), StandardOpenOption.APPEND);
+                Files.write(Paths.get(fileLocation), (""+System.lineSeparator()).getBytes(), StandardOpenOption.APPEND);
             }
         }
         catch (IOException e)

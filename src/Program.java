@@ -54,13 +54,13 @@ public class Program
                     switch(transactionInfo.get(0).toUpperCase())
                     {
                         case "WITHDRAW":
-                            transaction = transactionFactory.getExistingWithdraw(Integer.parseInt(transactionInfo.get(3)), Double.parseDouble(transactionInfo.get(2)), accountID);
+                            transaction = transactionFactory.getExistingWithdraw(Integer.parseInt(transactionInfo.get(2)), Double.parseDouble(transactionInfo.get(1)), accountID);
                             break;
                         case "DEPOSIT":
-                            transaction = transactionFactory.getExistingDeposit(Integer.parseInt(transactionInfo.get(3)), Double.parseDouble(transactionInfo.get(2)), accountID);
+                            transaction = transactionFactory.getExistingDeposit(Integer.parseInt(transactionInfo.get(2)), Double.parseDouble(transactionInfo.get(1)), accountID);
                             break;
                         case "TRANSFER":
-                            transaction = transactionFactory.getExistingTransfer(Integer.parseInt(transactionInfo.get(3)), Double.parseDouble(transactionInfo.get(2)), accountID, transactionInfo.get(4), transactionInfo.get(5));
+                            transaction = transactionFactory.getExistingTransfer(Integer.parseInt(transactionInfo.get(2)), Double.parseDouble(transactionInfo.get(1)), accountID, transactionInfo.get(4), transactionInfo.get(5));
                             break;
                     }
 
