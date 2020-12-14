@@ -6,7 +6,8 @@ public abstract class BankAccount implements Transferable
     private String accountID;
     private String currencyType;
     private double balance;
-    private TransactionHistory transactionHistory;
+    //private TransactionHistory transactionHistory;
+    private LinkedList<Transaction> transactionHistory;
     private Customer customer;
 
     /*
@@ -14,7 +15,7 @@ public abstract class BankAccount implements Transferable
     */
     public BankAccount(){}
 
-    public BankAccount(String name, String accountID, String currencyType, double balance, TransactionHistory transactionHistory)
+    public BankAccount(String name, String accountID, String currencyType, double balance, LinkedList<Transaction> transactionHistory)
     {
         setName(name);
         setAccountID(accountID);
@@ -29,7 +30,7 @@ public abstract class BankAccount implements Transferable
         setAccountID(accountID);
         setCurrencyType(currencyType);
         setBalance(0);
-        setTransactionHistory(new TransactionHistory());
+        setTransactionHistory(new LinkedList<Transaction>());
     }
 
     /*
@@ -55,7 +56,7 @@ public abstract class BankAccount implements Transferable
         this.balance = balance;
     }
 
-    public void setTransactionHistory(TransactionHistory transactionHistory)
+    public void setTransactionHistory(LinkedList<Transaction> transactionHistory)
     {
         this.transactionHistory = transactionHistory;
     }
@@ -83,7 +84,7 @@ public abstract class BankAccount implements Transferable
         return balance;
     }
 
-    public TransactionHistory getTransactionHistory()
+    public LinkedList<Transaction> getTransactionHistory()
     {
         return transactionHistory;
     }
@@ -94,7 +95,8 @@ public abstract class BankAccount implements Transferable
 
     public boolean addTransaction(Transaction transaction)
     {
-        getTransactionHistory().addTransaction(transaction);
+        transactionHistory.add(transaction);
+        //getTransactionHistory().addTransaction(transaction);
         return true;
     }
 

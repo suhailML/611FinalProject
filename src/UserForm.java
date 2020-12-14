@@ -3,7 +3,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.LinkedList;
 
 public class UserForm extends JFrame {
 
@@ -91,12 +90,6 @@ public class UserForm extends JFrame {
         ArrayList<BankAccount> accounts = new ArrayList<>();
 
         CheckingAccount test = new CheckingAccount("First Checking Account","A","$");
-        LinkedList<Transaction> transactionList = new LinkedList<>();
-        transactionList.add(new Transaction());
-        transactionList.add(new Transaction());
-        transactionList.add(new Transaction());
-
-        test.setTransactions(transactionList);
         accounts.add(test);
         accounts.add(new SavingsAccount("First Savings Account","A","$"));
 
@@ -145,8 +138,6 @@ public class UserForm extends JFrame {
             try {
                 BankAccount account = accountJList.getSelectedValue();
                 System.out.println("DELETE ACCOUNT: " + account);
-
-
 
                 System.out.println("TODO --> ACTUALLY DELETE ACCOUNT");
                 JOptionPane.showMessageDialog(UserForm.this,"DELETE - NEED TO DO - ACCOUNT" + account);

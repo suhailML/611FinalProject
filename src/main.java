@@ -42,6 +42,12 @@ public class main {
 
         bank.setCustomers(customers);
 
+        ArrayList<Employee> employees = new ArrayList<Employee>();
+        Employee employee = factory.createNewEmployee("test2", "1234", "Foo", "Bar");
+        employees.add(employee);
+
+        bank.setEmployees(employees);
+
         return bank;
     }
 

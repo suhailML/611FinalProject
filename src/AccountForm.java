@@ -40,7 +40,7 @@ public class AccountForm extends JFrame {
 
         panelOutput.add(outputJTextArea);
 
-        transactionJList = new JList(account.getTransactions().toArray());
+        transactionJList = new JList(account.getTransactionHistory().toArray());
 
         panelTransactions.add(new JLabel("Transaction Picker"), BorderLayout.NORTH);
         panelTransactions.add(transactionJList, BorderLayout.CENTER);
@@ -124,20 +124,7 @@ public class AccountForm extends JFrame {
             }
         }
     }
-
-
-    private class buttonLoanActionListener implements ActionListener{
-        public void actionPerformed(ActionEvent e) {
-            System.out.println("TODO --> DO LOAN INPUTS");
-            // TODO Create a loan
-
-
-            /*
-            bank.getBankRequestManager().takeOutLoan(Bank bank, Transferable lendee, Transferable lender, double money, String collateral);
-             */
-        }
-    }
-
+    
 
     private class BackActionListener implements  ActionListener{
         public void actionPerformed(ActionEvent e) {
@@ -157,7 +144,7 @@ public class AccountForm extends JFrame {
             System.out.println("YOU SELECTED: Transcation: " + index);
 
             // get the transaction
-            Transaction transaction = account.getTransactions().get(index);
+            Transaction transaction = account.getTransactionHistory().get(index);
 
             outputJTextArea.setText(transaction.toString());
         }

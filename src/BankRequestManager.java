@@ -142,6 +142,21 @@ public class BankRequestManager implements GUIRequests
         return valid;
     }
 
+    @Override
+    public boolean transfer(Bank bank, BankAccount account, Transferable sender, Transferable receiver, double money) {
+        return false;
+    }
+
+    @Override
+    public boolean takeOutLoan(Bank bank, BankAccount account, Transferable lendee, Transferable lender, double money, String collateral) {
+        return false;
+    }
+
+    @Override
+    public boolean payBackLoan(Bank bank, BankAccount account, Transferable lendee, Transferable lender, double money, Loan loan) {
+        return false;
+    }
+
 
     /** Take a loan from the lender to the lendee **/
     public boolean takeOutLoan(Bank bank, Transferable lender, Transferable lendee, double money, String collateral)
@@ -181,10 +196,11 @@ public class BankRequestManager implements GUIRequests
 
         return false;
     }
-
-    public boolean transfer(Bank bank, BankAccount account, Transferable sender, Transferable receiver, double money)
+    //public boolean transfer(Bank bank, BankAccount account, Transferable sender, Transferable receiver, double money)
+    public boolean transfer(Bank bank, Transferable sender, Transferable receiver, double money)
     {
-        Transaction transaction = transactionFactory.getTransfer(bank.getSettings().getDay(), money, account, sender, receiver);
+        //Transaction transaction = transactionFactory.getTransfer(bank.getSettings().getDay(), money, account, sender, receiver);
+        Transaction transaction = transactionFactory.getTransfer(bank.getSettings().getDay(), money, null, sender, receiver);
 
         double fee = bank.getSettings().getTransactionFee();
 
