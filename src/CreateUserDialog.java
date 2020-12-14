@@ -99,13 +99,13 @@ public class CreateUserDialog extends JDialog {
 
             if(username.isEmpty() || password.isEmpty() || firstName.isEmpty() || lastName.isEmpty()){
                 JOptionPane.showMessageDialog(CreateUserDialog.this, "All fields must be filled", "Empty Field", JOptionPane.ERROR_MESSAGE);
+                return;
             }
 
             Customer customer = bank.getBankRequestManager().createCustomer(bank, username, password, firstName, lastName);
 
             if(customer != null){
                 JOptionPane.showMessageDialog(CreateUserDialog.this, "Created user " + customer, "Customer Create", JOptionPane.INFORMATION_MESSAGE);
-
                 new AddAccountDialog(bank,customer, CreateUserDialog.this.parentFrame).setVisible(true);
             }
             else{
