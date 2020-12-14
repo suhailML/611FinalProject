@@ -118,16 +118,16 @@ public class BankDatabase  {
         ParseFile.deleteLine(accountIDsInfoFile, accountID);
     }
 
-    public void addAccount(String userID, String accountID, String name, String currencyType, String balance)
+    public void addAccount(String userID, String accountID, String name, String currencyType, String balance, String accountType)
     {
         ParseFile.addLine(userIdToAccountIDs + userID + ".txt", accountID);
-        ParseFile.addLine(accountIDsInfoFile, accountID + "\t" + name + "\t" + currencyType + "\t" + balance);
+        ParseFile.addLine(accountIDsInfoFile, accountID + "\t" + name + "\t" + currencyType + "\t" + balance + "\t" + accountType);
     }
 
-    public void updateAccount(String accountID, String name, String currencyType, String balance)
+    public void updateAccount(String accountID, String name, String currencyType, String balance, String accountType)
     {
         ParseFile.deleteLine(accountIDsInfoFile, accountID);
-        ParseFile.addLine(accountIDsInfoFile, accountID + "\t" + name + "\t" + currencyType + "\t" + balance);
+        ParseFile.addLine(accountIDsInfoFile, accountID + "\t" + name + "\t" + currencyType + "\t" + balance + "\t" + accountType);
     }
 
     public ArrayList<String> getAccountInfo(String accountID)
