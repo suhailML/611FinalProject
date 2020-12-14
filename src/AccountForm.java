@@ -40,7 +40,7 @@ public class AccountForm extends JFrame {
 
         panelOutput.add(outputJTextArea);
 
-        transactionJList = new JList(account.getTransactionHistory().toArray());
+        transactionJList = new JList(account.getTransactionHistory().getTransactions().toArray());
 
         panelTransactions.add(new JLabel("Transaction Picker"), BorderLayout.NORTH);
         panelTransactions.add(transactionJList, BorderLayout.CENTER);
@@ -144,7 +144,7 @@ public class AccountForm extends JFrame {
             System.out.println("YOU SELECTED: Transcation: " + index);
 
             // get the transaction
-            Transaction transaction = account.getTransactionHistory().get(index);
+            Transaction transaction = account.getTransactionHistory().getTransactions().get(index);
 
             outputJTextArea.setText(transaction.toString());
         }

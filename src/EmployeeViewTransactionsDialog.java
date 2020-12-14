@@ -68,7 +68,7 @@ public class EmployeeViewTransactionsDialog extends JDialog {
 
             System.out.println("Query Transactions");
 
-            EmployeeViewTransactionsDialog.this.ouputTextArea.setText(bank.getBankRequestManager().queryTransactions(day));
+            EmployeeViewTransactionsDialog.this.ouputTextArea.setText(bank.getBankRequestManager().queryTransactions(bank, day));
         }
     }
 

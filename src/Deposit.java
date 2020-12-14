@@ -6,6 +6,6 @@ public class Deposit extends Transaction
     }
 
     public String toString(){
-        return "DEPOSIT" + super.toString();
+        return "DEPOSIT " + super.toString();
     }
 }

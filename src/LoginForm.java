@@ -124,7 +124,7 @@ public class LoginForm extends JFrame {
     private class CreateUserActionListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             System.out.println("Create a user selected");
-            new CreateUserDialog(bank,LoginForm.this).setVisible(true);
+            new CreateUserDialog(bank, usernameField.getText(), passwordField.getText(), LoginForm.this).setVisible(true);
         }
     }
 }

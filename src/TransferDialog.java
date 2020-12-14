@@ -115,16 +115,31 @@ public class TransferDialog extends JDialog {
     private class ConfirmTransactionActionListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
 
-            int senderIndex = TransferDialog.this.senderComboBox.getSelectedIndex();
-            int recevierIndex = TransferDialog.this.receiverComboBox.getSelectedIndex();
+            int senderIndex = senderComboBox.getSelectedIndex();
+            int recevierIndex = receiverComboBox.getSelectedIndex();
 
-            Transferable sender = TransferDialog.this.senderComboBox.getItemAt(senderIndex);
-            Transferable receiver = TransferDialog.this.receiverComboBox.getItemAt(recevierIndex);
+            if(senderIndex == recevierIndex){
+                JOptionPane.showMessageDialog(TransferDialog.this, "Transfer must be between two different accounts", "Transfer Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
 
-            System.out.println("TODO Transfer action");
+            Transferable sender = senderComboBox.getItemAt(senderIndex);
+            Transferable receiver = receiverComboBox.getItemAt(recevierIndex);
+            double money = (Double)amountSpinner.getValue();
+
+            System.out.println("Transfer action");
             System.out.println("\t" + sender);
             System.out.println("\t" + receiver);
+            System.out.println("\t" + money);
 
+            if(bank.getBankRequestManager().transfer(bank, sender, receiver, money)){
+                JOptionPane.showMessageDialog(TransferDialog.this, "Transfer completed: " + sender + " --> " + receiver + " " + money, "Delete Account", JOptionPane.INFORMATION_MESSAGE);
+                TransferDialog.this.dispose();
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(TransferDialog.this, "Transfer Failed", "Transfer Error", JOptionPane.ERROR_MESSAGE);
+            }
         }
     }
 

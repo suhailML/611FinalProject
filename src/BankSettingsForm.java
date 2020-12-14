@@ -91,23 +91,19 @@ public class BankSettingsForm extends JDialog {
                 Double loanInterestRate = Double.parseDouble(BankSettingsForm.this.loanInterestRateField.getText());
                 Double minSavingsForInterest = Double.parseDouble(BankSettingsForm.this.minSavingsForInterestField.getText());
 
-                //TODO update the bank settings
-
                 System.out.println("TODO - Save the bank settings: ");
                 System.out.println("\ttransactionFee " + transactionFee);
                 System.out.println("\tsavingsInterestRate " + savingsInterestRate);
                 System.out.println("\tloanInterestRate " + loanInterestRate);
                 System.out.println("\tminSavingsForInterest " + minSavingsForInterest);
 
-
-                /* TODO
-                if(bank.getBankRequestManager().saveBankSettings(Bank bank, Double transactionFee, Double savingsInterestRate, Double loanInterestRate, Double minSavingsForInterest){
+                if(bank.getBankRequestManager().saveBankSettings(bank, transactionFee, savingsInterestRate, loanInterestRate, minSavingsForInterest)){
                     JOptionPane.showMessageDialog(BankSettingsForm.this, "Bank settings saved", "Bank Settings", JOptionPane.INFORMATION_MESSAGE);
                 }
                 else{
                     JOptionPane.showMessageDialog(BankSettingsForm.this, "Bank settings failed to save.", "Bank Settings Error", JOptionPane.ERROR_MESSAGE);
                 }
-                */
+
 
                 BankSettingsForm.this.dispose();
 
