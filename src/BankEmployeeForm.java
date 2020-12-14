@@ -15,6 +15,8 @@ public class BankEmployeeForm extends JFrame {
 
     private JFrame parentFrame;
 
+    private JButton incrementDay;
+
     public BankEmployeeForm(Bank bank, Employee employee, JFrame parentFrame){
 
         this.parentFrame = parentFrame;
@@ -48,7 +50,7 @@ public class BankEmployeeForm extends JFrame {
         JButton editSettingsButton = new JButton("Edit Settings");
         JButton viewCustomerButton = new JButton("View Account");
         JButton viewTransactionsButton = new JButton("View Transactions");
-        JButton incrementDay = new JButton("Increment Day");
+        incrementDay = new JButton("Increment Day: " + bank.getSettings().getDay());
         JButton signoutButton = new JButton("Sign out");
 
         createEmployeeButton.addActionListener(new CreateEmployeeActionListener());
@@ -110,8 +112,8 @@ public class BankEmployeeForm extends JFrame {
 
                 BankEmployeeForm.this.setVisible(false);
 
-                //TODO Open the customer history form
                 new EmployeeViewCustomerForm(bank, customer, BankEmployeeForm.this).setVisible(true);
+
             }catch(ArrayIndexOutOfBoundsException arrayIndexOutOfBoundsException){
                 JOptionPane.showMessageDialog(null, "NO ACCOUNT SELECTED", "ERROR", JOptionPane.ERROR_MESSAGE);
             }
@@ -120,7 +122,6 @@ public class BankEmployeeForm extends JFrame {
 
     private class ViewTransactionsActionListener implements ActionListener{
         public void actionPerformed(ActionEvent e) {
-            // output to console
             System.out.println("Open transactions view");
 
             new EmployeeViewTransactionsDialog(BankEmployeeForm.this.bank, BankEmployeeForm.this);
@@ -129,9 +130,9 @@ public class BankEmployeeForm extends JFrame {
 
     private class IncrementDayActionListener implements ActionListener{
         public void actionPerformed(ActionEvent e) {
-
             bank.getBankRequestManager().incrementDay(bank);
             System.out.println(bank.getSettings().getDay());
+            incrementDay.setText("Increment Day: " + bank.getSettings().getDay());
         }
     }
 

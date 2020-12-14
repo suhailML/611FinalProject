@@ -140,7 +140,6 @@ public class AddAccountDialog extends JDialog {
 
             BankAccount account = bank.getBankRequestManager().createAccount( bank, customer, name, currency, accountType);
 
-            //TODO check if the account creation is successful
             if(account != null){
                 System.out.println(account);
                 JOptionPane.showMessageDialog(AddAccountDialog.this, "Created account: " + account, "Account Created", JOptionPane.INFORMATION_MESSAGE);

@@ -132,7 +132,6 @@ public class TransferDialog extends JDialog {
             System.out.println("\t" + receiver);
             System.out.println("\t" + money);
 
-
             if(bank.getBankRequestManager().transfer(bank, sender, receiver, money)){
                 JOptionPane.showMessageDialog(TransferDialog.this, "Transfer completed: " + sender + " --> " + receiver + " " + money, "Delete Account", JOptionPane.INFORMATION_MESSAGE);
                 TransferDialog.this.dispose();
