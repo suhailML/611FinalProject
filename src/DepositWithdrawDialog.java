@@ -64,10 +64,12 @@ public class DepositWithdrawDialog extends JDialog {
         infoPanel.add(dataPanel);
         infoPanel.add(valuePanel);
 
-        JButton confirmButton = new JButton("Confirm");
+        JButton depositButton = new JButton("Deposit");
+        JButton withdrawButton = new JButton("Withdraw");
         JButton cancelButton = new JButton("Cancel");
 
-        confirmButton.addActionListener(new ConfirmTransactionActionListener());
+        depositButton.addActionListener(new DepositActionListener());
+        withdrawButton.addActionListener(new WithdrawActionListener());
         cancelButton.addActionListener(new CancelButtonActionListener());
 
         amountSpinner = new JSpinner(new SpinnerNumberModel(0.0, 0.0, Double.MAX_VALUE, 100.0));
@@ -75,11 +77,12 @@ public class DepositWithdrawDialog extends JDialog {
         amountSpinner.setPreferredSize(new Dimension(200, 20));
 
         actionPanel.add(amountSpinner);
-        actionPanel.add(confirmButton);
+        actionPanel.add(depositButton);
+        actionPanel.add(withdrawButton);
         actionPanel.add(cancelButton);
 
 
-        setTitle("Add Account");
+        setTitle("Deposit or Withdraw");
         // set up the action selection buttons
 
         setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -100,33 +103,47 @@ public class DepositWithdrawDialog extends JDialog {
 
 
     /** Update the title to match the account type selected **/
-    private class ConfirmTransactionActionListener implements ActionListener {
+    private class DepositActionListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
 
-            int senderIndex = senderComboBox.getSelectedIndex();
-            int recevierIndex = receiverComboBox.getSelectedIndex();
 
-            if(senderIndex == recevierIndex){
-                JOptionPane.showMessageDialog(DepositWithdrawDialog.this, "Transfer must be between two different accounts", "Transfer Error", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-
-            Transferable sender = senderComboBox.getItemAt(senderIndex);
-            Transferable receiver = receiverComboBox.getItemAt(recevierIndex);
+            BankAccount account = (BankAccount)accountComboBox.getSelectedItem();
             double money = (Double)amountSpinner.getValue();
 
-            System.out.println("Transfer action");
-            System.out.println("\t" + sender);
-            System.out.println("\t" + receiver);
+            System.out.println("Deposit action");
+            System.out.println("\t" + account);
             System.out.println("\t" + money);
 
-            if(bank.getBankRequestManager().transfer(bank, sender, receiver, money)){
-                JOptionPane.showMessageDialog(DepositWithdrawDialog.this, "Transfer completed: " + sender + " --> " + receiver + " " + money, "Delete Account", JOptionPane.INFORMATION_MESSAGE);
+            if(bank.getBankRequestManager().deposit(bank, account, money)){
+                JOptionPane.showMessageDialog(DepositWithdrawDialog.this, "Deposit completed: " + account + " " + money, "Deposit", JOptionPane.INFORMATION_MESSAGE);
                 DepositWithdrawDialog.this.dispose();
             }
             else
             {
-                JOptionPane.showMessageDialog(DepositWithdrawDialog.this, "Transfer Failed", "Transfer Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(DepositWithdrawDialog.this, "Deposit Failed", "Deposit Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+
+    /** Update the title to match the account type selected **/
+    private class WithdrawActionListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+
+
+            BankAccount account = (BankAccount)accountComboBox.getSelectedItem();
+            double money = (Double)amountSpinner.getValue();
+
+            System.out.println("Withdraw action");
+            System.out.println("\t" + account);
+            System.out.println("\t" + money);
+
+            if(bank.getBankRequestManager().withdraw(bank, account, money)){
+                JOptionPane.showMessageDialog(DepositWithdrawDialog.this, "Withdraw completed: " + account + " " + money, "Withdraw", JOptionPane.INFORMATION_MESSAGE);
+                DepositWithdrawDialog.this.dispose();
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(DepositWithdrawDialog.this, "Withdraw Failed: Insufficient Funds", "Withdraw Error", JOptionPane.ERROR_MESSAGE);
             }
         }
     }
