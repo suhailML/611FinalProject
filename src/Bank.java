@@ -137,10 +137,11 @@ public class Bank implements Transferable
         return valid;
     }
 
-    public void incrementDay()
+    public String getName()
     {
-
+        return "Bank";
     }
+
 
     public Customer getCustomer(String username, String password)
     {
