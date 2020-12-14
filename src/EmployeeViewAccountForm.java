@@ -37,7 +37,7 @@ public class EmployeeViewAccountForm extends JDialog {
 
         panelOutput.add(outputJTextArea);
 
-        transactionJList = new JList(account.getTransactions().toArray());
+        transactionJList = new JList(account.getTransactionHistory().toArray());
 
         panelTransactions.add(new JLabel("Transaction Viewer"), BorderLayout.NORTH);
         panelTransactions.add(transactionJList, BorderLayout.CENTER);

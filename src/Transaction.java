@@ -4,6 +4,8 @@ public abstract class Transaction
     private double money;
     private int day;
 
+
+
     public Transaction(BankAccount account, double money, int day)
     {
         setAccount(account);

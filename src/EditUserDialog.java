@@ -3,15 +3,16 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class CreateUserDialog extends JDialog {
+public class EditUserDialog extends JDialog {
 
     private JTextField usernameField, passwordField, firstNameField, lastNameField;
 
     private Bank bank;
+    private Customer customer;
 
     private JFrame parentFrame;
 
-    public CreateUserDialog(Bank bank, JFrame parentFrame){
+    public EditUserDialog(Bank bank, Customer customer, JFrame parentFrame){
         this.parentFrame = parentFrame;
 
         this.bank = bank;
@@ -28,17 +29,19 @@ public class CreateUserDialog extends JDialog {
         JPanel labelPanel = new JPanel(labelPanelLayout);
         JPanel textFieldPanel = new JPanel(textFieldPanelLayout);
 
-        usernameField = new JTextField();
-        passwordField = new JTextField();
-        firstNameField = new JTextField();
-        lastNameField = new JTextField();
+        // fill in the existing customer data
+        usernameField = new JTextField(customer.getUsername());
+        passwordField = new JTextField(customer.getPassword());
+        firstNameField = new JTextField(customer.getFirstName());
+        lastNameField = new JTextField(customer.getLastName());
 
         usernameField.setPreferredSize(new Dimension(200, 24));
         passwordField.setPreferredSize(new Dimension(200, 24));
         firstNameField.setPreferredSize(new Dimension(200, 24));
         lastNameField.setPreferredSize(new Dimension(200, 24));
 
-
+        // disable the username
+        usernameField.setEnabled(false);
 
         labelPanel.add(new JLabel("Username"));
         textFieldPanel.add(usernameField);
@@ -67,7 +70,7 @@ public class CreateUserDialog extends JDialog {
         JButton confirmButton = new JButton("Confirm");
         JButton cancelButton = new JButton("Cancel");
 
-        confirmButton.addActionListener(new CreateUserActionListener());
+        confirmButton.addActionListener(new EditUserActionListener());
         cancelButton.addActionListener(new CancelActionListener());
 
         actionPanel.add(confirmButton);
@@ -84,38 +87,35 @@ public class CreateUserDialog extends JDialog {
 
 
     /** Update the title to match the account type selected **/
-    private class CreateUserActionListener implements ActionListener {
+    private class EditUserActionListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
 
-            String username = CreateUserDialog.this.usernameField.getText();
-            String password = CreateUserDialog.this.passwordField.getText();
-            String firstName = CreateUserDialog.this.firstNameField.getText();
-            String lastName = CreateUserDialog.this.lastNameField.getText();
+            String username = EditUserDialog.this.usernameField.getText();
+            String password = EditUserDialog.this.passwordField.getText();
+            String firstName = EditUserDialog.this.firstNameField.getText();
+            String lastName = EditUserDialog.this.lastNameField.getText();
+
 
             username = username.replaceAll("\\s", "-");
             password = password.replaceAll("\\s", "-");
             firstName = firstName.replaceAll("\\s", "-");
             lastName = lastName.replaceAll("\\s", "-");
 
-            System.out.println("TODO Create Customer!");
+            System.out.println("TODO EDIT Customer!");
 
             /* TODO
-            if(bank.getBankRequestManager().createCustomer(bank, username, password, firstName, lastName){
-                JOptionPane.showMessageDialog(BankSettingsForm.this, "Created user " + , "Bank Settings", JOptionPane.INFORMATION_MESSAGE);
-
-                //TODO how do we get the customer to add the account to?
-                new AddAccountDialog(bank,customer, CreateUserDialog.this.parentFrame).setVisible(true);
-
+            if(bank.getBankRequestManager().editCustomer(bank, customer, username, password, firstName, lastName){
+                JOptionPane.showMessageDialog(BankSettingsForm.this, "Edited user " + , "Edit User", JOptionPane.INFORMATION_MESSAGE);
             }
             else{
-                JOptionPane.showMessageDialog(BankSettingsForm.this, "User creation failed.", "User Creation Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(BankSettingsForm.this, "User Edit failed.", "User Edit Error", JOptionPane.ERROR_MESSAGE);
             }
             */
 
 
 
 
-            CreateUserDialog.this.dispose();
+            EditUserDialog.this.dispose();
         }
     }
 
@@ -124,7 +124,7 @@ public class CreateUserDialog extends JDialog {
     private class CancelActionListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             System.out.println("Cancel");
-            CreateUserDialog.this.dispose();
+            EditUserDialog.this.dispose();
         }
     }
 }

@@ -5,7 +5,7 @@ public class BuyOrder extends StockOrder
     
     BuyOrder(double money, String company, int shares)
     {
-        super(money);
+        //super(money);
         this.company = company;
         this.shares = shares;
     }

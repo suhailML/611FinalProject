@@ -1,7 +1,7 @@
 import java.util.Comparator;
 
 /**
- * CustomerMeanalueComparator
+ * CustomerMeanValueComparator
  * This comparator compares customers based on their mean account value. That is the sum of all accounts / the number of accounts.
  *
  * @author ejbosia

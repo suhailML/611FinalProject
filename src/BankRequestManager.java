@@ -46,6 +46,8 @@ public class BankRequestManager implements GUIRequests
         return valid;
     }
 
+<<<<<<< HEAD
+=======
     public boolean updateCustomer(Bank bank, Customer customer, String firstName, String lastName, String password)
     {
         customer.setFirstName(firstName);
@@ -53,6 +55,7 @@ public class BankRequestManager implements GUIRequests
         customer.setPassword(password);
         bank.getBankDB().updateCustomer(customer);
     }
+>>>>>>> main
 
     public boolean createEmployee(Bank bank, String username, String password, String firstName, String lastName)
     {
@@ -99,10 +102,15 @@ public class BankRequestManager implements GUIRequests
             case 1: 
             account = bankAccountFactory.createNewSavingsAccount(name, currency);
             break;
+
+            default:
+                return false;
         }
 
         customer.addAccount(account);
         bank.getBankDB().addAccount(account);
+
+        return true;
     }
 
     public boolean saveBankSettings(Bank bank, double transactionFee, double savingsInterestRate, double loanInterestRate, double minSavingsForInterest)
@@ -119,6 +127,8 @@ public class BankRequestManager implements GUIRequests
     {
         customer.deleteAccount(account);
         bank.getBankDB().deleteAccount(account);
+
+        return true;
     }
 
     public boolean withdraw(Bank bank, BankAccount account, double money)
@@ -150,6 +160,21 @@ public class BankRequestManager implements GUIRequests
         bank.getBankDB().addTransaction(transaction);
         valid = true;
         return valid;
+    }
+
+    @Override
+    public boolean transfer(Bank bank, BankAccount account, Transferable sender, Transferable receiver, double money) {
+        return false;
+    }
+
+    @Override
+    public boolean takeOutLoan(Bank bank, BankAccount account, Transferable lendee, Transferable lender, double money, String collateral) {
+        return false;
+    }
+
+    @Override
+    public boolean payBackLoan(Bank bank, BankAccount account, Transferable lendee, Transferable lender, double money, Loan loan) {
+        return false;
     }
 
 
@@ -191,9 +216,18 @@ public class BankRequestManager implements GUIRequests
 
         return false;
     }
+<<<<<<< HEAD
+    //public boolean transfer(Bank bank, BankAccount account, Transferable sender, Transferable receiver, double money)
+    public boolean transfer(Bank bank, Transferable sender, Transferable receiver, double money)
+    {
+        //Transaction transaction = transactionFactory.getTransfer(bank.getSettings().getDay(), money, account, sender, receiver);
+        Transaction transaction = transactionFactory.getTransfer(bank.getSettings().getDay(), money, null, sender, receiver);
+
+=======
 
     public boolean transfer(Bank bank, Transferable sender, Transferable receiver, double money)
     {
+>>>>>>> main
         double fee = bank.getSettings().getTransactionFee();
 
         if(sender.send(money + fee)) {
@@ -221,13 +255,13 @@ public class BankRequestManager implements GUIRequests
             else{
                 System.out.println("Transaction failed from receiver - return all money to sender");
                 sender.receive(money + fee);
+                return false;
             }
         }
         else{
             System.out.println("Transaction failed from sender - insufficient funds");
+            return false;
         }
-
-        return true;
     }
 
     public boolean incrementDay(Bank bank)
