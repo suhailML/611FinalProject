@@ -106,6 +106,7 @@ public class UserForm extends JFrame {
             //TODO Create account form
             System.out.println("Edit User");
             new EditUserDialog(UserForm.this.bank, UserForm.this.customer, UserForm.this).setVisible(true);
+            accountJList.updateUI();
         }
     }
 
@@ -115,6 +116,7 @@ public class UserForm extends JFrame {
             //TODO Create account form
             System.out.println("Add Account");
             new AddAccountDialog(UserForm.this.bank, UserForm.this.customer, UserForm.this).setVisible(true);
+            accountJList.updateUI();
         }
     }
 
@@ -177,6 +179,7 @@ public class UserForm extends JFrame {
         public void actionPerformed(ActionEvent e) {
             System.out.println("OPEN TRANSFER DIALOG");
             new TransferDialog(UserForm.this.bank, UserForm.this.customer, UserForm.this).setVisible(true);
+
         }
     }
 

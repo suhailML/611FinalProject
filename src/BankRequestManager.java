@@ -219,7 +219,7 @@ public class BankRequestManager implements GUIRequests
                 }
                 if (receiver instanceof BankAccount)
                 {
-                    Transaction transaction = transactionFactory.getTransfer(bank.getSettings().getDay(), money, (BankAccount) sender, sender, receiver);
+                    Transaction transaction = transactionFactory.getTransfer(bank.getSettings().getDay(), money, (BankAccount) receiver, sender, receiver);
                     ((BankAccount) receiver).addTransaction(transaction);
                     bank.getBankDB().addTransaction(transaction);
                 }

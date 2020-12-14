@@ -99,15 +99,12 @@ public class CreateUserDialog extends JDialog {
 
             System.out.println("TODO Create Customer!");
 
-
             Customer customer = bank.getBankRequestManager().createCustomer(bank, username, password, firstName, lastName);
 
             if(customer != null){
                 JOptionPane.showMessageDialog(CreateUserDialog.this, "Created user " + customer, "Customer Create", JOptionPane.INFORMATION_MESSAGE);
 
-                //TODO how do we get the customer to add the account to?
                 new AddAccountDialog(bank,customer, CreateUserDialog.this.parentFrame).setVisible(true);
-
             }
             else{
                 JOptionPane.showMessageDialog(CreateUserDialog.this, "User creation failed.", "User Creation Error", JOptionPane.ERROR_MESSAGE);
