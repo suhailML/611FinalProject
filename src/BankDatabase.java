@@ -88,6 +88,20 @@ public class BankDatabase  {
         }
     }
 
+    public void updateCredentials(String userName, String password, String firstName, String lastName, String userId, String userType)
+    {    
+        if (userType.equals("customer"))
+        {
+            ParseFile.deleteLine(customerCredentials, userId);
+            ParseFile.addLine(customerCredentials, userName + "\t" + password + "\t" + firstName + "\t" + lastName + "\t" + userId);
+        }
+        else if (userType.equals("employee"))
+        {
+            ParseFile.deleteLine(employeeCredentials, userId);
+            ParseFile.addLine(employeeCredentials, userName + "\t" + password + "\t" + firstName + "\t" + lastName + "\t" + userId);
+        }
+    }
+
     public void addLoan(String accountID, String lender, String lendeeID, String loanID, String initialValue, String presentValue, String interestRate, String collateral)
     {
         ParseFile.addLine(loans + accountID + ".txt", lender + "," + lendeeID + "," + loanID + "," + initialValue + "," + presentValue + "," + interestRate + "," + collateral);
@@ -97,6 +111,11 @@ public class BankDatabase  {
     {
         ParseFile.deleteLine(loans + accountID + ".txt", loanID);
         ParseFile.addLine(loans + accountID + ".txt", lender + "," + lendeeID + "," + loanID + "," + initialValue + "," + presentValue + "," + interestRate + "," + collateral);
+    }
+
+    public void deleteLoan(String loanID, String accountID)
+    {
+        ParseFile.deleteLine(loans + accountID + ".txt", loanID);
     }
 
     public void deleteAccount(String userID, String accountID)
@@ -120,6 +139,12 @@ public class BankDatabase  {
     public void addAccount(String userID, String accountID, String name, String currencyType, String balance)
     {
         ParseFile.addLine(userIdToAccountIDs + userID + ".txt", accountID);
+        ParseFile.addLine(accountIDsInfoFile, accountID + "\t" + name + "\t" + currencyType + "\t" + balance);
+    }
+
+    public void updateAccount(String accountID, String name, String currencyType, String balance)
+    {
+        ParseFile.deleteLine(accountIDsInfoFile, accountID);
         ParseFile.addLine(accountIDsInfoFile, accountID + "\t" + name + "\t" + currencyType + "\t" + balance);
     }
 
@@ -153,6 +178,5 @@ public class BankDatabase  {
     public ArrayList<List<String>> getAllEmployeeCredentials()
     {
         return ParseFile.parseRows(employeeCredentials);
-    }  
-
+    }
 }
