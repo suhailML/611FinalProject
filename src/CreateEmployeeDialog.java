@@ -3,6 +3,13 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * CreateEmployeeDialog
+ * Allows the bank employee to create another employee in the system.
+ *
+ * @author ejbosia
+ */
+
 public class CreateEmployeeDialog extends JDialog {
 
     private JTextField usernameField, passwordField, firstNameField, lastNameField;
@@ -92,12 +99,10 @@ public class CreateEmployeeDialog extends JDialog {
             String firstName = CreateEmployeeDialog.this.firstNameField.getText();
             String lastName = CreateEmployeeDialog.this.lastNameField.getText();
 
-
             username = username.replaceAll("\\s", "-");
             password = password.replaceAll("\\s", "-");
             firstName = firstName.replaceAll("\\s", "-");
             lastName = lastName.replaceAll("\\s", "-");
-
 
             System.out.println("TODO Create Employee!");
 
