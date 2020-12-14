@@ -6,11 +6,7 @@ public abstract class BankAccount implements Transferable
     private String accountID;
     private String currencyType;
     private double balance;
-    //TODO remove this
-    private LinkedList<Transaction> transactions;
-
-    //TODO implement this
-    //private TransactionHistory history;
+    private TransactionHistory transactionHistory;
     private Customer customer;
 
     /*
@@ -18,13 +14,13 @@ public abstract class BankAccount implements Transferable
     */
     public BankAccount(){}
 
-    public BankAccount(String name, String accountID, String currencyType, double balance, LinkedList<Transaction> transactions)
+    public BankAccount(String name, String accountID, String currencyType, double balance, TransactionHistory transactionHistory)
     {
         setName(name);
         setAccountID(accountID);
         setCurrencyType(currencyType);
         setBalance(balance);
-        setTransactions(transactions);
+        setTransactionHistory(transactionHistory);
     }
 
     public BankAccount(String name, String accountID, String currencyType)
@@ -33,7 +29,7 @@ public abstract class BankAccount implements Transferable
         setAccountID(accountID);
         setCurrencyType(currencyType);
         setBalance(0);
-        setTransactions(new LinkedList<Transaction>());
+        setTransactionHistory(new TransactionHistory());
     }
 
     /*
@@ -59,9 +55,9 @@ public abstract class BankAccount implements Transferable
         this.balance = balance;
     }
 
-    public void setTransactions(LinkedList<Transaction> transactions)
+    public void setTransactionHistory(TransactionHistory transactionHistory)
     {
-        this.transactions = transactions;
+        this.transactionHistory = transactionHistory;
     }
 
     /*
@@ -87,9 +83,9 @@ public abstract class BankAccount implements Transferable
         return balance;
     }
 
-    public LinkedList<Transaction> getTransactions()
+    public TransactionHistory getTransactionHistory()
     {
-        return transactions;
+        return transactionHistory;
     }
 
     /*
@@ -98,7 +94,7 @@ public abstract class BankAccount implements Transferable
 
     public boolean addTransaction(Transaction transaction)
     {
-        getTransactions().add(transaction);
+        getTransactionHistory().addTransaction(transaction);
         return true;
     }
 

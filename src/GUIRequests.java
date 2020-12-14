@@ -9,7 +9,7 @@ public interface GUIRequests
     public boolean takeOutLoan(Bank bank, Transferable lendee, Transferable lender, double money, String collateral);
     public boolean payBackLoan(Bank bank, Transferable lendee, Transferable lender, double money, Loan loan);
     public boolean createCustomer(Bank bank, String username, String password, String firstName, String lastName);
-    public Customer checkUserLogin(Bank bank, String username, String password);
+    public Customer checkCustomerLogin(Bank bank, String username, String password);
     public Employee checkEmployeeLogin(Bank bank, String username, String password);
     public boolean createAccount(Bank bank, Customer customer, String name, String currency, int accountType);
     public boolean deleteAccount(Bank bank, Customer customer, BankAccount account);

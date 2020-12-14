@@ -182,9 +182,9 @@ public class BankRequestManager implements GUIRequests
         return false;
     }
 
-    public boolean transfer(Bank bank, Transferable sender, Transferable receiver, double money)
+    public boolean transfer(Bank bank, BankAccount account, Transferable sender, Transferable receiver, double money)
     {
-        Transaction transaction = transactionFactory.getTransfer(bank.getSettings().getDay(), money, sender, receiver);
+        Transaction transaction = transactionFactory.getTransfer(bank.getSettings().getDay(), money, account, sender, receiver);
 
         double fee = bank.getSettings().getTransactionFee();
 
