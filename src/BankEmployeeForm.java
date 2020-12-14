@@ -2,8 +2,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.LinkedList;
+
+/**
+ * BankEmployeeForm
+ * This form allows the Bank Employee to access different functions to control the bank.
+ *
+ * @author ejbosia
+ */
 
 public class BankEmployeeForm extends JFrame {
 
@@ -36,8 +41,7 @@ public class BankEmployeeForm extends JFrame {
         JPanel panelAccounts = new JPanel(new BorderLayout());
         JPanel panelActions = new JPanel(layout);
 
-
-        outputJTextArea = new JTextArea(employee.toString());
+        outputJTextArea = new JTextArea(employee.getFullOutput());
         outputJTextArea.setEnabled(false);
         panelOutput.add(outputJTextArea);
 
