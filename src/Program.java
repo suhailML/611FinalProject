@@ -38,12 +38,18 @@ public class Program
             List<BankAccount> accounts = new ArrayList<BankAccount>();
             for (String accountID : accountIDs)
             {
-                List<String> accountCredential = db.getAccount(accountID);
-                List<String> allTransactionInfo = db.getTransactionHistory(accountID);
+                List<String> accountCredential = db.getAccountInfo(accountID);
+                ArrayList<List<String>> allTransactionInfo = db.getTransactionHistory(accountID);
 
-                for (String transactionInfo : allTransactionInfo)
+                for (List<String> transactionInfo : allTransactionInfo)
                 {
-                    
+                    Transaction transaction;
+                    switch(transactionInfo.get(0).toUpperCase())
+                    {
+                        case "WITHDRAW":
+                            transaction = transactionFactory.getWithdraw(transactionInfo.get(3), transactionInfo.get(2), transaction) 
+                    }
+
                 }
 
 
