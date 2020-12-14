@@ -1,12 +1,12 @@
-public class SellAction extends StockOrder {
+public class SellOrder extends StockOrder {
     
-    SellAction(double money, String company, int shares)
+    SellOrder(BankAccount account, double money, String company, int shares, int day)
     {
-        super(money, company, shares);
+        super(account, money, company, shares, day);
     }
 
     public String toString()
     {
-        return "SELL: " + "Sold " + Integer.toString(this.shares) + " shares for " + Double.toString(this.money) + " dollars at the company, " + this.company;
+        return "SELL: " + "Sold " + getShares() + " shares for " + getMoney() + " dollars at the company, " + getCompany();
     }
 }

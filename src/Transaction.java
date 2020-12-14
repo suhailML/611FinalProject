@@ -36,7 +36,7 @@ public abstract class Transaction
     ACCESSORS
     */
 
-    public Transferable getAccount()
+    public BankAccount getAccount()
     {
         return account;
     }
@@ -51,9 +51,9 @@ public abstract class Transaction
         return day;
     }
 
-    /*
+
     public String toString(){
-        return sender.getName() + " --> " + receiver.getName() + " : " + money;
+        return account.getCurrencyType() + money + " - " + account.getName() + " DAY: " + day;
     }
-    */
+
 }

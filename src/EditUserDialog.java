@@ -103,14 +103,14 @@ public class EditUserDialog extends JDialog {
 
             System.out.println("TODO EDIT Customer!");
 
-            /* TODO
-            if(bank.getBankRequestManager().editCustomer(bank, customer, username, password, firstName, lastName){
-                JOptionPane.showMessageDialog(BankSettingsForm.this, "Edited user " + , "Edit User", JOptionPane.INFORMATION_MESSAGE);
+
+            if(bank.getBankRequestManager().updateCustomer(bank, customer, password, firstName, lastName)){
+                JOptionPane.showMessageDialog(EditUserDialog.this, "Edited user " + customer.getFirstName() + " " + customer.getLastName(), "Edit User", JOptionPane.INFORMATION_MESSAGE);
             }
             else{
-                JOptionPane.showMessageDialog(BankSettingsForm.this, "User Edit failed.", "User Edit Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(EditUserDialog.this, "User Edit failed.", "User Edit Error", JOptionPane.ERROR_MESSAGE);
             }
-            */
+
 
 
 

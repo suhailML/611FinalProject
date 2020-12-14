@@ -5,10 +5,10 @@ public interface GUIRequests
     public boolean transfer(Bank bank, Transferable sender, Transferable receiver, double money);
     public boolean takeOutLoan(Bank bank, Transferable lendee, Transferable lender, double money, String collateral);
     public boolean payBackLoan(Bank bank, Transferable lendee, Transferable lender, double money, Loan loan);
-    public boolean createCustomer(Bank bank, String username, String password, String firstName, String lastName);
+    public Customer createCustomer(Bank bank, String username, String password, String firstName, String lastName);
     public Customer checkCustomerLogin(Bank bank, String username, String password);
     public Employee checkEmployeeLogin(Bank bank, String username, String password);
-    public boolean createAccount(Bank bank, Customer customer, String name, String currency, int accountType);
+    public BankAccount createAccount(Bank bank, Customer customer, String name, String currency, int accountType);
     public boolean deleteAccount(Bank bank, Customer customer, BankAccount account);
     public boolean saveBankSettings(Bank bank, double transactionFee, double savingsInterestRate, double loanInterestRate, double minSavingsForInterest);
     public boolean updateCustomer(Bank bank, Customer customer, String firstName, String lastName, String password);

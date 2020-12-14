@@ -2,8 +2,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.LinkedList;
+
+/**
+ * BankEmployeeForm
+ * This form allows the Bank Employee to access different functions to control the bank.
+ *
+ * @author ejbosia
+ */
 
 public class BankEmployeeForm extends JFrame {
 
@@ -14,6 +19,8 @@ public class BankEmployeeForm extends JFrame {
     private JTextArea outputJTextArea;
 
     private JFrame parentFrame;
+
+    private JButton incrementDay;
 
     public BankEmployeeForm(Bank bank, Employee employee, JFrame parentFrame){
 
@@ -28,14 +35,13 @@ public class BankEmployeeForm extends JFrame {
         frameLayout.setHgap(10);
         setLayout(frameLayout);
 
-        GridLayout layout = new GridLayout(5,1, 10, 10);
+        GridLayout layout = new GridLayout(6,1, 10, 10);
 
         JPanel panelOutput = new JPanel(new GridLayout(1,1));
         JPanel panelAccounts = new JPanel(new BorderLayout());
         JPanel panelActions = new JPanel(layout);
 
-
-        outputJTextArea = new JTextArea(employee.toString());
+        outputJTextArea = new JTextArea(employee.getFullOutput());
         outputJTextArea.setEnabled(false);
         panelOutput.add(outputJTextArea);
 
@@ -48,18 +54,21 @@ public class BankEmployeeForm extends JFrame {
         JButton editSettingsButton = new JButton("Edit Settings");
         JButton viewCustomerButton = new JButton("View Account");
         JButton viewTransactionsButton = new JButton("View Transactions");
+        incrementDay = new JButton("Increment Day: " + bank.getSettings().getDay());
         JButton signoutButton = new JButton("Sign out");
 
         createEmployeeButton.addActionListener(new CreateEmployeeActionListener());
         editSettingsButton.addActionListener(new EditSettingsActionListener());
         viewCustomerButton.addActionListener(new ViewCustomerActionListener());
         viewTransactionsButton.addActionListener((new ViewTransactionsActionListener()));
+        incrementDay.addActionListener(new IncrementDayActionListener());
         signoutButton.addActionListener(new SignoutActionListener());
 
         panelActions.add(createEmployeeButton);
         panelActions.add(editSettingsButton);
         panelActions.add(viewCustomerButton);
         panelActions.add(viewTransactionsButton);
+        panelActions.add(incrementDay);
         panelActions.add(signoutButton);
 
         add(panelOutput);//adding button on frame
@@ -71,6 +80,11 @@ public class BankEmployeeForm extends JFrame {
         //setLayout(null);
         setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE);
         setVisible(true);
+    }
+
+    /** Color accounts that have < X balance **/
+    private void colorBadAccounts(){
+
     }
 
 
@@ -102,8 +116,8 @@ public class BankEmployeeForm extends JFrame {
 
                 BankEmployeeForm.this.setVisible(false);
 
-                //TODO Open the customer history form
                 new EmployeeViewCustomerForm(bank, customer, BankEmployeeForm.this).setVisible(true);
+
             }catch(ArrayIndexOutOfBoundsException arrayIndexOutOfBoundsException){
                 JOptionPane.showMessageDialog(null, "NO ACCOUNT SELECTED", "ERROR", JOptionPane.ERROR_MESSAGE);
             }
@@ -112,10 +126,17 @@ public class BankEmployeeForm extends JFrame {
 
     private class ViewTransactionsActionListener implements ActionListener{
         public void actionPerformed(ActionEvent e) {
-            // output to console
             System.out.println("Open transactions view");
 
             new EmployeeViewTransactionsDialog(BankEmployeeForm.this.bank, BankEmployeeForm.this);
+        }
+    }
+
+    private class IncrementDayActionListener implements ActionListener{
+        public void actionPerformed(ActionEvent e) {
+            bank.getBankRequestManager().incrementDay(bank);
+            System.out.println(bank.getSettings().getDay());
+            incrementDay.setText("Increment Day: " + bank.getSettings().getDay());
         }
     }
 
