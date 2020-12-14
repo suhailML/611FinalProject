@@ -137,6 +137,12 @@ public class Bank implements Transferable
         return valid;
     }
 
+    public String getName()
+    {
+        return "Bank";
+    }
+
+
     public Customer getCustomer(String username, String password)
     {
         Customer customer = null;

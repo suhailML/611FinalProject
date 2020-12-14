@@ -260,6 +260,8 @@ public class BankRequestManager implements GUIRequests
                 }
             }
         }
+
+        return true;
     }
 
     public String queryTransactions(Bank bank, int day)

@@ -1,38 +1,45 @@
 public class Transfer extends Transaction
 {
-    private Transferable sender;
-    private Transferable receiver;
+    private String senderName;
+    private String receiverName;
 
     public Transfer(BankAccount account, double money, int day, Transferable sender, Transferable receiver)
     {
         super(account, money, day);
-        setSender(sender);
-        setReceiver(receiver);
+        setSender(sender.getName());
+        setReceiver(receiver.getName());
+    }
+
+    public Transfer (BankAccount account, double money, int day, String senderName, String receiverName)
+    {
+        super(account, money, day);
+        setSender(senderName);
+        setReceiver(receiverName);
     }
 
     /*
     SETTERS
     */
-    public void setSender(Transferable sender)
+    public void setSender(String senderName)
     {
-        this.sender = sender;
+        this.senderName = senderName;
     }
 
-    public void setReceiver(Transferable receiver)
+    public void setReceiver(String receiverName)
     {
-        this.receiver = receiver;
+        this.receiverName = receiverName;
     }
 
     /*
     ACCESSORS
     */
-    public Transferable getSender()
+    public String getSender()
     {
-        return sender;
+        return senderName;
     }
 
-    public Transferable getReceiver()
+    public String getReceiver()
     {
-        return receiver;
+        return receiverName;
     }
 }
