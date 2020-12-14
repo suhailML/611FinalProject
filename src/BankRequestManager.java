@@ -170,7 +170,6 @@ public class BankRequestManager implements GUIRequests
     /** Take a loan from the lender to the lendee **/
     public boolean takeOutLoan(Bank bank, Transferable lender, Transferable lendee, double money, String collateral)
     {
-        BankSettings settings = bank.getSettings();
         Loan loan = loanFactory.createNewLoan(bank, lendee, money, bank.getSettings().getLoanInterestRate(), collateral);
 
         // if the loan transfer is successful from lender to lendee, add it to the database
@@ -206,11 +205,12 @@ public class BankRequestManager implements GUIRequests
 
     public boolean transfer(Bank bank, Transferable sender, Transferable receiver, double money)
     {
-        double fee = bank.getSettings().getTransactionFee();
+        BankSettings settings = bank.getSettings();
+        double fee = settings.getTransactionFee();
 
         if(sender.send(money + fee)) {
-            money -= bank.getSettings().getTransactionFee();
-            bank.addToReserves(bank.getSettings().getTransactionFee());
+            money -= settings.getTransactionFee();
+            bank.addToReserves(settings.getTransactionFee());
 
             // if the receiver was able to receive the money, update the database
             if(receiver.receive(money)) {
