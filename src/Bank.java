@@ -7,7 +7,7 @@ public class Bank implements Transferable
     private double reserves;
     private BankSettings settings;
     private BankRequestManager bankRequestManager;
-    private BankDB db;
+    private BankDatabase db;
 
     /*
     CONSTRUCTORS
@@ -16,10 +16,10 @@ public class Bank implements Transferable
     {
         setCustomers(new ArrayList<Customer>());
         setEmployees(new ArrayList<Employee>());
-        setReserves(1000000);
+        setReserves(0);
         setSettings(new BankSettings());
         setBankRequestManager(BankRequestManager.getSingleInstance());
-        setBankDB(BankDB.getSingleInstance());
+        setBankDB(BankDatabase.getSingleInstance());
     }
 
     public Bank(ArrayList<Customer> customers, ArrayList<Employee> employees, double reserves, BankSettings settings)
@@ -29,7 +29,7 @@ public class Bank implements Transferable
         setReserves(reserves);
         setSettings(settings);
         setBankRequestManager(BankRequestManager.getSingleInstance());
-        setBankDB(BankDB.getSingleInstance());
+        setBankDB(BankDatabase.getSingleInstance());
     }
 
     /*
@@ -60,7 +60,7 @@ public class Bank implements Transferable
         this.bankRequestManager = bankRequestManager;
     }
 
-    public void setBankDB(BankDB db)
+    public void setBankDB(BankDatabase db)
     {
         this.db = db;
     }
@@ -93,7 +93,7 @@ public class Bank implements Transferable
         return bankRequestManager;
     }
 
-    public BankDB getBankDB()
+    public BankDatabase getBankDB()
     {
         return db;
     }
@@ -135,11 +135,6 @@ public class Bank implements Transferable
         addToReserves(money);
         valid = true;
         return valid;
-    }
-
-    public void incrementDay()
-    {
-
     }
 
     public Customer getCustomer(String username, String password)

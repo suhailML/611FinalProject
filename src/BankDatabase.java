@@ -15,6 +15,19 @@ public class BankDatabase  {
     private String accountIDsInfo = bankDB + "accountIDsInfo/";
     private String accountIDsInfoFile = bankDB + accountIDsInfo + "accountIds.txt";
 
+    private static BankDatabase singleInstance;
+
+    private BankDatabase(){}
+
+    public static BankDatabase getSingleInstance()
+    {
+        if (singleInstance == null)
+        {
+            singleInstance = new BankDatabase();
+        }
+        return singleInstance;
+    }
+
     public ArrayList<List<String>> getLoans(String userID)
     {
         ArrayList<List<String>> parsedLoans = ParseFile.parseRows(loans + userID + ".txt");
