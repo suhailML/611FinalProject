@@ -31,14 +31,19 @@ public class UserForm extends JFrame {
 
         GridLayout actionsLayout = new GridLayout(6,1,10,10);
 
-        JPanel panelOutput = new JPanel(new GridLayout(1,1));
-        JPanel panelAccounts = new JPanel(new BorderLayout());
+        JPanel panelOutput = new JPanel(new BorderLayout(0,5));
+        JPanel panelAccounts = new JPanel(new BorderLayout(0, 5));
         JPanel panelActions = new JPanel(actionsLayout);
 
 
         outputJTextArea = new JTextArea(customer.toString());
         outputJTextArea.setEnabled(false);
-        panelOutput.add(outputJTextArea);
+
+        JButton editUserButton = new JButton("Edit User");
+        editUserButton.addActionListener(new EditUserActionListener());
+
+        panelOutput.add(outputJTextArea, BorderLayout.CENTER);
+        panelOutput.add(editUserButton, BorderLayout.SOUTH);
 
         accountJList = new JList(customer.getAccounts().toArray());
 
@@ -94,6 +99,14 @@ public class UserForm extends JFrame {
         accounts.add(new SavingsAccount("First Savings Account","A","$"));
 
         this.customer.setAccounts(accounts);
+    }
+
+    private class EditUserActionListener implements ActionListener{
+        public void actionPerformed(ActionEvent e) {
+            //TODO Create account form
+            System.out.println("Edit User");
+            new EditUserDialog(UserForm.this.bank, UserForm.this.customer, UserForm.this).setVisible(true);
+        }
     }
 
     /** Open the window to add an account **/
