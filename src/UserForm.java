@@ -29,8 +29,6 @@ public class UserForm extends JFrame {
 
         System.out.println("OPEN CUSTOMER " + customer);
 
-        debugInit();
-
         GridLayout frameLayout = new GridLayout(1,3);
         frameLayout.setHgap(10);
         setLayout(frameLayout);
@@ -103,17 +101,6 @@ public class UserForm extends JFrame {
         setVisible(true);
     }
 
-
-    private void debugInit(){
-
-        ArrayList<BankAccount> accounts = new ArrayList<>();
-
-        CheckingAccount test = new CheckingAccount("First Checking Account","A","$");
-        accounts.add(test);
-        accounts.add(new SavingsAccount("First Savings Account","A","$"));
-
-        this.customer.setAccounts(accounts);
-    }
 
     private void updateAccountJList(){
         accountJList.setListData(customer.getAccounts().toArray(new BankAccount[0]));

@@ -69,13 +69,14 @@ public class Program
                 transactionHistory.setTransactions(transactions);
 
                 BankAccount account = null;
-                if (accountCredential.get(3).equalsIgnoreCase("CHECKING"))
+                if (accountCredential.get(4).equalsIgnoreCase("CHECKING"))
                 {
-                    account = bankAccountFactory.createExistingCheckingAccount(accountCredential.get(0), accountID, accountCredential.get(1), Double.parseDouble(accountCredential.get(2)), transactionHistory);
+                    //accountID/name/currencyType/money/Type
+                    account = bankAccountFactory.createExistingCheckingAccount(accountCredential.get(1), accountCredential.get(0), accountCredential.get(2), Double.parseDouble(accountCredential.get(3)), transactionHistory);
                 }
-                else if (accountCredential.get(3).equalsIgnoreCase("SAVINGS"))
+                else if (accountCredential.get(4).equalsIgnoreCase("SAVINGS"))
                 {
-                    account = bankAccountFactory.createExistingSavingsAccount(accountCredential.get(0), accountID, accountCredential.get(1), Double.parseDouble(accountCredential.get(2)), transactionHistory);
+                    account = bankAccountFactory.createExistingSavingsAccount(accountCredential.get(1), accountCredential.get(0), accountCredential.get(2), Double.parseDouble(accountCredential.get(3)), transactionHistory);
                 }
 
                 accounts.add(account);
