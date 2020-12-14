@@ -52,6 +52,7 @@ public class ParseFile {
         {
             if (file.createNewFile())
             {
+                Files.write(Paths.get(fileLocation),"".getBytes());
                 Files.write(Paths.get(fileLocation), line.getBytes(), StandardOpenOption.APPEND);
             }
             else
