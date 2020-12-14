@@ -96,6 +96,11 @@ public class EditUserDialog extends JDialog {
             String lastName = EditUserDialog.this.lastNameField.getText();
 
 
+            username = username.replaceAll("\\s", "-");
+            password = password.replaceAll("\\s", "-");
+            firstName = firstName.replaceAll("\\s", "-");
+            lastName = lastName.replaceAll("\\s", "-");
+
             System.out.println("TODO EDIT Customer!");
 
             /* TODO

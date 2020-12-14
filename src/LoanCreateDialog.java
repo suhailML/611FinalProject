@@ -111,6 +111,9 @@ public class LoanCreateDialog extends JDialog {
 
             String collateral = collateralField.getText();
 
+            // remove spaces from collateral and replace with '-'
+            collateral = collateral.replaceAll("\\s", "-");
+
             System.out.println("Create LOAN action");
             System.out.println("\t" + lendee);
             System.out.println("\t" + money);

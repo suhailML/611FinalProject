@@ -3,7 +3,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class CreateUserDialog extends JDialog {
+public class CreateEmployeeDialog extends JDialog {
 
     private JTextField usernameField, passwordField, firstNameField, lastNameField;
 
@@ -11,7 +11,7 @@ public class CreateUserDialog extends JDialog {
 
     private JFrame parentFrame;
 
-    public CreateUserDialog(Bank bank, JFrame parentFrame){
+    public CreateEmployeeDialog(Bank bank, JFrame parentFrame){
         this.parentFrame = parentFrame;
 
         this.bank = bank;
@@ -74,7 +74,7 @@ public class CreateUserDialog extends JDialog {
         actionPanel.add(cancelButton);
 
 
-        setTitle("Create User");
+        setTitle("Create Employee");
         // set up the action selection buttons
 
         setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -87,35 +87,32 @@ public class CreateUserDialog extends JDialog {
     private class CreateUserActionListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
 
-            String username = CreateUserDialog.this.usernameField.getText();
-            String password = CreateUserDialog.this.passwordField.getText();
-            String firstName = CreateUserDialog.this.firstNameField.getText();
-            String lastName = CreateUserDialog.this.lastNameField.getText();
+            String username = CreateEmployeeDialog.this.usernameField.getText();
+            String password = CreateEmployeeDialog.this.passwordField.getText();
+            String firstName = CreateEmployeeDialog.this.firstNameField.getText();
+            String lastName = CreateEmployeeDialog.this.lastNameField.getText();
+
 
             username = username.replaceAll("\\s", "-");
             password = password.replaceAll("\\s", "-");
             firstName = firstName.replaceAll("\\s", "-");
             lastName = lastName.replaceAll("\\s", "-");
 
-            System.out.println("TODO Create Customer!");
 
-            /* TODO
-            if(bank.getBankRequestManager().createCustomer(bank, username, password, firstName, lastName){
-                JOptionPane.showMessageDialog(BankSettingsForm.this, "Created user " + , "Bank Settings", JOptionPane.INFORMATION_MESSAGE);
+            System.out.println("TODO Create Employee!");
 
-                //TODO how do we get the customer to add the account to?
-                new AddAccountDialog(bank,customer, CreateUserDialog.this.parentFrame).setVisible(true);
-
+            if(bank.getBankRequestManager().createEmployee(bank, username, password, firstName, lastName)){
+                JOptionPane.showMessageDialog(CreateEmployeeDialog.this, "Created employee " + firstName + " " + lastName, "Employee Created", JOptionPane.INFORMATION_MESSAGE);
             }
             else{
-                JOptionPane.showMessageDialog(BankSettingsForm.this, "User creation failed.", "User Creation Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(CreateEmployeeDialog.this, "Employee creation failed.", "Employee Creation Error", JOptionPane.ERROR_MESSAGE);
             }
-            */
 
 
 
 
-            CreateUserDialog.this.dispose();
+
+            CreateEmployeeDialog.this.dispose();
         }
     }
 
@@ -124,7 +121,7 @@ public class CreateUserDialog extends JDialog {
     private class CancelActionListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             System.out.println("Cancel");
-            CreateUserDialog.this.dispose();
+            CreateEmployeeDialog.this.dispose();
         }
     }
 }
