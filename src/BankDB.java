@@ -36,11 +36,19 @@ public class BankDB {
     }
 
 
+    public void updateCustomer(Customer customer){
+        System.out.println("DUMMY UPDATE CUSTOMER");
+    }
+
     public void addEmployee(Employee employee){
         System.out.println("DUMMY ADD" + employee);
     }
 
     public void addLoan(Loan loan){
         System.out.println("DUMMY UPDATE " + loan);
+    }
+
+    public void updateBankSettings(BankSettings settings){
+        System.out.println("DUMMY UPDATE " + settings);
     }
 }

@@ -9,4 +9,12 @@ public class Employee extends User implements EmployeeActions
     {
         super(username, password, userID, firstName, lastName);
     }
+
+    public String getFullOutput(){
+        String output = "First Name: " + getFirstName() + "\n";
+        output += "Last Name: " + getLastName() + "\n";
+        output += "Username: " + getUsername() + "\n";
+        output += "Password: " + getPassword() + "\n";
+        return output;
+    }
 }

@@ -25,7 +25,7 @@ public class BankRequestManager implements GUIRequests
         return singleInstance;
     }
 
-    public boolean createCustomer(Bank bank, String username, String password, String firstName, String lastName)
+    public Customer createCustomer(Bank bank, String username, String password, String firstName, String lastName)
     {
         boolean valid = false;
 
@@ -34,16 +34,15 @@ public class BankRequestManager implements GUIRequests
         {
             if (customers.get(i).getUsername().equals(username))
             {
-                return valid;
+                return null;
             }
         }
-        valid = true;
 
         Customer customer = userFactory.createNewCustomer(username, password, firstName, lastName);
         bank.addCustomer(customer);
         bank.getBankDB().addCustomer(customer);
 
-        return valid;
+        return customer;
     }
 
     public boolean updateCustomer(Bank bank, Customer customer, String firstName, String lastName, String password)
@@ -52,6 +51,7 @@ public class BankRequestManager implements GUIRequests
         customer.setLastName(lastName);
         customer.setPassword(password);
         bank.getBankDB().updateCustomer(customer);
+        return true;
     }
 
     public boolean createEmployee(Bank bank, String username, String password, String firstName, String lastName)
@@ -87,7 +87,7 @@ public class BankRequestManager implements GUIRequests
         return employee;
     }
 
-    public boolean createAccount(Bank bank, Customer customer, String name, String currency, int accountType)
+    public BankAccount createAccount(Bank bank, Customer customer, String name, String currency, int accountType)
     {
         BankAccount account;
         switch(accountType)
@@ -101,13 +101,13 @@ public class BankRequestManager implements GUIRequests
             break;
 
             default:
-                return false;
+                return null;
         }
 
         customer.addAccount(account);
         bank.getBankDB().addAccount(account);
 
-        return true;
+        return account;
     }
 
     public boolean saveBankSettings(Bank bank, double transactionFee, double savingsInterestRate, double loanInterestRate, double minSavingsForInterest)
@@ -118,6 +118,7 @@ public class BankRequestManager implements GUIRequests
         settings.setLoanInterestRate(loanInterestRate);
         settings.setMinSavingsForInterest(minSavingsForInterest);
         bank.getBankDB().updateBankSettings(settings);
+        return true;
     }
 
     public boolean deleteAccount(Bank bank, Customer customer, BankAccount account)
@@ -157,21 +158,6 @@ public class BankRequestManager implements GUIRequests
         bank.getBankDB().addTransaction(transaction);
         valid = true;
         return valid;
-    }
-
-    @Override
-    public boolean transfer(Bank bank, BankAccount account, Transferable sender, Transferable receiver, double money) {
-        return false;
-    }
-
-    @Override
-    public boolean takeOutLoan(Bank bank, BankAccount account, Transferable lendee, Transferable lender, double money, String collateral) {
-        return false;
-    }
-
-    @Override
-    public boolean payBackLoan(Bank bank, BankAccount account, Transferable lendee, Transferable lender, double money, Loan loan) {
-        return false;
     }
 
 
@@ -233,7 +219,7 @@ public class BankRequestManager implements GUIRequests
                 }
                 if (receiver instanceof BankAccount)
                 {
-                    Transaction transaction = transactionFactory.getTransfer(bank.getSettings().getDay(), money, (BankAccount) sender, sender, receiver);
+                    Transaction transaction = transactionFactory.getTransfer(bank.getSettings().getDay(), money, (BankAccount) receiver, sender, receiver);
                     ((BankAccount) receiver).addTransaction(transaction);
                     bank.getBankDB().addTransaction(transaction);
                 }
@@ -276,6 +262,8 @@ public class BankRequestManager implements GUIRequests
                 }
             }
         }
+
+        return true;
     }
 
     public String queryTransactions(Bank bank, int day)

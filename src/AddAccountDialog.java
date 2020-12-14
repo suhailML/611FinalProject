@@ -120,33 +120,34 @@ public class AddAccountDialog extends JDialog {
             String name = AddAccountDialog.this.nameField.getText();
             String currency = AddAccountDialog.this.currencyField.getText();
 
-            BankAccount account = null;
+            int accountType = -1;
 
             // select the right account type
             if(savingsRButton.isSelected()){
                 System.out.println("Create savings account!");
-                account = new SavingsAccount(name, "NEED ID", currency);
+                accountType = 0; // = new SavingsAccount(name, "NEED ID", currency);
             }
             else if(checkingRButton.isSelected()) {
                 System.out.println("Create checking account!");
-                account = new CheckingAccount();
+                accountType = 1; // = new CheckingAccount();
             }
 
             else if(securitiesRButton.isSelected()) {
                 System.out.println("Create securities account!");
                 // not implemented
+                accountType = 2;
             }
 
-            /* TODO check if the account creation is successful
-            if(createAccount(Bank bank, Customer customer, String name, String currency, Enum AccountType??)){
-                System.out.println("***** NEED TO IMPLEMENT ***** ACCOUNT CREATED");
+            BankAccount account = bank.getBankRequestManager().createAccount( bank, customer, name, currency, accountType);
+
+            if(account != null){
                 System.out.println(account);
                 JOptionPane.showMessageDialog(AddAccountDialog.this, "Created account: " + account, "Account Created", JOptionPane.INFORMATION_MESSAGE);
             }
             else{
                 JOptionPane.showMessageDialog(AddAccountDialog.this, "Failed to create account", "Account Creation Error", JOptionPane.ERROR_MESSAGE);
             }
-            */
+
 
             AddAccountDialog.this.dispose();
         }

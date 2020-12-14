@@ -4,6 +4,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
+/**
+ * LoanCreateDialog
+ * This class allows the user to request a loan. Right now, all loans are approved immediately.
+ *
+ * @author ejbosia
+ */
+
+
 public class LoanCreateDialog extends JDialog {
 
     private JComboBox<Transferable> senderComboBox;

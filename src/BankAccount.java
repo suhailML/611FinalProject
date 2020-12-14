@@ -117,18 +117,11 @@ public abstract class BankAccount implements Transferable
         return true;
     }
 
-
-    // TODO maybe we want to check this first
-    public boolean isValidWithdraw(double money){
-        System.out.println("NOT IMPLEMENTED - isValidWithdraw BankAccount");
-        return true;
-    }
-
     public String fullOutput(){
         return "ACCOUNT: " + name + "\n\t" + accountID + "\nCurrency: " + currencyType;
     }
 
     public String toString(){
-        return name;
+        return name + " - " + currencyType + balance;
     }
 }
