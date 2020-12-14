@@ -156,6 +156,9 @@ public class BankRequestManager implements GUIRequests
     /** Payback part of a loan from the lendee to the lender **/
     public boolean payBackLoan(Bank bank, Transferable lendee, Transferable lender, double money, Loan loan)
     {
+        if(loan.getPresentValue() < money){
+            money = loan.getPresentValue();
+        }
 
         // if the transfer of money is successful from lendee to lender
         if (transfer(bank, lendee, lender, money))
@@ -164,6 +167,12 @@ public class BankRequestManager implements GUIRequests
             loan.payBack(money);
 
             //TODO pay back over paying the loan?
+            /*
+            if(loan.getPresentValue() < 0){
+                transfer(bank, lendee, lender, 0-loan.getPresentValue());
+            }
+            */
+
 
             bank.getBankDB().updateLoan(loan);
 
@@ -173,20 +182,18 @@ public class BankRequestManager implements GUIRequests
         return false;
     }
 
-    public boolean transfer(Bank bank, Transferable sender, Transferable receiver, double money)
+    public boolean transfer(Bank bank, BankAccount account, Transferable sender, Transferable receiver, double money)
     {
-        Transaction transaction = transactionFactory.getTransfer(bank.getSettings().getDay(), money, sender, receiver);
+        Transaction transaction = transactionFactory.getTransfer(bank.getSettings().getDay(), money, account, sender, receiver);
 
         double fee = bank.getSettings().getTransactionFee();
 
         if(sender.send(money + fee)) {
+            money -= bank.getSettings().getTransactionFee();
+            bank.addToReserves(bank.getSettings().getTransactionFee());
 
             // if the receiver was able to receive the money, update the database
             if(receiver.receive(money)) {
-                money -= bank.getSettings().getTransactionFee();
-                bank.addToReserves(bank.getSettings().getTransactionFee());
-                receiver.receive(money);
-
                 sender.addTransaction(transaction);
                 receiver.addTransaction(transaction);
                 bank.getBankDB().addTransaction(transaction);

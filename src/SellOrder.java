@@ -1,4 +1,4 @@
-public class SellAction extends BuyAction {
+public class SellAction extends StockOrder {
     
     SellAction(double money, String company, int shares)
     {

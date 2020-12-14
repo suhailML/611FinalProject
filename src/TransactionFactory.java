@@ -14,8 +14,10 @@ public class TransactionFactory
         return deposit;
     }
 
-    public Transfer getTransfer(int day, double money, Transferable sender, Transferable receiver){
-        return new Transfer(day, money, sender, receiver);
+    public Transfer getTransfer(int day, double money, BankAccount account, Transferable sender, Transferable receiver)
+    {
+        Transfer transfer = new Transfer(account, money, day, sender, receiver);
+        return transfer;
     }
 
 }
