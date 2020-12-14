@@ -13,10 +13,8 @@ public interface GUIRequests
     public boolean saveBankSettings(Bank bank, double transactionFee, double savingsInterestRate, double loanInterestRate, double minSavingsForInterest);
     public boolean updateCustomer(Bank bank, Customer customer, String firstName, String lastName, String password);
     public boolean incrementDay(Bank bank);
-
+    public String queryTransactions(Bank bank, int day);
 
     //TODO add these functions
     
-
-    public String queryTransactions(Bank bank, int day);
 }
