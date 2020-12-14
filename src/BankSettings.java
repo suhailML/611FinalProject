@@ -87,4 +87,12 @@ public class BankSettings
     {
         return day;
     }
+
+    /*
+    MUTATORS
+    */
+    public void incrementDay()
+    {
+        this.day++;
+    }
 }

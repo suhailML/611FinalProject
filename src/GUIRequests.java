@@ -10,13 +10,13 @@ public interface GUIRequests
     public Employee checkEmployeeLogin(Bank bank, String username, String password);
     public boolean createAccount(Bank bank, Customer customer, String name, String currency, int accountType);
     public boolean deleteAccount(Bank bank, Customer customer, BankAccount account);
+    public boolean saveBankSettings(Bank bank, double transactionFee, double savingsInterestRate, double loanInterestRate, double minSavingsForInterest);
+    public boolean updateCustomer(Bank bank, Customer customer, String firstName, String lastName, String password);
+    public boolean incrementDay(Bank bank);
+
 
     //TODO add these functions
     
-    // - public boolean saveBankSettings(Bank bank, Double transactionFee, Double savingsInterestRate, Double loanInterestRate, Double minSavingsForInterest)
-    // - public boolean incrementDay()
-    // - public boolean updateCustomer()
-
 
     public String queryTransactions(int day);
 }

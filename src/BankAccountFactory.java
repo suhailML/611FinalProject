@@ -11,7 +11,7 @@ public class BankAccountFactory
         return account;
     }
 
-    public SavingsAccount createExistingSavingsAccount(String name, String accountID, String currencyType, double balance, LinkedList<Transaction> transactions)
+    public SavingsAccount createExistingSavingsAccount(String name, String accountID, String currencyType, double balance, TransactionHistory transactions)
     {
         SavingsAccount account = new SavingsAccount(name, accountID, currencyType, balance, transactions);
         return account;
@@ -24,7 +24,7 @@ public class BankAccountFactory
         return account;
     }
 
-    public CheckingAccount createExistingCheckingAccount(String name, String accountID, String currencyType, double balance, LinkedList<Transaction> transactions)
+    public CheckingAccount createExistingCheckingAccount(String name, String accountID, String currencyType, double balance, TransactionHistory transactions)
     {
         CheckingAccount account = new CheckingAccount(name, accountID, currencyType, balance, transactions);
         return account;
