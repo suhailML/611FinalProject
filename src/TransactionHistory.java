@@ -2,7 +2,7 @@ import java.util.*;
 
 public class TransactionHistory 
 {
-    private ArrayList<Transaction> transactions;
+    private List<Transaction> transactions;
 
     /*
     CONSTRUCTORS
@@ -15,7 +15,7 @@ public class TransactionHistory
     /*
     SETTERS
     */
-    public void setTransactions(ArrayList<Transaction> transactions)
+    public void setTransactions(List<Transaction> transactions)
     {
         this.transactions = transactions;
     }
@@ -23,7 +23,7 @@ public class TransactionHistory
     /*
     ACCESSORS
     */
-    public ArrayList<Transaction> getTransactions()
+    public List<Transaction> getTransactions()
     {
         return transactions;
     }
