@@ -14,6 +14,8 @@ public class BankDatabase  {
     private String userIdToAccountIDs = bankDB + "userIdToAccountIDs/";
     private String accountIDsInfo = bankDB + "accountIDsInfo/";
     private String accountIDsInfoFile = bankDB + accountIDsInfo + "accountIds.txt";
+    private String bankSettings = bankDB + "banksettings/";
+    private String bankSettingsFile = bankSettings + "banksettings.txt";
 
     public ArrayList<List<String>> getLoans(String userID)
     {
@@ -128,6 +130,31 @@ public class BankDatabase  {
     {
         ParseFile.deleteLine(accountIDsInfoFile, accountID);
         ParseFile.addLine(accountIDsInfoFile, accountID + "\t" + name + "\t" + currencyType + "\t" + balance + "\t" + accountType);
+    }
+
+    public void addBankSettings(String bankSettingsID, String transactionFee, String savingsInterestRate, String loanInterestRate, String minSavingsForInterest, String reserves, String day)
+    {
+        ParseFile.addLine(bankSettingsFile, bankSettingsID + "\t" + transactionFee + "\t" + savingsInterestRate + "\t" + loanInterestRate + "\t" + minSavingsForInterest + "\t" + reserves + "\t" + day);
+    }
+
+    public void updateBankSettings(String bankSettingsID, String transactionFee, String savingsInterestRate, String loanInterestRate, String minSavingsForInterest, String reserves, String day)
+    {
+        ParseFile.deleteLine(bankSettingsFile, bankSettingsID);
+        ParseFile.addLine(bankSettingsFile, bankSettingsID + "\t" + transactionFee + "\t" + savingsInterestRate + "\t" + loanInterestRate + "\t" + minSavingsForInterest + "\t" + reserves + "\t" + day);
+
+    }
+
+    public ArrayList<String> getBankSettings(String bankSettingsID)
+    {
+        ArrayList<List<String>> parsedRows = ParseFile.parseRows(bankSettingsFile);
+        for (List<String> row: parsedRows)
+        {
+            if (row.get(0).equals(bankSettingsID))
+            {
+                return (ArrayList<String>) row;
+            }
+        }
+        return new ArrayList<String>();
     }
 
     public ArrayList<String> getAccountInfo(String accountID)
