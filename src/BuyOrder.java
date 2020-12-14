@@ -1,8 +1,9 @@
-public class BuyAction extends TransactionAction {
+public class BuyOrder extends StockOrder 
+{
     protected String company;
     protected int shares;
     
-    BuyAction(double money, String company, int shares)
+    BuyOrder(double money, String company, int shares)
     {
         super(money);
         this.company = company;

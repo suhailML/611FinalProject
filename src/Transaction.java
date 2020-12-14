@@ -1,16 +1,57 @@
-public class Transaction {
+public class Transaction 
+{
+    private BankAccount account;
+    private double money;
+    private int day;
 
-    BankAccount sender;
-    BankAccount receiver;
-    int money;
-
-    public Transaction(){
-        sender = new CheckingAccount("TEST", "A", "$");
-        receiver = new CheckingAccount("TEST2", "B", "$");
-        money = 100;
+    public Transaction(BankAccount account, double money, int day)
+    {
+        setAccount(account);
+        setMoney(money);
+        setDay(day);
     }
 
+    /*
+    SETTERS
+    */
+
+    public void setAccount(BankAccount account)
+    {
+        this.account = account;
+    }
+
+    public void setMoney(double money)
+    {
+        this.money = money;
+    }
+
+    public void setDay(int day)
+    {
+        this.day = day;
+    }
+
+    /*
+    ACCESSORS
+    */
+
+    public Transferable getAccount()
+    {
+        return account;
+    }
+
+    public double getMoney()
+    {
+        return money;
+    }
+
+    public int getDay()
+    {
+        return day;
+    }
+
+    /*
     public String toString(){
         return sender.getName() + " --> " + receiver.getName() + " : " + money;
     }
+    */
 }
