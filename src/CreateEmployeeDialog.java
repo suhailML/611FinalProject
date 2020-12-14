@@ -108,6 +108,7 @@ public class CreateEmployeeDialog extends JDialog {
                 JOptionPane.showMessageDialog(CreateEmployeeDialog.this, "All fields must be filled", "Empty Field", JOptionPane.ERROR_MESSAGE);
                 return;
             }
+
             if(bank.getBankRequestManager().createEmployee(bank, username, password, firstName, lastName)){
                 JOptionPane.showMessageDialog(CreateEmployeeDialog.this, "Created employee " + firstName + " " + lastName, "Employee Created", JOptionPane.INFORMATION_MESSAGE);
             }
