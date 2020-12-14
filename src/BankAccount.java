@@ -74,7 +74,7 @@ public abstract class BankAccount implements Transferable
 
     public String getCurrencyType()
     {
-        return name;
+        return currencyType;
     }
 
     public double getBalance()

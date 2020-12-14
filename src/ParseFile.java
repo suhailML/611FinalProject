@@ -84,7 +84,7 @@ public class ParseFile {
         }
         if (rowToDelete == -1)
         {
-            System.out.println("Couldn't fine line.");
+            System.out.println("Couldn't fine line." + keyString);
         }
         else
         {

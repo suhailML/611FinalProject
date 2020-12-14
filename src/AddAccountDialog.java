@@ -143,6 +143,9 @@ public class AddAccountDialog extends JDialog {
                 return;
             }
 
+            name = name.replaceAll("\\s", "-");
+            currency = currency.replaceAll("\\s", "-");
+
             BankAccount account = bank.getBankRequestManager().createAccount( bank, customer, name, currency, accountType);
 
             if(account != null){
