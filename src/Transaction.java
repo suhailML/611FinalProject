@@ -1,4 +1,4 @@
-public class Transaction 
+public abstract class Transaction 
 {
     private BankAccount account;
     private double money;

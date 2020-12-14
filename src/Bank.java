@@ -5,7 +5,6 @@ public class Bank implements Transferable
     private ArrayList<Customer> customers;
     private ArrayList<Employee> employees;
     private double reserves;
-    private LinkedList<Transaction> transactions;
     private BankSettings settings;
     private BankRequestManager bankRequestManager;
     private BankDB db;
@@ -18,18 +17,16 @@ public class Bank implements Transferable
         setCustomers(new ArrayList<Customer>());
         setEmployees(new ArrayList<Employee>());
         setReserves(1000000);
-        setTransactions(new LinkedList<Transaction>());
         setSettings(new BankSettings());
         setBankRequestManager(BankRequestManager.getSingleInstance());
         setBankDB(BankDB.getSingleInstance());
     }
 
-    public Bank(ArrayList<Customer> customers, ArrayList<Employee> employees, double reserves, LinkedList<Transaction> transactions, BankSettings settings)
+    public Bank(ArrayList<Customer> customers, ArrayList<Employee> employees, double reserves, BankSettings settings)
     {
         setCustomers(customers);
         setEmployees(employees);
         setReserves(reserves);
-        setTransactions(transactions);
         setSettings(settings);
         setBankRequestManager(BankRequestManager.getSingleInstance());
         setBankDB(BankDB.getSingleInstance());
@@ -68,11 +65,6 @@ public class Bank implements Transferable
         this.db = db;
     }
 
-    public void setTransactions(LinkedList<Transaction> transactions)
-    {
-        this.transactions = transactions;
-    }
-
     /*
     ACCESSORS
     */
@@ -104,11 +96,6 @@ public class Bank implements Transferable
     public BankDB getBankDB()
     {
         return db;
-    }
-
-    public LinkedList<Transaction> getTransactions()
-    {
-        return transactions;
     }
 
     /*
@@ -148,12 +135,6 @@ public class Bank implements Transferable
         addToReserves(money);
         valid = true;
         return valid;
-    }
-
-    public boolean addTransaction(Transaction transaction)
-    {
-        //getTransactions().add(transaction);
-        return true;
     }
 
     public void incrementDay()

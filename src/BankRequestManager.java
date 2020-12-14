@@ -138,7 +138,6 @@ public class BankRequestManager implements GUIRequests
     /** Take a loan from the lender to the lendee **/
     public boolean takeOutLoan(Bank bank, Transferable lender, Transferable lendee, double money, String collateral)
     {
-
         Loan loan = loanFactory.createNewLoan(bank, lendee, money, bank.getSettings().getLoanInterestRate(), collateral);
 
         // if the loan transfer is successful from lender to lendee, add it to the database
@@ -156,7 +155,8 @@ public class BankRequestManager implements GUIRequests
     /** Payback part of a loan from the lendee to the lender **/
     public boolean payBackLoan(Bank bank, Transferable lendee, Transferable lender, double money, Loan loan)
     {
-        if(loan.getPresentValue() < money){
+        if(loan.getPresentValue() < money)
+        {
             money = loan.getPresentValue();
         }
 
@@ -166,14 +166,6 @@ public class BankRequestManager implements GUIRequests
             // remove money from the loan
             loan.payBack(money);
 
-            //TODO pay back over paying the loan?
-            /*
-            if(loan.getPresentValue() < 0){
-                transfer(bank, lendee, lender, 0-loan.getPresentValue());
-            }
-            */
-
-
             bank.getBankDB().updateLoan(loan);
 
             return true;
@@ -182,9 +174,17 @@ public class BankRequestManager implements GUIRequests
         return false;
     }
 
-    public boolean transfer(Bank bank, BankAccount account, Transferable sender, Transferable receiver, double money)
+    public boolean transfer(Bank bank, Transferable sender, Transferable receiver, double money)
     {
-        Transaction transaction = transactionFactory.getTransfer(bank.getSettings().getDay(), money, account, sender, receiver);
+        /*
+        if (sender instanceof BankAccount)
+        {
+            Transaction transaction = transactionFactory.getTransfer(bank.getSettings().getDay(), money, sender, sender, receiver);
+        }
+
+        */
+        //Transaction transaction = transactionFactory.getTransfer(bank.getSettings().getDay(), money, account, sender, receiver);
+
 
         double fee = bank.getSettings().getTransactionFee();
 
@@ -194,9 +194,19 @@ public class BankRequestManager implements GUIRequests
 
             // if the receiver was able to receive the money, update the database
             if(receiver.receive(money)) {
-                sender.addTransaction(transaction);
-                receiver.addTransaction(transaction);
-                bank.getBankDB().addTransaction(transaction);
+
+                if (sender instanceof BankAccount)
+                {
+                    Transaction transaction = transactionFactory.getTransfer(bank.getSettings().getDay(), money, (BankAccount) sender, sender, receiver);
+                    sender.addTransaction(transaction);
+                    bank.getBankDB().addTransaction(transaction);
+                }
+                if (receiver instanceof BankAccount)
+                {
+                    Transaction transaction = transactionFactory.getTransfer(bank.getSettings().getDay(), money, (BankAccount) sender, sender, receiver);
+                    receiver.addTransaction(transaction);
+                    bank.getBankDB().addTransaction(transaction);
+                }
 
                 return true;
             }
@@ -213,11 +223,21 @@ public class BankRequestManager implements GUIRequests
     }
 
 
-    public String queryTransactions(int day){
-
+    public String queryTransactions(int day)
+    {
+        // TODO
         String output = "TODO - fill in query transactions --> DAY: " + day;
 
+        /*
+        for (customer)
+            for (account)
+                for transaction
+                    if transaction.day == day
+                        s += transaction.tostring() + \n
+
+        */
         return output;
 
     }
+
 }
