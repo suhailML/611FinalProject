@@ -150,6 +150,7 @@ public class Bank implements Transferable
         List<Customer> customers = getCustomers();
         Iterator<Customer> iter = customers.iterator();
 
+
         while (iter.hasNext())
         {
 

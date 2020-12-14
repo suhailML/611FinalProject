@@ -1,2 +1,2 @@
 accountID/name/currencyType/money
-accountid test $ 10000
+accountid test $ 10000623e1860-c77f-48f2-868b-1f989917f9d9	Test-Account	Test-Account	0.0	CHECKING

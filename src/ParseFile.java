@@ -68,7 +68,7 @@ public class ParseFile {
 
     public static void deleteLine(String fileLocation, String keyString)
     {
-        ArrayList<List<String>> parsedRows = parseRows(fileLocation);
+        List<List<String>> parsedRows = parseRows(fileLocation);
         int count = 0;
         int rowToDelete = -1;
         for (List<String> row: parsedRows)
