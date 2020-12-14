@@ -66,7 +66,6 @@ public class AccountForm extends JFrame {
 
         setTitle("User View Form");
         setSize(600,400);
-        //setLayout(null);
         setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE);
         setVisible(true);
     }
@@ -85,18 +84,17 @@ public class AccountForm extends JFrame {
                 return;
             }
 
-            double amount = Double.parseDouble(input);
-            System.out.println("TODO --> DO WITHDRAW $" + amount);
+            double money = Double.parseDouble(input);
+            System.out.println("TODO --> DO WITHDRAW $" + money);
 
-            //TODO withdraw action
-            /* TODO
-            if(withdraw(Bank bank, BankAccount account, double money)){
+
+            if(bank.getBankRequestManager().withdraw(bank, account, money)){
                 JOptionPane.showMessageDialog(AccountForm.this, "You withdrew " + money + " from " + account, "Withdrawal", JOptionPane.INFORMATION_MESSAGE);
             }
             else{
                 JOptionPane.showMessageDialog(AccountForm.this, "Withdrawal from account failed", "Withdrawal Error", JOptionPane.ERROR_MESSAGE);
             }
-            */
+
         }
     }
 
