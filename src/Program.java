@@ -41,28 +41,38 @@ public class Program
                 List<String> accountCredential = db.getAccountInfo(accountID);
                 ArrayList<List<String>> allTransactionInfo = db.getTransactionHistory(accountID);
 
+                TransactionHistory transactionHistory = new TransactionHistory();
+                List<Transaction> transactions = new ArrayList<Transaction>();
                 for (List<String> transactionInfo : allTransactionInfo)
                 {
                     Transaction transaction;
                     switch(transactionInfo.get(0).toUpperCase())
                     {
                         case "WITHDRAW":
-                            transaction = transactionFactory.getWithdraw(transactionInfo.get(3), transactionInfo.get(2), transaction) 
+                            transaction = transactionFactory.getExistingWithdraw(Integer.parseInt(transactionInfo.get(3)), Double.parseDouble(transactionInfo.get(2)), accountID);
+                            break;
+                        case "DEPOSIT":
+                            transaction = transactionFactory.getExistingDeposit(Integer.parseInt(transactionInfo.get(3)), Double.parseDouble(transactionInfo.get(2)), accountID);
+                            break;
+                        case "TRANSFER":
+                            transaction = transactionFactory.getExistingTransfer(Integer.parseInt(transactionInfo.get(3)), Double.parseDouble(transactionInfo.get(2)), accountID, transactionInfo.get(4), transactionInfo.get(5));
                     }
 
+                    transactions.add(transaction);
                 }
+                transactionHistory.setTransactions(transactions);
 
-
-
-                TransactionHistory transactionHistory = new TransactionHistory();
-                if ()
+                BankAccount account;
+                if (accountCredential.get(0).equalsIgnoreCase("CHECKING"))
                 {
-                    bankAccountFactory.createExistingCheckingAccount(name, accountID, currencyType, balance, transactions)
+                    account = bankAccountFactory.createExistingCheckingAccount(accountCredential.get(1), accountID, accountCredential.get(2), Double.parseDouble(accountCredential.get(3)), transactionHistory);
                 }
-                else if ()
+                else if (accountCredential.get(0).equalsIgnoreCase("SAVINGS"))
                 {
-                    bankAccountFactory.createExistingSavingsAccount(name, accountID, currencyType, balance, transactions)
+                    account = bankAccountFactory.createExistingSavingsAccount(accountCredential.get(1), accountID, accountCredential.get(2), Double.parseDouble(accountCredential.get(3)), transactionHistory);
                 }
+
+                accounts.add(account);
             }
             // create all accounts
             
@@ -76,7 +86,7 @@ public class Program
                 
 
 
-                Loan loan = loanFactory.createExistingLoan(bank, lendee, loanID, initialValue, presentValue, interestRate, collateral)
+                Loan loan = loanFactory.createExistingLoan(bank, lendee, loanID, initialValue, presentValue, interestRate, collateral);
             }
 
 
