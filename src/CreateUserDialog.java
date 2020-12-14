@@ -97,7 +97,9 @@ public class CreateUserDialog extends JDialog {
             firstName = firstName.replaceAll("\\s", "-");
             lastName = lastName.replaceAll("\\s", "-");
 
-            System.out.println("TODO Create Customer!");
+            if(username.isEmpty() || password.isEmpty() || firstName.isEmpty() || lastName.isEmpty()){
+                JOptionPane.showMessageDialog(CreateUserDialog.this, "All fields must be filled", "Empty Field", JOptionPane.ERROR_MESSAGE);
+            }
 
             Customer customer = bank.getBankRequestManager().createCustomer(bank, username, password, firstName, lastName);
 
@@ -109,10 +111,6 @@ public class CreateUserDialog extends JDialog {
             else{
                 JOptionPane.showMessageDialog(CreateUserDialog.this, "User creation failed.", "User Creation Error", JOptionPane.ERROR_MESSAGE);
             }
-
-
-
-
 
             CreateUserDialog.this.dispose();
         }
