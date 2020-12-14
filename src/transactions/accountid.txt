@@ -1,0 +1,3 @@
+
+Sell: sold 5 shares of apple
+Buy: bought 134 shares of microsoft

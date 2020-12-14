@@ -1,5 +1,7 @@
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 public class BankDatabase  {
@@ -9,6 +11,9 @@ public class BankDatabase  {
     private String customerCredentials = credentials + "customercredentials.txt";
     private String loans = bankDB + "loans/";
     private String transactions = bankDB + "transactions/";
+    private String userIdToAccountIDs = bankDB + "userIdToAccountIDs/";
+    private String accountIDsInfo = bankDB + "accountIDsInfo/";
+    private String accountIDsInfoFile = bankDB + accountIDsInfo + "accountIds.txt";
 
     public ArrayList<List<String>> getLoans(String userID)
     {
@@ -80,4 +85,61 @@ public class BankDatabase  {
         ParseFile.deleteLine(loans + accountID + ".txt", loanID);
         ParseFile.addLine(loans + accountID + ".txt", lender + "," + lendeeID + "," + loanID + "," + initialValue + "," + presentValue + "," + interestRate + "," + collateral);
     }
+
+    public void deleteAccount(String userID, String accountID)
+    {
+        File file = new File(transactions + accountID + ".txt");
+        if (file.delete()) { 
+            System.out.println("Deleted the file: " + file.getName());
+          } else {
+            System.out.println("Failed to delete the file.");
+          } 
+        file = new File(loans + accountID + ".txt");
+        if (file.delete()) { 
+            System.out.println("Deleted the file: " + file.getName());
+          } else {
+            System.out.println("Failed to delete the file.");
+          } 
+        ParseFile.deleteLine(userIdToAccountIDs + userID + ".txt", accountID);
+        ParseFile.deleteLine(accountIDsInfoFile, accountID);
+    }
+
+    public void addAccount(String userID, String accountID, String name, String currencyType, String balance)
+    {
+        ParseFile.addLine(userIdToAccountIDs + userID + ".txt", accountID);
+        ParseFile.addLine(accountIDsInfoFile, accountID + "\t" + name + "\t" + currencyType + "\t" + balance);
+    }
+
+    public HashMap<String,ArrayList<String>> getAllUsersAndAccounts()
+    {
+        HashMap<String,ArrayList<String>> ret = new HashMap<String,ArrayList<String>>();
+        File dir = new File(userIdToAccountIDs);
+        File[] directoryListing = dir.listFiles();
+        if (directoryListing != null) {
+            for (File userID : directoryListing) {
+                String key = userID.getName().substring(0, userID.getName().length()-3);
+                ArrayList<String> value = new ArrayList<String>();
+                ArrayList<List<String>> accountIds = ParseFile.parseRows(userID.getPath());
+                for (List<String> s: accountIds)
+                {
+                    value.add(s.get(0));
+                }
+                ret.put(key, value);
+            }
+            return ret;
+        } else {
+            return null;
+        }
+    }
+
+    public ArrayList<List<String>> getAllCustomerCredentials()
+    {
+        return ParseFile.parseRows(customerCredentials);
+    }   
+    
+    public ArrayList<List<String>> getAllEmployeeCredentials()
+    {
+        return ParseFile.parseRows(employeeCredentials);
+    }  
+
 }
