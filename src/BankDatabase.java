@@ -110,6 +110,12 @@ public class BankDatabase  {
         ParseFile.addLine(accountIDsInfoFile, accountID + "\t" + name + "\t" + currencyType + "\t" + balance);
     }
 
+    public void updateAccount(String accountID, String name, String currencyType, String balance)
+    {
+        ParseFile.deleteLine(accountIDsInfoFile, accountID);
+        ParseFile.addLine(accountIDsInfoFile, accountID + "\t" + name + "\t" + currencyType + "\t" + balance);
+    }
+
     public HashMap<String,ArrayList<String>> getAllUsersAndAccounts()
     {
         HashMap<String,ArrayList<String>> ret = new HashMap<String,ArrayList<String>>();
@@ -140,6 +146,5 @@ public class BankDatabase  {
     public ArrayList<List<String>> getAllEmployeeCredentials()
     {
         return ParseFile.parseRows(employeeCredentials);
-    }  
-
+    }
 }
