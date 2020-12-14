@@ -121,6 +121,7 @@ public class ParseFile {
                 e.printStackTrace();
             }
             boolean successful = tempFile.renameTo(file);
+            System.out.println("UPDATE: " + successful);
             try {
                 writer.close();
             } catch (IOException e) {
