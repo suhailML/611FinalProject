@@ -135,6 +135,19 @@ public class BankDatabase  {
         ParseFile.addLine(accountIDsInfoFile, accountID + "\t" + name + "\t" + currencyType + "\t" + balance);
     }
 
+    public ArrayList<String> getAccountInfo(String accountID)
+    {
+        ArrayList<List<String>> accountInfos = ParseFile.parseRows(accountIDsInfoFile);
+        for (List<String> info: accountInfos)
+        {
+            if (info.get(0).equals(accountID))
+            {
+                return (ArrayList<String>) info;
+            }
+        }
+        return new ArrayList<String>();
+    }
+
     public HashMap<String,ArrayList<String>> getAllUsersAndAccounts()
     {
         HashMap<String,ArrayList<String>> ret = new HashMap<String,ArrayList<String>>();
