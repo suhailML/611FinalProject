@@ -118,7 +118,7 @@ public class BankRequestManager implements GUIRequests
         settings.setSavingsInterestRate(savingsInterestRate);
         settings.setLoanInterestRate(loanInterestRate);
         settings.setMinSavingsForInterest(minSavingsForInterest);
-        bank.getBankDB().updateBankSettings(settings);
+        bank.getBankDB().updateBankSettings(bankSettingsID, transactionFee, savingsInterestRate, loanInterestRate, minSavingsForInterest, reserves, day);;
         return true;
     }
 
@@ -144,7 +144,7 @@ public class BankRequestManager implements GUIRequests
             Transaction transaction = transactionFactory.getWithdraw(bank.getSettings().getDay(), money, account);
             account.addTransaction(transaction);
             bank.getBankDB().addTransactionWDL("WITHDRAW", account.getAccountID(), Double.toString(transaction.getMoney()), Integer.toString(transaction.getDay()), "NA", "NA");  
-            bank.getBankDB().updateBankSettings();
+            bank.getBankDB().updateBankSettings(bankSettingsID, transactionFee, savingsInterestRate, loanInterestRate, minSavingsForInterest, reserves, day);;
             bank.getBankDB().updateAccount(accountID, name, currencyType, balance, accountType);
             valid = true;
         }
@@ -159,7 +159,7 @@ public class BankRequestManager implements GUIRequests
         bank.addToReserves(bank.getSettings().getTransactionFee());
         Transaction transaction = transactionFactory.getDeposit(bank.getSettings().getDay(), money, account);
         bank.getBankDB().addTransactionWDL("DEPOSIT", account.getAccountID(), Double.toString(transaction.getMoney()), Integer.toString(transaction.getDay()), "NA", "NA");  
-        bank.getBankDB().updateBankSettings();
+        bank.getBankDB().updateBankSettings(bankSettingsID, transactionFee, savingsInterestRate, loanInterestRate, minSavingsForInterest, reserves, day);;
         bank.getBankDB().updateAccount(accountID, name, currencyType, balance, accountType);
 
         valid = true;
@@ -175,7 +175,7 @@ public class BankRequestManager implements GUIRequests
         if(transfer(bank, lender, lendee, money)){
 
             bank.getBankDB().addLoan(((BankAccount) loan.getLendee()).getAccountID(), loan.getLender().getName(), loan.getLendee().getName(), loan.getLoanID(), Double.toString(loan.getInitialValue()), Double.toString(loan.getPresentValue()), Double.toString(loan.getInterestRate()), loan.getCollateral());
-            bank.getBankDB().updateBankSettings();
+            bank.getBankDB().updateBankSettings(bankSettingsID, transactionFee, savingsInterestRate, loanInterestRate, minSavingsForInterest, reserves, day);;
             bank.getBankDB().updateAccount(accountID, name, currencyType, balance, accountType);
 
             return true;
@@ -200,8 +200,8 @@ public class BankRequestManager implements GUIRequests
             loan.payBack(money);
 
             bank.getBankDB().updateLoan(((BankAccount) loan.getLendee()).getAccountID(), loan.getLender().getName(), loan.getLendee().getName(), loan.getLoanID(), Double.toString(loan.getInitialValue()), Double.toString(loan.getPresentValue()), Double.toString(loan.getInterestRate()), loan.getCollateral());
-            bank.getBankDB().updateBankSettings();
-        bank.getBankDB().updateAccount(accountID, name, currencyType, balance, accountType);
+            bank.getBankDB().updateBankSettings(bankSettingsID, transactionFee, savingsInterestRate, loanInterestRate, minSavingsForInterest, reserves, day);;
+            bank.getBankDB().updateAccount(accountID, name, currencyType, balance, accountType);
 
             return true;
         }
@@ -236,7 +236,7 @@ public class BankRequestManager implements GUIRequests
                     bank.getBankDB().addTransactionWDL("TRANSFER", receiverAccount.getAccountID(), Double.toString(transaction.getMoney()), Integer.toString(transaction.getDay()), sender.getName(), receiver.getName());
                     bank.getBankDB().updateAccount(accountID, name, currencyType, balance, accountType);
                 }
-                bank.getBankDB().updateBankSettings();
+                bank.getBankDB().updateBankSettings(bankSettingsID, transactionFee, savingsInterestRate, loanInterestRate, minSavingsForInterest, reserves, day);;
 
                 return true;
             }
@@ -255,7 +255,7 @@ public class BankRequestManager implements GUIRequests
     public boolean incrementDay(Bank bank)
     {
         bank.getSettings().incrementDay();
-        bank.getBankDB().updateBankSettings();
+        bank.getBankDB().updateBankSettings(bankSettingsID, transactionFee, savingsInterestRate, loanInterestRate, minSavingsForInterest, reserves, day);;
         
         List<Customer> customers = bank.getCustomers();
 
