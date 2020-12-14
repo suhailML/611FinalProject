@@ -6,6 +6,6 @@ public class Withdraw extends Transaction
     }
 
     public String toString(){
-        return "Withdraw" + super.toString();
+        return "WITHDRAW " + super.toString();
     }
 }

@@ -4,6 +4,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+/**
+ * UserForm
+ * This form allows the user to access a lot of actions to control their accounts, take loans, make transfers, edit info...
+ *
+ * @author ejbosia
+ */
 public class UserForm extends JFrame {
 
     private Bank bank;

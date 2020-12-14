@@ -3,6 +3,13 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * EmployeeViewAccountForm
+ * Allows the employee to view the account of a customer and see their transactions.
+ *
+ * @author ejbosia
+ */
+
 public class EmployeeViewAccountForm extends JDialog {
 
     private Bank bank;
@@ -62,7 +69,7 @@ public class EmployeeViewAccountForm extends JDialog {
         setVisible(true);
     }
 
-
+    /** Return to the user form **/
     private class BackActionListener implements  ActionListener{
         public void actionPerformed(ActionEvent e) {
             System.out.println("ACTION: return to user form");
