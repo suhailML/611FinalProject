@@ -60,7 +60,7 @@ public class LoanCreateDialog extends JDialog {
         labelPanel.add(new JLabel("Receiving Account:"));
         dataPanel.add(senderComboBox);
         labelPanel.add(new JLabel("Collateral:"));
-        labelPanel.add(collateralField);
+        dataPanel.add(collateralField);
 
         infoPanel.add(labelPanel);
         infoPanel.add(dataPanel);
@@ -116,15 +116,13 @@ public class LoanCreateDialog extends JDialog {
             System.out.println("\t" + money);
             System.out.println("\t" + collateral);
 
-            if(bank.getBankRequestManager().takeOutLoan(bank, lendee, bank, money, collateral)){
+            if(bank.getBankRequestManager().takeOutLoan(bank, bank, lendee, money, collateral)){
                 JOptionPane.showMessageDialog(LoanCreateDialog.this, "Loan Requested", "Loan Request Success", JOptionPane.INFORMATION_MESSAGE);
-
                 LoanCreateDialog.this.dispose();
             }
             else{
                 JOptionPane.showMessageDialog(LoanCreateDialog.this, "Loan Request Failure", "Loan Request Error", JOptionPane.ERROR_MESSAGE);
             }
-
         }
     }
 

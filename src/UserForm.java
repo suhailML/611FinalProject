@@ -30,7 +30,7 @@ public class UserForm extends JFrame {
         frameLayout.setHgap(10);
         setLayout(frameLayout);
 
-        GridLayout actionsLayout = new GridLayout(5,1,10,10);
+        GridLayout actionsLayout = new GridLayout(6,1,10,10);
 
         JPanel panelOutput = new JPanel(new GridLayout(1,1));
         JPanel panelAccounts = new JPanel(new BorderLayout());
@@ -56,18 +56,21 @@ public class UserForm extends JFrame {
         JButton addAccountButton = new JButton("Add Account");
         JButton deleteAccountButton = new JButton("Delete Account");
         JButton transferButton = new JButton("Make Transfer");
+        JButton requestLoanButton = new JButton("Request Loan");
         JButton paybackLoanButton = new JButton("Payback Loan");
         JButton signoutButton = new JButton("Sign Out");;
 
         addAccountButton.addActionListener(new AddAccountActionListener());
         deleteAccountButton.addActionListener(new DeleteAccountActionListener());
         transferButton.addActionListener(new TransferActionListener());
+        requestLoanButton.addActionListener(new RequestLoanActionListener());
         paybackLoanButton.addActionListener(new PaybackLoanActionListener());
         signoutButton.addActionListener(new SignoutActionListener());
 
         panelActions.add(addAccountButton);
         panelActions.add(deleteAccountButton);
         panelActions.add(transferButton);
+        panelActions.add(requestLoanButton);
         panelActions.add(paybackLoanButton);
         panelActions.add(signoutButton);
 
@@ -173,6 +176,15 @@ public class UserForm extends JFrame {
         }
     }
 
+
+    /** Open the window to allow the user to payback a loan **/
+    private class RequestLoanActionListener implements ActionListener{
+        public void actionPerformed(ActionEvent e) {
+            System.out.println("OPEN CREATE LOAN DIALOG");
+            new LoanCreateDialog(UserForm.this.bank, UserForm.this.customer, UserForm.this).setVisible(true);
+        }
+    }
+
     /** Open the window to allow the user to payback a loan **/
     private class PaybackLoanActionListener implements ActionListener{
         public void actionPerformed(ActionEvent e) {
@@ -180,6 +192,7 @@ public class UserForm extends JFrame {
             new LoanPaybackDialog(UserForm.this.bank, UserForm.this.customer, UserForm.this).setVisible(true);
         }
     }
+
 
     /** Return to the login form - "log out" of the app **/
     private class SignoutActionListener implements ActionListener{
