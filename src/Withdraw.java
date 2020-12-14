@@ -5,6 +5,11 @@ public class Withdraw extends Transaction
         super(account, money, day);
     }
 
+    public Withdraw(int day, double money, String accountID)
+    {
+        super(accountID, money, day);
+    }
+
     public String toString(){
         return "WITHDRAW " + super.toString();
     }

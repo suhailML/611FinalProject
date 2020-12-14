@@ -17,7 +17,7 @@ public class Customer extends User implements CustomerActions
         setLoans(new ArrayList<Loan>());
     }
 
-    public Customer(String username, String password, String userID, String firstName, String lastName, ArrayList<BankAccount> accounts, ArrayList<Loan> loans)
+    public Customer(String username, String password, String userID, String firstName, String lastName, List<BankAccount> accounts, List<Loan> loans)
     {
         super(username, password, userID, firstName, lastName);
         setAccounts(accounts);
@@ -27,12 +27,12 @@ public class Customer extends User implements CustomerActions
     /*
     SETTERS
     */
-    public void setAccounts(ArrayList<BankAccount> accounts)
+    public void setAccounts(List<BankAccount> accounts)
     {
         this.accounts = accounts;
     }
 
-    public void setLoans(ArrayList<Loan> loans)
+    public void setLoans(List<Loan> loans)
     {
         this.loans = loans;
     }
