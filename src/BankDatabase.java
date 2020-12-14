@@ -47,20 +47,15 @@ public class BankDatabase  {
         return new ArrayList<String>();
     }
 
-    public ArrayList<String> getTransactionHistory(String accoundID)
+    public  ArrayList<List<String>> getTransactionHistory(String accoundID)
     {
-        ArrayList<List<String>> parsedTransactions = ParseFile.parseRows(transactions + accoundID + ".txt");
-        ArrayList<String> transactionHistory = new ArrayList<String>();
-        for (List<String> transaction: parsedTransactions)
-        {
-            transactionHistory.add(transaction.get(0));
-        }
-        return transactionHistory;
+        return ParseFile.parseRows(transactions + accoundID + ".txt");
     }
-
-    public void addTransaction(String accountID, String transaction)
+ 
+    // adding transaction for withdraw, deposits, and loans
+    public void addTransactionWDL(String transactionType, String accountID, String money, String day, String sender, String receiver)
     {
-        ParseFile.addLine(transactions + accountID + ".txt", transaction);
+        ParseFile.addLine(transactions + accountID + ".txt", transactionType + "\t" + money + "\t" + day + "\t" + sender + "\t" + receiver);
     }
 
     public void addCredentials(String userName, String password, String firstName, String lastName, String userId, String userType)
