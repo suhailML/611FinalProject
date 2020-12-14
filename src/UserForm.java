@@ -35,7 +35,7 @@ public class UserForm extends JFrame {
         frameLayout.setHgap(10);
         setLayout(frameLayout);
 
-        GridLayout actionsLayout = new GridLayout(6,1,10,10);
+        GridLayout actionsLayout = new GridLayout(7,1,10,10);
 
         JPanel panelOutput = new JPanel(new BorderLayout(0,5));
         JPanel panelAccounts = new JPanel(new BorderLayout(0, 5));
@@ -70,6 +70,7 @@ public class UserForm extends JFrame {
         // Action buttons
         JButton addAccountButton = new JButton("Add Account");
         JButton deleteAccountButton = new JButton("Delete Account");
+        JButton depositWithdrawButton = new JButton("Deposit or Withdraw");
         JButton transferButton = new JButton("Make Transfer");
         JButton requestLoanButton = new JButton("Request Loan");
         JButton paybackLoanButton = new JButton("Payback Loan");
@@ -77,6 +78,7 @@ public class UserForm extends JFrame {
 
         addAccountButton.addActionListener(new AddAccountActionListener());
         deleteAccountButton.addActionListener(new DeleteAccountActionListener());
+        depositWithdrawButton.addActionListener(new DepositWithdrawActionListener());
         transferButton.addActionListener(new TransferActionListener());
         requestLoanButton.addActionListener(new RequestLoanActionListener());
         paybackLoanButton.addActionListener(new PaybackLoanActionListener());
@@ -84,6 +86,7 @@ public class UserForm extends JFrame {
 
         panelActions.add(addAccountButton);
         panelActions.add(deleteAccountButton);
+        panelActions.add(depositWithdrawButton);
         panelActions.add(transferButton);
         panelActions.add(requestLoanButton);
         panelActions.add(paybackLoanButton);
@@ -188,6 +191,15 @@ public class UserForm extends JFrame {
             }catch(ArrayIndexOutOfBoundsException arrayIndexOutOfBoundsException){
                 JOptionPane.showMessageDialog(null, "NO ACCOUNT SELECTED", "ERROR", JOptionPane.ERROR_MESSAGE);
             }
+        }
+    }
+
+    /** Open the window to make a withdrawal from an account **/
+    private class DepositWithdrawActionListener implements ActionListener{
+        public void actionPerformed(ActionEvent e) {
+            System.out.println("OPEN WITHDRAW DIALOG");
+            new DepositWithdrawDialog(UserForm.this.bank, UserForm.this.customer, UserForm.this).setVisible(true);
+            updateAccountJList();
         }
     }
 
