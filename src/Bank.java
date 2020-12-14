@@ -2,12 +2,12 @@ import java.util.*;
 
 public class Bank implements Transferable
 {
-    private ArrayList<Customer> customers;
-    private ArrayList<Employee> employees;
+    private List<Customer> customers;
+    private List<Employee> employees;
     private double reserves;
     private BankSettings settings;
     private BankRequestManager bankRequestManager;
-    private BankDB db;
+    private BankDatabase db;
 
     /*
     CONSTRUCTORS
@@ -16,10 +16,10 @@ public class Bank implements Transferable
     {
         setCustomers(new ArrayList<Customer>());
         setEmployees(new ArrayList<Employee>());
-        setReserves(1000000);
+        setReserves(0);
         setSettings(new BankSettings());
         setBankRequestManager(BankRequestManager.getSingleInstance());
-        setBankDB(BankDB.getSingleInstance());
+        setBankDB(BankDatabase.getSingleInstance());
     }
 
     public Bank(ArrayList<Customer> customers, ArrayList<Employee> employees, double reserves, BankSettings settings)
@@ -29,18 +29,18 @@ public class Bank implements Transferable
         setReserves(reserves);
         setSettings(settings);
         setBankRequestManager(BankRequestManager.getSingleInstance());
-        setBankDB(BankDB.getSingleInstance());
+        setBankDB(BankDatabase.getSingleInstance());
     }
 
     /*
     SETTERS
     */
-    public void setCustomers(ArrayList<Customer> customers)
+    public void setCustomers(List<Customer> customers)
     {
         this.customers = customers;
     }
 
-    public void setEmployees(ArrayList<Employee> employees)
+    public void setEmployees(List<Employee> employees)
     {
         this.employees = employees;
     }
@@ -60,7 +60,7 @@ public class Bank implements Transferable
         this.bankRequestManager = bankRequestManager;
     }
 
-    public void setBankDB(BankDB db)
+    public void setBankDB(BankDatabase db)
     {
         this.db = db;
     }
@@ -68,12 +68,12 @@ public class Bank implements Transferable
     /*
     ACCESSORS
     */
-    public ArrayList<Customer> getCustomers()
+    public List<Customer> getCustomers()
     {
         return customers;
     }
 
-    public ArrayList<Employee> getEmployees()
+    public List<Employee> getEmployees()
     {
         return employees;
     }
@@ -93,7 +93,7 @@ public class Bank implements Transferable
         return bankRequestManager;
     }
 
-    public BankDB getBankDB()
+    public BankDatabase getBankDB()
     {
         return db;
     }
@@ -147,7 +147,7 @@ public class Bank implements Transferable
     {
         Customer customer = null;
 
-        ArrayList<Customer> customers = getCustomers();
+        List<Customer> customers = getCustomers();
         Iterator<Customer> iter = customers.iterator();
 
         while (iter.hasNext())
@@ -179,7 +179,7 @@ public class Bank implements Transferable
     {
         Employee employee = null;
 
-        ArrayList<Employee> employees = getEmployees();
+        List<Employee> employees = getEmployees();
         Iterator<Employee> iter = employees.iterator();
 
         while (iter.hasNext())

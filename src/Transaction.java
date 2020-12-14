@@ -1,6 +1,6 @@
 public abstract class Transaction 
 {
-    private BankAccount account;
+    private String accountID;
     private double money;
     private int day;
 
@@ -8,7 +8,14 @@ public abstract class Transaction
 
     public Transaction(BankAccount account, double money, int day)
     {
-        setAccount(account);
+        setAccount(account.getAccountID());
+        setMoney(money);
+        setDay(day);
+    }
+
+    public Transaction(String accountID, double money, int day)
+    {
+        setAccount(accountID);
         setMoney(money);
         setDay(day);
     }
@@ -17,9 +24,9 @@ public abstract class Transaction
     SETTERS
     */
 
-    public void setAccount(BankAccount account)
+    public void setAccount(String account)
     {
-        this.account = account;
+        this.accountID = account;
     }
 
     public void setMoney(double money)
@@ -36,9 +43,9 @@ public abstract class Transaction
     ACCESSORS
     */
 
-    public BankAccount getAccount()
+    public String getAccount()
     {
-        return account;
+        return accountID;
     }
 
     public double getMoney()

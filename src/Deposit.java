@@ -5,6 +5,11 @@ public class Deposit extends Transaction
         super(account, money, day);
     }
 
+    public Deposit(int day, double money, String accountID)
+    {
+        super(accountID, money, day);
+    }
+
     public String toString(){
         return "DEPOSIT " + super.toString();
     }

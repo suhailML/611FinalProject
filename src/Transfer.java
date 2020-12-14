@@ -8,6 +8,13 @@ public class Transfer extends Transaction
         this(account, money, day, sender.getName(), receiver.getName());
     }
 
+    public Transfer (String accountID, double money, int day, String senderName, String receiverName)
+    {
+        super(accountID, money, day);
+        setSender(senderName);
+        setReceiver(receiverName);
+    }
+
     public Transfer (BankAccount account, double money, int day, String senderName, String receiverName)
     {
         super(account, money, day);

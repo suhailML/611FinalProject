@@ -17,7 +17,7 @@ public class UserFactory
     /*
     createExistingCustomer - used to create customer already in database
     */
-    public Customer createExistingCustomer(String username, String password, String userID, String firstName, String lastName, ArrayList<BankAccount> accounts, ArrayList<Loan> loans)
+    public Customer createExistingCustomer(String username, String password, String userID, String firstName, String lastName, List<BankAccount> accounts, List<Loan> loans)
     {
         Customer customer = new Customer(username, password, userID, firstName, lastName, accounts, loans);
         return customer;

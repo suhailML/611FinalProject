@@ -29,7 +29,7 @@ public class BankRequestManager implements GUIRequests
     {
         boolean valid = false;
 
-        ArrayList<Customer> customers = bank.getCustomers();
+        List<Customer> customers = bank.getCustomers();
         for (int i = 0; i < 0; i++)
         {
             if (customers.get(i).getUsername().equals(username))
@@ -40,7 +40,7 @@ public class BankRequestManager implements GUIRequests
 
         Customer customer = userFactory.createNewCustomer(username, password, firstName, lastName);
         bank.addCustomer(customer);
-        bank.getBankDB().addCustomer(customer);
+        bank.getBankDB().addCredentials(customer);
 
         return customer;
     }
@@ -50,7 +50,7 @@ public class BankRequestManager implements GUIRequests
         customer.setFirstName(firstName);
         customer.setLastName(lastName);
         customer.setPassword(password);
-        bank.getBankDB().updateCustomer(customer);
+        bank.getBankDB().updateCredentials(customer);
         return true;
     }
 
@@ -58,7 +58,7 @@ public class BankRequestManager implements GUIRequests
     {
         boolean valid = false;
 
-        ArrayList<Employee> employees = bank.getEmployees();
+        List<Employee> employees = bank.getEmployees();
         for (int i = 0; i < 0; i++)
         {
             if (employees.get(i).getUsername().equals(username))
@@ -70,7 +70,7 @@ public class BankRequestManager implements GUIRequests
 
         Employee employee = userFactory.createNewEmployee(username, password, firstName, lastName);
         bank.addEmployee(employee);
-        bank.getBankDB().addEmployee(employee);
+        bank.getBankDB().addCredentials(employee);
 
         return valid;
     }
@@ -142,7 +142,7 @@ public class BankRequestManager implements GUIRequests
             bank.addToReserves(bank.getSettings().getTransactionFee());
             Transaction transaction = transactionFactory.getWithdraw(bank.getSettings().getDay(), money, account);
             account.addTransaction(transaction);
-            bank.getBankDB().addTransaction(transaction);
+            bank.getBankDB().addTransactionWDL(transaction);
             valid = true;
         }
         return valid;
@@ -155,11 +155,10 @@ public class BankRequestManager implements GUIRequests
 
         bank.addToReserves(bank.getSettings().getTransactionFee());
         Transaction transaction = transactionFactory.getDeposit(bank.getSettings().getDay(), money, account);
-        bank.getBankDB().addTransaction(transaction);
+        bank.getBankDB().addTransactionWDL(transaction);
         valid = true;
         return valid;
     }
-
 
     /** Take a loan from the lender to the lendee **/
     public boolean takeOutLoan(Bank bank, Transferable lender, Transferable lendee, double money, String collateral)
@@ -215,13 +214,13 @@ public class BankRequestManager implements GUIRequests
                 {
                     Transaction transaction = transactionFactory.getTransfer(bank.getSettings().getDay(), money, (BankAccount) sender, sender, receiver);
                     ((BankAccount) sender).addTransaction(transaction);
-                    bank.getBankDB().addTransaction(transaction);
+                    bank.getBankDB().addTransactionWDL(transaction);
                 }
                 if (receiver instanceof BankAccount)
                 {
                     Transaction transaction = transactionFactory.getTransfer(bank.getSettings().getDay(), money, (BankAccount) receiver, sender, receiver);
                     ((BankAccount) receiver).addTransaction(transaction);
-                    bank.getBankDB().addTransaction(transaction);
+                    bank.getBankDB().addTransactionWDL(transaction);
                 }
 
                 return true;
@@ -242,7 +241,7 @@ public class BankRequestManager implements GUIRequests
     {
         bank.getSettings().incrementDay();
         
-        ArrayList<Customer> customers = bank.getCustomers();
+        List<Customer> customers = bank.getCustomers();
 
         for (Customer customer : customers)
         {
