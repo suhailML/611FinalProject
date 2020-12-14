@@ -139,10 +139,11 @@ public class BankDatabase  {
         ParseFile.addLine(accountIDsInfoFile, accountID + "\t" + name + "\t" + currencyType + "\t" + balance + "\t" + accountType);
     }
 
-    public void updateAccount(String accountID, String name, String currencyType, String balance, String accountType)
+    public void updateAccount(String accountID, String name, String currencyType, String balance)
     {
+        ArrayList<String> row = getAccountInfo(accountID);
         ParseFile.deleteLine(accountIDsInfoFile, accountID);
-        ParseFile.addLine(accountIDsInfoFile, accountID + "\t" + name + "\t" + currencyType + "\t" + balance + "\t" + accountType);
+        ParseFile.addLine(accountIDsInfoFile, accountID + "\t" + name + "\t" + currencyType + "\t" + balance + "\t" + row.get(4));
     }
 
     public void addBankSettings(String bankSettingsID, String transactionFee, String savingsInterestRate, String loanInterestRate, String minSavingsForInterest, String reserves, String day)
