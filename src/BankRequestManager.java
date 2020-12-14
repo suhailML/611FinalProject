@@ -46,8 +46,6 @@ public class BankRequestManager implements GUIRequests
         return valid;
     }
 
-<<<<<<< HEAD
-=======
     public boolean updateCustomer(Bank bank, Customer customer, String firstName, String lastName, String password)
     {
         customer.setFirstName(firstName);
@@ -55,7 +53,6 @@ public class BankRequestManager implements GUIRequests
         customer.setPassword(password);
         bank.getBankDB().updateCustomer(customer);
     }
->>>>>>> main
 
     public boolean createEmployee(Bank bank, String username, String password, String firstName, String lastName)
     {
@@ -216,18 +213,9 @@ public class BankRequestManager implements GUIRequests
 
         return false;
     }
-<<<<<<< HEAD
-    //public boolean transfer(Bank bank, BankAccount account, Transferable sender, Transferable receiver, double money)
-    public boolean transfer(Bank bank, Transferable sender, Transferable receiver, double money)
-    {
-        //Transaction transaction = transactionFactory.getTransfer(bank.getSettings().getDay(), money, account, sender, receiver);
-        Transaction transaction = transactionFactory.getTransfer(bank.getSettings().getDay(), money, null, sender, receiver);
-
-=======
 
     public boolean transfer(Bank bank, Transferable sender, Transferable receiver, double money)
     {
->>>>>>> main
         double fee = bank.getSettings().getTransactionFee();
 
         if(sender.send(money + fee)) {
