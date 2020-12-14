@@ -48,18 +48,21 @@ public class BankEmployeeForm extends JFrame {
         JButton editSettingsButton = new JButton("Edit Settings");
         JButton viewCustomerButton = new JButton("View Account");
         JButton viewTransactionsButton = new JButton("View Transactions");
+        JButton incrementDay = new JButton("Increment Day");
         JButton signoutButton = new JButton("Sign out");
 
         createEmployeeButton.addActionListener(new CreateEmployeeActionListener());
         editSettingsButton.addActionListener(new EditSettingsActionListener());
         viewCustomerButton.addActionListener(new ViewCustomerActionListener());
         viewTransactionsButton.addActionListener((new ViewTransactionsActionListener()));
+        incrementDay.addActionListener(new IncrementDayActionListener());
         signoutButton.addActionListener(new SignoutActionListener());
 
         panelActions.add(createEmployeeButton);
         panelActions.add(editSettingsButton);
         panelActions.add(viewCustomerButton);
         panelActions.add(viewTransactionsButton);
+        panelActions.add(incrementDay);
         panelActions.add(signoutButton);
 
         add(panelOutput);//adding button on frame
@@ -71,6 +74,11 @@ public class BankEmployeeForm extends JFrame {
         //setLayout(null);
         setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE);
         setVisible(true);
+    }
+
+    /** Color accounts that have < X balance **/
+    private void colorBadAccounts(){
+
     }
 
 
@@ -116,6 +124,13 @@ public class BankEmployeeForm extends JFrame {
             System.out.println("Open transactions view");
 
             new EmployeeViewTransactionsDialog(BankEmployeeForm.this.bank, BankEmployeeForm.this);
+        }
+    }
+
+    private class IncrementDayActionListener implements ActionListener{
+        public void actionPerformed(ActionEvent e) {
+
+            bank.getBankRequestManager().incrementDay(bank);
         }
     }
 

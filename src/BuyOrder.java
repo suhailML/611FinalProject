@@ -1,12 +1,13 @@
 public class BuyOrder extends StockOrder 
 {
-    protected String company;
-    protected int shares;
     
-    BuyOrder(double money, String company, int shares)
+    BuyOrder(BankAccount account, double money, String company, int shares, int day)
     {
-        //super(money);
-        this.company = company;
-        this.shares = shares;
+        super(account, money, company, shares, day);
+    }
+
+    public String toString()
+    {
+        return "BUY: " + "Bought " + getShares() + " shares for " + getMoney() + " dollars at the company, " + getCompany();
     }
 }
