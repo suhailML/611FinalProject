@@ -1,0 +1,3 @@
+accountID/name/currencyType/money/Type
+623e1860-c77f-48f2-868b-1f989917f9d9	Test-Account	Test-Account	0.0	CHECKING
+077e579d-e1ab-49a5-893f-d4973a08914a	FACCOUNT	FACCOUNT	0.0	SAVINGS

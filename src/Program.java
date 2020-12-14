@@ -5,6 +5,9 @@ public class Program
     public static void run()
     {
         Bank bank = startup();
+
+        // open the login form
+        new LoginForm(bank);
     }
 
     private static Bank startup()
@@ -26,20 +29,22 @@ public class Program
             employees.add(employee);
         }
         bank.setEmployees(employees);
+        System.out.println(employees);
 
         List<List<String>> customerCredentials = db.getAllCustomerCredentials();
-        HashMap<String,ArrayList<String>> accountMap = db.getAllUsersAndAccounts();
+        Map<String,List<String>> accountMap = db.getAllUsersAndAccounts();
         List<Customer> customers = new ArrayList<Customer>();
         for (List<String> credentials : customerCredentials)
         {
             String ID = credentials.get(4);
 
-            ArrayList<String> accountIDs = accountMap.get(ID);
+            List<String> accountIDs = accountMap.get(ID);
+
             List<BankAccount> accounts = new ArrayList<BankAccount>();
             for (String accountID : accountIDs)
             {
                 List<String> accountCredential = db.getAccountInfo(accountID);
-                ArrayList<List<String>> allTransactionInfo = db.getTransactionHistory(accountID);
+                List<List<String>> allTransactionInfo = db.getTransactionHistory(accountID);
 
                 TransactionHistory transactionHistory = new TransactionHistory();
                 List<Transaction> transactions = new ArrayList<Transaction>();
@@ -64,19 +69,20 @@ public class Program
                 transactionHistory.setTransactions(transactions);
 
                 BankAccount account = null;
-                if (accountCredential.get(3).equalsIgnoreCase("CHECKING"))
+                if (accountCredential.get(4).equalsIgnoreCase("CHECKING"))
                 {
-                    account = bankAccountFactory.createExistingCheckingAccount(accountCredential.get(0), accountID, accountCredential.get(1), Double.parseDouble(accountCredential.get(2)), transactionHistory);
+                    //accountID/name/currencyType/money/Type
+                    account = bankAccountFactory.createExistingCheckingAccount(accountCredential.get(1), accountCredential.get(0), accountCredential.get(2), Double.parseDouble(accountCredential.get(3)), transactionHistory);
                 }
-                else if (accountCredential.get(3).equalsIgnoreCase("SAVINGS"))
+                else if (accountCredential.get(4).equalsIgnoreCase("SAVINGS"))
                 {
-                    account = bankAccountFactory.createExistingSavingsAccount(accountCredential.get(0), accountID, accountCredential.get(1), Double.parseDouble(accountCredential.get(2)), transactionHistory);
+                    account = bankAccountFactory.createExistingSavingsAccount(accountCredential.get(1), accountCredential.get(0), accountCredential.get(2), Double.parseDouble(accountCredential.get(3)), transactionHistory);
                 }
 
                 accounts.add(account);
             }
             
-            ArrayList<List<String>> loanCredentials = db.getLoans(ID);
+            List<List<String>> loanCredentials = db.getLoans(ID);
 
             List<Loan> loans = new ArrayList<Loan>();
             for (List<String> loanCredential : loanCredentials)
@@ -88,7 +94,7 @@ public class Program
             Customer customer = userFactory.createExistingCustomer(credentials.get(0), credentials.get(1), credentials.get(4), credentials.get(2), credentials.get(3), accounts, loans);
             customers.add(customer);
         }
-        
+        bank.setCustomers(customers);
         // initialize settings and reserves
 
         return bank; 

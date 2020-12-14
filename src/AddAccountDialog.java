@@ -138,6 +138,11 @@ public class AddAccountDialog extends JDialog {
                 accountType = 2;
             }
 
+            if(name.isEmpty() || currency.isEmpty()){
+                JOptionPane.showMessageDialog(AddAccountDialog.this, "All fields must be filled", "Empty Field", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
             BankAccount account = bank.getBankRequestManager().createAccount( bank, customer, name, currency, accountType);
 
             if(account != null){

@@ -60,7 +60,7 @@ public abstract class Transaction
 
 
     public String toString(){
-        return account.getCurrencyType() + money + " - " + account.getName() + " DAY: " + day;
+        return money + " - " + getAccount() + " DAY: " + day;
     }
 
 }

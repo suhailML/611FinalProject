@@ -1,0 +1,1 @@
+transactionType/accountID/money/day/sender/receiver

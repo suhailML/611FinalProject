@@ -16,7 +16,7 @@ import java.util.UUID;
 
 public class ParseFile {
 
-    public static ArrayList<List<String>> parseRows(String fileLocation)
+    public static List<List<String>> parseRows(String fileLocation)
     {
         ArrayList<List<String>> parsedObjects = new ArrayList<List<String>>();
         File file = new File(fileLocation);
@@ -24,7 +24,7 @@ public class ParseFile {
         try {
             fileScanner = new Scanner(file);
         } catch (FileNotFoundException e) {
-            System.out.println("File Not Found");
+            System.out.println("File Not Found" + fileLocation);
             return new ArrayList<List<String>>();
         }
         int count = 0;
@@ -68,7 +68,7 @@ public class ParseFile {
 
     public static void deleteLine(String fileLocation, String keyString)
     {
-        ArrayList<List<String>> parsedRows = parseRows(fileLocation);
+        List<List<String>> parsedRows = parseRows(fileLocation);
         int count = 0;
         int rowToDelete = -1;
         for (List<String> row: parsedRows)

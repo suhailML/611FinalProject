@@ -1,10 +1,14 @@
+
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
 public class BankDatabase  {
+
+    //LINUX File Paths
     private String bankDB = "../src/";
     private String credentials = bankDB + "credentials/";
     private String employeeCredentials = credentials + "employeecredentials.txt";
@@ -13,16 +17,45 @@ public class BankDatabase  {
     private String transactions = bankDB + "transactions/";
     private String userIdToAccountIDs = bankDB + "userIdToAccountIDs/";
     private String accountIDsInfo = bankDB + "accountIDsInfo/";
-    private String accountIDsInfoFile = bankDB + accountIDsInfo + "accountIds.txt";
+    private String accountIDsInfoFile = accountIDsInfo + "accountIds.txt";
     private String bankSettings = bankDB + "banksettings/";
     private String bankSettingsFile = bankSettings + "banksettings.txt";
 
+
+
+
     private static BankDatabase singleInstance;
 
-    private BankDatabase(){}
+    private BankDatabase(){
+        setupWindowsLogin();
+    }
+
+    private void setupWindowsLogin(){
+        File fileTest = new File(System.getProperty("user.dir"));
+
+        try {
+            String start = fileTest.getCanonicalPath();
+            bankDB = start + "\\src\\";
+            credentials = bankDB + "credentials\\";
+            employeeCredentials = credentials + "employeecredentials.txt";
+            customerCredentials = credentials + "customercredentials.txt";
+            loans = bankDB + "loans\\";
+            transactions = bankDB + "transactions\\";
+            userIdToAccountIDs = bankDB + "userIdToAccountIDs\\";
+            accountIDsInfo = bankDB + "accountIDsInfo\\";
+            accountIDsInfoFile = accountIDsInfo + "accountIds.txt";
+            bankSettings = bankDB + "banksettings\\";
+            bankSettingsFile = bankSettings + "banksettings.txt";
+
+        }catch(IOException ioe){
+            System.out.println("IO Exception");
+        }
+    }
+
 
     public static BankDatabase getSingleInstance()
     {
+
         if (singleInstance == null)
         {
             singleInstance = new BankDatabase();
@@ -30,10 +63,10 @@ public class BankDatabase  {
         return singleInstance;
     }
 
-    public ArrayList<List<String>> getLoans(String userID)
+    public List<List<String>> getLoans(String userID)
     {
-        ArrayList<List<String>> parsedLoans = ParseFile.parseRows(loans + userID + ".txt");
-        ArrayList<List<String>> returnList  = new ArrayList<List<String>>();
+        List<List<String>> parsedLoans = ParseFile.parseRows(loans + userID + ".txt");
+        List<List<String>> returnList  = new ArrayList<List<String>>();
         for (List<String> loanInfo: parsedLoans)
         {
             returnList.add(Arrays.asList(loanInfo.get(0).split(",")));
@@ -41,9 +74,9 @@ public class BankDatabase  {
         return returnList;
     }
 
-    public ArrayList<String> getCredentials(String userID, String userType)
+    public List<String> getCredentials(String userID, String userType)
     {
-        ArrayList<List<String>> parsedUsers = new ArrayList<List<String>>();
+        List<List<String>> parsedUsers = new ArrayList<List<String>>();
         if (userType.equals("customer"))
         {
             parsedUsers = ParseFile.parseRows(customerCredentials);
@@ -62,7 +95,7 @@ public class BankDatabase  {
         return new ArrayList<String>();
     }
 
-    public  ArrayList<List<String>> getTransactionHistory(String accoundID)
+    public  List<List<String>> getTransactionHistory(String accoundID)
     {
         return ParseFile.parseRows(transactions + accoundID + ".txt");
     }
@@ -141,7 +174,7 @@ public class BankDatabase  {
 
     public void updateAccount(String accountID, String name, String currencyType, String balance)
     {
-        ArrayList<String> row = getAccountInfo(accountID);
+        List<String> row = getAccountInfo(accountID);
         ParseFile.deleteLine(accountIDsInfoFile, accountID);
         ParseFile.addLine(accountIDsInfoFile, accountID + "\t" + name + "\t" + currencyType + "\t" + balance + "\t" + row.get(4));
     }
@@ -158,9 +191,9 @@ public class BankDatabase  {
 
     }
 
-    public ArrayList<String> getBankSettings(String bankSettingsID)
+    public List<String> getBankSettings(String bankSettingsID)
     {
-        ArrayList<List<String>> parsedRows = ParseFile.parseRows(bankSettingsFile);
+        List<List<String>> parsedRows = ParseFile.parseRows(bankSettingsFile);
         for (List<String> row: parsedRows)
         {
             if (row.get(0).equals(bankSettingsID))
@@ -171,29 +204,29 @@ public class BankDatabase  {
         return new ArrayList<String>();
     }
 
-    public ArrayList<String> getAccountInfo(String accountID)
+    public List<String> getAccountInfo(String accountID)
     {
-        ArrayList<List<String>> accountInfos = ParseFile.parseRows(accountIDsInfoFile);
+        List<List<String>> accountInfos = ParseFile.parseRows(accountIDsInfoFile);
         for (List<String> info: accountInfos)
         {
             if (info.get(0).equals(accountID))
             {
-                return (ArrayList<String>) info;
+                return info;
             }
         }
         return new ArrayList<String>();
     }
 
-    public HashMap<String,ArrayList<String>> getAllUsersAndAccounts()
+    public HashMap<String,List<String>> getAllUsersAndAccounts()
     {
-        HashMap<String,ArrayList<String>> ret = new HashMap<String,ArrayList<String>>();
+        HashMap<String,List<String>> ret = new HashMap<String,List<String>>();
         File dir = new File(userIdToAccountIDs);
         File[] directoryListing = dir.listFiles();
         if (directoryListing != null) {
             for (File userID : directoryListing) {
-                String key = userID.getName().substring(0, userID.getName().length()-3);
-                ArrayList<String> value = new ArrayList<String>();
-                ArrayList<List<String>> accountIds = ParseFile.parseRows(userID.getPath());
+                String key = userID.getName().substring(0, userID.getName().length()-4);
+                List<String> value = new ArrayList<String>();
+                List<List<String>> accountIds = ParseFile.parseRows(userID.getPath());
                 for (List<String> s: accountIds)
                 {
                     value.add(s.get(0));
@@ -206,13 +239,16 @@ public class BankDatabase  {
         }
     }
 
-    public ArrayList<List<String>> getAllCustomerCredentials()
+    public List<List<String>> getAllCustomerCredentials()
     {
         return ParseFile.parseRows(customerCredentials);
     }   
     
-    public ArrayList<List<String>> getAllEmployeeCredentials()
+    public List<List<String>> getAllEmployeeCredentials()
     {
         return ParseFile.parseRows(employeeCredentials);
     }
+
 }
+
+
