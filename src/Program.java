@@ -69,6 +69,8 @@ public class Program
                 transactionHistory.setTransactions(transactions);
 
                 BankAccount account = null;
+                System.out.println("\n" + accountID);
+                System.out.println(accountCredential);
                 if (accountCredential.get(4).equalsIgnoreCase("CHECKING"))
                 {
                     //accountID/name/currencyType/money/Type

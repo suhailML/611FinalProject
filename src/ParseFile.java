@@ -57,7 +57,7 @@ public class ParseFile {
             }
             else
             {
-                Files.write(Paths.get(fileLocation), (""+System.lineSeparator()).getBytes(), StandardOpenOption.APPEND);
+                Files.write(Paths.get(fileLocation), (line+System.lineSeparator()).getBytes(), StandardOpenOption.APPEND);
             }
         }
         catch (IOException e)

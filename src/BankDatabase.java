@@ -176,6 +176,7 @@ public class BankDatabase  {
     public void updateAccount(String accountID, String name, String currencyType, String balance)
     {
         List<String> row = getAccountInfo(accountID);
+        System.out.println(row);
         ParseFile.deleteLine(accountIDsInfoFile, accountID);
         ParseFile.addLine(accountIDsInfoFile, accountID + "\t" + name + "\t" + currencyType + "\t" + balance + "\t" + row.get(4));
     }

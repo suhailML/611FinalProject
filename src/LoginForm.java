@@ -86,7 +86,7 @@ public class LoginForm extends JFrame {
             }
             else {
                 LoginForm.this.setVisible(false);
-                new UserForm(bank, bank.getCustomers().get(0), LoginForm.this).setVisible(true); // Main Form to show after the Login Form..
+                new UserForm(bank, bank.getCustomer(username, password), LoginForm.this).setVisible(true); // Main Form to show after the Login Form..
             }
         }
     }
