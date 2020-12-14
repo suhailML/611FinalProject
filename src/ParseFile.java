@@ -16,7 +16,7 @@ import java.util.UUID;
 
 public class ParseFile {
 
-    public static ArrayList<List<String>> parseRows(String fileLocation)
+    public static List<List<String>> parseRows(String fileLocation)
     {
         ArrayList<List<String>> parsedObjects = new ArrayList<List<String>>();
         File file = new File(fileLocation);
