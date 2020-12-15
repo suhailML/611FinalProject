@@ -104,8 +104,22 @@ public class Program
             customers.add(customer);
         }
         bank.setCustomers(customers);
-        // initialize settings and reserves
 
+
+        // initialize settings and reserves
+        List<String> rawBankSettings =  db.getBankSettings("1");
+
+        bank.setSettings(new BankSettings(
+                            Double.parseDouble(rawBankSettings.get(1)),
+                            Double.parseDouble(rawBankSettings.get(2)),
+                            Double.parseDouble(rawBankSettings.get(3)),
+                            Double.parseDouble(rawBankSettings.get(4)),
+                            Integer.parseInt(rawBankSettings.get(6)))
+                        );
+
+        bank.setReserves(Double.parseDouble(rawBankSettings.get(5)));
+
+        System.out.println(bank.getSettings());
         return bank; 
     }
 

@@ -101,4 +101,15 @@ public class BankSettings
     public Character[] getCurrencyArray(){
         return currencyArray;
     }
+
+    public String toString(){
+
+        String output = "BANK SETTINGS\n";
+        output += "Transaction Fee: " + transactionFee + "\n";
+        output += "Savings Interest Rate: " + transactionFee + "\n";
+        output += "Loan Interest Rate: " + transactionFee + "\n";
+        output += "Min Savings Balance Interest: " + minSavingsForInterest + "\n";
+        output += "Current Day: " + day + "\n";
+        return output;
+    }
 }

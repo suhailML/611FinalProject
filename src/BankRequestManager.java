@@ -30,7 +30,6 @@ public class BankRequestManager implements GUIRequests
         List<Customer> customers = bank.getCustomers();
         for (int i = 0; i < customers.size(); i++)
         {
-            System.out.println(customers.get(i).getUsername() + " =?= " + username);
             if (customers.get(i).getUsername().equals(username))
             {
                 return null;
@@ -119,7 +118,7 @@ public class BankRequestManager implements GUIRequests
         settings.setSavingsInterestRate(savingsInterestRate);
         settings.setLoanInterestRate(loanInterestRate);
         settings.setMinSavingsForInterest(minSavingsForInterest);
-        bank.getBankDB().updateBankSettings("1", Double.toString(settings.getTransactionFee()), Double.toString(settings.getSavingsInterestRate()), Double.toString(settings.getLoanInterestRate()), Double.toString(settings.getMinSavingsForInterest()), Double.toString(bank.getReserves()), Integer.toString(settings.getDay()));;
+        bank.getBankDB().updateBankSettings("1", String.format("%.2f", settings.getTransactionFee()), Double.toString(settings.getSavingsInterestRate()), Double.toString(settings.getLoanInterestRate()), Double.toString(settings.getMinSavingsForInterest()), String.format("%.2f", bank.getReserves()), Integer.toString(settings.getDay()));;
         return true;
     }
 
