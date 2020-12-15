@@ -1,3 +1,2 @@
 
 Bank,Test-Account,eab0ba5b-03db-4eaa-bb73-197f61bc87e0,10000.0,10000.0,0.01,10000
-B

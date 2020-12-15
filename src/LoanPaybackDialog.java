@@ -139,6 +139,8 @@ public class LoanPaybackDialog extends JDialog {
                 }
                 else{
                     JOptionPane.showMessageDialog(LoanPaybackDialog.this, "You have payed off the loan!", "Loan Payment Complete", JOptionPane.INFORMATION_MESSAGE);
+                    // remove the loan from memory
+                    customer.getLoans().remove(loan);
                 }
                 LoanPaybackDialog.this.dispose();
             }
