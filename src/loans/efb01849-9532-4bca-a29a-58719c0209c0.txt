@@ -6,3 +6,5 @@ Bank,Savings,86e075df-cd82-4905-bacd-be27c59d5256,1000.0,404.0,0.01,my-life
 Bank,Savings,86e075df-cd82-4905-bacd-be27c59d5256,1000.0,408.04,0.01,my-life
 Bank,Savings,86e075df-cd82-4905-bacd-be27c59d5256,1000.0,412.1204,0.01,my-life
 Bank,Savings,86e075df-cd82-4905-bacd-be27c59d5256,1000.0,416.241604,0.01,my-life
+Bank,Savings,86e075df-cd82-4905-bacd-be27c59d5256,1000.0,420.40402004,0.01,my-life
+Bank,Savings,86e075df-cd82-4905-bacd-be27c59d5256,1000.0,424.6080602404,0.01,my-life

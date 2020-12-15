@@ -23,7 +23,7 @@ public class AccountForm extends JFrame {
         this.bank = bank;
         this.account = account;
 
-        GridLayout frameLayout = new GridLayout(1,3);
+        GridLayout frameLayout = new GridLayout(1,2);
         frameLayout.setHgap(10);
         setLayout(frameLayout);
 
@@ -34,33 +34,19 @@ public class AccountForm extends JFrame {
         JPanel panelOutput = new JPanel(new GridLayout(1,1));
         JPanel panelTransactions = new JPanel(new BorderLayout());
 
-        JPanel panelActions = new JPanel(buttonPanelLayout);
-
         panelOutput.add(outputJTextArea);
 
         transactionJList = new JList(account.getTransactionHistory().getTransactions().toArray());
 
-        panelTransactions.add(new JLabel("Transaction Picker"), BorderLayout.NORTH);
-        panelTransactions.add(transactionJList, BorderLayout.CENTER);
-
-        JButton buttonWithdraw = new JButton("Withdraw");
-        JButton buttonDeposit = new JButton("Deposit");
-        JButton buttonTakeLoan = new JButton("Request Loan ~ debug");
         JButton buttonBack = new JButton("Back");
-
-        buttonWithdraw.addActionListener(new buttonWithdrawActionListener());
-        buttonDeposit.addActionListener(new buttonDepositActionListener());
-        buttonTakeLoan.addActionListener(new TestActionListener());
         buttonBack.addActionListener(new BackActionListener());
 
-        panelActions.add(buttonWithdraw);
-        panelActions.add(buttonDeposit);
-        panelActions.add(buttonTakeLoan);
-        panelActions.add(buttonBack);
+        panelTransactions.add(new JLabel("Transaction Picker"), BorderLayout.NORTH);
+        panelTransactions.add(transactionJList, BorderLayout.CENTER);
+        panelTransactions.add(buttonBack, BorderLayout.SOUTH);
 
         add(panelOutput);//adding button on frame
         add(panelTransactions);//adding button on frame
-        add(panelActions);//adding button on frame
 
         setTitle("User View Form");
         setSize(600,400);

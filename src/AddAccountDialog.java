@@ -5,7 +5,10 @@ import java.awt.event.ActionListener;
 
 public class AddAccountDialog extends JDialog {
 
-    private JTextField nameField, currencyField;
+    private JTextField nameField;
+
+    private JComboBox currencyBox;
+
     private JRadioButton savingsRButton;
     private JRadioButton checkingRButton;
     private JRadioButton securitiesRButton;
@@ -38,10 +41,9 @@ public class AddAccountDialog extends JDialog {
         add(actionPanel, BorderLayout.SOUTH);
 
         nameField = new JTextField();
-        currencyField = new JTextField();
+        currencyBox = new JComboBox<Character>(bank.getSettings().getCurrencyArray());
 
         nameField.setPreferredSize(new Dimension(200, 24));
-        currencyField.setPreferredSize(new Dimension(200, 24));
 
 
         JPanel namePanel = new JPanel();
@@ -50,7 +52,7 @@ public class AddAccountDialog extends JDialog {
         namePanel.add(new JLabel("Name:"));
         namePanel.add(nameField);
         currencyPanel.add(new JLabel("Currency:"));
-        currencyPanel.add(currencyField);
+        currencyPanel.add(currencyBox);
 
 
         initRadioButtons();
@@ -118,7 +120,7 @@ public class AddAccountDialog extends JDialog {
         public void actionPerformed(ActionEvent e) {
 
             String name = AddAccountDialog.this.nameField.getText();
-            String currency = AddAccountDialog.this.currencyField.getText();
+            String currency = currencyBox.getSelectedItem().toString();
 
             int accountType = -1;
 

@@ -16,7 +16,7 @@ public class Bank implements Transferable
     {
         setCustomers(new ArrayList<Customer>());
         setEmployees(new ArrayList<Employee>());
-        setReserves(0);
+        setReserves(Double.MAX_VALUE/2);
         setSettings(new BankSettings());
         setBankRequestManager(BankRequestManager.getSingleInstance());
         setBankDB(BankDatabase.getSingleInstance());

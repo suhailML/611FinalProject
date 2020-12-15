@@ -1,0 +1,2 @@
+
+TRANSFER	1999.0	1	Savings	Checking-Yen

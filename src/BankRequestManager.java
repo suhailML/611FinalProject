@@ -28,8 +28,9 @@ public class BankRequestManager implements GUIRequests
     public Customer createCustomer(Bank bank, String username, String password, String firstName, String lastName)
     {
         List<Customer> customers = bank.getCustomers();
-        for (int i = 0; i < 0; i++)
+        for (int i = 0; i < customers.size(); i++)
         {
+            System.out.println(customers.get(i).getUsername() + " =?= " + username);
             if (customers.get(i).getUsername().equals(username))
             {
                 return null;
@@ -57,7 +58,7 @@ public class BankRequestManager implements GUIRequests
         boolean valid = false;
 
         List<Employee> employees = bank.getEmployees();
-        for (int i = 0; i < 0; i++)
+        for (int i = 0; i < employees.size(); i++)
         {
             if (employees.get(i).getUsername().equals(username))
             {
@@ -196,7 +197,13 @@ public class BankRequestManager implements GUIRequests
         {
             // remove money from the loan
             loan.payBack(money);
-            bank.getBankDB().updateLoan(((BankAccount) loan.getLendee()).getAccountID(), loan.getLender().getName(), loan.getLendee().getName(), loan.getLoanID(), Double.toString(loan.getInitialValue()), Double.toString(loan.getPresentValue()), Double.toString(loan.getInterestRate()), loan.getCollateral());
+
+            if(loan.getPresentValue() <= 0){
+                bank.getBankDB().deleteLoan(loan.getLoanID(), ((BankAccount) loan.getLendee()).getAccountID());
+            }
+            else {
+                bank.getBankDB().updateLoan(((BankAccount) loan.getLendee()).getAccountID(), loan.getLender().getName(), loan.getLendee().getName(), loan.getLoanID(), Double.toString(loan.getInitialValue()), Double.toString(loan.getPresentValue()), Double.toString(loan.getInterestRate()), loan.getCollateral());
+            }
             return true;
         }
 

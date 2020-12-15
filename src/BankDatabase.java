@@ -200,7 +200,7 @@ public class BankDatabase  {
         {
             if (row.get(0).equals(bankSettingsID))
             {
-                return (ArrayList<String>) row;
+                return row;
             }
         }
         return new ArrayList<String>();

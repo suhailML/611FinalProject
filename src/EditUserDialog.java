@@ -16,6 +16,7 @@ public class EditUserDialog extends JDialog {
         this.parentFrame = parentFrame;
 
         this.bank = bank;
+        this.customer = customer;
 
         setSize(400,200);
 

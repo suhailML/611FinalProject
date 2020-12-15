@@ -41,6 +41,9 @@ public class Program
             List<String> accountIDs = accountMap.get(ID);
 
             List<BankAccount> accounts = new ArrayList<BankAccount>();
+
+            List<Loan> loans = new ArrayList<Loan>();
+
             for (String accountID : accountIDs)
             {
                 List<String> accountCredential = db.getAccountInfo(accountID);
@@ -60,7 +63,7 @@ public class Program
                             transaction = transactionFactory.getExistingDeposit(Integer.parseInt(transactionInfo.get(2)), Double.parseDouble(transactionInfo.get(1)), accountID);
                             break;
                         case "TRANSFER":
-                            transaction = transactionFactory.getExistingTransfer(Integer.parseInt(transactionInfo.get(2)), Double.parseDouble(transactionInfo.get(1)), accountID, transactionInfo.get(4), transactionInfo.get(5));
+                            transaction = transactionFactory.getExistingTransfer(Integer.parseInt(transactionInfo.get(2)), Double.parseDouble(transactionInfo.get(1)), accountID, transactionInfo.get(3), transactionInfo.get(4));
                             break;
                     }
 
@@ -82,16 +85,19 @@ public class Program
                 }
 
                 accounts.add(account);
+
+                //ADD LOANS
+                List<List<String>> loanCredentials = db.getLoans(accountID);
+
+                for (List<String> loanCredential : loanCredentials)
+                {
+                    Loan loan = loanFactory.createExistingLoan(bank, account, loanCredential.get(2), Double.parseDouble(loanCredential.get(3)), Double.parseDouble(loanCredential.get(4)), Double.parseDouble(loanCredential.get(5)), loanCredential.get(6));
+                    loans.add(loan);
+                }
+
             }
             
-            List<List<String>> loanCredentials = db.getLoans(ID);
 
-            List<Loan> loans = new ArrayList<Loan>();
-            for (List<String> loanCredential : loanCredentials)
-            {
-                Loan loan = loanFactory.createExistingLoan(bank, getAccountById(accounts, loanCredential.get(1)), loanCredential.get(2), Double.parseDouble(loanCredential.get(3)), Double.parseDouble(loanCredential.get(4)), Double.parseDouble(loanCredential.get(5)), loanCredential.get(6));
-                loans.add(loan);
-            }
 
             Customer customer = userFactory.createExistingCustomer(credentials.get(0), credentials.get(1), credentials.get(4), credentials.get(2), credentials.get(3), accounts, loans);
             customers.add(customer);

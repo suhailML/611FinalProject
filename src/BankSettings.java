@@ -6,7 +6,7 @@ public class BankSettings
     private static final double defaultMinSavingsForInterest = 5000.00;
     private static final int defaultDay = 1;
 
-    private static final char[] currencyArray = {'$', '\u20AC', '\u00A3', '\u00A5'};
+    private static final Character[] currencyArray = {'$', '\u20AC', '\u00A3', '\u00A5'};
     private double transactionFee;
     private double savingsInterestRate;
     private double loanInterestRate;
@@ -98,7 +98,7 @@ public class BankSettings
         this.day++;
     }
 
-    public char[] getCurrencyArray(){
+    public Character[] getCurrencyArray(){
         return currencyArray;
     }
 }

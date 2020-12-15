@@ -44,6 +44,10 @@ public class LoanPaybackDialog extends JDialog {
         initComboBox(senderComboBox, customer.getAccounts());
         initComboBox(loanComboBox, customer.getLoans());
 
+        if(customer.getLoans().isEmpty()){
+            JOptionPane.showMessageDialog(parentFrame, "NO LOANS TO PAYBACK");
+        }
+
         // update sender when the sender combo box changes
         senderComboBox.addActionListener(e -> {
             senderValueLabel.setText("$" + ((BankAccount)senderComboBox.getSelectedItem()).getBalance());
@@ -52,6 +56,8 @@ public class LoanPaybackDialog extends JDialog {
         loanComboBox.addActionListener(e -> {
             loanValueLabel.setText("$" + ((Loan)loanComboBox.getSelectedItem()).getPresentValue());
         });
+
+
 
 
         senderValueLabel = new JLabel("$" + ((BankAccount)senderComboBox.getSelectedItem()).getBalance());
