@@ -1,16 +1,24 @@
-3) You should submit a readme. The readme file should be a short txt file with your name, email, BU ID, compilation and execution instructions that you should have tested to make sure they work (because if we follow them and they don’t work you will lose points) and a simple description of each class. Nothing more than two sentences for each class. For example, for the "Player" class you could have something like "A class representing a board game player, it is created in an abstract way so it can be extended for other kind of players as well." or "it is created in a specific way tightly bound to this game to provide better specialization". Lastly, if you have implemented anything that was not required and can be considered as a bonus or if you have skipped implementing a part of the assignment you should mention that too, as well as any other special comments about your submission you may have.
-
-
 # CS611 Final Project
 
 Evan Bosia
 ejbosia@bu.edu
 U23665170
 
-## Compilation and Execution Instructions
+## Compilation Instructions
 1. Open folder in command terminal.
 2. javac \*.java
 3. java main
+
+
+## Execution Instructions
+The first screen is the login screen. Enter the username and password into their respective fields.
+
+1. Bank Login - use the credentials to login as an employee
+2. Create User - create a customer user (opens form)
+3. User Login - use the credentials to login as an user
+
+If login is successful, depending on the type of login, either the bank homepage or the customer homepage is shown.
+
 
 ## Class Structure:
 
@@ -35,6 +43,7 @@ BankSettings
 ### User
 
 User
+
 UserFactory
 
 Customer
@@ -59,17 +68,17 @@ Loan
 
 LoanFactory
 
-Deposit
+Deposit extends Transaction
 
 Transaction
 
 TransactionFactory
 
-Transfer
+Transfer extends Transaction
 
-Withdraw
+Withdraw extends Transaction
 
-Transferable
+Transferable interface - classes that implement this interface provide the *boolean send(double money)*, *boolean receive(double money)*, and *String getName()* methods that allow for the transfer of money to and from the object.
 
 
 ### UI Forms
@@ -77,43 +86,41 @@ AccountForm - open an account for the user
 
 AddAccountDialog - dialog that provides fields to add an account for a user
 
-BankEmployeeForm - homepage for the employee login
+BankEmployeeForm - homepage for the employee - allows the employee to 
 
 BankSettingsForm - allows the employee to change the current settings of the bank
 
+CreateEmployeeDialog - allows an employee to create credentials of a new employee
 
-CreateEmployeeDialog
-CreateUserDialog
+CreateUserDialog - allows the user to create a customer account - the user is then prompted to create an account
 
+DepositWithdrawDialog - allows the user to withdraw or deposit money into one of their accounts (selectable in window)
 
-DepositWithdrawDialog
-EditUserDialog
+EditUserDialog - allows the user to edit their password, firstname, and lastname values
 
-EmployeeViewCustomerForm
-EmployeeViewTransactionsDialog
-GUIRequests
+EmployeeViewCustomerForm - allows the employee to view customer specifics, such as a summary of their holdings, and individually selectable accounts and loans
 
-LoanCreateDialog
+EmployeeViewTransactionsDialog - allows the employee to query transactions for a selected day
 
-LoanPaybackDialog
-LoginForm
+GUIRequests interface - used to force certains methods called by the UI in the BankRequestManager ~ easy to read
 
+LoanCreateDialog - allows the user to "request" a loan - *all loans are approved*
 
+LoanPaybackDialog - allows the user to pay back a loan by making a transfer from one of their accounts
 
+LoginForm - entrypoint to the user interface - allows the user to login with employee or user credentials, or create a new user account
 
+TransferDialog - allows the user to transfer money in between accounts, 
 
-TransferDialog
-
-UserForm
+UserForm - homepage for the customer - has options to add or delete an account, deposit or withdraw from an account, transfer money between accounts, and request or payback loans
 
 ### Unused
 
-StockOrder
+StockOrder extends Transaction
 
-BuyOrder
+BuyOrder extends StockOrder
 
-SellOrder
-
-
+SellOrder extends StockOrder
 
 ## Extra / Missed Features
+We did not attempt the bonus of stocks.
