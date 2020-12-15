@@ -13,8 +13,6 @@ import java.util.ArrayList;
  * @author ejbosia
  */
 
-
-
 public class EmployeeViewCustomerForm extends JDialog {
 
     private JFrame parentFrame;

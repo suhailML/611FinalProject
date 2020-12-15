@@ -41,7 +41,7 @@ public class BankEmployeeForm extends JFrame {
         JPanel panelAccounts = new JPanel(new BorderLayout());
         JPanel panelActions = new JPanel(layout);
 
-        outputJTextArea = new JTextArea(employee.getFullOutput());
+        outputJTextArea = new JTextArea(employee.getFullOutput() + "\n\n" + bank.fullOutput());
         outputJTextArea.setEnabled(false);
         panelOutput.add(outputJTextArea);
 

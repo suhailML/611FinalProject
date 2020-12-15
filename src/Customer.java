@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class Customer extends User implements CustomerActions
+public class Customer extends User
 {
     private List<BankAccount> accounts;
     private List<Loan> loans;
@@ -52,8 +52,7 @@ public class Customer extends User implements CustomerActions
 
 
     /** Sum up all of the accounts **/
-    //TODO should this include loans?
-    public double getNetWorth(){
+    public double getTotalBalance(){
         double total = 0;
         for(BankAccount account : accounts){
             total += account.getBalance();
@@ -70,6 +69,11 @@ public class Customer extends User implements CustomerActions
         return total;
     }
 
+    /** Get the value of accounts - value of debts **/
+    public double getNetWorth(){
+        return getTotalBalance() - getTotalLoans();
+    }
+
     public void addAccount(BankAccount account)
     {
         getAccounts().add(account);
@@ -78,6 +82,16 @@ public class Customer extends User implements CustomerActions
     public void deleteAccount(BankAccount account)
     {
         getAccounts().remove(account);
+    }
+
+    public String fullOutput(){
+        String output = super.fullOutput();
+        output += " - Balance: " + String.format("%.2f",getTotalBalance()) + "\n";
+        output += " - Number loans: " + loans.size() + "\n";
+        output += " - Loans debt: " + String.format("%.2f", getTotalLoans()) + "\n";
+        output += " - Net worth:  " + String.format("%.2f",getNetWorth()) + "\n";
+
+        return output;
     }
 
 }

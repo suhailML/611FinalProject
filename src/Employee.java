@@ -1,4 +1,4 @@
-public class Employee extends User implements EmployeeActions
+public class Employee extends User
 {
     /*
     CONSTRUCTORS

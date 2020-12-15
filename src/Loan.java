@@ -128,8 +128,8 @@ public class Loan
     public String fullOutput(){
         String output = "Loan: " + loanID + "\n";
 
-        output += " - initial value: " + initialValue + "\n";
-        output += " - present value: " + presentValue + "\n";
+        output += " - initial value: " + String.format("%.2f",initialValue) + "\n";
+        output += " - present value: " + String.format("%.2f",presentValue) + "\n";
         output += " - interest rate: " + interestRate + "\n";
         output += " - lender name: " + lender.getName() + "\n";
         output += " - lendee name: " + lendee.getName() + "\n";
