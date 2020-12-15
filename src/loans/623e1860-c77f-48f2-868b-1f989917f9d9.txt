@@ -1,2 +1,10 @@
 
 Bank,Test-Account,a612b5ce-db25-40bd-ba65-d19519fbf115,1000.0,1000.0,0.01,mylife
+Bank,Test-Account,a612b5ce-db25-40bd-ba65-d19519fbf115,1000.0,1010.0,0.01,mylife
+Bank,Test-Account,a612b5ce-db25-40bd-ba65-d19519fbf115,1000.0,1020.1,0.01,mylife
+Bank,Test-Account,a612b5ce-db25-40bd-ba65-d19519fbf115,1000.0,1030.301,0.01,mylife
+Bank,Test-Account,a612b5ce-db25-40bd-ba65-d19519fbf115,1000.0,1010.0,0.01,mylife
+Bank,Test-Account,a612b5ce-db25-40bd-ba65-d19519fbf115,1000.0,1020.1,0.01,mylife
+Bank,Test-Account,a612b5ce-db25-40bd-ba65-d19519fbf115,1000.0,1030.301,0.01,mylife
+Bank,Test-Account,a612b5ce-db25-40bd-ba65-d19519fbf115,1000.0,1040.60401,0.01,mylife
+Bank,Test-Account,a612b5ce-db25-40bd-ba65-d19519fbf115,1000.0,400.0,0.01,mylife
