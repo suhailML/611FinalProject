@@ -115,7 +115,7 @@ public class DepositWithdrawDialog extends JDialog {
             System.out.println("\t" + money);
 
             if(bank.getBankRequestManager().deposit(bank, account, money)){
-                JOptionPane.showMessageDialog(DepositWithdrawDialog.this, "Deposit completed: " + account + " " + money, "Deposit", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(DepositWithdrawDialog.this, "Deposit completed: " + account + " " + money + "\nTransaction Fee: " + bank.getSettings().getTransactionFee(), "Deposit", JOptionPane.INFORMATION_MESSAGE);
                 DepositWithdrawDialog.this.dispose();
             }
             else
@@ -138,7 +138,7 @@ public class DepositWithdrawDialog extends JDialog {
             System.out.println("\t" + money);
 
             if(bank.getBankRequestManager().withdraw(bank, account, money)){
-                JOptionPane.showMessageDialog(DepositWithdrawDialog.this, "Withdraw completed: " + account + " " + money, "Withdraw", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(DepositWithdrawDialog.this, "Withdraw completed: " + account.getName() + " " + money + "\nTransaction Fee: " + bank.getSettings().getTransactionFee(), "Withdraw", JOptionPane.INFORMATION_MESSAGE);
                 DepositWithdrawDialog.this.dispose();
             }
             else

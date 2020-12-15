@@ -108,7 +108,6 @@ public class UserForm extends JFrame {
 
     private class EditUserActionListener implements ActionListener{
         public void actionPerformed(ActionEvent e) {
-            //TODO Create account form
             System.out.println("Edit User");
             new EditUserDialog(UserForm.this.bank, UserForm.this.customer, UserForm.this).setVisible(true);
             accountJList.updateUI();
@@ -118,7 +117,6 @@ public class UserForm extends JFrame {
     /** Open the window to add an account **/
     private class AddAccountActionListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            //TODO Create account form
             System.out.println("Add Account");
             new AddAccountDialog(UserForm.this.bank, UserForm.this.customer, UserForm.this).setVisible(true);
             updateAccountJList();

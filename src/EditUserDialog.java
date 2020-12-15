@@ -101,9 +101,6 @@ public class EditUserDialog extends JDialog {
             firstName = firstName.replaceAll("\\s", "-");
             lastName = lastName.replaceAll("\\s", "-");
 
-            System.out.println("TODO EDIT Customer!");
-
-
             if(bank.getBankRequestManager().updateCustomer(bank, customer, password, firstName, lastName)){
                 JOptionPane.showMessageDialog(EditUserDialog.this, "Edited user " + customer.getFirstName() + " " + customer.getLastName(), "Edit User", JOptionPane.INFORMATION_MESSAGE);
             }
