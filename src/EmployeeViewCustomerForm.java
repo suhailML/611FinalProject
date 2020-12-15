@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 
 
-public class EmployeeViewCustomerForm extends JFrame {
+public class EmployeeViewCustomerForm extends JDialog {
 
     private JFrame parentFrame;
 
@@ -28,7 +28,7 @@ public class EmployeeViewCustomerForm extends JFrame {
 
     public EmployeeViewCustomerForm(Bank bank, Customer customer, JFrame parentFrame){
 
-        this.parentFrame = parentFrame;
+        super(parentFrame);
 
         this.bank = bank;
         this.customer = customer;
@@ -41,7 +41,6 @@ public class EmployeeViewCustomerForm extends JFrame {
 
         JPanel panelLoan = new JPanel(new BorderLayout());
         JPanel panelAccounts = new JPanel(new BorderLayout());
-        JPanel panelActions = new JPanel(actionsLayout);
 
         ScrollPane accountScroll = new ScrollPane();
         ScrollPane loanScroll = new ScrollPane();
@@ -63,8 +62,12 @@ public class EmployeeViewCustomerForm extends JFrame {
         panelAccountsInfo.add(accountScroll);
         panelAccountsInfo.add(accountTextArea);
 
+        JButton viewTransactionsButton = new JButton("View Transactions");
+        viewTransactionsButton.addActionListener(new ViewTransactionsActionListener());
+
         panelAccounts.add(new JLabel("Account Picker"), BorderLayout.NORTH);
         panelAccounts.add(panelAccountsInfo, BorderLayout.CENTER);
+        panelAccounts.add(viewTransactionsButton, BorderLayout.SOUTH);
 
         JPanel panelLoanInfo = new JPanel(infoPanelLayout);
         panelLoanInfo.add(loanScroll);
@@ -73,21 +76,13 @@ public class EmployeeViewCustomerForm extends JFrame {
         panelLoan.add(new JLabel("Loan Picker"), BorderLayout.NORTH);
         panelLoan.add(panelLoanInfo, BorderLayout.CENTER);
 
-        JButton returnButton = new JButton("Back");
-
-        returnButton.addActionListener(new ReturnActionListener());
-
-        panelActions.add(returnButton);
-
         add(panelAccounts);
         add(panelLoan);
-        add(panelActions);
 
-        setTitle("Bank View of User");
+        setTitle("Customer: " + customer);
         setSize(600,400);
-        //setLayout(null);
-        setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE);
-        setVisible(true);
+        setModal(true);
+        setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
     }
 
     private class AccountListActionListener implements ListSelectionListener {
@@ -117,14 +112,15 @@ public class EmployeeViewCustomerForm extends JFrame {
         }
     }
 
-    private class ReturnActionListener implements ActionListener{
+
+    private class ViewTransactionsActionListener implements ActionListener{
+        @Override
         public void actionPerformed(ActionEvent e) {
-            System.out.println("Signout");
-            parentFrame.setVisible(true);
-            EmployeeViewCustomerForm.this.dispose();
+            BankAccount account  = (BankAccount)accountJList.getSelectedValue();
+
+            // OPEN A MESSAGE BOX
+            JOptionPane.showMessageDialog(EmployeeViewCustomerForm.this, account.getTransactionHistory());
         }
     }
-
-
 
 }

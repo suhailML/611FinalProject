@@ -35,4 +35,15 @@ public class TransactionHistory
     {
         getTransactions().add(transaction);
     }
+
+
+    public String toString(){
+        String output = "Transaction History\n";
+
+        for(Transaction transaction : transactions){
+            output += " - " + transaction + "\n";
+        }
+
+        return output;
+    }
 }

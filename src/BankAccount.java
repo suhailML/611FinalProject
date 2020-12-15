@@ -118,7 +118,12 @@ public abstract class BankAccount implements Transferable
     }
 
     public String fullOutput(){
-        return "ACCOUNT: " + name + "\n\t" + accountID + "\nCurrency: " + currencyType;
+
+        String output = "ACCOUNT\n";
+        output += " - Account name: " + name + "\n";
+        output += " - Account ID: " + accountID + "\n";
+        output += " - Balance: " + currencyType + balance;
+        return output;
     }
 
     public String toString(){

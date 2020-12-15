@@ -2,7 +2,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 /**
  * UserForm
@@ -48,11 +47,6 @@ public class UserForm extends JFrame {
 
         panelOutput.add(outputJTextArea, BorderLayout.CENTER);
         panelOutput.add(editUserButton, BorderLayout.SOUTH);
-
-        /*
-        DefaultListModel<BankAccount> listModel = new DefaultListModel<>();
-        listModel.
-         */
 
         accountJList = new JList(customer.getAccounts().toArray());
 

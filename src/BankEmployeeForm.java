@@ -113,9 +113,6 @@ public class BankEmployeeForm extends JFrame {
                 // get the index
                 Customer customer = customerJList.getSelectedValue();
                 System.out.println("Open customer: " + customer);
-
-                BankEmployeeForm.this.setVisible(false);
-
                 new EmployeeViewCustomerForm(bank, customer, BankEmployeeForm.this).setVisible(true);
 
             }catch(ArrayIndexOutOfBoundsException arrayIndexOutOfBoundsException){
@@ -128,7 +125,7 @@ public class BankEmployeeForm extends JFrame {
         public void actionPerformed(ActionEvent e) {
             System.out.println("Open transactions view");
 
-            new EmployeeViewTransactionsDialog(BankEmployeeForm.this.bank, BankEmployeeForm.this);
+            new EmployeeViewTransactionsDialog(BankEmployeeForm.this.bank, BankEmployeeForm.this).setVisible(true);
         }
     }
 

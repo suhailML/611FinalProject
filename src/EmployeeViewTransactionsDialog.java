@@ -4,11 +4,16 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * EmployeeViewTransactionsDialog
+ * Allow the employee to view all of the transactions for a given day.
+ *
+ * @author ejbosia
+ */
+
 public class EmployeeViewTransactionsDialog extends JDialog {
 
     private Bank bank;
-
-    private JFrame parentFrame;
 
     private JTextArea ouputTextArea;
 
@@ -47,13 +52,12 @@ public class EmployeeViewTransactionsDialog extends JDialog {
         actionPanel.add(cancelButton);
 
 
-        setTitle("Create User");
+        setTitle("Date Transaction Viewer");
         // set up the action selection buttons
 
         setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         setModal(true);
         setLocationRelativeTo(null);
-        setVisible(true);
     }
 
 
