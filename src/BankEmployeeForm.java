@@ -91,7 +91,7 @@ public class BankEmployeeForm extends JFrame {
     /** Open the bank settings editor form **/
     private class CreateEmployeeActionListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            new CreateEmployeeDialog( BankEmployeeForm.this.bank, BankEmployeeForm.this).setVisible(true);
+            new CreateEmployeeDialog(bank, BankEmployeeForm.this).setVisible(true);
         }
     }
 
@@ -100,7 +100,7 @@ public class BankEmployeeForm extends JFrame {
     private class EditSettingsActionListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
 
-            new BankSettingsForm(BankEmployeeForm.this, BankEmployeeForm.this.bank).setVisible(true);
+            new BankSettingsForm(BankEmployeeForm.this, bank).setVisible(true);
 
         }
     }

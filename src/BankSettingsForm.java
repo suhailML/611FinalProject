@@ -3,6 +3,14 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * BankSettingsForm
+ * Allows the employee to change the Bank Settings
+ *
+ * @author ejbosia
+ */
+
+
 public class BankSettingsForm extends JDialog {
 
     private JTextField transactionFeeField, savingsInterestRateField, loanInterestRateField, minSavingsForInterestField;

@@ -1,5 +1,11 @@
 import java.util.*;
 
+/**
+ * BankAccountFactory
+ * Allows for different types of BankAccount classes to be created.
+ */
+
+
 public class BankAccountFactory 
 {
     public BankAccountFactory() {}
