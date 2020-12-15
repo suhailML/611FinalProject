@@ -90,13 +90,10 @@ public class EditUserDialog extends JDialog {
     private class EditUserActionListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
 
-            String username = EditUserDialog.this.usernameField.getText();
             String password = EditUserDialog.this.passwordField.getText();
             String firstName = EditUserDialog.this.firstNameField.getText();
             String lastName = EditUserDialog.this.lastNameField.getText();
 
-
-            username = username.replaceAll("\\s", "-");
             password = password.replaceAll("\\s", "-");
             firstName = firstName.replaceAll("\\s", "-");
             lastName = lastName.replaceAll("\\s", "-");
@@ -107,8 +104,6 @@ public class EditUserDialog extends JDialog {
             else{
                 JOptionPane.showMessageDialog(EditUserDialog.this, "User Edit failed.", "User Edit Error", JOptionPane.ERROR_MESSAGE);
             }
-
-
 
 
 
