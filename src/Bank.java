@@ -131,10 +131,8 @@ public class Bank implements Transferable
 
     public boolean receive(double money)
     {
-        boolean valid = false;
         addToReserves(money);
-        valid = true;
-        return valid;
+        return true;
     }
 
     public String getName()

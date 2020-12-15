@@ -107,12 +107,12 @@ public class CreateUserDialog extends JDialog {
             if(customer != null){
                 JOptionPane.showMessageDialog(CreateUserDialog.this, "Created user " + customer, "Customer Create", JOptionPane.INFORMATION_MESSAGE);
                 new AddAccountDialog(bank,customer, CreateUserDialog.this.parentFrame).setVisible(true);
+                CreateUserDialog.this.dispose();
             }
             else{
-                JOptionPane.showMessageDialog(CreateUserDialog.this, "User creation failed.", "User Creation Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(CreateUserDialog.this, "User creation failed. Duplicate Username", "User Creation Error", JOptionPane.ERROR_MESSAGE);
             }
 
-            CreateUserDialog.this.dispose();
         }
     }
 

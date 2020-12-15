@@ -91,6 +91,7 @@ public class Program
 
                 for (List<String> loanCredential : loanCredentials)
                 {
+                    System.out.println("LOAN " + loanCredential);
                     Loan loan = loanFactory.createExistingLoan(bank, account, loanCredential.get(2), Double.parseDouble(loanCredential.get(3)), Double.parseDouble(loanCredential.get(4)), Double.parseDouble(loanCredential.get(5)), loanCredential.get(6));
                     loans.add(loan);
                 }

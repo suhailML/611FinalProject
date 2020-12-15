@@ -1,3 +1,2 @@
 
 Bank,Test-Account,a612b5ce-db25-40bd-ba65-d19519fbf115,1000.0,1000.0,0.01,mylife
-
