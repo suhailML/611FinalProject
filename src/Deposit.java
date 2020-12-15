@@ -11,6 +11,6 @@ public class Deposit extends Transaction
     }
 
     public String toString(){
-        return "DEPOSIT " + super.toString();
+        return "Day: " + getDay() + "\tDeposit: " + getMoney() + " from " + getAccount();
     }
 }

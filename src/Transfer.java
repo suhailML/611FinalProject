@@ -49,7 +49,7 @@ public class Transfer extends Transaction
     }
 
     public String toString() {
-        return "Transfer: "+ getMoney() + " - " + "FROM: " + senderName + " TO: " + receiverName;
+        return "Day: " + getDay() + "\tTransfer: "+ getMoney() + " - " + "FROM: " + senderName + " TO: " + receiverName;
     }
 
 }

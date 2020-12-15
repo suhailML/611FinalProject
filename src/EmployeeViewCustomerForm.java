@@ -65,7 +65,7 @@ public class EmployeeViewCustomerForm extends JDialog {
         JButton viewTransactionsButton = new JButton("View Transactions");
         viewTransactionsButton.addActionListener(new ViewTransactionsActionListener());
 
-        panelAccounts.add(new JLabel("Account Picker"), BorderLayout.NORTH);
+        panelAccounts.add(new JLabel("Accounts"), BorderLayout.NORTH);
         panelAccounts.add(panelAccountsInfo, BorderLayout.CENTER);
         panelAccounts.add(viewTransactionsButton, BorderLayout.SOUTH);
 
@@ -73,8 +73,13 @@ public class EmployeeViewCustomerForm extends JDialog {
         panelLoanInfo.add(loanScroll);
         panelLoanInfo.add(loanTextArea);
 
-        panelLoan.add(new JLabel("Loan Picker"), BorderLayout.NORTH);
+
+        JButton closeButton = new JButton("Close");
+        closeButton.addActionListener(new CloseActionListener());
+
+        panelLoan.add(new JLabel("Loans"), BorderLayout.NORTH);
         panelLoan.add(panelLoanInfo, BorderLayout.CENTER);
+        panelLoan.add(closeButton, BorderLayout.SOUTH);
 
         add(panelAccounts);
         add(panelLoan);
@@ -120,6 +125,14 @@ public class EmployeeViewCustomerForm extends JDialog {
 
             // OPEN A MESSAGE BOX
             JOptionPane.showMessageDialog(EmployeeViewCustomerForm.this, account.getTransactionHistory());
+        }
+    }
+
+    private class CloseActionListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            System.out.println("Close Employee Customer View");
+            EmployeeViewCustomerForm.this.dispose();
         }
     }
 

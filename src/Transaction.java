@@ -1,10 +1,8 @@
-public abstract class Transaction 
+public abstract class Transaction implements Comparable<Transaction>
 {
     private String accountID;
     private double money;
     private int day;
-
-
 
     public Transaction(BankAccount account, double money, int day)
     {
@@ -58,6 +56,10 @@ public abstract class Transaction
         return day;
     }
 
+    /** Compare the transaction by day for sorting **/
+    public int compareTo(Transaction t){
+        return t.getDay() - getDay();
+    }
 
     public String toString(){
         return money + " - " + getAccount() + " DAY: " + day;

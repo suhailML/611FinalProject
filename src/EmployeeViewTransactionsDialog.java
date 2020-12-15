@@ -24,10 +24,10 @@ public class EmployeeViewTransactionsDialog extends JDialog {
 
         this.bank = bank;
 
-        setSize(400,220);
+        setSize(700,400);
 
         JPanel infoPanel = new JPanel();
-        ouputTextArea = new JTextArea(8, 25);
+        ouputTextArea = new JTextArea(20, 50);
 
         JScrollPane scrollPane = new JScrollPane( ouputTextArea );
         infoPanel.add(scrollPane);

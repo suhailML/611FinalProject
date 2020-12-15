@@ -36,9 +36,11 @@ public class TransactionHistory
         getTransactions().add(transaction);
     }
 
-
+    /** Output all of the transactions in the transaction history) **/
     public String toString(){
         String output = "Transaction History\n";
+
+        Collections.sort(transactions);
 
         for(Transaction transaction : transactions){
             output += " - " + transaction + "\n";

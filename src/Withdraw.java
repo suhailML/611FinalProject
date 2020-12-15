@@ -11,6 +11,6 @@ public class Withdraw extends Transaction
     }
 
     public String toString(){
-        return "WITHDRAW " + super.toString();
+        return "Day: " + getDay() + "\tWithdraw: " + getMoney() + " from " + getAccount();
     }
 }
