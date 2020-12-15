@@ -44,10 +44,10 @@ public class DepositWithdrawDialog extends JDialog {
 
         // update sender when the sender combo box changes
         accountComboBox.addActionListener(e -> {
-            accountValueLabel.setText("$" + ((BankAccount)accountComboBox.getSelectedItem()).getBalance());
+            accountValueLabel.setText(((BankAccount)accountComboBox.getSelectedItem()).getCurrencyType() + ((BankAccount)accountComboBox.getSelectedItem()).getBalance());
         });
 
-        accountValueLabel = new JLabel("$" + ((BankAccount)accountComboBox.getSelectedItem()).getBalance());
+        accountValueLabel = new JLabel(((BankAccount)accountComboBox.getSelectedItem()).getCurrencyType() + ((BankAccount)accountComboBox.getSelectedItem()).getBalance());
 
         GridLayout rowLayout = new GridLayout(2,1, 5,5);
 

@@ -1,4 +1,10 @@
-import java.util.*;
+/**
+ * BankAccount implements Transferable
+ * The BankAccount abstract class provides the framework to create different types of BankAccount subclasses
+ *
+ *
+ */
+
 
 public abstract class BankAccount implements Transferable
 {

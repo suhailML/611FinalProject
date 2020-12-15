@@ -68,7 +68,6 @@ public class BankSettingsForm extends JDialog {
         add(actionPanel, BorderLayout.SOUTH);
 
         setTitle("Bank Settings");
-        // set up the action selection buttons
 
         setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);

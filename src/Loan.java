@@ -137,4 +137,8 @@ public class Loan
 
         return output;
     }
+
+    public String toString(){
+        return loanID;
+    }
 }

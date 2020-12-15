@@ -6,3 +6,5 @@ TRANSFER	-1.0	1	Bank	Test-Account
 TRANSFER	9999.0	1	Test-Account	Bank
 TRANSFER	999.0	1	Test-Account	Bank
 TRANSFER	999.0	1	Test-Account	Bank
+DEPOSIT	21700.0	1	NA	NA
+WITHDRAW	2900.0	1	NA	NA
