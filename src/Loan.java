@@ -124,4 +124,17 @@ public class Loan
     {
         presentValue += presentValue*interestRate;
     }
+
+    public String fullOutput(){
+        String output = "Loan: " + loanID + "\n";
+
+        output += " - initial value: " + initialValue + "\n";
+        output += " - present value: " + presentValue + "\n";
+        output += " - interest rate: " + interestRate + "\n";
+        output += " - lender name: " + lender.getName() + "\n";
+        output += " - lendee name: " + lendee.getName() + "\n";
+        output += " - collateral: " + collateral + "\n";
+
+        return output;
+    }
 }

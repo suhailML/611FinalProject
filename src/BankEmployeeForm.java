@@ -52,7 +52,7 @@ public class BankEmployeeForm extends JFrame {
 
         JButton createEmployeeButton = new JButton("Create Employee");
         JButton editSettingsButton = new JButton("Edit Settings");
-        JButton viewCustomerButton = new JButton("View Account");
+        JButton viewCustomerButton = new JButton("View Customer");
         JButton viewTransactionsButton = new JButton("View Transactions");
         incrementDay = new JButton("Increment Day: " + bank.getSettings().getDay());
         JButton signoutButton = new JButton("Sign out");

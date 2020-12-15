@@ -1,9 +1,15 @@
-import sun.rmi.runtime.Log;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+/**
+ * LoginForm
+ * The login form is the entry point for the program. It allows the user to enter credentials as an employee or a user.
+ *
+ * @author ejbosia
+ */
 
 public class LoginForm extends JFrame {
 
@@ -83,10 +89,14 @@ public class LoginForm extends JFrame {
 
             if (customer == null) {
                 JOptionPane.showMessageDialog(LoginForm.this, "Customer not found with these credentials", "Customer not Found", JOptionPane.ERROR_MESSAGE);
+                passwordField.setText("");
             }
             else {
                 LoginForm.this.setVisible(false);
                 new UserForm(bank, bank.getCustomer(username, password), LoginForm.this).setVisible(true); // Main Form to show after the Login Form..
+
+                usernameField.setText("");
+                passwordField.setText("");
             }
         }
     }
@@ -104,6 +114,7 @@ public class LoginForm extends JFrame {
 
             if (employee == null) {
                 JOptionPane.showMessageDialog(LoginForm.this, "Employee not found with these credentials", "Employee not Found", JOptionPane.ERROR_MESSAGE);
+                passwordField.setText("");
             }
             else{
                 LoginForm.this.setVisible(false);
@@ -115,6 +126,9 @@ public class LoginForm extends JFrame {
                         "First Name",
                         "Last Name"
                 ), LoginForm.this).setVisible(true); // Main Form to show after the Login Form..
+
+                usernameField.setText("");
+                passwordField.setText("");
             }
         }
     }

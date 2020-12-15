@@ -8,15 +8,12 @@ public class BankSettingsForm extends JDialog {
     private JTextField transactionFeeField, savingsInterestRateField, loanInterestRateField, minSavingsForInterestField;
 
     private Bank bank;
-    private Customer customer;
-
 
     public BankSettingsForm(JFrame parentFrame, Bank bank){
 
         super(parentFrame);
 
         this.bank = bank;
-        this.customer = customer;
 
         setSize(400,250);
 
@@ -43,7 +40,6 @@ public class BankSettingsForm extends JDialog {
         loanInterestRateField.setText(Double.toString(bank.getSettings().getLoanInterestRate()));
         minSavingsForInterestField.setText(Double.toString(bank.getSettings().getMinSavingsForInterest()));
 
-
         JPanel labelPanel = new JPanel(new GridLayout(4,1, 5,5));
         JPanel fieldPanel = new JPanel(new GridLayout(4,1, 5,5));
 
@@ -55,7 +51,6 @@ public class BankSettingsForm extends JDialog {
         fieldPanel.add(loanInterestRateField);
         labelPanel.add(new JLabel("Min Saving Amount for Interest"));
         fieldPanel.add(minSavingsForInterestField);
-
 
         infoPanel.add(labelPanel);
         infoPanel.add(fieldPanel);
@@ -104,17 +99,11 @@ public class BankSettingsForm extends JDialog {
                     JOptionPane.showMessageDialog(BankSettingsForm.this, "Bank settings failed to save.", "Bank Settings Error", JOptionPane.ERROR_MESSAGE);
                 }
 
-
                 BankSettingsForm.this.dispose();
-
             }
             catch(NumberFormatException numberFormatException){
                 JOptionPane.showMessageDialog(BankSettingsForm.this, "All field inputs must be numbers", "NUMBER ERROR", JOptionPane.ERROR_MESSAGE);
             }
-
-
-
-
         }
     }
 

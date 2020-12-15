@@ -1,4 +1,6 @@
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -20,7 +22,9 @@ public class EmployeeViewCustomerForm extends JFrame {
     private Bank bank;
     private Customer customer;
 
-    private JList accountJList;
+    private JList accountJList, loanJList;
+
+    private JTextArea accountTextArea, loanTextArea;
 
     public EmployeeViewCustomerForm(Bank bank, Customer customer, JFrame parentFrame){
 
@@ -29,35 +33,55 @@ public class EmployeeViewCustomerForm extends JFrame {
         this.bank = bank;
         this.customer = customer;
 
-        debugInit();
-
-        GridLayout frameLayout = new GridLayout(1,2, 10, 0);
+        GridLayout frameLayout = new GridLayout(1,3, 10, 0);
         setLayout(frameLayout);
 
         GridLayout actionsLayout = new GridLayout(3,1,10,10);
+        GridLayout infoPanelLayout = new GridLayout(2,1,10,10);
 
+        JPanel panelLoan = new JPanel(new BorderLayout());
         JPanel panelAccounts = new JPanel(new BorderLayout());
         JPanel panelActions = new JPanel(actionsLayout);
 
-        accountJList = new JList(customer.getAccounts().toArray());
+        ScrollPane accountScroll = new ScrollPane();
+        ScrollPane loanScroll = new ScrollPane();
+
+
+        accountJList = new JList(customer.getAccounts().toArray(new BankAccount[0]));
+        loanJList = new JList(customer.getLoans().toArray(new Loan[0]));
+
+        accountJList.addListSelectionListener(new AccountListActionListener());
+        loanJList.addListSelectionListener(new LoanListActionListener());
+
+        accountScroll.add(accountJList);
+        loanScroll.add(loanJList);
+
+        accountTextArea = new JTextArea();
+        loanTextArea = new JTextArea();
+
+        JPanel panelAccountsInfo = new JPanel(infoPanelLayout);
+        panelAccountsInfo.add(accountScroll);
+        panelAccountsInfo.add(accountTextArea);
 
         panelAccounts.add(new JLabel("Account Picker"), BorderLayout.NORTH);
-        panelAccounts.add(accountJList, BorderLayout.CENTER);
+        panelAccounts.add(panelAccountsInfo, BorderLayout.CENTER);
 
-        JButton sortAccountsButton = new JButton("Sort Accounts");
-        JButton viewAccountButton = new JButton("View Account");
-        JButton returnButton = new JButton("Back");;
+        JPanel panelLoanInfo = new JPanel(infoPanelLayout);
+        panelLoanInfo.add(loanScroll);
+        panelLoanInfo.add(loanTextArea);
 
-        sortAccountsButton.addActionListener(new SortAccountsActionListener());
-        viewAccountButton.addActionListener(new ViewAccountActionListener());
+        panelLoan.add(new JLabel("Loan Picker"), BorderLayout.NORTH);
+        panelLoan.add(panelLoanInfo, BorderLayout.CENTER);
+
+        JButton returnButton = new JButton("Back");
+
         returnButton.addActionListener(new ReturnActionListener());
 
-        panelActions.add(sortAccountsButton);
-        panelActions.add(viewAccountButton);
         panelActions.add(returnButton);
 
-        add(panelAccounts);//adding button on frame
-        add(panelActions);//adding button on frame
+        add(panelAccounts);
+        add(panelLoan);
+        add(panelActions);
 
         setTitle("Bank View of User");
         setSize(600,400);
@@ -66,51 +90,32 @@ public class EmployeeViewCustomerForm extends JFrame {
         setVisible(true);
     }
 
-
-        private void debugInit(){
-
-            ArrayList<BankAccount> accounts = new ArrayList<>();
-
-            CheckingAccount test = new CheckingAccount("First Checking Account","A","$");
-           // LinkedList<Transaction> transactionList = new LinkedList<>();
-            //transactionList.add(new Transaction());
-            //transactionList.add(new Transaction());
-           /// transactionList.add(new Transaction());
-
-            //test.setTransactions(transactionList);
-            accounts.add(test);
-            accounts.add(new SavingsAccount("First Savings Account","A","$"));
-
-            this.customer.setAccounts(accounts);
-        }
-
-    private class SortAccountsActionListener implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
-            //TODO Create account form
-            System.out.println("SORT ACCOUNTS");
-        }
-    }
-
-    private class ViewAccountActionListener implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
-
-            try {
-                // get the index
-                int index = accountJList.getLeadSelectionIndex();
-                System.out.println("ACCOUNT: " + index);
-
-                // get the account
-                BankAccount account = customer.getAccounts().get(index);
-
-                // Open the EmployeeViewAccount form
-                new EmployeeViewAccountForm(EmployeeViewCustomerForm.this.bank, account, EmployeeViewCustomerForm.this);
-
-            }catch(IndexOutOfBoundsException indexOutOfBoundsException){
-                JOptionPane.showMessageDialog(null, "NO ACCOUNT SELECTED", "ERROR", JOptionPane.ERROR_MESSAGE);
+    private class AccountListActionListener implements ListSelectionListener {
+        public void valueChanged(ListSelectionEvent e) {
+            if(e.getValueIsAdjusting()){
+                // do nothing until the selection is finalized
+            }
+            else {
+                BankAccount account = (BankAccount)accountJList.getSelectedValue();
+                System.out.println("Account " + account);
+                accountTextArea.setText(account.fullOutput());
             }
         }
     }
 
+    private class LoanListActionListener implements ListSelectionListener {
+        public void valueChanged(ListSelectionEvent e) {
+
+            if(e.getValueIsAdjusting()){
+                // do nothing until the selection is finalized
+            }
+            else {
+                Loan loan = (Loan)loanJList.getSelectedValue();
+                System.out.println("Loan " + loan);
+                loanTextArea.setText(loan.fullOutput());
+            }
+        }
+    }
 
     private class ReturnActionListener implements ActionListener{
         public void actionPerformed(ActionEvent e) {

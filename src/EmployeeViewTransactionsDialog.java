@@ -15,13 +15,11 @@ public class EmployeeViewTransactionsDialog extends JDialog {
     private JSpinner daySelectSpinner;
 
     public EmployeeViewTransactionsDialog(Bank bank, JFrame parentFrame){
-        this.parentFrame = parentFrame;
+        super(parentFrame);
 
         this.bank = bank;
 
         setSize(400,220);
-
-
 
         JPanel infoPanel = new JPanel();
         ouputTextArea = new JTextArea(8, 25);
