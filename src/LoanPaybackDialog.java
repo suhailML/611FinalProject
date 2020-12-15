@@ -134,8 +134,12 @@ public class LoanPaybackDialog extends JDialog {
 
             //TODO payback loan action
             if(bank.getBankRequestManager().payBackLoan(bank, lendee, bank, money, loan)){
-                JOptionPane.showMessageDialog(LoanPaybackDialog.this, "Loan value remaining: " + loan.getPresentValue(), "Loan Payment", JOptionPane.INFORMATION_MESSAGE);
-
+                if(loan.getPresentValue() > 0) {
+                    JOptionPane.showMessageDialog(LoanPaybackDialog.this, "Loan value remaining: " + loan.getPresentValue(), "Loan Payment", JOptionPane.INFORMATION_MESSAGE);
+                }
+                else{
+                    JOptionPane.showMessageDialog(LoanPaybackDialog.this, "You have payed off the loan!", "Loan Payment Complete", JOptionPane.INFORMATION_MESSAGE);
+                }
                 LoanPaybackDialog.this.dispose();
             }
             else{

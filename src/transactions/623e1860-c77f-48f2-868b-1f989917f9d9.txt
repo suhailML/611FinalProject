@@ -4,3 +4,4 @@ TRANSFER	999.0	1	Bank	Test-Account
 TRANSFER	9999.0	5	Bank	Test-Account
 TRANSFER	-1.0	1	Bank	Test-Account
 TRANSFER	9999.0	1	Test-Account	Bank
+TRANSFER	999.0	1	Test-Account	Bank
