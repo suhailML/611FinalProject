@@ -10,11 +10,7 @@ public class Employee extends User
         super(username, password, userID, firstName, lastName);
     }
 
-    public String getFullOutput(){
-        String output = "First Name: " + getFirstName() + "\n";
-        output += "Last Name: " + getLastName() + "\n";
-        output += "Username: " + getUsername() + "\n";
-        output += "Password: " + getPassword() + "\n";
-        return output;
+    public String fullOutput(){
+        return "Employee:\n" + super.fullOutput()+ "\n";
     }
 }

@@ -49,7 +49,7 @@ public class Transfer extends Transaction
     }
 
     public String toString() {
-        return "Day: " + getDay() + "\tTransfer: "+ String.format("%. 2f",getMoney()) + " - " + "FROM: " + senderName + " TO: " + receiverName;
+        return "Day: " + getDay() + " Transfer: "+ String.format("%.2f",getMoney()) + " - " + "FROM: " + senderName + " TO: " + receiverName;
     }
 
 }

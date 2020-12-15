@@ -11,6 +11,6 @@ public class Withdraw extends Transaction
     }
 
     public String toString(){
-        return "Day: " + getDay() + "\tWithdraw: " + String.format("%. 2f",getMoney()) + " from " + getAccount();
+        return "Day: " + getDay() + " Withdraw: " + String.format("%.2f",getMoney()) + " from " + getAccount();
     }
 }

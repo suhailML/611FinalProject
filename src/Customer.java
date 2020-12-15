@@ -85,7 +85,7 @@ public class Customer extends User
     }
 
     public String fullOutput(){
-        String output = super.fullOutput();
+        String output = "Customer:\n" + super.fullOutput()+ "\n";
         output += " - Balance: " + String.format("%.2f",getTotalBalance()) + "\n";
         output += " - Number loans: " + loans.size() + "\n";
         output += " - Loans debt: " + String.format("%.2f", getTotalLoans()) + "\n";

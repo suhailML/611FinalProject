@@ -77,7 +77,7 @@ public abstract class User
     }
 
     public String fullOutput(){
-        return "ACCOUNT: " + username + "\n\t" + password + "\nName: " + firstName + " " + lastName;
+        return " - Username: "+ username + "\n - Password: " + password + "\n - Name: " + firstName + " " + lastName;
     }
 
     public String toString(){

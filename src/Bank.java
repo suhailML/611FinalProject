@@ -196,11 +196,23 @@ public class Bank implements Transferable
         return employee;
     }
 
+    public double getTotalCustomerDebt(){
+
+        double totalCustomerDebt = 0;
+        for(Customer customer : customers){
+            totalCustomerDebt += customer.getTotalLoans();
+        }
+
+        return totalCustomerDebt;
+    }
+
     public String fullOutput(){
         String output = "BANK STATS\n";
         output += " - # OF CUSTOMERS: " + customers.size() + "\n";
         output += " - # OF EMPLOYEES: " + employees.size() + "\n";
-        output += " - RESERVES: " + String.format("%.2f", reserves);
+        output += " - RESERVES:\n        " + String.format("%.2f", reserves) + "\n";
+        output += " - MONEY OWED:\n       " + String.format("%.2f", getTotalCustomerDebt()) + "\n";
+
         return output;
     }
 }
