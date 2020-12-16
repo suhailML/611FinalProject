@@ -177,6 +177,15 @@ public class BankRequestManager implements GUIRequests
     */
     public boolean deleteAccount(Bank bank, Customer customer, BankAccount account)
     {
+
+        double fee = bank.getSettings().getTransactionFee();
+
+        if(fee > account.getBalance()){
+            fee = account.getBalance();
+        }
+
+        transfer(bank, account, bank, fee);
+
         customer.deleteAccount(account);
         bank.getBankDB().deleteAccount(customer.getUserID(), account.getAccountID());
 
@@ -196,10 +205,10 @@ public class BankRequestManager implements GUIRequests
             bank.addToReserves(settings.getTransactionFee());
             Transaction transaction = transactionFactory.getWithdraw(settings.getDay(), money, account);
             account.addTransaction(transaction);
-            bank.getBankDB().addTransactionWDL("WITHDRAW", account.getAccountID(), Double.toString(transaction.getMoney()), Integer.toString(transaction.getDay()), "NA", "NA");  
-            bank.getBankDB().updateBankSettings("1", Double.toString(settings.getTransactionFee()), Double.toString(settings.getSavingsInterestRate()), Double.toString(settings.getLoanInterestRate()), Double.toString(settings.getMinSavingsForInterest()), Double.toString(bank.getReserves()), Integer.toString(settings.getDay()));;
+            bank.getBankDB().addTransactionWDL("WITHDRAW", account.getAccountID(), String.format("%.2f", transaction.getMoney()), Integer.toString(transaction.getDay()), "NA", "NA");
+            bank.getBankDB().updateBankSettings("1", String.format("%.2f", settings.getTransactionFee()), Double.toString(settings.getSavingsInterestRate()), Double.toString(settings.getLoanInterestRate()), Double.toString(settings.getMinSavingsForInterest()), String.format("%.2f", bank.getReserves()), Integer.toString(settings.getDay()));;
 
-            bank.getBankDB().updateAccount(account.getAccountID(), account.getName(), account.getCurrencyType(), Double.toString(account.getBalance()));
+            bank.getBankDB().updateAccount(account.getAccountID(), account.getName(), account.getCurrencyType(), String.format("%.2f", account.getBalance()));
             valid = true;
         }
         return valid;
@@ -216,11 +225,10 @@ public class BankRequestManager implements GUIRequests
 
         bank.addToReserves(bank.getSettings().getTransactionFee());
         Transaction transaction = transactionFactory.getDeposit(bank.getSettings().getDay(), money, account);
-        bank.getBankDB().addTransactionWDL("DEPOSIT", account.getAccountID(), Double.toString(transaction.getMoney()), Integer.toString(transaction.getDay()), "NA", "NA");  
-        bank.getBankDB().updateBankSettings("1", Double.toString(settings.getTransactionFee()), Double.toString(settings.getSavingsInterestRate()), Double.toString(settings.getLoanInterestRate()), Double.toString(settings.getMinSavingsForInterest()), Double.toString(bank.getReserves()), Integer.toString(settings.getDay()));;
+        bank.getBankDB().addTransactionWDL("DEPOSIT", account.getAccountID(), String.format("%.2f", transaction.getMoney()), Integer.toString(transaction.getDay()), "NA", "NA");
+        bank.getBankDB().updateBankSettings("1", String.format("%.2f", settings.getTransactionFee()), Double.toString(settings.getSavingsInterestRate()), Double.toString(settings.getLoanInterestRate()), Double.toString(settings.getMinSavingsForInterest()), String.format("%.2f", bank.getReserves()), Integer.toString(settings.getDay()));;
 
-
-        bank.getBankDB().updateAccount(account.getAccountID(), account.getName(), account.getCurrencyType(), Double.toString(account.getBalance()));
+        bank.getBankDB().updateAccount(account.getAccountID(), account.getName(), account.getCurrencyType(), String.format("%.2f", account.getBalance()));
 
         valid = true;
         return valid;
@@ -265,7 +273,7 @@ public class BankRequestManager implements GUIRequests
                 bank.getBankDB().deleteLoan(loan.getLoanID(), ((BankAccount) loan.getLendee()).getAccountID());
             }
             else {
-                bank.getBankDB().updateLoan(((BankAccount) loan.getLendee()).getAccountID(), loan.getLender().getName(), loan.getLendee().getName(), loan.getLoanID(), Double.toString(loan.getInitialValue()), Double.toString(loan.getPresentValue()), Double.toString(loan.getInterestRate()), loan.getCollateral());
+                bank.getBankDB().updateLoan(((BankAccount) loan.getLendee()).getAccountID(), loan.getLender().getName(), loan.getLendee().getName(), loan.getLoanID(), String.format("%.2f", loan.getInitialValue()), String.format("%.2f", loan.getPresentValue()), Double.toString(loan.getInterestRate()), loan.getCollateral());
             }
             return true;
         }
