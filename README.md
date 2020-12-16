@@ -27,6 +27,14 @@ The first screen is the login screen. Enter the username and password into their
 
 If login is successful, depending on the type of login, either the bank homepage or the customer homepage is shown.
 
+### NOTES
+ - Users must be created with an account.
+ - Accounts must be created with a deposit.
+ - Adding and deleting accounts charges a bank fee.
+ - Banks control updating the day ~ used to calculate interest.
+ - Transfers are between two different accounts
+ - All transfers (withdraw, deposit, transfer) incur a bank fee. 
+
 
 ## Class Structure:
 
@@ -128,11 +136,11 @@ UserForm - homepage for the customer - has options to add or delete an account, 
 
 ### Unused
 
-StockOrder extends Transaction
+StockOrder
+BuyOrder
+SellOrder
 
-BuyOrder extends StockOrder
-
-SellOrder extends StockOrder
+StockOrder is a subclass of Transaction, and is the super class to BuyOrder and SellOrder. These orders would be used for the "Securities Account" part of the program which was unimplemented.
 
 ## Extra / Missed Features
 We did not attempt the bonus of stocks.
