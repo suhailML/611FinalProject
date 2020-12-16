@@ -13,9 +13,10 @@ suhails@bu.edu
 U05507139
 
 ## Compilation Instructions
-1. Open src folder in command terminal.
-2. javac *.java
-3. java main
+1. Unzip project.
+2. Open src folder (located inside unzipped folder) in command terminal.
+3. javac *.java
+4. java main
 
 
 ## Execution Instructions
