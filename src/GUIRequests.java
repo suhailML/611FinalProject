@@ -1,3 +1,12 @@
+/*
+File: GUIRequest.java
+Developer: Tristan Marchand, Evan Boria
+Email: tmarch@bu.edu
+Last Edited: Wednesday, December 16, 2020
+
+Description: Stores all function calls made by the GUI
+*/
+
 public interface GUIRequests 
 {
     public boolean withdraw(Bank bank, BankAccount account, double money);
@@ -14,7 +23,4 @@ public interface GUIRequests
     public boolean updateCustomer(Bank bank, Customer customer, String firstName, String lastName, String password);
     public boolean incrementDay(Bank bank);
     public String queryTransactions(Bank bank, int day);
-
-    //TODO add these functions
-    
 }
