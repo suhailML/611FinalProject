@@ -229,14 +229,15 @@ public class BankRequestManager implements GUIRequests
     /*
     takeOutLoan - Take a loan from the lender to the lendee
     */
-    public boolean takeOutLoan(Bank bank, Transferable lender, Transferable lendee, double money, String collateral)
+    public boolean takeOutLoan(Bank bank,Customer customer, Transferable lender, Transferable lendee, double money, String collateral)
     {
         Loan loan = loanFactory.createNewLoan(bank, lendee, money, bank.getSettings().getLoanInterestRate(), collateral);
 
         // if the loan transfer is successful from lender to lendee, add it to the database
         if(transfer(bank, lender, lendee, money))
         {
-            bank.getBankDB().addLoan(((BankAccount) loan.getLendee()).getAccountID(), loan.getLender().getName(), loan.getLendee().getName(), loan.getLoanID(), Double.toString(loan.getInitialValue()), Double.toString(loan.getPresentValue()), Double.toString(loan.getInterestRate()), loan.getCollateral());
+            bank.getBankDB().addLoan(((BankAccount) loan.getLendee()).getAccountID(), loan.getLender().getName(), loan.getLendee().getName(), loan.getLoanID(), String.format("%.2f", loan.getInitialValue()), String.format("%.2f", loan.getPresentValue()), Double.toString(loan.getInterestRate()), loan.getCollateral());
+            customer.getLoans().add(loan);
             return true;
         }
 

@@ -116,7 +116,8 @@ public class LoanCreateDialog extends JDialog {
             double money = (Double) LoanCreateDialog.this.amountSpinner.getValue();
 
             if(money > 1000000){
-                JOptionPane.showMessageDialog(LoanCreateDialog.this, "LOAN MUST BE LESS THAN ");
+                JOptionPane.showMessageDialog(LoanCreateDialog.this, "LOAN MUST BE LESS THAN 1000000");
+                return;
             }
 
             Transferable lendee = LoanCreateDialog.this.senderComboBox.getItemAt(lendeeIndex);
@@ -131,7 +132,7 @@ public class LoanCreateDialog extends JDialog {
             System.out.println("\t" + money);
             System.out.println("\t" + collateral);
 
-            if(bank.getBankRequestManager().takeOutLoan(bank, bank, lendee, money, collateral)){
+            if(bank.getBankRequestManager().takeOutLoan(bank, customer, bank, lendee, money, collateral)){
                 JOptionPane.showMessageDialog(LoanCreateDialog.this, "Loan Requested", "Loan Request Success", JOptionPane.INFORMATION_MESSAGE);
                 LoanCreateDialog.this.dispose();
             }

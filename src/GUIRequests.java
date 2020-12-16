@@ -12,7 +12,7 @@ public interface GUIRequests
     public boolean withdraw(Bank bank, BankAccount account, double money);
     public boolean deposit(Bank bank, BankAccount account, double money);
     public boolean transfer(Bank bank, Transferable sender, Transferable receiver, double money);
-    public boolean takeOutLoan(Bank bank, Transferable lendee, Transferable lender, double money, String collateral);
+    public boolean takeOutLoan(Bank bank,Customer customer, Transferable lender, Transferable lendee, double money, String collateral);
     public boolean payBackLoan(Bank bank, Transferable lendee, Transferable lender, double money, Loan loan);
     public Customer createCustomer(Bank bank, String username, String password, String firstName, String lastName);
     public Customer checkCustomerLogin(Bank bank, String username, String password);

@@ -3,3 +3,8 @@ DEPOSIT	400.0	46	NA	NA
 TRANSFER	-10.0	46	Bank	Checking-Yen
 TRANSFER	4990.0	46	Bank	Checking-Yen
 TRANSFER	2990.0	46	Bank	Checking-Yen
+TRANSFER	990.0	46	Bank	Checking-Yen
+TRANSFER	990.0	46	Checking-Yen	Bank
+TRANSFER	999990.0	46	Bank	Checking-Yen
+TRANSFER	999990.0	46	Checking-Yen	Bank
+TRANSFER	1.23214233E9	46	Bank	Checking-Yen
