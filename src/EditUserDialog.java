@@ -25,7 +25,6 @@ public class EditUserDialog extends JDialog {
         GridLayout labelPanelLayout = new GridLayout(5,1, 5,5);
         GridLayout textFieldPanelLayout = new GridLayout(5,1, 5,5);
 
-
         JPanel infoPanel = new JPanel(infoPanelLayout);
         JPanel labelPanel = new JPanel(labelPanelLayout);
         JPanel textFieldPanel = new JPanel(textFieldPanelLayout);
@@ -78,7 +77,7 @@ public class EditUserDialog extends JDialog {
         actionPanel.add(cancelButton);
 
 
-        setTitle("Create User");
+        setTitle("Edit User");
         // set up the action selection buttons
 
         setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -99,14 +98,12 @@ public class EditUserDialog extends JDialog {
             firstName = firstName.replaceAll("\\s", "-");
             lastName = lastName.replaceAll("\\s", "-");
 
-            if(bank.getBankRequestManager().updateCustomer(bank, customer, password, firstName, lastName)){
+            if(bank.getBankRequestManager().updateCustomer(bank, customer, firstName, lastName, password)){
                 JOptionPane.showMessageDialog(EditUserDialog.this, "Edited user " + customer.getFirstName() + " " + customer.getLastName(), "Edit User", JOptionPane.INFORMATION_MESSAGE);
             }
             else{
                 JOptionPane.showMessageDialog(EditUserDialog.this, "User Edit failed.", "User Edit Error", JOptionPane.ERROR_MESSAGE);
             }
-
-
 
             EditUserDialog.this.dispose();
         }

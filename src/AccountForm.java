@@ -17,7 +17,7 @@ public class AccountForm extends JFrame {
 
         this.parentFrame = parentFrame;
 
-        this.outputJTextArea = new JTextArea(account.toString());
+        this.outputJTextArea = new JTextArea(account.fullOutput());
         this.outputJTextArea.setEnabled(false);
 
         this.bank = bank;
