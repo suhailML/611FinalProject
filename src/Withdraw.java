@@ -1,3 +1,12 @@
+/*
+File: Withdraw.java
+Developer: Tristan Marchand, Evan Boria
+Email: tmarch@bu.edu
+Last Edited: Wednesday, December 16, 2020
+
+Description: Subclass of Transaction representing a Deposit
+*/
+
 public class Withdraw extends Transaction
 {
     public Withdraw(int day, double money, BankAccount account)
