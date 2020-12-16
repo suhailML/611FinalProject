@@ -1,3 +1,12 @@
+/*
+File: BankSettings.java
+Developer: Tristan Marchand, Evan Boria
+Email: tmarch@bu.edu
+Last Edited: Wednesday, December 16, 2020
+
+Description: Stores all settings for a bank
+*/
+
 public class BankSettings 
 {
     private static final double defaultTransactionFee = 1.00;

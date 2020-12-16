@@ -1,3 +1,15 @@
+/*
+File: BankSettings.java
+Developer: Tristan Marchand, Evan Boria
+Email: tmarch@bu.edu
+Last Edited: Wednesday, December 16, 2020
+
+Description: Stores all settings for a bank
+*/
+
+/*
+Imported Libraries
+*/
 import java.util.*;
 
 public class Customer extends User
@@ -50,8 +62,9 @@ public class Customer extends User
         return loans;
     }
 
-
-    /** Sum up all of the accounts **/
+    /*
+    getTotalBalance - Sum up all of the accounts
+    */
     public double getTotalBalance(){
         double total = 0;
         for(BankAccount account : accounts){
@@ -60,7 +73,9 @@ public class Customer extends User
         return total;
     }
 
-    /** Return the total list of loans **/
+    /*
+    getTotalLoans - Return the total list of loans
+    */
     public double getTotalLoans(){
         double total = 0;
         for(Loan loan : loans){
@@ -69,16 +84,24 @@ public class Customer extends User
         return total;
     }
 
-    /** Get the value of accounts - value of debts **/
+    /*
+    getNetWorth - Get the value of accounts - value of debts
+    */
     public double getNetWorth(){
         return getTotalBalance() - getTotalLoans();
     }
 
+    /*
+    addAccount - add account to the customer
+    */
     public void addAccount(BankAccount account)
     {
         getAccounts().add(account);
     }
 
+    /*
+    deleteAccount - deletes account from customer
+    */
     public void deleteAccount(BankAccount account)
     {
         getAccounts().remove(account);
