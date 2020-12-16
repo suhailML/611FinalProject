@@ -1,8 +1,20 @@
+/*
+File: Transfer.java
+Developer: Tristan Marchand, Evan Boria
+Email: tmarch@bu.edu
+Last Edited: Wednesday, December 16, 2020
+
+Description: Subclass of Transaction, representing a Transfer object
+*/
+
 public class Transfer extends Transaction
 {
     private String senderName;
     private String receiverName;
 
+    /*
+    CONSTRUCTORS
+    */
     public Transfer(BankAccount account, double money, int day, Transferable sender, Transferable receiver)
     {
         this(account, money, day, sender.getName(), receiver.getName());

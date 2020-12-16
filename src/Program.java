@@ -1,7 +1,22 @@
+/*
+File: Program.java
+Developer: Tristan Marchand, Evan Boria
+Email: tmarch@bu.edu
+Last Edited: Wednesday, December 16, 2020
+
+Description: Uses Factory design pattern. Creates loan objects
+*/
+
+/*
+Imported Libraries
+*/
 import java.util.*;
 
-public class Program 
+public abstract class Program 
 {
+    /*
+    run - static method to run the atm program
+    */
     public static void run()
     {
         Bank bank = startup();
@@ -10,6 +25,9 @@ public class Program
         new LoginForm(bank);
     }
 
+    /*
+    startup - creates all objects from the database to run the program
+    */
     private static Bank startup()
     {
         UserFactory userFactory = new UserFactory();
@@ -66,7 +84,6 @@ public class Program
                             transaction = transactionFactory.getExistingTransfer(Integer.parseInt(transactionInfo.get(2)), Double.parseDouble(transactionInfo.get(1)), accountID, transactionInfo.get(3), transactionInfo.get(4));
                             break;
                     }
-
                     transactions.add(transaction);
                 }
                 transactionHistory.setTransactions(transactions);
@@ -95,11 +112,7 @@ public class Program
                     Loan loan = loanFactory.createExistingLoan(bank, account, loanCredential.get(2), Double.parseDouble(loanCredential.get(3)), Double.parseDouble(loanCredential.get(4)), Double.parseDouble(loanCredential.get(5)), loanCredential.get(6));
                     loans.add(loan);
                 }
-
             }
-            
-
-
             Customer customer = userFactory.createExistingCustomer(credentials.get(0), credentials.get(1), credentials.get(4), credentials.get(2), credentials.get(3), accounts, loans);
             customers.add(customer);
         }

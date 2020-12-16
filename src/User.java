@@ -1,3 +1,12 @@
+/*
+File: User.java
+Developer: Tristan Marchand
+Email: tmarch@bu.edu
+Last Edited: Wednesday, December 16, 2020
+
+Description: Abstract superclass User, used to store information for Customer and Employee.
+*/
+
 public abstract class User
 {
     private String username;
@@ -5,7 +14,7 @@ public abstract class User
     private String userID;
     private String firstName;
     private String lastName;
-
+    
     /*
     CONSTRUCTORS
     */

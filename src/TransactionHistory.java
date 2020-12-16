@@ -1,3 +1,15 @@
+/*
+File: TransactionHistory.java
+Developer: Tristan Marchand, Evan Boria
+Email: tmarch@bu.edu
+Last Edited: Wednesday, December 16, 2020
+
+Description: Holds a list of all transactions for an account
+*/
+
+/*
+Imported Libraries
+*/
 import java.util.*;
 
 public class TransactionHistory 

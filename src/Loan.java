@@ -1,3 +1,15 @@
+/*
+File: Loan.java
+Developer: Tristan Marchand, Evan Boria
+Email: tmarch@bu.edu
+Last Edited: Wednesday, December 16, 2020
+
+Description: An object representing a Loan
+*/
+
+/*
+Imported Libraries
+*/
 public class Loan 
 {
     private Transferable lender; 
