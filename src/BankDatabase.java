@@ -44,7 +44,7 @@ public class BankDatabase  {
     /** Set up the paths for a windows login using current directory as the start of the path **/
     private void setupWindowsLogin(){
         String start = System.getProperty("user.dir");
-        bankDB = start + "\\src\\";
+        bankDB = start + "\\";
         credentials = bankDB + "credentials\\";
         employeeCredentials = credentials + "employeecredentials.txt";
         customerCredentials = credentials + "customercredentials.txt";
