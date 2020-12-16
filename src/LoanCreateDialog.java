@@ -81,7 +81,7 @@ public class LoanCreateDialog extends JDialog {
 
 
         System.out.println("\tSET THE LOAN MAX VALUE TO A REAL NUMBER! RIGHT NOW IT IS 10000");
-        amountSpinner = new JSpinner(new SpinnerNumberModel(0.0, 0.0, 10000, 100.0));
+        amountSpinner = new JSpinner(new SpinnerNumberModel(0.0, 0.0, Integer.MAX_VALUE, 100.0));
 
         amountSpinner.setPreferredSize(new Dimension(200, 20));
 
@@ -115,6 +115,11 @@ public class LoanCreateDialog extends JDialog {
 
             double money = (Double) LoanCreateDialog.this.amountSpinner.getValue();
 
+            if(money > 1000000){
+                JOptionPane.showMessageDialog(LoanCreateDialog.this, "LOAN MUST BE LESS THAN 1000000");
+                return;
+            }
+
             Transferable lendee = LoanCreateDialog.this.senderComboBox.getItemAt(lendeeIndex);
 
             String collateral = collateralField.getText();
@@ -127,7 +132,7 @@ public class LoanCreateDialog extends JDialog {
             System.out.println("\t" + money);
             System.out.println("\t" + collateral);
 
-            if(bank.getBankRequestManager().takeOutLoan(bank, bank, lendee, money, collateral)){
+            if(bank.getBankRequestManager().takeOutLoan(bank, customer, bank, lendee, money, collateral)){
                 JOptionPane.showMessageDialog(LoanCreateDialog.this, "Loan Requested", "Loan Request Success", JOptionPane.INFORMATION_MESSAGE);
                 LoanCreateDialog.this.dispose();
             }

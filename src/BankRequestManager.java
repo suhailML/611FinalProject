@@ -121,21 +121,28 @@ public class BankRequestManager implements GUIRequests
     /*
     createAccount - creates a new account for a customer
     */
-    public BankAccount createAccount(Bank bank, Customer customer, String name, String currency, int accountType)
+    public BankAccount createAccount(Bank bank, Customer customer, String name, String currency, int accountType, double deposit)
     {
         BankAccount account;
         String accountTypeString;
+
+        if(deposit < bank.getSettings().getTransactionFee()){
+            System.out.println("Deposit is too low");
+            return null;
+        }
+
+
         switch(accountType)
         {
-            case 0: 
-            account = bankAccountFactory.createNewCheckingAccount(name, currency);
-            accountTypeString = "CHECKING";
-            break;
+            case 0:
+                account = bankAccountFactory.createNewCheckingAccount(name, currency);
+                accountTypeString = "CHECKING";
+                break;
 
-            case 1: 
-            account = bankAccountFactory.createNewSavingsAccount(name, currency);
-            accountTypeString = "SAVINGS";
-            break;
+            case 1:
+                account = bankAccountFactory.createNewSavingsAccount(name, currency);
+                accountTypeString = "SAVINGS";
+                break;
 
             default:
                 return null;
@@ -143,6 +150,8 @@ public class BankRequestManager implements GUIRequests
 
         customer.addAccount(account);
         bank.getBankDB().addAccount(customer.getUserID(), account.getAccountID(), account.getName(), account.getCurrencyType(), Double.toString(account.getBalance()), accountTypeString);
+
+        deposit(bank, account, deposit);
 
         return account;
     }
@@ -168,6 +177,16 @@ public class BankRequestManager implements GUIRequests
     */
     public boolean deleteAccount(Bank bank, Customer customer, BankAccount account)
     {
+
+        double fee = bank.getSettings().getTransactionFee();
+
+        if(fee > account.getBalance()){
+            fee = account.getBalance();
+        }
+
+        bank.addToReserves(fee);
+        account.setBalance(account.getBalance()-fee);
+
         customer.deleteAccount(account);
         bank.getBankDB().deleteAccount(customer.getUserID(), account.getAccountID());
 
@@ -187,10 +206,10 @@ public class BankRequestManager implements GUIRequests
             bank.addToReserves(settings.getTransactionFee());
             Transaction transaction = transactionFactory.getWithdraw(settings.getDay(), money, account);
             account.addTransaction(transaction);
-            bank.getBankDB().addTransactionWDL("WITHDRAW", account.getAccountID(), Double.toString(transaction.getMoney()), Integer.toString(transaction.getDay()), "NA", "NA");  
-            bank.getBankDB().updateBankSettings("1", Double.toString(settings.getTransactionFee()), Double.toString(settings.getSavingsInterestRate()), Double.toString(settings.getLoanInterestRate()), Double.toString(settings.getMinSavingsForInterest()), Double.toString(bank.getReserves()), Integer.toString(settings.getDay()));;
+            bank.getBankDB().addTransactionWDL("WITHDRAW", account.getAccountID(), String.format("%.2f", transaction.getMoney()), Integer.toString(transaction.getDay()), "NA", "NA");
+            bank.getBankDB().updateBankSettings("1", String.format("%.2f", settings.getTransactionFee()), Double.toString(settings.getSavingsInterestRate()), Double.toString(settings.getLoanInterestRate()), Double.toString(settings.getMinSavingsForInterest()), String.format("%.2f", bank.getReserves()), Integer.toString(settings.getDay()));;
 
-            bank.getBankDB().updateAccount(account.getAccountID(), account.getName(), account.getCurrencyType(), Double.toString(account.getBalance()));
+            bank.getBankDB().updateAccount(account.getAccountID(), account.getName(), account.getCurrencyType(), String.format("%.2f", account.getBalance()));
             valid = true;
         }
         return valid;
@@ -207,11 +226,10 @@ public class BankRequestManager implements GUIRequests
 
         bank.addToReserves(bank.getSettings().getTransactionFee());
         Transaction transaction = transactionFactory.getDeposit(bank.getSettings().getDay(), money, account);
-        bank.getBankDB().addTransactionWDL("DEPOSIT", account.getAccountID(), Double.toString(transaction.getMoney()), Integer.toString(transaction.getDay()), "NA", "NA");  
-        bank.getBankDB().updateBankSettings("1", Double.toString(settings.getTransactionFee()), Double.toString(settings.getSavingsInterestRate()), Double.toString(settings.getLoanInterestRate()), Double.toString(settings.getMinSavingsForInterest()), Double.toString(bank.getReserves()), Integer.toString(settings.getDay()));;
+        bank.getBankDB().addTransactionWDL("DEPOSIT", account.getAccountID(), String.format("%.2f", transaction.getMoney()), Integer.toString(transaction.getDay()), "NA", "NA");
+        bank.getBankDB().updateBankSettings("1", String.format("%.2f", settings.getTransactionFee()), Double.toString(settings.getSavingsInterestRate()), Double.toString(settings.getLoanInterestRate()), Double.toString(settings.getMinSavingsForInterest()), String.format("%.2f", bank.getReserves()), Integer.toString(settings.getDay()));;
 
-
-        bank.getBankDB().updateAccount(account.getAccountID(), account.getName(), account.getCurrencyType(), Double.toString(account.getBalance()));
+        bank.getBankDB().updateAccount(account.getAccountID(), account.getName(), account.getCurrencyType(), String.format("%.2f", account.getBalance()));
 
         valid = true;
         return valid;
@@ -220,14 +238,15 @@ public class BankRequestManager implements GUIRequests
     /*
     takeOutLoan - Take a loan from the lender to the lendee
     */
-    public boolean takeOutLoan(Bank bank, Transferable lender, Transferable lendee, double money, String collateral)
+    public boolean takeOutLoan(Bank bank,Customer customer, Transferable lender, Transferable lendee, double money, String collateral)
     {
         Loan loan = loanFactory.createNewLoan(bank, lendee, money, bank.getSettings().getLoanInterestRate(), collateral);
 
         // if the loan transfer is successful from lender to lendee, add it to the database
         if(transfer(bank, lender, lendee, money))
         {
-            bank.getBankDB().addLoan(((BankAccount) loan.getLendee()).getAccountID(), loan.getLender().getName(), loan.getLendee().getName(), loan.getLoanID(), Double.toString(loan.getInitialValue()), Double.toString(loan.getPresentValue()), Double.toString(loan.getInterestRate()), loan.getCollateral());
+            bank.getBankDB().addLoan(((BankAccount) loan.getLendee()).getAccountID(), loan.getLender().getName(), loan.getLendee().getName(), loan.getLoanID(), String.format("%.2f", loan.getInitialValue()), String.format("%.2f", loan.getPresentValue()), Double.toString(loan.getInterestRate()), loan.getCollateral());
+            customer.getLoans().add(loan);
             return true;
         }
 
@@ -255,7 +274,7 @@ public class BankRequestManager implements GUIRequests
                 bank.getBankDB().deleteLoan(loan.getLoanID(), ((BankAccount) loan.getLendee()).getAccountID());
             }
             else {
-                bank.getBankDB().updateLoan(((BankAccount) loan.getLendee()).getAccountID(), loan.getLender().getName(), loan.getLendee().getName(), loan.getLoanID(), Double.toString(loan.getInitialValue()), Double.toString(loan.getPresentValue()), Double.toString(loan.getInterestRate()), loan.getCollateral());
+                bank.getBankDB().updateLoan(((BankAccount) loan.getLendee()).getAccountID(), loan.getLender().getName(), loan.getLendee().getName(), loan.getLoanID(), String.format("%.2f", loan.getInitialValue()), String.format("%.2f", loan.getPresentValue()), Double.toString(loan.getInterestRate()), loan.getCollateral());
             }
             return true;
         }
@@ -336,8 +355,7 @@ public class BankRequestManager implements GUIRequests
                 if (account instanceof SavingsAccount && account.getBalance() > bank.getSettings().getMinSavingsForInterest())
                 {
                     SavingsAccount temp = (SavingsAccount) account;
-                    temp.compoundInterest(bank.getSettings().getSavingsInterestRate());
-                    bank.getBankDB().updateAccount(account.getAccountID(), account.getName(), account.getCurrencyType(), Double.toString(account.getBalance()));
+                    transfer(bank, bank, temp, bank.getSettings().getSavingsInterestRate() * temp.getBalance());
                 }
             }
         }

@@ -148,28 +148,20 @@ public class UserForm extends JFrame {
     /** Allow the user to delete a selected account **/
     private class DeleteAccountActionListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            // get the index
-            try {
-                BankAccount account = accountJList.getSelectedValue();
-                System.out.println("DELETE ACCOUNT: " + account);
+            // get the account
+            BankAccount account = accountJList.getSelectedValue();
+            System.out.println("DELETE ACCOUNT: " + account);
+            if(account != null) {
 
-                System.out.println("TODO --> ACTUALLY DELETE ACCOUNT");
-                JOptionPane.showMessageDialog(UserForm.this,"DELETE - NEED TO DO - ACCOUNT" + account);
-
-
-                //TODO
-
-                if(bank.getBankRequestManager().deleteAccount(bank, customer, account)){
-                    JOptionPane.showMessageDialog(UserForm.this, "Account deleted: " + account, "Delete Account", JOptionPane.INFORMATION_MESSAGE);
-                }
-                else{
+                if (bank.getBankRequestManager().deleteAccount(bank, customer, account)) {
+                    JOptionPane.showMessageDialog(UserForm.this, "Account deleted: " + account + "\n" + "You withdrew " + account.getCurrencyType() + account.getBalance(), "Delete Account", JOptionPane.INFORMATION_MESSAGE);
+                } else {
                     JOptionPane.showMessageDialog(UserForm.this, "Could not delete account: " + account, "Delete Account Error", JOptionPane.ERROR_MESSAGE);
                 }
 
                 updateOutputFields();
-
-            }catch(ArrayIndexOutOfBoundsException arrayIndexOutOfBoundsException){
-                JOptionPane.showMessageDialog(null, "NO ACCOUNT SELECTED", "ERROR", JOptionPane.ERROR_MESSAGE);
+            }else{
+                    JOptionPane.showMessageDialog(null, "NO ACCOUNT SELECTED", "ERROR", JOptionPane.ERROR_MESSAGE);
             }
         }
     }
@@ -206,8 +198,13 @@ public class UserForm extends JFrame {
     private class PaybackLoanActionListener implements ActionListener{
         public void actionPerformed(ActionEvent e) {
             System.out.println("OPEN PAYBACK LOAN DIALOG");
-            new LoanPaybackDialog(UserForm.this.bank, UserForm.this.customer, UserForm.this).setVisible(true);
-            updateOutputFields();
+            if(customer.getLoans().isEmpty()){
+                JOptionPane.showMessageDialog(parentFrame, "NO LOANS TO PAYBACK");
+            }
+            else {
+                new LoanPaybackDialog(UserForm.this.bank, UserForm.this.customer, UserForm.this).setVisible(true);
+                updateOutputFields();
+            }
         }
     }
 

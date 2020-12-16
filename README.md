@@ -4,6 +4,10 @@ Evan Bosia
 ejbosia@bu.edu
 U23665170
 
+Tristan Marchand
+tmarch@bu.edu
+U13495035
+
 ## Compilation Instructions
 1. Open folder in command terminal.
 2. javac \*.java
@@ -24,62 +28,66 @@ If login is successful, depending on the type of login, either the bank homepage
 
 main - entry point to the program.
 
+Program - runs the startup code, which reads all info from the database and creates all objects. Passes the startup() outputed Bank object to the 
+login form, and the GUI opens.
+
 ### Database
 
 ParseFile
 
-Program
+BankDatabase
 
 ### Bank
 
 Bank
-
-BankDatabase
-
-BankRequestManager
-
 BankSettings
+
+The Bank is the main object of the program, which holds reference to all information in the system. BankSettings holds variables specific to the bank.
+
+BankRequestManager - Uses Singleton design pattern. Handles all requests from the GUI
 
 ### User
 
 User
-
-UserFactory
-
 Customer
-
 Employee
+
+User is an abstract superclass, with subclasses Customer and Employee. Customer has access to all its accounts and loans, and employee has access
+to everything in the database.
 
 ### Accounts
 
 BankAccount
+SavingsAccount 
+CheckingAccount 
 
-BankAccountFactory
-
-SavingsAccount extends BankAccount
-
-CheckingAccount extends BankAccount
+BankAccount is an abstract superclass, with subclasses SavingsAccount and CheckingAccount. 
 
 TransactionHistory
 
+TransactionHistory is held by the BankAccount object, which stores all transactions for that account.
+
 ### Transactions
 
-Loan
-
-LoanFactory
-
-Deposit extends Transaction
+Loan - an object holding the information for a loan
 
 Transaction
+Deposit
+Transfer
+Withdraw 
 
-TransactionFactory
-
-Transfer extends Transaction
-
-Withdraw extends Transaction
+Transaction is an abstract superclass, with subclasses Deposit, Transfer, and Withdraw. Holds all relevant information for each transaction.
 
 Transferable interface - classes that implement this interface provide the *boolean send(double money)*, *boolean receive(double money)*, and *String getName()* methods that allow for the transfer of money to and from the object.
 
+### Factories
+
+UserFactory
+BankAccountFactory
+TransactionFactory
+LoanFactory
+
+Factory Design Patterns for Users, BankAccounts, Transactions, and Loans. Methods for creating objects from both the GUI and the database. 
 
 ### UI Forms
 AccountForm - open an account for the user
