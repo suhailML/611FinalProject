@@ -32,8 +32,8 @@ If login is successful, depending on the type of login, either the bank homepage
  - Accounts must be created with a deposit.
  - Adding and deleting accounts charges a bank fee.
  - Banks control updating the day ~ used to calculate interest.
- - Transfers are between two different accounts
- - All transfers (withdraw, deposit, transfer) incur a bank fee. 
+ - Transfers are between two different accounts or a bank and an account
+ - All transactions (withdraw, deposit, transfer) incur a bank fee. 
 
 
 ## Class Structure:
