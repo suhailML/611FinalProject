@@ -19,6 +19,8 @@ public class AddAccountDialog extends JDialog {
     private Customer customer;
 
 
+    JSpinner depositSpinner;
+
     public AddAccountDialog(Bank bank, Customer customer, JFrame parentFrame){
         super(parentFrame);
 
@@ -30,7 +32,7 @@ public class AddAccountDialog extends JDialog {
         setSize(400,400);
 
 
-        GridLayout infoPanelLayout = new GridLayout(3,1, 5,5);
+        GridLayout infoPanelLayout = new GridLayout(4,1, 5,5);
 
         JPanel infoPanel = new JPanel(infoPanelLayout);
         JPanel actionPanel = new JPanel();
@@ -54,11 +56,18 @@ public class AddAccountDialog extends JDialog {
         currencyPanel.add(new JLabel("Currency:"));
         currencyPanel.add(currencyBox);
 
+        JPanel depositPanel = new JPanel();
+
+        depositSpinner = new JSpinner(new SpinnerNumberModel(100,100,Integer.MAX_VALUE,100));
+
+        depositPanel.add(new JLabel("Deposit:"));
+        depositPanel.add(depositSpinner);
 
         initRadioButtons();
 
         infoPanel.add(namePanel);
         infoPanel.add(currencyPanel);
+        infoPanel.add(depositPanel);
         radioPanel.add(savingsRButton);
         radioPanel.add(checkingRButton);
         radioPanel.add(securitiesRButton);
@@ -146,9 +155,18 @@ public class AddAccountDialog extends JDialog {
             }
 
             name = name.replaceAll("\\s", "-");
-            currency = currency.replaceAll("\\s", "-");
+            double deposit = 0;
+            try {
+                 deposit = ((Integer)depositSpinner.getValue()).doubleValue();
+            }
+            catch(NumberFormatException nfe){
+                JOptionPane.showMessageDialog(AddAccountDialog.this, "NUMBER REQUIRED FOR ACCOUNT");
+                return;
+            }
 
-            BankAccount account = bank.getBankRequestManager().createAccount( bank, customer, name, currency, accountType);
+            BankAccount account = bank.getBankRequestManager().createAccount( bank, customer, name, currency, accountType, deposit);
+
+            // make a direct deposit
 
             if(account != null){
                 System.out.println(account);
