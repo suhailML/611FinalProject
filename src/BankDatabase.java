@@ -26,7 +26,7 @@ public class BankDatabase  {
     private BankDatabase(){
 
         // Comment this out to use the linux values
-        // setupWindowsLogin();
+        setupWindowsLogin();
     }
 
     /** Set up the paths for a windows login using current directory as the start of the path **/
