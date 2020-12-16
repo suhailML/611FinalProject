@@ -119,13 +119,7 @@ public class LoginForm extends JFrame {
             else{
                 LoginForm.this.setVisible(false);
 
-                new BankEmployeeForm(bank, new Employee(
-                        usernameField.getText(),
-                        passwordField.getText(),
-                        "ABCDE",
-                        "First Name",
-                        "Last Name"
-                ), LoginForm.this).setVisible(true); // Main Form to show after the Login Form..
+                new BankEmployeeForm(bank, employee, LoginForm.this).setVisible(true); // Main Form to show after the Login Form..
 
                 usernameField.setText("");
                 passwordField.setText("");
