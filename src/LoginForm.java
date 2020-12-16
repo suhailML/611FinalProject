@@ -53,7 +53,6 @@ public class LoginForm extends JFrame {
 
         createUserButton.addActionListener(new CreateUserActionListener());
 
-
         usernamePanel.add(usernameLabel);
         usernamePanel.add(usernameField);
         passwordPanel.add(passwordLabel);

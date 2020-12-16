@@ -1,3 +1,10 @@
+/**
+ * SellOrder extends StockOrder
+ * Records the order to sell stock.
+ *
+ * @author ejbosia
+ */
+
 public class SellOrder extends StockOrder {
     
     SellOrder(BankAccount account, double money, String company, int shares, int day)

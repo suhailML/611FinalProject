@@ -4,6 +4,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
+/**
+ * TransferDialog
+ * The transfer dialog allows the user to transfer money between their accounts.
+ *
+ * @author ejbosia
+ */
+
+
 public class TransferDialog extends JDialog {
 
     private JComboBox<Transferable> senderComboBox, receiverComboBox;

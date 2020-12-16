@@ -1,6 +1,6 @@
 /*
 File: Transaction.java
-Developer: Tristan Marchand, Evan Boria, Suhail Singh
+Developer: Tristan Marchand, Evan Bosia, Suhail Singh
 Email: tmarch@bu.edu
 Last Edited: Wednesday, December 16, 2020
 

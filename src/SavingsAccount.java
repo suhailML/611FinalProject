@@ -1,6 +1,6 @@
 /*
 File: SavingsAccount.java
-Developer: Tristan Marchand, Evan Boria
+Developer: Tristan Marchand, Evan Bosia
 Email: tmarch@bu.edu
 Last Edited: Wednesday, December 16, 2020
 
