@@ -188,7 +188,7 @@ public class BankRequestManager implements GUIRequests
             Transaction transaction = transactionFactory.getWithdraw(settings.getDay(), money, account);
             account.addTransaction(transaction);
             bank.getBankDB().addTransactionWDL("WITHDRAW", account.getAccountID(), Double.toString(transaction.getMoney()), Integer.toString(transaction.getDay()), "NA", "NA");  
-            //bank.getBankDB().updateBankSettings("1", Double.toString(settings.getTransactionFee()), Double.toString(settings.getSavingsInterestRate()), Double.toString(settings.getLoanInterestRate()), Double.toString(settings.getMinSavingsForInterest()), Double.toString(bank.getReserves()), Integer.toString(settings.getDay()));;
+            bank.getBankDB().updateBankSettings("1", Double.toString(settings.getTransactionFee()), Double.toString(settings.getSavingsInterestRate()), Double.toString(settings.getLoanInterestRate()), Double.toString(settings.getMinSavingsForInterest()), Double.toString(bank.getReserves()), Integer.toString(settings.getDay()));;
 
             bank.getBankDB().updateAccount(account.getAccountID(), account.getName(), account.getCurrencyType(), Double.toString(account.getBalance()));
             valid = true;
@@ -208,7 +208,7 @@ public class BankRequestManager implements GUIRequests
         bank.addToReserves(bank.getSettings().getTransactionFee());
         Transaction transaction = transactionFactory.getDeposit(bank.getSettings().getDay(), money, account);
         bank.getBankDB().addTransactionWDL("DEPOSIT", account.getAccountID(), Double.toString(transaction.getMoney()), Integer.toString(transaction.getDay()), "NA", "NA");  
-        //bank.getBankDB().updateBankSettings("1", Double.toString(settings.getTransactionFee()), Double.toString(settings.getSavingsInterestRate()), Double.toString(settings.getLoanInterestRate()), Double.toString(settings.getMinSavingsForInterest()), Double.toString(bank.getReserves()), Integer.toString(settings.getDay()));;
+        bank.getBankDB().updateBankSettings("1", Double.toString(settings.getTransactionFee()), Double.toString(settings.getSavingsInterestRate()), Double.toString(settings.getLoanInterestRate()), Double.toString(settings.getMinSavingsForInterest()), Double.toString(bank.getReserves()), Integer.toString(settings.getDay()));;
 
 
         bank.getBankDB().updateAccount(account.getAccountID(), account.getName(), account.getCurrencyType(), Double.toString(account.getBalance()));
