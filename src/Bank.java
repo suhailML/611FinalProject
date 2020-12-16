@@ -1,8 +1,7 @@
 /*
 File: Bank.java
-Developer: Tristan Marchand
+Developer: Tristan Marchand, Evan Boria
 Email: tmarch@bu.edu
-BU ID: U13495035
 Last Edited: Wednesday, December 16, 2020
 
 Description: Bank Object, holding lists of all employees, customers, and settings. Implements Transferable.

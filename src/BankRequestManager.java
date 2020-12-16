@@ -1,3 +1,15 @@
+/*
+File: BankRequestManager.java
+Developer: Tristan Marchand, Evan Boria
+Email: tmarch@bu.edu
+Last Edited: Wednesday, December 16, 2020
+
+Description: Uses Singleton design pattern. Handles all actions requested by the GUI
+*/
+
+/*
+Imported Libraries
+*/
 import java.util.*;
 
 public class BankRequestManager implements GUIRequests
@@ -8,6 +20,9 @@ public class BankRequestManager implements GUIRequests
     private TransactionFactory transactionFactory;
     private static BankRequestManager singleInstance;
 
+    /*
+    CONSTRUCTORS (private)
+    */
     private BankRequestManager()
     {
         userFactory = new UserFactory();
@@ -16,6 +31,9 @@ public class BankRequestManager implements GUIRequests
         transactionFactory = new TransactionFactory();
     }
 
+    /*
+    Singleton getSingleInstance
+    */
     public static BankRequestManager getSingleInstance()
     {
         if (singleInstance == null)
@@ -25,6 +43,9 @@ public class BankRequestManager implements GUIRequests
         return singleInstance;
     }
 
+    /*
+    createCustomer - creates a new customer
+    */
     public Customer createCustomer(Bank bank, String username, String password, String firstName, String lastName)
     {
         List<Customer> customers = bank.getCustomers();
@@ -43,6 +64,9 @@ public class BankRequestManager implements GUIRequests
         return customer;
     }
 
+    /*
+    updateCustomer - updates the information of a customer
+    */
     public boolean updateCustomer(Bank bank, Customer customer, String firstName, String lastName, String password)
     {
         customer.setFirstName(firstName);
@@ -52,6 +76,9 @@ public class BankRequestManager implements GUIRequests
         return true;
     }
 
+    /*
+    createEmployee - creates a new employee
+    */
     public boolean createEmployee(Bank bank, String username, String password, String firstName, String lastName)
     {
         boolean valid = false;
@@ -73,18 +100,27 @@ public class BankRequestManager implements GUIRequests
         return valid;
     }
 
+    /*
+    checkCustomerLogin - checks the login credentials of a customer, and returns that object if the credentials are correct
+    */
     public Customer checkCustomerLogin(Bank bank, String username, String password)
     {
         Customer customer = bank.getCustomer(username, password);
         return customer;
     }
 
+    /*
+    checkEmployeeLogin - checks the login credentials of an employee, and returns that object if the credentials are correct
+    */
     public Employee checkEmployeeLogin(Bank bank, String username, String password)
     {
         Employee employee = bank.getEmployee(username, password);
         return employee;
     }
 
+    /*
+    createAccount - creates a new account for a customer
+    */
     public BankAccount createAccount(Bank bank, Customer customer, String name, String currency, int accountType)
     {
         BankAccount account;
@@ -111,6 +147,9 @@ public class BankRequestManager implements GUIRequests
         return account;
     }
 
+    /*
+    saveBankSettings - updates the bank settings
+    */
     public boolean saveBankSettings(Bank bank, double transactionFee, double savingsInterestRate, double loanInterestRate, double minSavingsForInterest)
     {
         BankSettings settings = bank.getSettings();
@@ -124,6 +163,9 @@ public class BankRequestManager implements GUIRequests
         return true;
     }
 
+    /*
+    deleteAccount - deletes an account
+    */
     public boolean deleteAccount(Bank bank, Customer customer, BankAccount account)
     {
         customer.deleteAccount(account);
@@ -132,6 +174,9 @@ public class BankRequestManager implements GUIRequests
         return true;
     }
 
+    /*
+    withdraw - withdraws money from a bank account
+    */
     public boolean withdraw(Bank bank, BankAccount account, double money)
     {
         boolean valid = false;
@@ -151,6 +196,9 @@ public class BankRequestManager implements GUIRequests
         return valid;
     }
 
+    /*
+    deposit - deposits money to a bank account
+    */
     public boolean deposit(Bank bank, BankAccount account, double money)
     {
         boolean valid = false;
@@ -169,7 +217,9 @@ public class BankRequestManager implements GUIRequests
         return valid;
     }
 
-    /** Take a loan from the lender to the lendee **/
+    /*
+    takeOutLoan - Take a loan from the lender to the lendee
+    */
     public boolean takeOutLoan(Bank bank, Transferable lender, Transferable lendee, double money, String collateral)
     {
         Loan loan = loanFactory.createNewLoan(bank, lendee, money, bank.getSettings().getLoanInterestRate(), collateral);
@@ -185,7 +235,9 @@ public class BankRequestManager implements GUIRequests
     }
 
 
-    /** Payback part of a loan from the lendee to the lender **/
+    /*
+    payBackLoan - Payback part of a loan from the lendee to the lender
+    */
     public boolean payBackLoan(Bank bank, Transferable lendee, Transferable lender, double money, Loan loan)
     {
         if(loan.getPresentValue() < money)
@@ -211,6 +263,9 @@ public class BankRequestManager implements GUIRequests
         return false;
     }
 
+    /*
+    transfer - transfers funds from one Transferable object to another
+    */
     public boolean transfer(Bank bank, Transferable sender, Transferable receiver, double money)
     {
         BankSettings settings = bank.getSettings();
@@ -255,6 +310,9 @@ public class BankRequestManager implements GUIRequests
         }
     }
 
+    /*
+    incrementDay - moves the day forward, and updates all loans and savings accounts
+    */
     public boolean incrementDay(Bank bank)
     {
         BankSettings settings = bank.getSettings();
@@ -287,6 +345,9 @@ public class BankRequestManager implements GUIRequests
         return true;
     }
 
+    /*
+    queryTransactions - returns all transactions for the given day
+    */
     public String queryTransactions(Bank bank, int day)
     {
         StringBuilder string = new StringBuilder();

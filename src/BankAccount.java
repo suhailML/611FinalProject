@@ -1,8 +1,7 @@
 /*
 File: BankAccount.java
-Developer: Tristan Marchand
+Developer: Tristan Marchand, Evan Boria
 Email: tmarch@bu.edu
-BU ID: U13495035
 Last Edited: Wednesday, December 16, 2020
 
 Description: The BankAccount abstract class provides the framework to create different types of BankAccount subclasses. Implements Transferable.
