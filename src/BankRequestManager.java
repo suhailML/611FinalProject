@@ -184,7 +184,8 @@ public class BankRequestManager implements GUIRequests
             fee = account.getBalance();
         }
 
-        transfer(bank, account, bank, fee);
+        bank.addToReserves(fee);
+        account.setBalance(account.getBalance()-fee);
 
         customer.deleteAccount(account);
         bank.getBankDB().deleteAccount(customer.getUserID(), account.getAccountID());
