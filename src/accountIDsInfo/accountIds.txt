@@ -1,7 +1,3 @@
 accountID/name/currencyType/money/Type
-077e579d-e1ab-49a5-893f-d4973a08914a	FACCOUNT	$	0.0	SAVINGS
-6c4e0d0c-c5ad-4dee-8205-1d347c1bfdb0	First-Checking-Account	€	0.0	SAVINGS
-a63bdf0c-b2c5-42b9-bd2e-f4da6ecbdeb6	Checking-Yen	¥	1999.0	SAVINGS
-efb01849-9532-4bca-a29a-58719c0209c0	Savings	$	3396.0	CHECKING
-f9de86f8-8bc5-4152-8327-a6b36438d2a1	checking-usd	$	999.0	SAVINGS
-0df68c83-a80d-4fca-a3bf-9e469774da97	savings-yen	¥	99999.0	CHECKING
+0df68c83-a80d-4fca-a3bf-9e469774da97	savings-yen	¥	102979.0	CHECKING
+37f95d46-8abc-47c7-adcd-265dc58630b1	aaaa	€	180.00	CHECKING

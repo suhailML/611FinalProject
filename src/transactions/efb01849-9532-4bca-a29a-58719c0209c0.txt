@@ -1,6 +1,0 @@
-
-DEPOSIT	5000.0	1	NA	NA
-TRANSFER	1999.0	1	Savings	Checking-Yen
-TRANSFER	999.0	1	Bank	Savings
-TRANSFER	599.0	1	Savings	Bank
-TRANSFER	499.0	1	Bank	Savings

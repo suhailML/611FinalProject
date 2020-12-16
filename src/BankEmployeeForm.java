@@ -109,13 +109,14 @@ public class BankEmployeeForm extends JFrame {
     private class ViewCustomerActionListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
 
-            try{
-                // get the index
-                Customer customer = customerJList.getSelectedValue();
-                System.out.println("Open customer: " + customer);
-                new EmployeeViewCustomerForm(bank, customer, BankEmployeeForm.this).setVisible(true);
+            // get the index
+            Customer customer = customerJList.getSelectedValue();
+            System.out.println("Open customer: " + customer);
 
-            }catch(ArrayIndexOutOfBoundsException arrayIndexOutOfBoundsException){
+            if(customer != null) {
+                new EmployeeViewCustomerForm(bank, customer, BankEmployeeForm.this).setVisible(true);
+            }
+            else{
                 JOptionPane.showMessageDialog(null, "NO ACCOUNT SELECTED", "ERROR", JOptionPane.ERROR_MESSAGE);
             }
         }
