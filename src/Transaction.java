@@ -1,6 +1,6 @@
 /*
-File: LoanFactory.java
-Developer: Tristan Marchand, Evan Boria
+File: Transaction.java
+Developer: Tristan Marchand, Evan Boria, Suhail Singh
 Email: tmarch@bu.edu
 Last Edited: Wednesday, December 16, 2020
 
