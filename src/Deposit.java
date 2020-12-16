@@ -1,3 +1,12 @@
+/*
+File: Deposit.java
+Developer: Tristan Marchand, Evan Boria
+Email: tmarch@bu.edu
+Last Edited: Wednesday, December 16, 2020
+
+Description: Subclass of Transaction representing a Deposit
+*/
+
 public class Deposit extends Transaction 
 {
     public Deposit(int day, double money, BankAccount account)
