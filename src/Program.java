@@ -122,6 +122,7 @@ public abstract class Program
         // initialize settings and reserves
         List<String> rawBankSettings =  db.getBankSettings("1");
         System.out.println(rawBankSettings);
+
         bank.setSettings(new BankSettings(
                             Double.parseDouble(rawBankSettings.get(1)),
                             Double.parseDouble(rawBankSettings.get(2)),
