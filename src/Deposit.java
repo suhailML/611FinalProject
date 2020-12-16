@@ -1,6 +1,6 @@
 /*
 File: Deposit.java
-Developer: Tristan Marchand, Evan Boria
+Developer: Tristan Marchand, Evan Boria, Suhail Singh 
 Email: tmarch@bu.edu
 Last Edited: Wednesday, December 16, 2020
 

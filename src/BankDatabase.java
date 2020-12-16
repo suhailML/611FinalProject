@@ -1,3 +1,11 @@
+/*
+File: BankDatabase.java
+Developer: Suhail Singh
+Email: suhails@bu.edu
+Last Edited: Wednesday, December 16, 2020
+
+Description: This class serves to connect the codebase to our database. The codebase can use this class to make calls to the database to add new data and update old data. 
+*/
 
 import java.io.File;
 import java.io.IOException;
@@ -45,17 +53,24 @@ public class BankDatabase  {
         bankSettingsFile = bankSettings + "banksettings.txt";
     }
 
-
+    /**
+     * 
+     * @return: A single instance of the database for the bank to hold. 
+     */
     public static BankDatabase getSingleInstance()
     {
-
         if (singleInstance == null)
         {
             singleInstance = new BankDatabase();
         }
         return singleInstance;
     }
-
+    
+    /**
+     * 
+     * @param userID: Unique user identifier
+     * @return: A list that holds all of the loan information for an individual user. 
+     */
     public List<List<String>> getLoans(String userID)
     {
         List<List<String>> parsedLoans = ParseFile.parseRows(loans + userID + ".txt");
@@ -67,6 +82,12 @@ public class BankDatabase  {
         return returnList;
     }
 
+    /**
+     * 
+     * @param userID: Unique user identifier
+     * @param userType: Either Customer or Employee
+     * @return: Returns a list of data for the user once they login to the program. 
+     */
     public List<String> getCredentials(String userID, String userType)
     {
         List<List<String>> parsedUsers = new ArrayList<List<String>>();
@@ -88,17 +109,27 @@ public class BankDatabase  {
         return new ArrayList<String>();
     }
 
-    public  List<List<String>> getTransactionHistory(String accoundID)
+    /**
+     * 
+     * @param accoundID: Unique account identifier
+     * @return: Returns a list containing each row of the transaction history for a specific account in a printable format. 
+     */
+    public List<List<String>> getTransactionHistory(String accoundID)
     {
         return ParseFile.parseRows(transactions + accoundID + ".txt");
     }
  
-    // adding transaction for withdraw, deposits, and loans
+    /**
+     * Makes a call to the database to add a transaction with inputted details to an accounts transaction history.
+     */
     public void addTransactionWDL(String transactionType, String accountID, String money, String day, String sender, String receiver)
     {
         ParseFile.addLine(transactions + accountID + ".txt", transactionType + "\t" + money + "\t" + day + "\t" + sender + "\t" + receiver);
     }
 
+    /**
+     * Makes a call to the database to add new credentials with inputted details to the specified user credentials txt file.
+     */
     public void addCredentials(String userName, String password, String firstName, String lastName, String userId, String userType)
     {
         if (userType.equals("customer"))
@@ -111,6 +142,9 @@ public class BankDatabase  {
         }
     }
 
+    /**
+     * Makes a call to the database to update old credentials with inputted details to the specified user credentials txt file.
+     */
     public void updateCredentials(String userName, String password, String firstName, String lastName, String userId, String userType)
     {    
         if (userType.equals("customer"))
@@ -125,22 +159,34 @@ public class BankDatabase  {
         }
     }
 
+    /**
+     * Makes a call to the database to add a new loan with inputted details to the specified file for tracking loans for each account.
+     */
     public void addLoan(String accountID, String lender, String lendeeID, String loanID, String initialValue, String presentValue, String interestRate, String collateral)
     {
         ParseFile.addLine(loans + accountID + ".txt", lender + "," + lendeeID + "," + loanID + "," + initialValue + "," + presentValue + "," + interestRate + "," + collateral);
     }
 
+    /**
+     * Makes a call to the database to update a currently stored loan with inputted details to the specified file for tracking loans for each account.
+     */
     public void updateLoan(String accountID, String lender, String lendeeID, String loanID, String initialValue, String presentValue, String interestRate, String collateral)
     {
         ParseFile.deleteLine(loans + accountID + ".txt", loanID);
         ParseFile.addLine(loans + accountID + ".txt", lender + "," + lendeeID + "," + loanID + "," + initialValue + "," + presentValue + "," + interestRate + "," + collateral);
     }
 
+    /**
+     * Makes a call to the database to delete a currently stored loan in the specified file for tracking loans for each account.
+     */
     public void deleteLoan(String loanID, String accountID)
     {
         ParseFile.deleteLine(loans + accountID + ".txt", loanID);
     }
 
+    /**
+     * Makes a call to the database to delete an account throughout the entirety of the database.
+     */
     public void deleteAccount(String userID, String accountID)
     {
         File file = new File(transactions + accountID + ".txt");
@@ -159,6 +205,9 @@ public class BankDatabase  {
         ParseFile.deleteLine(accountIDsInfoFile, accountID);
     }
 
+    /**
+     * Makes a call to the database to add an new account by mapping it to a userID and storing its details.
+     */
     public void addAccount(String userID, String accountID, String name, String currencyType, String balance, String accountType)
     {
 
@@ -166,6 +215,9 @@ public class BankDatabase  {
         ParseFile.addLine(accountIDsInfoFile, accountID + "\t" + name + "\t" + currencyType + "\t" + balance + "\t" + accountType);
     }
 
+    /**
+     * Makes a call to the database to update a currently stored account with inputted details to the specified file for storing account info.
+     */
     public void updateAccount(String accountID, String name, String currencyType, String balance)
     {
         List<String> row = getAccountInfo(accountID);
@@ -174,6 +226,9 @@ public class BankDatabase  {
         ParseFile.addLine(accountIDsInfoFile, accountID + "\t" + name + "\t" + currencyType + "\t" + balance + "\t" + row.get(4));
     }
 
+    /**
+     * Makes a call to the database to add the inputted details of the settings of the bank to the specified file meant for doing so.
+     */
     public void addBankSettings(String bankSettingsID, String transactionFee, String savingsInterestRate, String loanInterestRate, String minSavingsForInterest, String reserves, String day)
     {
         ParseFile.addLine(bankSettingsFile, bankSettingsID + "\t" + transactionFee + "\t" + savingsInterestRate + "\t" + loanInterestRate + "\t" + minSavingsForInterest + "\t" + reserves + "\t" + day);
@@ -186,6 +241,9 @@ public class BankDatabase  {
 
     }
 
+    /**
+     * Makes a call to the database to retrieve the inputted details of the settings of the bank from the specified file meant for doing so.
+     */
     public List<String> getBankSettings(String bankSettingsID)
     {
         List<List<String>> parsedRows = ParseFile.parseRows(bankSettingsFile);
@@ -199,6 +257,9 @@ public class BankDatabase  {
         return new ArrayList<String>();
     }
 
+    /**
+     * Makes a call to the database to retrieve the account info tied to the specified accountID.
+     */
     public List<String> getAccountInfo(String accountID)
     {
         List<List<String>> accountInfos = ParseFile.parseRows(accountIDsInfoFile);
@@ -212,6 +273,9 @@ public class BankDatabase  {
         return new ArrayList<String>();
     }
 
+    /**
+     * Makes a call to the datbase to retrieve all of the users mapped to an array of their associated accounts. 
+     */
     public HashMap<String,List<String>> getAllUsersAndAccounts()
     {
         HashMap<String,List<String>> ret = new HashMap<String,List<String>>();
@@ -234,21 +298,20 @@ public class BankDatabase  {
         }
     }
 
+    /**
+     * Makes a call to the datbase to retrieve all of the customer credendtials in a readable format. 
+     */
     public List<List<String>> getAllCustomerCredentials()
     {
         return ParseFile.parseRows(customerCredentials);
     }   
     
+    /**
+     * Makes a call to the datbase to retrieve all of the employee credendtials in a readable format. 
+     */
     public List<List<String>> getAllEmployeeCredentials()
     {
         return ParseFile.parseRows(employeeCredentials);
-    }
-
-    public static void main (String[] args)
-    {
-        BankDatabase db = new BankDatabase();
-        db.updateBankSettings("1", "10.0", "0.01", "0.01", "5000.0", "1000000000000.0", "9");
-        System.out.println(System.getProperty("user.dir"));
     }
 }
 

@@ -1,3 +1,12 @@
+/*
+File: ParseFile.java
+Developer: Suhail Singh
+Email: suhails@bu.edu
+Last Edited: Wednesday, December 16, 2020
+
+Description: Our program uses .txt files to store data, similar to the .txt files used to store data in the Legends Project. ParseFile is used to parse and edit these text files in order to load the data into the Bank on startup, as well as keep the Bank's data intact after closing and reopening the program. 
+*/
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -13,10 +22,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
-import java.util.UUID;
 
 public class ParseFile {
 
+    /**
+     *  Parses input file by splitting every row in the file into a list of strings.
+     * 
+     * @param fileLocation: Path to file
+     */
     public static List<List<String>> parseRows(String fileLocation)
     {
         ArrayList<List<String>> parsedObjects = new ArrayList<List<String>>();
@@ -46,6 +59,12 @@ public class ParseFile {
         return parsedObjects;
     }
 
+    /**
+     * Adds new line with data into the input file, as well as simultaneously creates a new file if the file does not exist.
+     * 
+     * @param fileLocation: Path to file
+     * @param line: Line to add to the file
+     */
     public static void addLine(String fileLocation, String line)
     {
         File file = new File(fileLocation);
@@ -67,6 +86,12 @@ public class ParseFile {
         }
     }
 
+    /**
+     * Deletes a row in the file based on a unique substring in that row. 
+     * 
+     * @param fileLocation: Path to file
+     * @param keyString: Substring that identifies which row should be deleted. 
+     */
     public static void deleteLine(String fileLocation, String keyString)
     {
         List<List<String>> parsedRows = parseRows(fileLocation);
@@ -106,20 +131,17 @@ public class ParseFile {
                 return;
             }
             String lineToRemove = convertListofStringsToString(parsedRows.get(rowToDelete));
-            // System.out.println(lineToRemove);
             String currentLine;
 
             try {
                 while ((currentLine = reader.readLine()) != null) {
                     // trim newline when comparing with lineToRemove
                     String trimmedLine = currentLine.trim().replaceAll("\\s", "");
-                    // System.out.println(trimmedLine.replaceAll("\\s", ""));
                     if (trimmedLine.equals(lineToRemove))
                         continue;
                     writer.write(currentLine + System.getProperty("line.separator")); 
                 }
             } catch (IOException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
             
@@ -140,12 +162,11 @@ public class ParseFile {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
-            //boolean successful = tempFile.renameTo(file);
             System.out.println("UPDATE: " + "\t" + file);
         }
     }
 
+    // Helper to convert a List of Strings to a String
     private static String convertListofStringsToString(List<String> arr)
     {  
         StringBuilder sb = new StringBuilder();
@@ -154,43 +175,5 @@ public class ParseFile {
             sb.append(s);
         }
         return sb.toString();
-    }
-
-    // public static void removeLine(BufferedReader br , File f,  String Line) throws IOException{
-    //     File temp = new File("temp.txt");
-    //     BufferedWriter bw = new BufferedWriter(new FileWriter(temp));
-    //     String removeID = Line;
-    //     String currentLine;
-    //     while((currentLine = br.readLine()) != null){
-    //         String trimmedLine = currentLine.trim();
-    //         if(trimmedLine.equals(removeID)){
-    //             currentLine = "";
-    //         }
-    //         bw.write(currentLine + System.getProperty("line.separator"));
-    
-    //     }
-    //     bw.close();
-    //     br.close();
-    //     boolean delete = f.delete();
-    //     boolean b = temp.renameTo(f);
-    // }
-
-    public static void main(String[] args) {
-        // System.out.println(parseRows("./credentials/credentials.txt"));
-        // for (int i = 0; i<5; i++)
-        // {
-        //     UUID uniqueKey = UUID.randomUUID();
-        //     System.out.println(uniqueKey);
-        // }
-
-        // addLine("./credentials/customercredentials2.txt", "\n" + "boi2");
-
-        // deleteLine("../src/credentials/customercredentials.txt", "test");
-        // File file = new File("../src/credentials/customercredentials.txt");
-        // BufferedReader reader = new BufferedReader(new FileReader("../src/credentials/customercredentials.txt"));
-
-
-        File file = new File("../src/credentials/customercredentials.txt");
-        
     }
 }
