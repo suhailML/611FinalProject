@@ -34,7 +34,11 @@ public class BankDatabase  {
     private BankDatabase(){
 
         // Comment this out to use the linux values
-        setupWindowsLogin();
+        System.out.println(System.getProperty("os.name"));
+
+        if(System.getProperty("os.name").startsWith("Windows")){
+            setupWindowsLogin();
+        }
     }
 
     /** Set up the paths for a windows login using current directory as the start of the path **/
