@@ -1,4 +1,11 @@
-import java.util.*;
+/*
+File: SavingsAccount.java
+Developer: Tristan Marchand, Evan Boria
+Email: tmarch@bu.edu
+Last Edited: Wednesday, December 16, 2020
+
+Description: Subclass of BankAccount, representing a Savings Account
+*/
 
 public class SavingsAccount extends BankAccount 
 {

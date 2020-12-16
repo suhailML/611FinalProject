@@ -1,3 +1,12 @@
+/*
+File: TransactionFactory.java
+Developer: Tristan Marchand
+Email: tmarch@bu.edu
+Last Edited: Wednesday, December 16, 2020
+
+Description: Uses Factory design pattern. Creates Transaction subclass objects.
+*/
+
 public class TransactionFactory 
 {
     public TransactionFactory(){}

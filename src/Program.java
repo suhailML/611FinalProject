@@ -12,7 +12,7 @@ Imported Libraries
 */
 import java.util.*;
 
-public class Program 
+public abstract class Program 
 {
     /*
     run - static method to run the atm program
