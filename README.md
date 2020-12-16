@@ -27,6 +27,17 @@ The first screen is the login screen. Enter the username and password into their
 
 If login is successful, depending on the type of login, either the bank homepage or the customer homepage is shown.
 
+### Testing Credentials
+
+Customer:
+ - happy
+ - trees
+
+Employee:
+ - username: employee
+ - password: 123
+
+
 ### NOTES
  - Users must be created with an account.
  - Accounts must be created with a deposit.
