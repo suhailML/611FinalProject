@@ -336,8 +336,7 @@ public class BankRequestManager implements GUIRequests
                 if (account instanceof SavingsAccount && account.getBalance() > bank.getSettings().getMinSavingsForInterest())
                 {
                     SavingsAccount temp = (SavingsAccount) account;
-                    temp.compoundInterest(bank.getSettings().getSavingsInterestRate());
-                    bank.getBankDB().updateAccount(account.getAccountID(), account.getName(), account.getCurrencyType(), Double.toString(account.getBalance()));
+                    transfer(bank, bank, temp, bank.getSettings().getSavingsInterestRate() * temp.getBalance());
                 }
             }
         }

@@ -4,6 +4,10 @@ Evan Bosia
 ejbosia@bu.edu
 U23665170
 
+Tristan Marchand
+tmarch@bu.edu
+U13495035
+
 ## Compilation Instructions
 1. Open folder in command terminal.
 2. javac \*.java
@@ -24,21 +28,25 @@ If login is successful, depending on the type of login, either the bank homepage
 
 main - entry point to the program.
 
+Program - runs the startup code, which reads all info from the database and creates all objects. Passes the startup() outputed Bank object to the 
+login form, and the GUI opens.
+
 ### Database
 
 ParseFile
 
-Program
+BankDatabase
 
 ### Bank
 
 Bank
+BankSettings
 
-BankDatabase
+The Bank is the main object of the program, which holds reference to all information in the system. BankSettings holds variables specific 
 
 BankRequestManager
 
-BankSettings
+
 
 ### User
 
