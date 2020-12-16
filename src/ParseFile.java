@@ -120,8 +120,7 @@ public class ParseFile {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             }
-            boolean successful = tempFile.renameTo(file);
-            System.out.println("UPDATE: " + successful);
+            
             try {
                 writer.close();
             } catch (IOException e) {
@@ -132,6 +131,8 @@ public class ParseFile {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            boolean successful = tempFile.renameTo(file);
+            System.out.println("UPDATE: " + successful);
         }
     }
 
