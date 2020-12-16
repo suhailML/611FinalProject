@@ -119,14 +119,15 @@ public class EmployeeViewCustomerForm extends JDialog {
     private class ViewTransactionsActionListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
-            try {
-                BankAccount account = (BankAccount) accountJList.getSelectedValue();
 
-                // OPEN A MESSAGE BOX
+            BankAccount account = (BankAccount) accountJList.getSelectedValue();
+            System.out.println(account);
+            // OPEN A MESSAGE BOX
+            if(account != null) {
                 JOptionPane.showMessageDialog(EmployeeViewCustomerForm.this, account.getTransactionHistory());
             }
-            catch(IndexOutOfBoundsException indexOutOfBoundsException){
-                JOptionPane.showMessageDialog(EmployeeViewCustomerForm.this, "NO ACCOUNT SELECTED", "ACCOUNT ERROR", JOptionPane.ERROR_MESSAGE);
+            else{
+                JOptionPane.showMessageDialog(EmployeeViewCustomerForm.this, "NO ACCOUNT SELECTED", "ERROR", JOptionPane.ERROR_MESSAGE);
             }
         }
     }
