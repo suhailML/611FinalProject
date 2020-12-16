@@ -4,6 +4,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
+/**
+ * DepositWithdrawDialog
+ * Allows the user to deposit or withdraw money from an account.
+ *
+ * @author ejbosia
+ */
+
 public class DepositWithdrawDialog extends JDialog {
 
     private JComboBox<Transferable> accountComboBox;

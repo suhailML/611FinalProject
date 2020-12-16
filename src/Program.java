@@ -1,10 +1,10 @@
 /*
 File: Program.java
-Developer: Tristan Marchand, Evan Boria
+Developer: Tristan Marchand, Evan Bosia
 Email: tmarch@bu.edu
 Last Edited: Wednesday, December 16, 2020
 
-Description: Uses Factory design pattern. Creates loan objects
+Description: Class used to start the program with static methods.
 */
 
 /*

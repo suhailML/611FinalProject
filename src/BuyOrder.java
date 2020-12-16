@@ -1,4 +1,12 @@
-public class BuyOrder extends StockOrder 
+/**
+ * BuyOrder extends StockOrder
+ * Records the order to buy stock ~ not implemented.
+ *
+ * @author ejbosia
+ */
+
+
+public class BuyOrder extends StockOrder
 {
     
     BuyOrder(BankAccount account, double money, String company, int shares, int day)

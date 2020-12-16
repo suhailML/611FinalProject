@@ -3,6 +3,12 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * EditUserDialog
+ * Allows the user to edit their password, firstname, and lastname.
+ *
+ * @author ejbosia
+ */
 public class EditUserDialog extends JDialog {
 
     private JTextField usernameField, passwordField, firstNameField, lastNameField;

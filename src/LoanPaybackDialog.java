@@ -3,7 +3,12 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
-
+/**
+ * LoanPaybackDialog
+ * Allows the user to payback a loan within a swing JDialog.
+ *
+ * @author ejbosia
+ */
 public class LoanPaybackDialog extends JDialog {
 
     private JComboBox<Transferable> senderComboBox;

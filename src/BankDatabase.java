@@ -1,6 +1,6 @@
 /*
 File: BankDatabase.java
-Developer: Suhail Singh
+Developer: Suhail Singh, Evan Bosia (bugsfixes)
 Email: suhails@bu.edu
 Last Edited: Wednesday, December 16, 2020
 

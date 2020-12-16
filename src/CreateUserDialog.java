@@ -3,6 +3,13 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * CreateUserDialog
+ * Allows the User to create a new Customer account in the bank.
+ *
+ * @author ejbosia
+ */
+
 public class CreateUserDialog extends JDialog {
 
     private JTextField usernameField, passwordField, firstNameField, lastNameField;

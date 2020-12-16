@@ -3,6 +3,13 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * AccountForm
+ * Allows the user to view an account summary and transactions associated with the account.
+ *
+ * @author ejbosia
+ */
+
 public class AccountForm extends JFrame {
 
     private Bank bank;

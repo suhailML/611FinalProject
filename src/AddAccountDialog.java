@@ -3,6 +3,13 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * AddAccountDialog
+ * This form allows the Customer to add an Account to their profile. An account must be made with a deposit.
+ *
+ * @author ejbosia
+ */
+
 public class AddAccountDialog extends JDialog {
 
     private JTextField nameField;
