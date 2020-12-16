@@ -8,6 +8,10 @@ Tristan Marchand
 tmarch@bu.edu
 U13495035
 
+Suhail Singh
+suhails@bu.edu
+U05507139
+
 ## Compilation Instructions
 1. Open folder in command terminal.
 2. javac \*.java
@@ -33,9 +37,9 @@ login form, and the GUI opens.
 
 ### Database
 
-ParseFile
+ParseFile - Our program uses .txt files to store data, similar to the .txt files used to store data in the Legends Project. ParseFile is used to parse and edit these text files in order to load the data into the Bank on startup, as well as keep the Bank's data intact after closing and reopening the program. 
 
-BankDatabase
+BankDatabase - This class serves to connect the codebase to our database. The codebase can use this class to make calls to the database to add new data and update old data.
 
 ### Bank
 
