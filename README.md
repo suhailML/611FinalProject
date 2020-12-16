@@ -13,8 +13,8 @@ suhails@bu.edu
 U05507139
 
 ## Compilation Instructions
-1. Open folder in command terminal.
-2. javac \*.java
+1. Open src folder in command terminal.
+2. javac *.java
 3. java main
 
 
@@ -30,8 +30,8 @@ If login is successful, depending on the type of login, either the bank homepage
 ### Testing Credentials
 
 Customer:
- - happy
- - trees
+ - username: happy
+ - password: trees
 
 Employee:
  - username: employee
@@ -45,7 +45,6 @@ Employee:
  - Banks control updating the day ~ used to calculate interest.
  - Transfers are between two different accounts or a bank and an account
  - All transactions (withdraw, deposit, transfer) incur a bank fee. 
-
 
 ## Class Structure:
 
