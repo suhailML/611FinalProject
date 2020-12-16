@@ -150,6 +150,9 @@ public class BankRequestManager implements GUIRequests
 
         customer.addAccount(account);
         bank.getBankDB().addAccount(customer.getUserID(), account.getAccountID(), account.getName(), account.getCurrencyType(), Double.toString(account.getBalance()), accountTypeString);
+
+        deposit(bank, account, deposit);
+
         return account;
     }
 
