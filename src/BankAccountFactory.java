@@ -1,10 +1,17 @@
+/*
+File: BankAccountFactory.java
+Developer: Tristan Marchand
+Email: tmarch@bu.edu
+BU ID: U13495035
+Last Edited: Wednesday, December 16, 2020
+
+Description: Uses Factory design pattern. Allows for different types of BankAccount classes to be created.
+*/
+
+/*
+Imported Libraries
+*/
 import java.util.*;
-
-/**
- * BankAccountFactory
- * Allows for different types of BankAccount classes to be created.
- */
-
 
 public class BankAccountFactory 
 {

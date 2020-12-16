@@ -1,10 +1,12 @@
-/**
- * BankAccount implements Transferable
- * The BankAccount abstract class provides the framework to create different types of BankAccount subclasses
- *
- *
- */
+/*
+File: BankAccount.java
+Developer: Tristan Marchand
+Email: tmarch@bu.edu
+BU ID: U13495035
+Last Edited: Wednesday, December 16, 2020
 
+Description: The BankAccount abstract class provides the framework to create different types of BankAccount subclasses. Implements Transferable.
+*/
 
 public abstract class BankAccount implements Transferable
 {

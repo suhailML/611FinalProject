@@ -1,3 +1,16 @@
+/*
+File: Bank.java
+Developer: Tristan Marchand
+Email: tmarch@bu.edu
+BU ID: U13495035
+Last Edited: Wednesday, December 16, 2020
+
+Description: Bank Object, holding lists of all employees, customers, and settings. Implements Transferable.
+*/
+
+/*
+Imported Libraries
+*/
 import java.util.*;
 
 public class Bank implements Transferable
@@ -101,7 +114,6 @@ public class Bank implements Transferable
     /*
     MUTATORS
     */
-
     public void addToReserves(double money)
     {
         reserves += money;
@@ -115,7 +127,6 @@ public class Bank implements Transferable
     /*
     Transferable Methods
     */
-
     public boolean send(double money)
     {
         boolean valid = false;
@@ -140,7 +151,9 @@ public class Bank implements Transferable
         return "Bank";
     }
 
-
+    /*
+    getCustomer - returns a customer object based on their username and password
+    */
     public Customer getCustomer(String username, String password)
     {
         Customer customer = null;
@@ -164,16 +177,9 @@ public class Bank implements Transferable
         return customer;
     }
 
-    public void addCustomer(Customer customer)
-    {
-        getCustomers().add(customer);
-    }
-
-    public void addEmployee(Employee employee)
-    {
-        getEmployees().add(employee);
-    }
-
+    /*
+    getEmployee - returns an employee object based on their username and password
+    */
     public Employee getEmployee(String username, String password)
     {
         Employee employee = null;
@@ -194,6 +200,25 @@ public class Bank implements Transferable
         return employee;
     }
 
+    /*
+    addCustomer - adds a customer to the bank's list of customers
+    */
+    public void addCustomer(Customer customer)
+    {
+        getCustomers().add(customer);
+    }
+
+    /*
+    addEmployee - adds a employee to the bank's list of employees
+    */
+    public void addEmployee(Employee employee)
+    {
+        getEmployees().add(employee);
+    }
+
+    /*
+    getTotalCustomerDebt - returns total sum of all loan debt
+    */
     public double getTotalCustomerDebt(){
 
         double totalCustomerDebt = 0;
