@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
@@ -132,8 +133,16 @@ public class ParseFile {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            boolean successful = tempFile.renameTo(file);
-            System.out.println("UPDATE: " + successful);
+            Path source = tempFile.toPath();
+            try {
+                Files.delete(source.resolveSibling(file.toPath()));
+                Files.move(source, source.resolveSibling(file.toPath()));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            //boolean successful = tempFile.renameTo(file);
+            System.out.println("UPDATE: " + "\t" + file);
         }
     }
 

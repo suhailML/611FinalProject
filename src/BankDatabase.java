@@ -26,30 +26,23 @@ public class BankDatabase  {
     private BankDatabase(){
 
         // Comment this out to use the linux values
-        // setupWindowsLogin();
+        setupWindowsLogin();
     }
 
     /** Set up the paths for a windows login using current directory as the start of the path **/
     private void setupWindowsLogin(){
-        File fileTest = new File(System.getProperty("user.dir"));
-
-        try {
-            String start = fileTest.getCanonicalPath();
-            bankDB = start + "\\src\\";
-            credentials = bankDB + "credentials\\";
-            employeeCredentials = credentials + "employeecredentials.txt";
-            customerCredentials = credentials + "customercredentials.txt";
-            loans = bankDB + "loans\\";
-            transactions = bankDB + "transactions\\";
-            userIdToAccountIDs = bankDB + "userIdToAccountIDs\\";
-            accountIDsInfo = bankDB + "accountIDsInfo\\";
-            accountIDsInfoFile = accountIDsInfo + "accountIds.txt";
-            bankSettings = bankDB + "banksettings\\";
-            bankSettingsFile = bankSettings + "banksettings.txt";
-
-        }catch(IOException ioe){
-            System.out.println("IO Exception");
-        }
+        String start = System.getProperty("user.dir");
+        bankDB = start + "\\src\\";
+        credentials = bankDB + "credentials\\";
+        employeeCredentials = credentials + "employeecredentials.txt";
+        customerCredentials = credentials + "customercredentials.txt";
+        loans = bankDB + "loans\\";
+        transactions = bankDB + "transactions\\";
+        userIdToAccountIDs = bankDB + "userIdToAccountIDs\\";
+        accountIDsInfo = bankDB + "accountIDsInfo\\";
+        accountIDsInfoFile = accountIDsInfo + "accountIds.txt";
+        bankSettings = bankDB + "banksettings\\";
+        bankSettingsFile = bankSettings + "banksettings.txt";
     }
 
 
@@ -255,6 +248,7 @@ public class BankDatabase  {
     {
         BankDatabase db = new BankDatabase();
         db.updateBankSettings("1", "10.0", "0.01", "0.01", "5000.0", "1000000000000.0", "9");
+        System.out.println(System.getProperty("user.dir"));
     }
 }
 
