@@ -1,2 +1,5 @@
 accountID/name/currencyType/money/Type
-0df68c83-a80d-4fca-a3bf-9e469774da97	savings-yen	¥	10000.00	CHECKING
+ae514a9d-b3fb-4e49-830c-7cad758023be	Checking-Euro	€	4990.00	SAVINGS
+8f8014b6-8090-483f-976a-814d084810ce	Savings	$	10980.0	CHECKING
+6612a616-4602-482e-abcb-6e1989e957e5	Savings	$	10000.00	CHECKING
+e634add0-eae3-4971-a8c3-0e0b48a637fe	Checking	$	5000.00	SAVINGS
