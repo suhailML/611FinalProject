@@ -226,6 +226,8 @@ public class BankRequestManager implements GUIRequests
 
         bank.addToReserves(bank.getSettings().getTransactionFee());
         Transaction transaction = transactionFactory.getDeposit(bank.getSettings().getDay(), money, account);
+        account.addTransaction(transaction);
+
         bank.getBankDB().addTransactionWDL("DEPOSIT", account.getAccountID(), String.format("%.2f", transaction.getMoney()), Integer.toString(transaction.getDay()), "NA", "NA");
         bank.getBankDB().updateBankSettings("1", String.format("%.2f", settings.getTransactionFee()), Double.toString(settings.getSavingsInterestRate()), Double.toString(settings.getLoanInterestRate()), Double.toString(settings.getMinSavingsForInterest()), String.format("%.2f", bank.getReserves()), Integer.toString(settings.getDay()));;
 

@@ -20,6 +20,6 @@ public class Deposit extends Transaction
     }
 
     public String toString(){
-        return "Day: " + getDay() + " Deposit: " + String.format("%.2f",getMoney()) + " from " + getAccount();
+        return "Day: " + getDay() + " Deposit: " + String.format("%.2f",getMoney()) + " to " + getAccount();
     }
 }

@@ -169,7 +169,7 @@ public class AddAccountDialog extends JDialog {
             // make a direct deposit
             if(account != null){
                 System.out.println(account);
-                JOptionPane.showMessageDialog(AddAccountDialog.this, "Created account: " + account, "Account Created", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(AddAccountDialog.this, "Created account: " + account + "\nInitial Deposit: " + account.getBalance() + "\nBank Fee: " + bank.getSettings().getTransactionFee(), "Account Created", JOptionPane.INFORMATION_MESSAGE);
             }
             else{
                 JOptionPane.showMessageDialog(AddAccountDialog.this, "Failed to create account", "Account Creation Error", JOptionPane.ERROR_MESSAGE);
