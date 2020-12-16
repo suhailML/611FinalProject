@@ -153,14 +153,8 @@ public class UserForm extends JFrame {
                 BankAccount account = accountJList.getSelectedValue();
                 System.out.println("DELETE ACCOUNT: " + account);
 
-                System.out.println("TODO --> ACTUALLY DELETE ACCOUNT");
-                JOptionPane.showMessageDialog(UserForm.this,"DELETE - NEED TO DO - ACCOUNT" + account);
-
-
-                //TODO
-
                 if(bank.getBankRequestManager().deleteAccount(bank, customer, account)){
-                    JOptionPane.showMessageDialog(UserForm.this, "Account deleted: " + account, "Delete Account", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(UserForm.this, "Account deleted: " + account + "\n" + "You withdrew " + account.getCurrencyType() +  account.getBalance() , "Delete Account", JOptionPane.INFORMATION_MESSAGE);
                 }
                 else{
                     JOptionPane.showMessageDialog(UserForm.this, "Could not delete account: " + account, "Delete Account Error", JOptionPane.ERROR_MESSAGE);

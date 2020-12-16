@@ -121,21 +121,28 @@ public class BankRequestManager implements GUIRequests
     /*
     createAccount - creates a new account for a customer
     */
-    public BankAccount createAccount(Bank bank, Customer customer, String name, String currency, int accountType)
+    public BankAccount createAccount(Bank bank, Customer customer, String name, String currency, int accountType, double deposit)
     {
         BankAccount account;
         String accountTypeString;
+
+        if(deposit < bank.getSettings().getTransactionFee()){
+            System.out.println("Deposit is too low");
+            return null;
+        }
+
+
         switch(accountType)
         {
-            case 0: 
-            account = bankAccountFactory.createNewCheckingAccount(name, currency);
-            accountTypeString = "CHECKING";
-            break;
+            case 0:
+                account = bankAccountFactory.createNewCheckingAccount(name, currency);
+                accountTypeString = "CHECKING";
+                break;
 
-            case 1: 
-            account = bankAccountFactory.createNewSavingsAccount(name, currency);
-            accountTypeString = "SAVINGS";
-            break;
+            case 1:
+                account = bankAccountFactory.createNewSavingsAccount(name, currency);
+                accountTypeString = "SAVINGS";
+                break;
 
             default:
                 return null;
@@ -143,6 +150,8 @@ public class BankRequestManager implements GUIRequests
 
         customer.addAccount(account);
         bank.getBankDB().addAccount(customer.getUserID(), account.getAccountID(), account.getName(), account.getCurrencyType(), Double.toString(account.getBalance()), accountTypeString);
+
+        deposit(bank, account, deposit);
 
         return account;
     }
