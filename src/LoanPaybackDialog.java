@@ -88,7 +88,6 @@ public class LoanPaybackDialog extends JDialog {
         cancelButton.addActionListener(new CancelButtonActionListener());
 
         amountSpinner = new JSpinner(new SpinnerNumberModel(0.0, 0.0, Double.MAX_VALUE, 100.0));
-
         amountSpinner.setPreferredSize(new Dimension(200, 20));
 
         actionPanel.add(amountSpinner);
