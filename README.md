@@ -35,6 +35,10 @@ If login is successful, depending on the type of login, either the bank homepage
  - Transfers are between two different accounts or a bank and an account
  - All transactions (withdraw, deposit, transfer) incur a bank fee. 
 
+ - Testing Credentials (can be used to login as a customer or an employee, testing purposes only)
+ username: test
+ password: t
+
 
 ## Class Structure:
 
