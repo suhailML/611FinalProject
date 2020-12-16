@@ -24,7 +24,7 @@ public class ParseFile {
         try {
             fileScanner = new Scanner(file);
         } catch (FileNotFoundException e) {
-            System.out.println("File Not Found" + fileLocation);
+            System.out.println("File Not Found " + fileLocation);
             return new ArrayList<List<String>>();
         }
         int count = 0;
@@ -105,16 +105,17 @@ public class ParseFile {
                 return;
             }
             String lineToRemove = convertListofStringsToString(parsedRows.get(rowToDelete));
-            System.out.println(lineToRemove);
+            // System.out.println(lineToRemove);
             String currentLine;
 
             try {
                 while ((currentLine = reader.readLine()) != null) {
                     // trim newline when comparing with lineToRemove
-                    String trimmedLine = currentLine.trim();
+                    String trimmedLine = currentLine.trim().replaceAll("\\s", "");
+                    // System.out.println(trimmedLine.replaceAll("\\s", ""));
                     if (trimmedLine.equals(lineToRemove))
                         continue;
-                    writer.write(currentLine + System.getProperty("line.separator"));
+                    writer.write(currentLine + System.getProperty("line.separator")); 
                 }
             } catch (IOException e) {
                 // TODO Auto-generated catch block
@@ -175,12 +176,12 @@ public class ParseFile {
 
         // addLine("./credentials/customercredentials2.txt", "\n" + "boi2");
 
-        deleteLine("../src/credentials/customercredentials.txt", "test");
+        // deleteLine("../src/credentials/customercredentials.txt", "test");
         // File file = new File("../src/credentials/customercredentials.txt");
         // BufferedReader reader = new BufferedReader(new FileReader("../src/credentials/customercredentials.txt"));
 
 
-
+        File file = new File("../src/credentials/customercredentials.txt");
         
     }
 }

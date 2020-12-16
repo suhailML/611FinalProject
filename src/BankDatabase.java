@@ -26,7 +26,7 @@ public class BankDatabase  {
     private BankDatabase(){
 
         // Comment this out to use the linux values
-        setupWindowsLogin();
+        // setupWindowsLogin();
     }
 
     /** Set up the paths for a windows login using current directory as the start of the path **/
@@ -251,6 +251,11 @@ public class BankDatabase  {
         return ParseFile.parseRows(employeeCredentials);
     }
 
+    public static void main (String[] args)
+    {
+        BankDatabase db = new BankDatabase();
+        db.updateBankSettings("1", "10.0", "0.01", "0.01", "5000.0", "1000000000000.0", "9");
+    }
 }
 
 
